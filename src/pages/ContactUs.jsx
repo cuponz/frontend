@@ -1,4 +1,5 @@
-function App() {
-  return <h1>Contact Us</h1>;
+// import React from "react";
+
+export default function AboutUs() {
+  return <div>Contact Us</div>;
 }
-export default App;
