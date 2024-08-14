@@ -1,8 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 const Carousel = ({ images, rightImages }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const combinedImages = isMobile ? [...images, ...rightImages] : images;
+
+  useEffect(() => {
+    // Update the state based on the window width
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Check the screen size on component mount
+    window.addEventListener("resize", handleResize); // Listen for window resize events
+
+    return () => {
+      window.removeEventListener("resize", handleResize); // Clean up the event listener
+    };
+  }, []);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
@@ -16,13 +32,12 @@ const Carousel = ({ images, rightImages }) => {
     );
   };
 
-  // Combine carousel images and right images for small screens
-  const combinedImages = [...images, ...rightImages];
-
   return (
     <div className="flex flex-col md:flex-row justify-center items-center w-full max-w-7xl mx-auto">
       {/* Carousel */}
-      <div className="w-full md:w-3/5 relative h-[400px]">
+      <div className="w-full md:w-3/5 relative h-[600px]">
+        {" "}
+        {/* Increased height */}
         <div className="overflow-hidden relative h-full">
           <div
             className="flex transition-transform duration-700 ease-in-out h-full"
@@ -37,21 +52,18 @@ const Carousel = ({ images, rightImages }) => {
             ))}
           </div>
         </div>
-
         <button
           className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2"
           onClick={prevSlide}
         >
           &#10094;
         </button>
-
         <button
           className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 p-2"
           onClick={nextSlide}
         >
           &#10095;
         </button>
-
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {combinedImages.map((_, index) => (
             <button
@@ -66,16 +78,20 @@ const Carousel = ({ images, rightImages }) => {
       </div>
 
       {/* Right Images Split Vertically for Larger Screens */}
-      <div className="hidden md:flex w-2/5 ml-4 flex-col space-y-4 h-[400px]">
-        <div
-          className="w-full h-1/2 bg-cover bg-center"
-          style={{ backgroundImage: `url(${rightImages[0]})` }}
-        ></div>
-        <div
-          className="w-full h-1/2 bg-cover bg-center"
-          style={{ backgroundImage: `url(${rightImages[1]})` }}
-        ></div>
-      </div>
+      {!isMobile && (
+        <div className="hidden md:flex w-2/5 ml-4 flex-col space-y-4 h-[600px]">
+          {" "}
+          {/* Increased height */}
+          <div
+            className="w-full h-1/2 bg-cover bg-center"
+            style={{ backgroundImage: `url(${rightImages[0]})` }}
+          ></div>
+          <div
+            className="w-full h-1/2 bg-cover bg-center"
+            style={{ backgroundImage: `url(${rightImages[1]})` }}
+          ></div>
+        </div>
+      )}
     </div>
   );
 };

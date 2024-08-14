@@ -9,22 +9,20 @@ import Navbar from "../components/navbar";
 // }
 import Carousel from "../components/Carousel";
 
-const App = () => {
-  const images = [
-    "https://via.placeholder.com/800x400.png?text=Slide+1",
-    "https://via.placeholder.com/800x400.png?text=Slide+2",
-    "https://via.placeholder.com/800x400.png?text=Slide+3",
-  ];
+import image1 from "../assets/image1.png";
+import image2 from "../assets/image2.png";
+import image3 from "../assets/image3.png";
+import image4 from "../assets/image4.jpg";
+import image5 from "../assets/image5.png";
 
-  const rightImages = [
-    "https://via.placeholder.com/400x200.png?text=Top+Image",
-    "https://via.placeholder.com/400x200.png?text=Bottom+Image",
-  ];
+const App = () => {
+  const carouselImages = [image3, image4, image5];
+  const rightImages = [image2, image1];
 
   return (
     <div className="App">
       <Navbar />
-      <Carousel images={images} rightImages={rightImages} />
+      <Carousel images={carouselImages} rightImages={rightImages} />
     </div>
   );
 };
