@@ -92,7 +92,7 @@ function LoginPage() {
         </form>
         <div className="mt-6 flex justify-center items-center content-center">
           <p className="text-sm content-center">
-            Don't have an Account?{" "}
+            Don&apos;t have an Account?{" "}
             <a
               href="/register"
               className="font-medium text-indigo-600 hover:text-indigo-500"
