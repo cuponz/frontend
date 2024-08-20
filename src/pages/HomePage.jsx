@@ -8,6 +8,8 @@ import Navbar from "../components/navbar";
 //   );
 // }
 import Carousel from "../components/Carousel";
+import Banner from "../components/banner";
+import CouponList from "../components/CouponList";
 
 import image1 from "../assets/image1.png";
 import image2 from "../assets/image2.png";
@@ -23,6 +25,8 @@ const App = () => {
     <div className="App">
       <Navbar />
       <Carousel images={carouselImages} rightImages={rightImages} />
+      <Banner />
+      <CouponList />
     </div>
   );
 };
