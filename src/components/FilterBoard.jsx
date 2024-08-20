@@ -1,51 +1,81 @@
 import { useState, useEffect } from "react";
 import MultiSelectDropdown from "./MultiSelectDropdown";
 
-const FilterBoard = ({ onFilterChange }) => {
+const FilterBoard = ({
+  onFilterChange,
+  categories,
+  brands,
+  shopNames,
+  closeFilterBoard,
+}) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedShopNames, setSelectedShopNames] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const categories = ["Desktop", "Laptop", "Phone", "Tablet", "Accessory"];
-  const brands = ["Apple", "Samsung", "Dell", "HP", "Microsoft", "Asus"];
-
   useEffect(() => {
-    // Call onFilterChange whenever any of the filter states change
-    onFilterChange(selectedCategories, selectedBrands, startDate, endDate);
-  }, [selectedCategories, selectedBrands, startDate, endDate, onFilterChange]);
+    onFilterChange({
+      selectedCategories,
+      selectedBrands,
+      selectedShopNames,
+      startDate,
+      endDate,
+    });
+  }, [
+    selectedCategories,
+    selectedBrands,
+    selectedShopNames,
+    startDate,
+    endDate,
+  ]);
 
   const resetFilters = () => {
     setSelectedCategories([]);
     setSelectedBrands([]);
+    setSelectedShopNames([]);
     setStartDate("");
     setEndDate("");
   };
 
+  // Calculate the number of applied filters
+  const appliedFilterCount =
+    selectedCategories.length +
+    selectedBrands.length +
+    selectedShopNames.length +
+    (startDate ? 1 : 0) +
+    (endDate ? 1 : 0);
+
   return (
-    <div className="flex flex-wrap items-center justify-between mt-6 mb-6 rounded-md space-y-4 md:space-y-0">
-      <div className="flex flex-wrap space-y-4 md:space-y-0 md:flex-nowrap w-full text-gray-700">
-        <div className="flex flex-col w-full md:w-auto md:flex-1 md:mr-4">
-          <MultiSelectDropdown
-            label="Categories"
-            options={categories}
-            selectedOptions={selectedCategories}
-            setSelectedOptions={setSelectedCategories}
-            width="w-full md:w-48"
-          />
-        </div>
+    <div className="p-4 h-full flex flex-col space-y-4">
+      {/* Header section with Filters title and close button */}
+      <div className="flex justify-between items-center mb-4 border-b pb-2">
+        <h2 className="text-lg font-medium">Filters ({appliedFilterCount})</h2>
+        <button onClick={closeFilterBoard} className="text-2xl font-bold">
+          &times;
+        </button>
+      </div>
 
-        <div className="flex flex-col w-full md:w-auto md:flex-1 md:mr-4">
-          <MultiSelectDropdown
-            label="Brand"
-            options={brands}
-            selectedOptions={selectedBrands}
-            setSelectedOptions={setSelectedBrands}
-            width="w-full md:w-48"
-          />
-        </div>
-
-        <div className="flex flex-col w-full md:w-auto md:flex-1 md:mr-4">
+      <div className="flex flex-col space-y-3">
+        <MultiSelectDropdown
+          label="Categories"
+          options={categories}
+          selectedOptions={selectedCategories}
+          setSelectedOptions={setSelectedCategories}
+        />
+        <MultiSelectDropdown
+          label="Brand"
+          options={brands}
+          selectedOptions={selectedBrands}
+          setSelectedOptions={setSelectedBrands}
+        />
+        <MultiSelectDropdown
+          label="Shop Name"
+          options={shopNames}
+          selectedOptions={selectedShopNames}
+          setSelectedOptions={setSelectedShopNames}
+        />
+        <div className="flex flex-col">
           <label htmlFor="start-date" className="text-gray-700 font-medium">
             Start Date
           </label>
@@ -54,11 +84,10 @@ const FilterBoard = ({ onFilterChange }) => {
             id="start-date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full md:w-48 px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
           />
         </div>
-
-        <div className="flex flex-col w-full md:w-auto md:flex-1 md:mr-4">
+        <div className="flex flex-col">
           <label htmlFor="end-date" className="text-gray-700 font-medium">
             End Date
           </label>
@@ -67,18 +96,24 @@ const FilterBoard = ({ onFilterChange }) => {
             id="end-date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full md:w-48 px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
           />
         </div>
+      </div>
 
-        <div className="flex flex-col w-full md:w-auto md:flex-1 md:mr-4 justify-end">
-          <button
-            onClick={resetFilters}
-            className="mt-6 md:mt-0 bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 focus:outline-none"
-          >
-            Reset
-          </button>
-        </div>
+      <div className="mt-auto flex space-x-4">
+        <button
+          onClick={resetFilters}
+          className="w-full bg-red-500 text-white px-3 py-2 rounded-md shadow-md hover:bg-red-600 focus:outline-none"
+        >
+          Reset
+        </button>
+        <button
+          onClick={() => applyFilters()}
+          className="w-full bg-green-500 text-white px-3 py-2 rounded-md shadow-md hover:bg-green-600 focus:outline-none"
+        >
+          Apply
+        </button>
       </div>
     </div>
   );

@@ -10,7 +10,8 @@
     "category": "Laptop",
     "keywords": ["Apple", "Laptop"],
     "startDate": "2023-01-15",
-    "endDate": "2024-01-15"
+    "endDate": "2024-01-15",
+    "shopName": "TechWorld"
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "category": "Phone",
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
-    "endDate": "2024-02-01"
+    "endDate": "2024-02-01",
+    "shopName": "GadgetHub"
   },
   {
     "id": 3,
@@ -36,7 +38,8 @@
     "category": "Desktop",
     "keywords": ["Dell", "Desktop"],
     "startDate": "2023-03-10",
-    "endDate": "2024-03-10"
+    "endDate": "2024-03-10",
+    "shopName": "CompuStore"
   },
   {
     "id": 4,
@@ -49,7 +52,8 @@
     "category": "Tablet",
     "keywords": ["HP", "Tablet"],
     "startDate": "2023-04-05",
-    "endDate": "2024-04-05"
+    "endDate": "2024-04-05",
+    "shopName": "ElectroShop"
   },
   {
     "id": 5,
@@ -62,7 +66,8 @@
     "category": "Accessory",
     "keywords": ["Microsoft", "Accessory"],
     "startDate": "2023-05-15",
-    "endDate": "2024-05-15"
+    "endDate": "2024-05-15",
+    "shopName": "OfficeMart"
   },
   {
     "id": 6,
@@ -75,7 +80,8 @@
     "category": "Laptop",
     "keywords": ["Asus", "Laptop"],
     "startDate": "2023-06-20",
-    "endDate": "2024-06-20"
+    "endDate": "2024-06-20",
+    "shopName": "LaptopWorld"
   },
   {
     "id": 7,
@@ -88,7 +94,8 @@
     "category": "Phone",
     "keywords": ["Apple", "Phone"],
     "startDate": "2023-07-01",
-    "endDate": "2024-07-01"
+    "endDate": "2024-07-01",
+    "shopName": "SmartTech"
   },
   {
     "id": 8,
@@ -101,7 +108,8 @@
     "category": "Tablet",
     "keywords": ["Samsung", "Tablet"],
     "startDate": "2023-08-10",
-    "endDate": "2024-08-10"
+    "endDate": "2024-08-10",
+    "shopName": "GadgetHub"
   },
   {
     "id": 9,
@@ -114,7 +122,8 @@
     "category": "Accessory",
     "keywords": ["Dell", "Accessory"],
     "startDate": "2023-09-15",
-    "endDate": "2024-09-15"
+    "endDate": "2024-09-15",
+    "shopName": "TechStore"
   },
   {
     "id": 10,
@@ -127,6 +136,7 @@
     "category": "Laptop",
     "keywords": ["HP", "Laptop"],
     "startDate": "2023-10-05",
-    "endDate": "2024-10-05"
+    "endDate": "2024-10-05",
+    "shopName": "ElectroShop"
   }
 ]
