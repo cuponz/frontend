@@ -108,13 +108,13 @@ const CouponPage = () => {
       <Navbar />
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-14">
         <Banner message="Discover the Best Deals Today!" />
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 mt-5">
           <div>
             <button
               onClick={toggleFilterBoard}
               className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 focus:outline-none"
             >
-              Toggle Filters
+              Apply Filters
             </button>
           </div>
           <div className="ml-4">
