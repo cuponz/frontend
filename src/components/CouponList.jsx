@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import couponData from "../data/couponData.json"; // Import the JSON file
+import couponData from "../data/couponData.json";
 
-// Import your images
+// Import images
 import dellLogo from "../assets/dell.png";
 import hpLogo from "../assets/hp.png";
 
-// Create a mapping between the logo name in JSON and the imported images
 const logoMap = {
   "dell.png": dellLogo,
   "hp.png": hpLogo,
-  // Add more mappings as needed
 };
 
 const CouponList = () => {
   const [coupons, setCoupons] = useState([]);
 
   useEffect(() => {
-    // Filter the coupons to include only those with id 3, 4, and 9
+    // Example filter the coupons to include only those with id 3, 4, and 9
     const filteredCoupons = couponData.filter((coupon) =>
       [3, 4, 9].includes(coupon.id)
     );
@@ -36,7 +34,7 @@ const CouponList = () => {
           >
             <div className="flex-shrink-0">
               <img
-                src={logoMap[coupon.logo]} // Use the mapped image here
+                src={logoMap[coupon.logo]}
                 alt={`${coupon.brand} Logo`}
                 className="h-20 w-20 rounded-full"
               />

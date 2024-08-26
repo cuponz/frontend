@@ -12,11 +12,12 @@ const Carousel = ({ images, rightImages }) => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    handleResize(); // Check the screen size on component mount
-    window.addEventListener("resize", handleResize); // Listen for window resize events
+    // Check the screen size
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize); // Clean up the event listener
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -37,7 +38,6 @@ const Carousel = ({ images, rightImages }) => {
       {/* Carousel */}
       <div className="w-full md:w-3/5 relative h-[600px]">
         {" "}
-        {/* Increased height */}
         <div className="overflow-hidden relative h-full">
           <div
             className="flex transition-transform duration-700 ease-in-out h-full"
@@ -77,11 +77,10 @@ const Carousel = ({ images, rightImages }) => {
         </div>
       </div>
 
-      {/* Right Images Split Vertically for Larger Screens */}
+      {/* Right banner */}
       {!isMobile && (
         <div className="hidden md:flex w-2/5 ml-4 flex-col space-y-4 h-[600px]">
           {" "}
-          {/* Increased height */}
           <div
             className="w-full h-1/2 bg-cover bg-center"
             style={{ backgroundImage: `url(${rightImages[0]})` }}
