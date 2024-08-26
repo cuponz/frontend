@@ -1,6 +1,15 @@
+import ContactForm from "../components/contactForm";
 import Footer from "../components/footer";
+import Navbar from "../components/navbar";
 
 function App() {
-  return( <><h1>Contact Us</h1><Footer/></>);
+  return( <>
+  
+  
+  <Navbar/>
+
+  <ContactForm/>
+  
+  <Footer/></>);
 }
 export default App;

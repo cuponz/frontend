@@ -6,7 +6,7 @@ function App() {
     <>
     
     <Navbar />
-    <h2>dasd</h2>
+    <h2>homepage</h2>
     <Footer/>
     </>
   )
