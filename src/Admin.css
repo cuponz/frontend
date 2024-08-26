@@ -1,0 +1,102 @@
+.admin-dashboard {
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #F5F5F5;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .admin-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav ul li {
+    cursor: pointer;
+  }
+  
+  .management-section {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .coupon-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .coupon-table th, .coupon-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .coupon-table .status {
+    font-weight: bold;
+  }
+  
+  .coupon-table .status.approved {
+    color: green;
+  }
+  
+  .coupon-table .status.pending {
+    color: orange;
+  }
+  
+  .coupon-table .status.rejected {
+    color: red;
+  }
+  
+  button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  .pagination {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  footer {
+    background-color: #4A3A69;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+  
