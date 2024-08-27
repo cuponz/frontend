@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import MultiSelectDropdown from "./MultiSelectDropdown";
+import MultiSelectDropdown from "../components/MultiSelectDropdown";
 
 const FilterBoard = ({
   onFilterChange,
@@ -7,12 +7,19 @@ const FilterBoard = ({
   brands,
   shopNames,
   closeFilterBoard,
+  initialFilters,
 }) => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedBrands, setSelectedBrands] = useState([]);
-  const [selectedShopNames, setSelectedShopNames] = useState([]);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState(
+    initialFilters.selectedCategories
+  );
+  const [selectedBrands, setSelectedBrands] = useState(
+    initialFilters.selectedBrands
+  );
+  const [selectedShopNames, setSelectedShopNames] = useState(
+    initialFilters.selectedShopNames
+  );
+  const [startDate, setStartDate] = useState(initialFilters.startDate);
+  const [endDate, setEndDate] = useState(initialFilters.endDate);
 
   useEffect(() => {
     onFilterChange({
@@ -38,7 +45,6 @@ const FilterBoard = ({
     setEndDate("");
   };
 
-  // Calculate the number of applied filters
   const appliedFilterCount =
     selectedCategories.length +
     selectedBrands.length +
@@ -48,7 +54,6 @@ const FilterBoard = ({
 
   return (
     <div className="p-4 h-full flex flex-col space-y-4">
-      {/* Header section with Filters title and close button */}
       <div className="flex justify-between items-center mb-4 border-b pb-2">
         <h2 className="text-lg font-medium">Filters ({appliedFilterCount})</h2>
         <button onClick={closeFilterBoard} className="text-2xl font-bold">
@@ -109,7 +114,7 @@ const FilterBoard = ({
           Reset
         </button>
         <button
-          onClick={() => applyFilters()}
+          onClick={closeFilterBoard} // Close the filter board when applying filters
           className="w-full bg-green-500 text-white px-3 py-2 rounded-md shadow-md hover:bg-green-600 focus:outline-none"
         >
           Apply

@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import CouponCard from "../components/CouponCard";
-import Navbar from "../components/Navbar";
 import Banner from "../components/Banner";
 import FilterBoard from "../components/FilterBoard";
 import Pagination from "../components/Pagination";
+import Layout from "../layout/layout";
+import InstructionPopup from "../components/InstructionPopup";
 import coupons from "../data/couponData.json";
 
 const itemsPerPage = 8; // Number of coupons per page
 
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-500"></div>
+  </div>
+);
+
 const CouponPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredCoupons, setFilteredCoupons] = useState(coupons);
+  const [filteredCoupons, setFilteredCoupons] = useState([]);
   const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [appliedFilters, setAppliedFilters] = useState({
@@ -20,26 +27,30 @@ const CouponPage = () => {
     startDate: "",
     endDate: "",
   });
+  const [showPopup, setShowPopup] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Extract unique values for categories, brands, and shop names
-  const uniqueCategories = [
-    ...new Set(coupons.map((coupon) => coupon.category)),
-  ];
-  const uniqueBrands = [...new Set(coupons.map((coupon) => coupon.brand))];
-  const uniqueShopNames = [
-    ...new Set(coupons.map((coupon) => coupon.shopName)),
-  ];
+  useEffect(() => {
+    setTimeout(() => {
+      setFilteredCoupons(coupons);
+      setIsLoading(false);
+    }, 1500); // Simulate loading time
+  }, []);
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
 
   useEffect(() => {
     applyFilters();
-  }, [appliedFilters, searchTerm]); // Depend on filters and searchTerm
+  }, [appliedFilters, searchTerm]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   const applyFilters = () => {
-    let filtered = [...coupons]; // Create a copy of the original coupons array
+    let filtered = [...coupons];
 
     const {
       selectedCategories,
@@ -84,7 +95,14 @@ const CouponPage = () => {
     setFilteredCoupons(filtered);
     setCurrentPage(1); // Reset to first page after filtering
   };
-
+  // Extract unique values for categories, brands, and shop names
+  const uniqueCategories = [
+    ...new Set(coupons.map((coupon) => coupon.category)),
+  ];
+  const uniqueBrands = [...new Set(coupons.map((coupon) => coupon.brand))];
+  const uniqueShopNames = [
+    ...new Set(coupons.map((coupon) => coupon.shopName)),
+  ];
   const handleFilterChange = (newFilters) => {
     setAppliedFilters(newFilters);
   };
@@ -105,7 +123,7 @@ const CouponPage = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen py-8">
-      <Navbar />
+      <Layout />
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-14">
         <Banner message="Discover the Best Deals Today!" />
         <div className="flex items-center justify-between mb-4 mt-5">
@@ -128,57 +146,65 @@ const CouponPage = () => {
           </div>
         </div>
 
-        {isFilterBoardVisible && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
-            onClick={toggleFilterBoard}
-          ></div>
+        {showPopup && <InstructionPopup onClose={handlePopupClose} />}
+
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            {isFilterBoardVisible && (
+              <div
+                className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                onClick={toggleFilterBoard}
+              ></div>
+            )}
+
+            <div
+              className={`fixed top-0 left-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 transform ${
+                isFilterBoardVisible ? "translate-x-0" : "-translate-x-full"
+              }`}
+              style={{ width: "70%", maxWidth: "300px" }}
+            >
+              {isFilterBoardVisible && (
+                <FilterBoard
+                  onFilterChange={handleFilterChange}
+                  initialFilters={appliedFilters}
+                  categories={uniqueCategories}
+                  brands={uniqueBrands}
+                  shopNames={uniqueShopNames}
+                  closeFilterBoard={toggleFilterBoard}
+                />
+              )}
+            </div>
+
+            <div className="flex justify-between items-center mt-4 mb-4">
+              <div className="text-lg font-medium">
+                {`${filteredCoupons.length} / ${coupons.length} Coupons found`}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+              {currentCoupons.map((coupon, index) => (
+                <CouponCard
+                  key={index}
+                  logo={coupon.logo}
+                  title={coupon.title}
+                  keywords={coupon.keywords}
+                  startDate={coupon.startDate}
+                  endDate={coupon.endDate}
+                  description={coupon.description}
+                  shopName={coupon.shopName}
+                />
+              ))}
+            </div>
+            <div className="mt-8">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(filteredCoupons.length / itemsPerPage)}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          </>
         )}
-
-        <div
-          className={`fixed top-0 left-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 transform ${
-            isFilterBoardVisible ? "translate-x-0" : "-translate-x-full"
-          }`}
-          style={{ width: "70%", maxWidth: "300px" }} // Reduced width here
-        >
-          {isFilterBoardVisible && (
-            <FilterBoard
-              onFilterChange={handleFilterChange}
-              applyFilters={applyFilters}
-              categories={uniqueCategories}
-              brands={uniqueBrands}
-              shopNames={uniqueShopNames}
-              closeFilterBoard={toggleFilterBoard} // Pass close function
-            />
-          )}
-        </div>
-
-        <div className="flex justify-between items-center mt-4 mb-4">
-          <div className="text-lg font-medium">
-            {`${filteredCoupons.length} / ${coupons.length} Coupons found`}
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-          {currentCoupons.map((coupon, index) => (
-            <CouponCard
-              key={index}
-              logo={coupon.logo}
-              title={coupon.title}
-              keywords={coupon.keywords}
-              startDate={coupon.startDate}
-              endDate={coupon.endDate}
-              description={coupon.description}
-              shopName={coupon.shopName}
-            />
-          ))}
-        </div>
-        <div className="mt-8">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(filteredCoupons.length / itemsPerPage)}
-            onPageChange={handlePageChange}
-          />
-        </div>
       </div>
     </div>
   );
