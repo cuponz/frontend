@@ -24,9 +24,11 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <Carousel images={carouselImages} rightImages={rightImages} />
-      <Banner />
-      <CouponList />
+      <div className="pt-16 p-6">
+        <Carousel images={carouselImages} rightImages={rightImages} />
+        <Banner />
+        <CouponList />
+      </div>
     </div>
   );
 };

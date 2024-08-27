@@ -1,8 +1,9 @@
 const ShopOwnerInfo = () => {
   return (
-    <div className="container mx-auto p-4 justify-center">
-      <div className="grid grid-cols-[auto_1fr] gap-5 items-center p-6 border border-gray-300 rounded-lg shadow-sm">
+    <div className="container mx-auto  justify-center">
+      <div className="grid grid-cols-[auto_1fr] sm:gap-5 items-center p-6  gap-0">
         <div className="w-24 h-24">
+          {/* ShopOwner avatar image(if has) */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="96"
@@ -19,8 +20,12 @@ const ShopOwnerInfo = () => {
           </svg>
         </div>
         <div className="ml-6">
-          <h2 className="text-2xl font-medium text-gray-900">Shop Name</h2>
-          <p className="text-xl text-gray-500">myemailorphone@gmail.com</p>
+          <h2 className="sm:text-2xl font-medium text-gray-900 text-lg">
+            Shop Name
+          </h2>
+          <p className="sm:text-xl text-gray-500 text-sm">
+            myemailorphone@gmail.com
+          </p>
         </div>
       </div>
     </div>
