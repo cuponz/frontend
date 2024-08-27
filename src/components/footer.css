@@ -1,5 +1,6 @@
 /* Footer.css */
 
+
 /* Full-width background container */
 .footer-background {
   width: 100%;
@@ -25,7 +26,10 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgb(182, 177, 177)
 }
+
 
 .footer-nav a {
   margin: 0 15px;
@@ -106,5 +110,6 @@
     margin-top: 10px;
   }
 }
+
 
 

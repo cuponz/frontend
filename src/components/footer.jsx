@@ -1,20 +1,17 @@
-import React from 'react';
-import './footer.css';
+import React from "react";
+import "./footer.css";
 
 const Footer = () => {
   return (
     <div className="footer-background">
       <footer className="footer">
+        {/* Add image here */}
+
         <div className="footer-top">
           <div className="footer-nav">
             <a href="/">Home</a>
             <a href="/contactus">Contact Us</a>
             <a href="/aboutus">About Us</a>
-          </div>
-          <div className="footer-subscribe">
-            <label htmlFor="email">Get Notification:</label>
-            <input type="email" id="email" placeholder="User@gmail.com" />
-            <button className="subscribe-btn">Subscribe</button>
           </div>
         </div>
         <div className="footer-bottom">
