@@ -6,6 +6,7 @@ import ContactUs from "./pages/ContactUs.jsx"
 import "./index.css";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
+import AdminDashboard from "./pages/Adminview.jsx";
 const router = createBrowserRouter([
   {
   path:'/',
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path:'/aboutus',
     element: <AboutUs />
+  },
+  {
+    path:'/adminview',
+    element: <AdminDashboard />
   },
 ]);
 

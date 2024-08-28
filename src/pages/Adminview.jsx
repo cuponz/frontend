@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AdminDashboard.css'; //css style in Admin.css
+import './Admin.css'; //css style in Admin.css
 
 const AdminDashboard = () => {
   const [coupons, setCoupons] = useState([
