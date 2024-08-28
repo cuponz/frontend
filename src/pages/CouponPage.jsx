@@ -1,19 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
+import Fuse from "fuse.js";
 import CouponCard from "../components/CouponCard";
 import Banner from "../components/Banner";
 import FilterBoard from "../components/FilterBoard";
 import Pagination from "../components/Pagination";
 import Layout from "../layout/layout";
 import InstructionPopup from "../components/InstructionPopup";
-import coupons from "../data/couponData.json";
+import LoadingSpinner from "../components/LoadingSpinner"; // Import the new component
 
-const itemsPerPage = 8; // Number of coupons per page
-
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center h-screen">
-    <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-500"></div>
-  </div>
-);
+const itemsPerPage = 8;
 
 const CouponPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,23 +18,114 @@ const CouponPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [appliedFilters, setAppliedFilters] = useState({
     selectedCategories: [],
-    selectedBrands: [],
     selectedShopNames: [],
     startDate: "",
     endDate: "",
   });
   const [showPopup, setShowPopup] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [coupons, setCoupons] = useState([]);
+  const location = useLocation();
+
+  const fuseOptions = {
+    keys: ["title", "description", "keywords", "shopName"], // Added "shopName" to the keys
+    threshold: 0.3,
+  };
+
+  const fuse = new Fuse(coupons, fuseOptions);
 
   useEffect(() => {
-    setTimeout(() => {
-      setFilteredCoupons(coupons);
-      setIsLoading(false);
-    }, 1500); // Simulate loading time
-  }, []);
+    fetch("https://walts03.github.io/testdatacoupon/couponData.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setCoupons(data);
+
+        const params = new URLSearchParams(location.search);
+        const category = params.get("category");
+        if (category) {
+          const newFilters = {
+            ...appliedFilters,
+            selectedCategories: [category],
+          };
+          setAppliedFilters(newFilters);
+          applyFilters(newFilters, data);
+        } else {
+          setFilteredCoupons(data);
+        }
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1500);
+      })
+      .catch((error) => {
+        console.error("Error fetching coupon data:", error);
+        setIsLoading(false);
+      });
+  }, [location.search]);
 
   const handlePopupClose = () => {
     setShowPopup(false);
+  };
+
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
+  // useCallback to memoize the applyFilters function
+  const applyFilters = useCallback(
+    (filters = appliedFilters, couponsData = coupons) => {
+      let filtered = [...couponsData];
+
+      const { selectedCategories, selectedShopNames, startDate, endDate } =
+        filters;
+
+      if (selectedCategories.length > 0) {
+        filtered = filtered.filter((coupon) =>
+          selectedCategories.includes(coupon.category)
+        );
+      }
+
+      if (selectedShopNames.length > 0) {
+        filtered = filtered.filter((coupon) =>
+          selectedShopNames.includes(coupon.shopName)
+        );
+      }
+
+      if (startDate) {
+        filtered = filtered.filter((coupon) => coupon.startDate >= startDate);
+      }
+
+      if (endDate) {
+        filtered = filtered.filter((coupon) => coupon.endDate <= endDate);
+      }
+
+      if (searchTerm) {
+        const searchResults = fuse.search(searchTerm);
+        filtered = searchResults.map((result) => result.item);
+      }
+
+      setFilteredCoupons(filtered);
+      setCurrentPage(1);
+    },
+    [appliedFilters, searchTerm, coupons] // Dependencies for useCallback
+  );
+
+  const uniqueCategories = [
+    ...new Set(coupons.map((coupon) => coupon.category)),
+  ];
+  const uniqueShopNames = [
+    ...new Set(coupons.map((coupon) => coupon.shopName)),
+  ];
+
+  const handleFilterChange = (newFilters) => {
+    setAppliedFilters(newFilters);
   };
 
   useEffect(() => {
@@ -49,67 +136,12 @@ const CouponPage = () => {
     setCurrentPage(page);
   };
 
-  const applyFilters = () => {
-    let filtered = [...coupons];
-
-    const {
-      selectedCategories,
-      selectedBrands,
-      selectedShopNames,
-      startDate,
-      endDate,
-    } = appliedFilters;
-
-    if (selectedCategories.length > 0) {
-      filtered = filtered.filter((coupon) =>
-        selectedCategories.includes(coupon.category)
-      );
-    }
-
-    if (selectedBrands.length > 0) {
-      filtered = filtered.filter((coupon) =>
-        selectedBrands.includes(coupon.brand)
-      );
-    }
-
-    if (selectedShopNames.length > 0) {
-      filtered = filtered.filter((coupon) =>
-        selectedShopNames.includes(coupon.shopName)
-      );
-    }
-
-    if (startDate) {
-      filtered = filtered.filter((coupon) => coupon.startDate >= startDate);
-    }
-
-    if (endDate) {
-      filtered = filtered.filter((coupon) => coupon.endDate <= endDate);
-    }
-
-    if (searchTerm) {
-      filtered = filtered.filter((coupon) =>
-        coupon.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    setFilteredCoupons(filtered);
-    setCurrentPage(1); // Reset to first page after filtering
-  };
-  // Extract unique values for categories, brands, and shop names
-  const uniqueCategories = [
-    ...new Set(coupons.map((coupon) => coupon.category)),
-  ];
-  const uniqueBrands = [...new Set(coupons.map((coupon) => coupon.brand))];
-  const uniqueShopNames = [
-    ...new Set(coupons.map((coupon) => coupon.shopName)),
-  ];
-  const handleFilterChange = (newFilters) => {
-    setAppliedFilters(newFilters);
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleSearchChange = useCallback(
+    debounce((e) => {
+      setSearchTerm(e.target.value);
+    }, 300),
+    []
+  );
 
   const toggleFilterBoard = () => {
     setIsFilterBoardVisible(!isFilterBoardVisible);
@@ -120,7 +152,6 @@ const CouponPage = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
   return (
     <div className="bg-gray-100 min-h-screen py-8">
       <Layout />
@@ -130,16 +161,29 @@ const CouponPage = () => {
           <div>
             <button
               onClick={toggleFilterBoard}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 focus:outline-none"
+              className="bg-yellow-500 text-gray-800 px-4 py-2 rounded-md shadow-lg hover:bg-yellow-600 focus:outline-none flex items-center"
             >
-              Apply Filters
+              Filter
+              <svg
+                className="ml-2 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
             </button>
           </div>
           <div className="ml-4">
             <input
               type="text"
               placeholder="Search coupons..."
-              value={searchTerm}
               onChange={handleSearchChange}
               className="w-64 px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
             />
@@ -170,7 +214,6 @@ const CouponPage = () => {
                   onFilterChange={handleFilterChange}
                   initialFilters={appliedFilters}
                   categories={uniqueCategories}
-                  brands={uniqueBrands}
                   shopNames={uniqueShopNames}
                   closeFilterBoard={toggleFilterBoard}
                 />
@@ -193,9 +236,11 @@ const CouponPage = () => {
                   endDate={coupon.endDate}
                   description={coupon.description}
                   shopName={coupon.shopName}
+                  couponCount={coupon.availableCoupons}
                 />
               ))}
             </div>
+
             <div className="mt-8">
               <Pagination
                 currentPage={currentPage}

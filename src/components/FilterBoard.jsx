@@ -4,16 +4,12 @@ import MultiSelectDropdown from "../components/MultiSelectDropdown";
 const FilterBoard = ({
   onFilterChange,
   categories,
-  brands,
   shopNames,
   closeFilterBoard,
   initialFilters,
 }) => {
   const [selectedCategories, setSelectedCategories] = useState(
     initialFilters.selectedCategories
-  );
-  const [selectedBrands, setSelectedBrands] = useState(
-    initialFilters.selectedBrands
   );
   const [selectedShopNames, setSelectedShopNames] = useState(
     initialFilters.selectedShopNames
@@ -24,22 +20,14 @@ const FilterBoard = ({
   useEffect(() => {
     onFilterChange({
       selectedCategories,
-      selectedBrands,
       selectedShopNames,
       startDate,
       endDate,
     });
-  }, [
-    selectedCategories,
-    selectedBrands,
-    selectedShopNames,
-    startDate,
-    endDate,
-  ]);
+  }, [selectedCategories, selectedShopNames, startDate, endDate]);
 
   const resetFilters = () => {
     setSelectedCategories([]);
-    setSelectedBrands([]);
     setSelectedShopNames([]);
     setStartDate("");
     setEndDate("");
@@ -47,7 +35,6 @@ const FilterBoard = ({
 
   const appliedFilterCount =
     selectedCategories.length +
-    selectedBrands.length +
     selectedShopNames.length +
     (startDate ? 1 : 0) +
     (endDate ? 1 : 0);
@@ -67,12 +54,6 @@ const FilterBoard = ({
           options={categories}
           selectedOptions={selectedCategories}
           setSelectedOptions={setSelectedCategories}
-        />
-        <MultiSelectDropdown
-          label="Brand"
-          options={brands}
-          selectedOptions={selectedBrands}
-          setSelectedOptions={setSelectedBrands}
         />
         <MultiSelectDropdown
           label="Shop Name"
