@@ -27,7 +27,9 @@ const Navbar = () => {
 
         <ul className="hidden md:flex space-x-10 ml-15 text-[#25354C]">
           <li className="hover:underline cursor-pointer">Home</li>
+
           <li className="hover:underline cursor-pointer">All Coupons</li>
+
           <li
             className="hover:underline relative cursor-pointer"
             onClick={toggleCategories}
