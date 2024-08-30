@@ -1,5 +1,3 @@
-/* Navbar.css */
-
 body {
   font-family: Arial, sans-serif;
 }
@@ -11,15 +9,17 @@ body {
   align-items: center;
   padding: 10px 20px;
   background-color: #e0dffe;
-  max-width: 1000px; /* Constrain the maximum width */
-  margin: 0 auto;    /* Center the navbar horizontally */
-  border-radius: 8px; /* Optional: Add rounded corners */
+  max-width: 1000px; 
+  margin: 0 auto;    
+  border-radius: 8px; 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+  width: 100%;
 }
 
 .navbar-background {
   width: 100%;
-  background-color: #e0dffe; /* Full-width background color */
-  padding: 10px 0; /* Vertical padding for the navbar */
+  background-color: #e0dffe; 
+  padding: 10px 0; 
   border-bottom: 2px solid #183346;
 }
 
@@ -43,28 +43,24 @@ body {
   font-weight: 500;
   color: #333;
 }
-
 .navbar-left .dropdown-content {
   display: none;
-  position: fixed; /* Changed to fixed */
-  background-color: #E0DFFE; /* Same background color as navbar */
-  color: #fff;
+  position: absolute;
+  background-color: #E0DFFE; /* Black background color /
+  color: #fff; / White text color /
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  width: 100vw; /* Set width to full viewport width */
-  left: 0; /* Align to the left edge of the viewport */
-  top: 60px; /* Set top offset to height of the navbar */
 }
 
 .navbar-left .dropdown-content a {
-  color: black;
+  color: black; / White text color for links /
   padding: 10px 20px;
   text-decoration: none;
   display: block;
 }
 
 .navbar-left .dropdown-content a:hover {
-  background-color: #E0DFFE; /* Darker background on hover */
+  background-color: #E0DFFE; / Darker background on hover */
 }
 
 .navbar-left .dropdown:hover .dropdown-content {
@@ -108,12 +104,11 @@ body {
   background-color: #563b9e;
 }
 
-/* Responsive Design */
 @media screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px; /* Adjust padding for smaller screens */
+    padding: 10px; 
   }
 
   .navbar-left, .navbar-right {
@@ -125,4 +120,5 @@ body {
     width: 100%;
     margin: 5px 0;
   }
+  
 }
