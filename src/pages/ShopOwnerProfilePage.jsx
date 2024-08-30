@@ -1,5 +1,4 @@
-import React from "react";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import ShopOwnerProfile from "../components/ShopOwnerProfile";
 import ShopCouponList from "../components/ShopCouponList";
