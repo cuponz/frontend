@@ -1,58 +1,92 @@
-import React, { useState, useEffect } from "react";
-import "./navbar.css";
+import { useState } from "react";
+import logo from "../assets/logo.png"; // Correct path for logo
+import CategoriesMenu from "./CategoriesMenu";
 
 const Navbar = () => {
-  const [menuItems, setMenuItems] = useState([]);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [isElectronicsOpen, setIsElectronicsOpen] = useState(false);
 
-  useEffect(() => {
-    // Fetch data from your deployed JSON file
-    fetch(
-      "https://cdn.discordapp.com/attachments/1225107283768377395/1279066133265121340/menuItem.json?ex=66d316aa&is=66d1c52a&hm=17cdce2657a7c5b7501ddb63b572a9fb804b37cb6956a3b9c58b29253108220a&"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setMenuItems(data.menuItems);
-        console.log(data.menuItems);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  const toggleCategories = () => {
+    setIsCategoriesOpen(!isCategoriesOpen);
+    if (isCategoriesOpen) {
+      setIsElectronicsOpen(false); // Close all submenus when categories close
+    }
+  };
 
-  const renderMenuItems = (items) => {
-    return items.map((item, index) => {
-      if (item.dropdown) {
-        return (
-          <div className="dropdown" key={index}>
-            <button className="dropbtn">
-              {item.name}
-              <i className="arrow down"></i>
-            </button>
-            <div className="dropdown-content">
-              {renderMenuItems(item.items)}
-            </div>
-          </div>
-        );
-      } else {
-        return (
-          <a href={item.link} key={index}>
-            {item.name}
-          </a>
-        );
-      }
-    });
+  const toggleElectronics = (e) => {
+    e.stopPropagation();
+    setIsElectronicsOpen(!isElectronicsOpen); // Toggle Electronics submenu
   };
 
   return (
-    <div className="navbar-background">
-      <nav className="navbar">
-        <div className="navbar-left">{renderMenuItems(menuItems)}</div>
-        <div className="navbar-right">
-          <button className="search-btn">
-            <i className="fa fa-search"></i>
-          </button>
-          <button className="login-btn">Login</button>
+    <nav className="bg-[#E9E7F9] p-4">
+      <div className="container mx-auto flex justify-between items-center relative">
+        <div className="flex items-center">
+          <img src={logo} alt="CuponZ Logo" className="h-8 mr-10" />
         </div>
-      </nav>
-    </div>
+
+        <ul className="hidden md:flex space-x-10 ml-15 text-[#25354C]">
+          <li className="hover:underline cursor-pointer">Home</li>
+          <li className="hover:underline cursor-pointer">All Coupons</li>
+          <li
+            className="hover:underline relative cursor-pointer"
+            onClick={toggleCategories}
+          >
+            Categories
+          </li>
+          <li className="hover:underline cursor-pointer">Contact Us</li>
+          <li className="hover:underline cursor-pointer">About Us</li>
+        </ul>
+
+        <div className="flex items-center space-x-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search"
+              className="pl-8 pr-4 py-1 border rounded-full"
+            />
+            <svg
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 1114 0 7 7 0 01-14 0z"
+              />
+            </svg>
+          </div>
+          <button className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300">
+            Login
+          </button>
+        </div>
+
+        <div className="md:hidden">
+          <button className="focus:outline-none">
+            <svg
+              className="w-6 h-6 text-gray-800"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      {isCategoriesOpen && (
+        <CategoriesMenu
+          isElectronicsOpen={isElectronicsOpen}
+          toggleElectronics={toggleElectronics}
+        />
+      )}
+    </nav>
   );
 };
 
