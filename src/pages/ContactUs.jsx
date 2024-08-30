@@ -2,7 +2,7 @@ import ContactForm from "../components/contactForm";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 
-function App() {
+function ContactUs() {
   return (
     <>
       <Navbar />
@@ -13,3 +13,4 @@ function App() {
     </>
   );
 }
+export default ContactUs;
