@@ -1,5 +1,16 @@
-// import React from "react";
+import ContactForm from "../components/contactForm";
+import Footer from "../components/footer";
+import Navbar from "../components/navbar";
 
-export default function AboutUs() {
-  return <div>Contact Us</div>;
+function ContactUs() {
+  return (
+    <>
+      <Navbar />
+
+      <ContactForm />
+
+      <Footer />
+    </>
+  );
 }
+export default ContactUs;

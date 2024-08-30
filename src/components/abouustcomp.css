@@ -1,0 +1,129 @@
+/* AboutUs.css */
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+
+}
+
+.upper-section {
+  background-color: #e0dffe;
+  padding: 50px 20px;
+  width: 100%;
+  text-align: left;
+  align-self: flex-start;
+  padding-left: 100px;
+  /* padding-bottom: 50px; */
+}
+
+.up-sec{
+    /* background-color: #e0dffe; */
+    width: 50%;
+    text-align: left;
+    align-self: flex-start;
+}
+
+.upper-section h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #4b4b92;
+}
+
+.upper-section p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.hero-buttons .search-btn, .hero-buttons .contact-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-btn {
+  background-color: #ffda44;
+  color: #333;
+}
+
+.contact-btn {
+  padding: 10px 20px;
+  border: 1px solid #6d50bf !important;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #6d50bf;
+  background-color: transparent;
+}
+
+.contact-btn:hover {
+  background-color: #6d50bf; /* Background color on hover */
+  color: white; /* Text color on hover */
+}
+
+
+.lower-section {
+  padding: 50px 20px;
+  background-color: white;
+  width: 50%;
+  text-align: left;
+  align-self: flex-end;
+  padding-right: 40px;
+  /* padding-top: 50px; */
+
+}
+
+.lower-section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #4b4b92;
+}
+
+.lower-section p {
+  font-size: 16px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.overview-buttons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.overview-buttons .company-btn,
+.overview-buttons .products-btn,
+.overview-buttons .team-btn {
+  padding: 10px 20px;
+  border: 1px solid #6d50bf;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #6d50bf;
+  background-color: transparent;
+}
+
+.overview-buttons .company-btn:hover,
+.overview-buttons .products-btn:hover,
+.overview-buttons .team-btn:hover {
+  background-color: #6d50bf;
+  color: white;
+}
+
+.learn-more-btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #6d50bf;
+  color: white;
+}

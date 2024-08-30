@@ -9,6 +9,9 @@ import AboutUs from "./pages/AboutUs.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import CouponPage from "./pages/CouponPage.jsx";
+import CustomerProfilePage from "./pages/CustomerProfilePage.jsx";
+import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +27,15 @@ const router = createBrowserRouter([
     element: <AboutUs />,
   },
   {
+    path: "/customerProfile",
+    element: <CustomerProfilePage />,
+  },
+
+  {
+    path: "/shop",
+    element: <ShopOwnerProfilePage />,
+	},
+	{
     path: "/login",
     element: <Login />,
   },
