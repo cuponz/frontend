@@ -1,4 +1,5 @@
 import React from "react";
+import "./coupon.css";
 
 function Coupon({
   logo,
@@ -35,7 +36,7 @@ function Coupon({
         )}
       </div>
       <div className="mt-auto">
-        <button className="bg-[#46467A] text-white px-4 py-2 rounded-md hover:bg-green-700 w-full">
+        <button className=" redeem-btn bg-[#46467A] text-white px-4 py-2 rounded-md hover:bg-green-700 w-full redeem-btn">
           Redeem Now
         </button>
       </div>

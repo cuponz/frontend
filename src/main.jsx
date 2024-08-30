@@ -7,6 +7,7 @@ import "./index.css";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import CustomerProfilePage from "./pages/CustomerProfilePage.jsx";
+import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/customerProfile",
     element: <CustomerProfilePage />,
+  },
+
+  {
+    path: "/shop",
+    element: <ShopOwnerProfilePage />,
   },
 ]);
 

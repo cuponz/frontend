@@ -1,22 +1,22 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import CouponsList from "../components/couponList";
-import UserInfo from "../components/UserInfo";
+import ShopOwnerProfile from "../components/ShopOwnerProfile";
+import ShopCouponList from "../components/ShopCouponList";
 
-function CustomerProfilePage() {
+function ShopOwnerProfilePage() {
   return (
     <>
       <Navbar />
 
       <div className="container mx-auto py-8">
         {/* <h1 className="text-2xl font-bold mb-4">Customer Profile</h1> */}
-        <UserInfo />
-        <CouponsList />
+        <ShopOwnerProfile />
+        <ShopCouponList />
       </div>
       <Footer />
     </>
   );
 }
 
-export default CustomerProfilePage;
+export default ShopOwnerProfilePage;

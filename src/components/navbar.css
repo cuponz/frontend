@@ -14,8 +14,6 @@ body {
   max-width: 1000px; /* Constrain the maximum width */
   margin: 0 auto;    /* Center the navbar horizontally */
   border-radius: 8px; /* Optional: Add rounded corners */
-  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); Optional: Add a subtle shadow */
-  width: 100%;
 }
 
 .navbar-background {
@@ -48,15 +46,18 @@ body {
 
 .navbar-left .dropdown-content {
   display: none;
-  position: absolute;
-  background-color: #E0DFFE; /* Black background color */
-  color: #fff; /* White text color */
+  position: fixed; /* Changed to fixed */
+  background-color: #E0DFFE; /* Same background color as navbar */
+  color: #fff;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  width: 100vw; /* Set width to full viewport width */
+  left: 0; /* Align to the left edge of the viewport */
+  top: 60px; /* Set top offset to height of the navbar */
 }
 
 .navbar-left .dropdown-content a {
-  color: black; /* White text color for links */
+  color: black;
   padding: 10px 20px;
   text-decoration: none;
   display: block;
@@ -125,4 +126,3 @@ body {
     margin: 5px 0;
   }
 }
-

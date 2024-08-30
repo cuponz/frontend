@@ -7,12 +7,40 @@ export const menuItems = [
     name: "Categories",
     dropdown: true,
     items: [
-      { name: "Desktop", link: "#" },
-      { name: "Laptop", link: "#" },
-      { name: "Mobile", link: "#" },
-      { name: "Xiaomi", link: "#" },
-      { name: "Huawei", link: "#" },
-      // Add more categories as needed
+      {
+        name: "Electronics",
+        dropdown: true,
+        items: [
+          { name: "Desktop", type: "Desktop", brand: ["Dell", "Microsoft"] },
+          { name: "Laptop", type: "Laptop", brand: ["Xiaomi", "Huawei"] },
+          { name: "Mobile", type: "Mobile", brand: ["Apple", "Samsung"] },
+        ],
+      },
+      {
+        name: "Clothing & Accessories",
+        dropdown: true,
+        items: [
+          { name: "Men", type: "Men's Clothing", brand: ["Nike", "Adidas"] },
+          { name: "Women", type: "Women's Clothing", brand: ["H&M", "Zara"] },
+        ],
+      },
+      {
+        name: "Health and Beauty",
+        dropdown: true,
+        items: [
+          {
+            name: "Skincare",
+            type: "Skincare Products",
+            brand: ["Clinique", "Neutrogena"],
+          },
+          {
+            name: "Makeup",
+            type: "Makeup Products",
+            brand: ["MAC", "Sephora"],
+          },
+        ],
+      },
+      { name: "Offers", link: "#" },
     ],
   },
   { name: "Contact Us", link: "contactus" },
