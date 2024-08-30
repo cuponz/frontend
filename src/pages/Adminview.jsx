@@ -47,8 +47,8 @@ const AdminDashboard = () => {
         <div className="flex items-center">
           <div className="w-12 h-12 bg-gray-400 rounded-full mr-4"></div>
           <div>
-            <h3 className="text-lg font-semibold">Admin Name</h3>
-            <p className="text-sm">admin@gmail.com</p>
+            <h3 className="text-lg font-semibold">Admin Arman</h3>
+            <p className="text-sm">armanhossain@gmail.com</p>
           </div>
         </div>
         <nav>
@@ -135,14 +135,21 @@ const AdminDashboard = () => {
           ))}
         </div>
       </main>
-      <footer className="bg-gray-800 text-white text-center p-4 mt-auto">
-        <p>© 2024 i71 Cuponz All rights reserved</p>
-        <ul className="flex justify-center space-x-4 mt-2">
-          <li>Terms</li>
-          <li>Privacy</li>
-          <li>Cookies</li>
-        </ul>
-      </footer>
+        <footer className="bg-[#4C4188] text-white text-center p-4">
+    <div className="flex justify-center space-x-6 mb-2">
+      <a href="#" className="text-white hover:underline">Home</a>
+      <a href="#" className="text-white hover:underline">Hot Deals</a>
+      <a href="#" className="text-white hover:underline">Contact Us</a>
+      <a href="#" className="text-white hover:underline">About Us</a>
+    </div>
+    <p className="text-sm">© 2024 i71 Cuponz All rights reserved </p>
+    <div className="flex justify-center space-x-4 mt-2">
+      <a href="#" className="text-white hover:underline">Terms</a>
+      <a href="#" className="text-white hover:underline">Privacy</a>
+      <a href="#" className="text-white hover:underline">Cookies</a>
+    </div>
+  </footer>
+
     </div>
   );
 };

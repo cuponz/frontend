@@ -85,18 +85,46 @@
   }
   
   footer {
-    background-color: #4A3A69;
+    background-color: #4C4188; /* The footer background color */
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 16px;
   }
   
-  footer ul {
-    list-style-type: none;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
+  footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 8px;
+    font-size: 14px;
   }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
+  footer p {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+  
+  footer .flex {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  footer .space-x-6 {
+    gap: 24px;
+  }
+  
+  footer .space-x-4 {
+    gap: 16px;
+  }
+  
+  @media (max-width: 640px) {
+    footer a {
+      margin: 8px 0;
+      display: block;
+    }
+  }
+  
   
