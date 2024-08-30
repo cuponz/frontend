@@ -1,5 +1,4 @@
-import React from "react";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import CouponsList from "../components/couponList";
 import UserInfo from "../components/UserInfo";
