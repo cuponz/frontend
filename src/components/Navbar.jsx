@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/logo.png"; // Correct path for logo
 import CategoriesMenu from "./CategoriesMenu";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
@@ -26,18 +27,24 @@ const Navbar = () => {
         </div>
 
         <ul className="hidden md:flex space-x-10 ml-15 text-[#25354C]">
-          <li className="hover:underline cursor-pointer">Home</li>
-
-          <li className="hover:underline cursor-pointer">All Coupons</li>
-
+          <Link to="/">
+            <li className="hover:underline cursor-pointer">Home</li>
+          </Link>
+          <Link to="/coupon">
+            <li className="hover:underline cursor-pointer">All Coupons</li>
+          </Link>
           <li
             className="hover:underline relative cursor-pointer"
             onClick={toggleCategories}
           >
             Categories
           </li>
-          <li className="hover:underline cursor-pointer">Contact Us</li>
-          <li className="hover:underline cursor-pointer">About Us</li>
+          <Link to="/contactus">
+            <li className="hover:underline cursor-pointer">Contact Us</li>
+          </Link>
+          <Link to="/aboutus">
+            <li className="hover:underline cursor-pointer">About Us</li>
+          </Link>
         </ul>
 
         <div className="flex items-center space-x-4">

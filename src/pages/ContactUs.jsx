@@ -1,15 +1,13 @@
 import ContactForm from "../components/contactForm";
-import Footer from "../components/footer";
-import Navbar from "../components/Navbar";
+
+import Layout from "../layout/layout";
 
 function ContactUs() {
   return (
     <>
-      <Navbar />
-
-      <ContactForm />
-
-      <Footer />
+      <Layout>
+        <ContactForm />
+      </Layout>
     </>
   );
 }
