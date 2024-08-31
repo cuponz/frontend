@@ -11,7 +11,8 @@
     "keywords": ["Apple", "Laptop"],
     "startDate": "2023-01-15",
     "endDate": "2024-01-15",
-    "shopName": "TechWorld"
+    "shopName": "TechWorld",
+    "numUsers": 1200
   },
   {
     "id": 2,
@@ -25,7 +26,8 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 950
   },
   {
     "id": 3,
@@ -39,7 +41,8 @@
     "keywords": ["Dell", "Desktop"],
     "startDate": "2023-03-10",
     "endDate": "2024-03-10",
-    "shopName": "CompuStore"
+    "shopName": "CompuStore",
+    "numUsers": 300
   },
   {
     "id": 4,
@@ -53,7 +56,8 @@
     "keywords": ["HP", "Tablet"],
     "startDate": "2023-04-05",
     "endDate": "2024-04-05",
-    "shopName": "ElectroShop"
+    "shopName": "ElectroShop",
+    "numUsers": 480
   },
   {
     "id": 5,
@@ -67,7 +71,8 @@
     "keywords": ["Microsoft", "Accessory"],
     "startDate": "2023-05-15",
     "endDate": "2024-05-15",
-    "shopName": "OfficeMart"
+    "shopName": "OfficeMart",
+    "numUsers": 650
   },
   {
     "id": 6,
@@ -81,7 +86,8 @@
     "keywords": ["Asus", "Laptop"],
     "startDate": "2023-06-20",
     "endDate": "2024-06-20",
-    "shopName": "LaptopWorld"
+    "shopName": "LaptopWorld",
+    "numUsers": 780
   },
   {
     "id": 7,
@@ -95,7 +101,8 @@
     "keywords": ["Apple", "Phone"],
     "startDate": "2023-07-01",
     "endDate": "2024-07-01",
-    "shopName": "SmartTech"
+    "shopName": "SmartTech",
+    "numUsers": 1050
   },
   {
     "id": 8,
@@ -109,7 +116,8 @@
     "keywords": ["Samsung", "Tablet"],
     "startDate": "2023-08-10",
     "endDate": "2024-08-10",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 870
   },
   {
     "id": 9,
@@ -123,7 +131,8 @@
     "keywords": ["Dell", "Accessory"],
     "startDate": "2023-09-15",
     "endDate": "2024-09-15",
-    "shopName": "TechStore"
+    "shopName": "TechStore",
+    "numUsers": 540
   },
   {
     "id": 10,
@@ -137,10 +146,11 @@
     "keywords": ["HP", "Laptop"],
     "startDate": "2023-10-05",
     "endDate": "2024-10-05",
-    "shopName": "ElectroShop"
+    "shopName": "ElectroShop",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 21,
     "title": "1Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -151,10 +161,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 22,
     "title": "2Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -165,10 +176,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 23,
     "title": "3Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -179,10 +191,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 24,
     "title": "4Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -193,10 +206,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 25,
     "title": "5Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -207,10 +221,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 26,
     "title": "6Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -221,10 +236,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 27,
     "title": "7Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -235,10 +251,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 28,
     "title": "8Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -249,10 +266,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 29,
     "title": "9Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -263,10 +281,11 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   },
   {
-    "id": 2,
+    "id": 299,
     "title": "10Samsung Phone Sale",
     "name": "Samsung Phone Discount",
     "description": "Exclusive deals on Samsung Phones. Don't miss out!",
@@ -277,6 +296,7 @@
     "keywords": ["Samsung", "Phone"],
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
-    "shopName": "GadgetHub"
+    "shopName": "GadgetHub",
+    "numUsers": 640
   }
 ]

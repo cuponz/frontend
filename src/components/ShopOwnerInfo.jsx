@@ -21,7 +21,7 @@ const ShopOwnerInfo = () => {
         </div>
         <div className="ml-6">
           <h2 className="sm:text-2xl font-medium text-gray-900 text-lg">
-            Shop Name
+            GadgetHub
           </h2>
           <p className="sm:text-xl text-gray-500 text-sm">
             myemailorphone@gmail.com

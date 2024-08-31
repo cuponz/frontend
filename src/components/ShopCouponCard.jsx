@@ -1,6 +1,7 @@
 const CouponCard = ({
   logo,
   title,
+  numUsers,
   description,
   keywords,
   startDate,
@@ -10,7 +11,6 @@ const CouponCard = ({
 }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full relative">
-      {/* Coupon count badge positioned in the top-right corner */}
       <div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
         {couponCount} coupons left!
       </div>
@@ -20,7 +20,6 @@ const CouponCard = ({
           <img src={logo} alt={title} className="h-16 w-16 object-contain" />
         </div>
         <h2 className="text-lg font-semibold mb-1">{title}</h2>
-        {/* Display the shop name */}
         <p className="text-gray-700 text-sm mb-2">{shopName}</p>
         <p className="mt-2 text-gray-600 text-sm">{description}</p>
         <p className="mt-2 text-gray-600 text-sm">
@@ -34,8 +33,8 @@ const CouponCard = ({
         )}
       </div>
       <div className="mt-auto">
-        <button className="bg-[#46467A] text-white px-4 py-2 rounded-md hover:bg-green-700 w-full">
-          Redeem Now
+        <button className="bg-[#46467A] text-white px-4 py-2 rounded-md w-full">
+          Number of users: {numUsers}
         </button>
       </div>
     </div>
