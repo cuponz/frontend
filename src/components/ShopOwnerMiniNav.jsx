@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ShopCoupon from "../components/ShopCoupon";
 
 const ShopOwnerMiniNav = () => {
   const [activeTab, setActiveTab] = useState("Coupons");
@@ -6,7 +7,11 @@ const ShopOwnerMiniNav = () => {
   const renderContent = () => {
     switch (activeTab) {
       case "Coupons":
-        return <div>Coupons Content</div>;
+        return (
+          <div>
+            <ShopCoupon />
+          </div>
+        );
       case "Management":
         return <div>Management Content</div>;
       case "Customer Info":

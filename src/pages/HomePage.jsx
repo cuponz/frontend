@@ -9,7 +9,7 @@ import Navbar from "../components/navbar";
 // }
 import Carousel from "../components/Carousel";
 import Banner from "../components/banner";
-import CouponList from "../components/CouponList";
+import HomeCouponList from "../components/HomeCouponList";
 
 import image1 from "../assets/image1.png";
 import image2 from "../assets/image2.png";
@@ -27,7 +27,7 @@ const App = () => {
       <div className="pt-16 p-6">
         <Carousel images={carouselImages} rightImages={rightImages} />
         <Banner />
-        <CouponList />
+        <HomeCouponList />
       </div>
     </div>
   );
