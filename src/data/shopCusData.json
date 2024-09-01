@@ -1,0 +1,296 @@
+[
+  {
+    "coupon_id": 1,
+    "user_id": 1001,
+    "user_name": "John Doe",
+    "email": "johndoe@example.com",
+    "phoneNumber": "+1234567890"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1002,
+    "user_name": "Jane Smith",
+    "email": "janesmith@example.com",
+    "phoneNumber": "+0987654321"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1003,
+    "user_name": "Alice Johnson",
+    "email": "alicej@example.com",
+    "phoneNumber": "+1122334455"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1004,
+    "user_name": "Bob Brown",
+    "email": "bobbrown@example.com",
+    "phoneNumber": "+2233445566"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1005,
+    "user_name": "Charlie Davis",
+    "email": "charliedavis@example.com",
+    "phoneNumber": "+3344556677"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1006,
+    "user_name": "Diana Evans",
+    "email": "dianaevans@example.com",
+    "phoneNumber": "+4455667788"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1007,
+    "user_name": "Evan White",
+    "email": "evanwhite@example.com",
+    "phoneNumber": "+5566778899"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1008,
+    "user_name": "Fiona Green",
+    "email": "fionagreen@example.com",
+    "phoneNumber": "+6677889900"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1009,
+    "user_name": "George Harris",
+    "email": "georgeh@example.com",
+    "phoneNumber": "+7788990011"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1010,
+    "user_name": "Hannah Lee",
+    "email": "hannahlee@example.com",
+    "phoneNumber": "+8899001122"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1011,
+    "user_name": "Ian Black",
+    "email": "ianblack@example.com",
+    "phoneNumber": "+9900112233"
+  },
+  {
+    "coupon_id": 1,
+    "user_id": 1012,
+    "user_name": "Judy Blue",
+    "email": "judyblue@example.com",
+    "phoneNumber": "+1100223344"
+  },
+  {
+    "coupon_id": 2,
+    "user_id": 1013,
+    "user_name": "Kevin Red",
+    "email": "kevinred@example.com",
+    "phoneNumber": "+1200334455"
+  },
+  {
+    "coupon_id": 2,
+    "user_id": 1014,
+    "user_name": "Laura Green",
+    "email": "lauragreen@example.com",
+    "phoneNumber": "+1300445566"
+  },
+  {
+    "coupon_id": 2,
+    "user_id": 1015,
+    "user_name": "Mona White",
+    "email": "monawhite@example.com",
+    "phoneNumber": "+1400556677"
+  },
+  {
+    "coupon_id": 2,
+    "user_id": 1016,
+    "user_name": "Nina Brown",
+    "email": "ninabrown@example.com",
+    "phoneNumber": "+1500667788"
+  },
+  {
+    "coupon_id": 2,
+    "user_id": 1017,
+    "user_name": "Oscar Black",
+    "email": "oscarblack@example.com",
+    "phoneNumber": "+1600778899"
+  },
+  {
+    "coupon_id": 2,
+    "user_id": 1018,
+    "user_name": "Paul Silver",
+    "email": "paulsilver@example.com",
+    "phoneNumber": "+1700889900"
+  },
+  {
+    "coupon_id": 3,
+    "user_id": 1019,
+    "user_name": "Quincy Gold",
+    "email": "quincygold@example.com",
+    "phoneNumber": "+1800990011"
+  },
+  {
+    "coupon_id": 3,
+    "user_id": 1020,
+    "user_name": "Rachel Brown",
+    "email": "rachelbrown@example.com",
+    "phoneNumber": "+1900111122"
+  },
+  {
+    "coupon_id": 3,
+    "user_id": 1021,
+    "user_name": "Sam Black",
+    "email": "samblack@example.com",
+    "phoneNumber": "+2000112233"
+  },
+  {
+    "coupon_id": 3,
+    "user_id": 1022,
+    "user_name": "Tina White",
+    "email": "tinawhite@example.com",
+    "phoneNumber": "+2100223344"
+  },
+  {
+    "coupon_id": 3,
+    "user_id": 1023,
+    "user_name": "Uma Red",
+    "email": "umared@example.com",
+    "phoneNumber": "+2200334455"
+  },
+  {
+    "coupon_id": 3,
+    "user_id": 1024,
+    "user_name": "Victor Yellow",
+    "email": "victoryellow@example.com",
+    "phoneNumber": "+2300445566"
+  },
+  {
+    "coupon_id": 4,
+    "user_id": 1025,
+    "user_name": "Wendy Green",
+    "email": "wendygreen@example.com",
+    "phoneNumber": "+2400556677"
+  },
+  {
+    "coupon_id": 4,
+    "user_id": 1026,
+    "user_name": "Xavier Black",
+    "email": "xavierblack@example.com",
+    "phoneNumber": "+2500667788"
+  },
+  {
+    "coupon_id": 4,
+    "user_id": 1027,
+    "user_name": "Yara Brown",
+    "email": "yarabrown@example.com",
+    "phoneNumber": "+2600778899"
+  },
+  {
+    "coupon_id": 4,
+    "user_id": 1028,
+    "user_name": "Zane White",
+    "email": "zanewhite@example.com",
+    "phoneNumber": "+2700889900"
+  },
+  {
+    "coupon_id": 4,
+    "user_id": 1029,
+    "user_name": "Amy Red",
+    "email": "amyred@example.com",
+    "phoneNumber": "+2800990011"
+  },
+  {
+    "coupon_id": 4,
+    "user_id": 1030,
+    "user_name": "Brian Gold",
+    "email": "briangold@example.com",
+    "phoneNumber": "+2900111122"
+  },
+  {
+    "coupon_id": 5,
+    "user_id": 1031,
+    "user_name": "Cathy Blue",
+    "email": "cathyblue@example.com",
+    "phoneNumber": "+3000112233"
+  },
+  {
+    "coupon_id": 5,
+    "user_id": 1032,
+    "user_name": "David Green",
+    "email": "davidgreen@example.com",
+    "phoneNumber": "+3100223344"
+  },
+  {
+    "coupon_id": 5,
+    "user_id": 1033,
+    "user_name": "Eve Black",
+    "email": "eveblack@example.com",
+    "phoneNumber": "+3200334455"
+  },
+  {
+    "coupon_id": 5,
+    "user_id": 1034,
+    "user_name": "Frank White",
+    "email": "frankwhite@example.com",
+    "phoneNumber": "+3300445566"
+  },
+  {
+    "coupon_id": 5,
+    "user_id": 1035,
+    "user_name": "Grace Red",
+    "email": "gracered@example.com",
+    "phoneNumber": "+3400556677"
+  },
+  {
+    "coupon_id": 5,
+    "user_id": 1036,
+    "user_name": "Hank Yellow",
+    "email": "hankyellow@example.com",
+    "phoneNumber": "+3500667788"
+  },
+  {
+    "coupon_id": 6,
+    "user_id": 1037,
+    "user_name": "Ivy Brown",
+    "email": "ivybrown@example.com",
+    "phoneNumber": "+3600778899"
+  },
+  {
+    "coupon_id": 6,
+    "user_id": 1038,
+    "user_name": "Jack Black",
+    "email": "jackblack@example.com",
+    "phoneNumber": "+3700889900"
+  },
+  {
+    "coupon_id": 6,
+    "user_id": 1039,
+    "user_name": "Kate White",
+    "email": "katewhite@example.com",
+    "phoneNumber": "+3800990011"
+  },
+  {
+    "coupon_id": 6,
+    "user_id": 1040,
+    "user_name": "Leo Red",
+    "email": "leored@example.com",
+    "phoneNumber": "+3900111122"
+  },
+  {
+    "coupon_id": 6,
+    "user_id": 1041,
+    "user_name": "Mia Gold",
+    "email": "miagold@example.com",
+    "phoneNumber": "+4000112233"
+  },
+  {
+    "coupon_id": 6,
+    "user_id": 1042,
+    "user_name": "Nick Green",
+    "email": "nickgreen@example.com",
+    "phoneNumber": "+4100223344"
+  }
+]
