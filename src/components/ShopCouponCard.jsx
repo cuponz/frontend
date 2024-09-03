@@ -1,4 +1,4 @@
-const CouponCard = ({
+const ShopCouponCard = ({
   logo,
   title,
   numUsers,
@@ -6,13 +6,13 @@ const CouponCard = ({
   keywords,
   startDate,
   endDate,
-  couponCount,
   shopName,
+  onShowDetails,
 }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full relative">
       <div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
-        {couponCount} coupons left!
+        {numUsers} Users
       </div>
 
       <div className="flex flex-col items-center text-center mb-4 flex-grow">
@@ -33,12 +33,15 @@ const CouponCard = ({
         )}
       </div>
       <div className="mt-auto">
-        <button className="bg-[#46467A] text-white px-4 py-2 rounded-md w-full">
-          Number of users: {numUsers}
+        <button
+          className="bg-[#46467A] text-white px-4 py-2 rounded-md w-full"
+          onClick={onShowDetails}
+        >
+          Show details
         </button>
       </div>
     </div>
   );
 };
 
-export default CouponCard;
+export default ShopCouponCard;

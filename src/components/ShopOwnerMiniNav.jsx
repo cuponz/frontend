@@ -1,16 +1,28 @@
 import { useState } from "react";
 import ShopCoupon from "../components/ShopCoupon";
 import ShopCouponTable from "../components/shopCouponTable";
+import UserTable from "../components/UserTable"; // Assuming you have a UserTable component
 
 const ShopOwnerMiniNav = () => {
   const [activeTab, setActiveTab] = useState("Coupons");
+  const [selectedCoupon, setSelectedCoupon] = useState(null);
+
+  const handleShowDetails = (couponId) => {
+    setSelectedCoupon(couponId);
+    setActiveTab("Details");
+  };
+
+  const handleBackToCoupons = () => {
+    setSelectedCoupon(null);
+    setActiveTab("Coupons");
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case "Coupons":
         return (
           <div>
-            <ShopCoupon />
+            <ShopCoupon onShowDetails={handleShowDetails} />
           </div>
         );
       case "Management":
@@ -19,8 +31,12 @@ const ShopOwnerMiniNav = () => {
             <ShopCouponTable />
           </div>
         );
-      case "Customer Info":
-        return <div>Customer Info Content</div>;
+      case "Details":
+        return (
+          <div>
+            <UserTable couponId={selectedCoupon} onBack={handleBackToCoupons} />
+          </div>
+        );
       case "Setting":
         return <div>Setting Content</div>;
       default:
@@ -29,11 +45,11 @@ const ShopOwnerMiniNav = () => {
   };
 
   return (
-    <div className="container mx-auto ">
-      <hr className="h-0.5 mx-auto bg-indigo-900 border-0 rounded  dark:bg-gray-700" />
+    <div className="container mx-auto">
+      <hr className="h-0.5 mx-auto bg-indigo-900 border-0 rounded dark:bg-gray-700" />
       <div className="grid grid-cols-2 md:flex justify-between max-w-xl">
         <button
-          className={`w-full md:w-1/4 px-4 py-2 font-medium text-sm ${
+          className={`w-full md:w-1/3 px-4 py-2 font-medium text-sm ${
             activeTab === "Coupons"
               ? "bg-indigo-900 text-white"
               : "text-gray-700"
@@ -43,7 +59,7 @@ const ShopOwnerMiniNav = () => {
           Coupons
         </button>
         <button
-          className={`w-full md:w-1/4 px-4 py-2 font-medium text-sm ${
+          className={`w-full md:w-1/3 px-4 py-2 font-medium text-sm ${
             activeTab === "Management"
               ? "bg-indigo-900 text-white"
               : "text-gray-700"
@@ -53,17 +69,7 @@ const ShopOwnerMiniNav = () => {
           Management
         </button>
         <button
-          className={`w-full md:w-1/4 px-4 py-2 font-medium text-sm ${
-            activeTab === "Customer Info"
-              ? "bg-indigo-900 text-white"
-              : "text-gray-700"
-          }`}
-          onClick={() => setActiveTab("Customer Info")}
-        >
-          Customer Info
-        </button>
-        <button
-          className={`w-full md:w-1/4 px-4 py-2 font-medium text-sm ${
+          className={`w-full md:w-1/3 px-4 py-2 font-medium text-sm ${
             activeTab === "Setting"
               ? "bg-indigo-900 text-white"
               : "text-gray-700"
