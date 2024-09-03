@@ -1,4 +1,4 @@
-CuponZ Backend
+# CuponZ Frontend
 ## Description
 This repository handles the Front-end of the Cupon website.
 
