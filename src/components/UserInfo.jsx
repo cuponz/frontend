@@ -1,11 +1,20 @@
-import React from "react";
-import "./userInfo.css"; // Assuming you have specific CSS for CustomerInfo
+import React, { useState } from "react";
+import "./userInfo.css"; // Assuming CSS is appropriately linked
+import CouponsList from "./couponList"; // Import the CouponsList component
+import Settings from "./Settings"; // Import or define the Settings component
 
 function UserInfo() {
   // Static data for demonstration
   const clientInfo = {
     name: "My Name",
     email: "myemailorphone@gmail.com",
+  };
+
+  const [activeTab, setActiveTab] = useState("coupons"); // State to track the active tab
+
+  // Function to switch tabs
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
   };
 
   return (
@@ -20,9 +29,20 @@ function UserInfo() {
             </div>
           </div>
           <div className="profile-tabs">
-            <button className="tab">Coupons</button>
-            <button className="tab">Settings</button>
+            <button
+              className={`tab ${activeTab === "coupons" ? "active" : ""}`}
+              onClick={() => handleTabChange("coupons")}
+            >
+              Coupons
+            </button>
+            <button
+              className={`tab ${activeTab === "settings" ? "active" : ""}`}
+              onClick={() => handleTabChange("settings")}
+            >
+              Settings
+            </button>
           </div>
+          {activeTab === "coupons" ? <CouponsList /> : <Settings />}
         </div>
       </div>
     </div>

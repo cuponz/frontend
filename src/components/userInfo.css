@@ -46,4 +46,18 @@
   .tab:not(.active) {
     background-color: gray;
   }
+
+  .tab {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: lightgray;
+    margin-right: 5px;
+  }
+  
+  .tab.active {
+    background-color: #4D4D86;
+    color: white;
+  }
+  
   

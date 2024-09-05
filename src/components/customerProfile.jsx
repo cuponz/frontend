@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import CouponsList from "./couponList";
 import customerData from "../../dist/demo_cust_prof"; // Importing the JSON data
-// import "./CustomerProfile.css";
+import CouponsList from "../components/couponList"; // Assuming path correctness
+import Settings from "../components/Settings"; // You need to create this component
 
 function CustomerProfile() {
   const [customer, setCustomer] = useState({
@@ -9,11 +9,16 @@ function CustomerProfile() {
     email: "",
     profileImageUrl: "",
   });
+  const [activeTab, setActiveTab] = useState("coupons"); // New state to track the active tab
 
   useEffect(() => {
     // Simulate fetching data
     setCustomer(customerData);
   }, []);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <div className="customer-profile">
@@ -27,11 +32,21 @@ function CustomerProfile() {
           <p>{customer.email}</p>
         </div>
         <div className="tabs">
-          <div className="tab active">Coupons</div>
-          <div className="tab">Settings</div>
+          <div
+            className={`tab ${activeTab === "coupons" ? "active" : ""}`}
+            onClick={() => handleTabChange("coupons")}
+          >
+            Coupons
+          </div>
+          <div
+            className={`tab ${activeTab === "settings" ? "active" : ""}`}
+            onClick={() => handleTabChange("settings")}
+          >
+            Settings
+          </div>
         </div>
       </div>
-      {/* <CouponsList /> */}
+      {activeTab === "coupons" ? <CouponsList /> : <Settings />}
     </div>
   );
 }
