@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // import CouponsList from "./couponList";
 import customerData from "../../dist/demo_cust_prof"; // Importing the JSON data
 // import "./CustomerProfile.css";

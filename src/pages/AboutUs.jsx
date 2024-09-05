@@ -1,15 +1,12 @@
-import Footer from "../components/footer";
-import Navbar from "../components/Navbar";
+import Layout from "../layout/layout";
 import AboutusComp from "../components/aboutusComp";
 
 export default function AboutUs() {
   return (
     <>
-      <Navbar />
-
-      <AboutusComp />
-
-      <Footer />
+      <Layout>
+        <AboutusComp />
+      </Layout>
     </>
   );
 }

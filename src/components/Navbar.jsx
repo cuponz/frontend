@@ -68,9 +68,11 @@ const Navbar = () => {
               />
             </svg>
           </div>
-          <button className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300">
-            Login
-          </button>
+          <Link to="/login">
+            <button className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300">
+              Login
+            </button>
+          </Link>
         </div>
 
         <div className="md:hidden">
