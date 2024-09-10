@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
 import "./index.css";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
@@ -12,8 +13,12 @@ import CouponPage from "./pages/CouponPage.jsx";
 import CustomerProfilePage from "./pages/CustomerProfilePage.jsx";
 import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage.jsx";
 
+import ShopOwnerManage from "./pages/ShopOwnerManage.jsx";
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
     path: "/",
     element: <HomePage />,
     errorElement: <ErrorPage />,
