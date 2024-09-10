@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#E9E7F9] p-4">
+    <nav className="bg-[#E9E7F9] p-4 z-50">
       <div className="container mx-auto flex justify-between items-center relative">
         {/* Logo Section */}
         <div className="flex items-center">
@@ -103,7 +103,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
+        <div className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2 ">
           <Link to="/" onClick={toggleMobileMenu}>
             <p className="hover:underline">Home</p>
           </Link>

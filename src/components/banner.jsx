@@ -17,7 +17,7 @@ const Banner = () => {
             <img src={hpLogo} alt="HP" className="h-16" />
             <img src={dellLogo} alt="Dell" className="h-16" />
             <img src={microsoftLogo} alt="Microsoft" className="h-16" />
-            <a href="/shops" className="text-white flex items-center">
+            <a href="/coupon" className="text-white flex items-center">
               <svg
                 className="h-8 w-8 mr-2"
                 fill="currentColor"
