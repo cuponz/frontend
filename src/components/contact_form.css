@@ -72,6 +72,7 @@
 
    /* csss 2 */
 
+   
    .contact-form-container {
     display: flex;
     justify-content: space-between;
@@ -303,4 +304,37 @@
   pointer-events: none; /* Ensure clicks pass through the SVG if necessary */
 }
 
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+  .contact-form-container {
+      flex-direction: column; /* Stack the form and contact info vertically */
+  }
+
+  .contact-info, .contact-form {
+      width: 100%; /* Both sections take full width on smaller screens */
+      padding: 20px; /* Reduce padding for smaller screens */
+      border-radius: 8px; /* Adjust border-radius for a consistent look */
+  }
+
+  .contact-form .form-group, .contact-form .radio-group {
+      flex-direction: column; /* Stack form elements vertically */
+  }
+
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form input[type="tel"],
+  .contact-form textarea {
+      width: 100%; /* Full width for form elements */
+  }
+
+  .contact-form .radio-group label {
+      margin-right: 0; /* Remove margin for radio labels */
+  }
+
+  .contact-info .social-icons {
+      width: auto; /* Adjust social icons container width */
+      margin-top: 20px; /* Add some top margin */
+  }
+}
 
