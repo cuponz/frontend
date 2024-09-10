@@ -1,4 +1,3 @@
-import React from "react";
 import "./coupon.css";
 
 function Coupon({

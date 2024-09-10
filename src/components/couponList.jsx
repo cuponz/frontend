@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Coupon from "./Coupon";
+import { useState } from "react";
+import Coupon from "./coupon";
 import { couponData } from "../data/couponData";
 
 function CouponsList() {
