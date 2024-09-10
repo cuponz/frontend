@@ -53,7 +53,7 @@ const CouponList = () => {
       </div>
       <div className="mt-6 flex justify-end">
         <a
-          href="/coupons"
+          href="/coupon"
           className="text-indigo-900 text-lg font-semibold flex items-center"
         >
           View All Coupons
