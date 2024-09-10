@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isElectronicsOpen, setIsElectronicsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
 
   const toggleCategories = () => {
     setIsCategoriesOpen(!isCategoriesOpen);
@@ -19,14 +20,20 @@ const Navbar = () => {
     setIsElectronicsOpen(!isElectronicsOpen); // Toggle Electronics submenu
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu
+  };
+
   return (
     <nav className="bg-[#E9E7F9] p-4">
       <div className="container mx-auto flex justify-between items-center relative">
+        {/* Logo Section */}
         <div className="flex items-center">
           <img src={logo} alt="CuponZ Logo" className="h-8 mr-10" />
         </div>
 
-        <ul className="hidden md:flex space-x-10 ml-15 text-[#25354C]">
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-10 text-[#25354C]">
           <Link to="/">
             <li className="hover:underline cursor-pointer">Home</li>
           </Link>
@@ -47,6 +54,7 @@ const Navbar = () => {
           </Link>
         </ul>
 
+        {/* Search and Login Section */}
         <div className="flex items-center space-x-4">
           <div className="relative">
             <input
@@ -75,8 +83,9 @@ const Navbar = () => {
           </Link>
         </div>
 
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <button className="focus:outline-none">
+          <button onClick={toggleMobileMenu} className="focus:outline-none">
             <svg
               className="w-6 h-6 text-gray-800"
               fill="none"
@@ -91,6 +100,34 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
+          <Link to="/" onClick={toggleMobileMenu}>
+            <p className="hover:underline">Home</p>
+          </Link>
+          <Link to="/coupon" onClick={toggleMobileMenu}>
+            <p className="hover:underline">All Coupons</p>
+          </Link>
+          <p
+            className="hover:underline cursor-pointer"
+            onClick={() => {
+              toggleCategories();
+              toggleMobileMenu(); // Close mobile menu after click
+            }}
+          >
+            Categories
+          </p>
+          <Link to="/contactus" onClick={toggleMobileMenu}>
+            <p className="hover:underline">Contact Us</p>
+          </Link>
+          <Link to="/aboutus" onClick={toggleMobileMenu}>
+            <p className="hover:underline">About Us</p>
+          </Link>
+        </div>
+      )}
+
       {isCategoriesOpen && (
         <CategoriesMenu
           isElectronicsOpen={isElectronicsOpen}
