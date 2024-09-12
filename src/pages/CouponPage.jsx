@@ -35,7 +35,8 @@ const CouponPage = () => {
   const fuse = new Fuse(coupons, fuseOptions);
 
   useEffect(() => {
-    fetch("https://walts03.github.io/testdatacoupon/couponData.json")
+    // fetch("https://walts03.github.io/testdatacoupon/couponData.json")
+    fetch("/api/coupon")
       .then((response) => response.json())
       .then((data) => {
         setCoupons(data);
@@ -231,14 +232,15 @@ const CouponPage = () => {
                   {currentCoupons.map((coupon, index) => (
                     <CouponCard
                       key={index}
-                      logo={coupon.logo}
+                      logo={coupon.logo_url}
                       title={coupon.title}
                       keywords={coupon.keywords}
-                      startDate={coupon.startDate}
-                      endDate={coupon.endDate}
-                      description={coupon.description}
-                      shopName={coupon.shopName}
-                      couponCount={coupon.availableCoupons}
+                      startDate={coupon.start_date}
+                      endDate={coupon.end_date}
+                      description={coupon.desc}
+                      shopName={coupon.name}
+                      maxUsage={coupon.max_usage}
+                      usageCount={coupon.usage_count}
                     />
                   ))}
                 </div>

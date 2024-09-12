@@ -101,24 +101,6 @@ function LoginPage() {
             </a>
           </p>
         </div>
-        <div className="mt-4 flex gap-2 justify-center">
-          <button className="flex items-center justify-center w-full py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-            <img
-              src="https://img.icons8.com/ios-filled/24/000000/facebook--v1.png"
-              alt="Facebook icon"
-              className="w-5 h-5 mr-2"
-            />
-            Login with Facebook
-          </button>
-          <button className="flex items-center justify-center w-full py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-            <img
-              src="https://img.icons8.com/ios-filled/24/000000/google-logo.png"
-              alt="Google icon"
-              className="w-5 h-5 mr-2"
-            />
-            Login with Google
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -5,19 +5,27 @@ const CouponCard = ({
   keywords,
   startDate,
   endDate,
-  couponCount,
   shopName,
+  maxUsage,
+  usageCount,
 }) => {
+  keywords = keywords.split(",");
+
+  startDate = (new Date(startDate)).toLocaleDateString()
+  endDate = (new Date(endDate)).toLocaleDateString()
+
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full relative">
       {/* Coupon count badge positioned in the top-right corner */}
-      <div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
-        {couponCount} coupons left!
-      </div>
+      {maxUsage && (
+        <div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
+          {maxUsage - usageCount} coupons left!
+        </div>
+      )}
 
       <div className="flex flex-col items-center text-center mb-4 flex-grow">
         <div className="mb-4">
-          <img src={logo} alt={title} className="h-16 w-16 object-contain" />
+          <img src={logo} alt={title} className="w-96 h-96 object-contain" />
         </div>
         <h2 className="text-lg font-semibold mb-1">{title}</h2>
         {/* Display the shop name */}
