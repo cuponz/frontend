@@ -1,5 +1,4 @@
-import React from "react";
-import Coupon from "./Coupon";
+import Coupon from "./coupon";
 import { couponData } from "../data/couponData";
 
 function ShopCouponList() {

@@ -1,4 +1,3 @@
-import React from "react";
 import "./userInfo.css"; // Assuming you have specific CSS for CustomerInfo
 
 function UserInfo() {

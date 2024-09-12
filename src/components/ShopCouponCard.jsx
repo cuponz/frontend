@@ -1,20 +1,18 @@
-import "./coupon.css";
-
-function Coupon({
+const ShopCouponCard = ({
   logo,
   title,
+  numUsers,
   description,
   keywords,
   startDate,
   endDate,
-  couponCount,
   shopName,
-}) {
+  onShowDetails,
+}) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full relative">
-      {/* Coupon count badge positioned in the top-right corner */}
       <div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
-        {couponCount} coupons left!
+        {numUsers} Users
       </div>
 
       <div className="flex flex-col items-center text-center mb-4 flex-grow">
@@ -35,12 +33,15 @@ function Coupon({
         )}
       </div>
       <div className="mt-auto">
-        <button className=" redeem-btn bg-[#46467A] text-white px-4 py-2 rounded-md hover:bg-green-700 w-full redeem-btn">
-          Redeem Now
+        <button
+          className="bg-[#46467A] text-white px-4 py-2 rounded-md w-full"
+          onClick={onShowDetails}
+        >
+          Show details
         </button>
       </div>
     </div>
   );
-}
+};
 
-export default Coupon;
+export default ShopCouponCard;
