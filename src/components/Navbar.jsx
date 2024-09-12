@@ -1,27 +1,27 @@
 import { useState } from "react";
-import logo from "../assets/logo.png"; // Correct path for logo
+import logo from "../assets/logo.png";
 import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isElectronicsOpen, setIsElectronicsOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleCategories = () => {
     setIsCategoriesOpen(!isCategoriesOpen);
     if (isCategoriesOpen) {
-      setIsElectronicsOpen(false); // Close all submenus when categories close
+      setIsElectronicsOpen(false);
     }
   };
 
   const toggleElectronics = (e) => {
     e.stopPropagation();
-    setIsElectronicsOpen(!isElectronicsOpen); // Toggle Electronics submenu
+    setIsElectronicsOpen(!isElectronicsOpen);
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -29,7 +29,11 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center relative">
         {/* Logo Section */}
         <div className="flex items-center">
-          <img src={logo} alt="CuponZ Logo" className="h-8 mr-10" />
+          <img
+            src={logo}
+            alt="CuponZ Logo"
+            className="h-5 w-auto md:h-8 lg:h-10 mr-4"
+          />
         </div>
 
         {/* Desktop Menu */}
@@ -55,7 +59,7 @@ const Navbar = () => {
         </ul>
 
         {/* Search and Login Section */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 ml-2">
           <div className="relative">
             <input
               type="text"
@@ -77,7 +81,7 @@ const Navbar = () => {
             </svg>
           </div>
           <Link to="/login">
-            <button className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300">
+            <button className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300 mr-2">
               Login
             </button>
           </Link>
@@ -103,7 +107,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2 ">
+        <div className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
           <Link to="/" onClick={toggleMobileMenu}>
             <p className="hover:underline">Home</p>
           </Link>
@@ -114,7 +118,7 @@ const Navbar = () => {
             className="hover:underline cursor-pointer"
             onClick={() => {
               toggleCategories();
-              toggleMobileMenu(); // Close mobile menu after click
+              toggleMobileMenu();
             }}
           >
             Categories
@@ -128,6 +132,7 @@ const Navbar = () => {
         </div>
       )}
 
+      {/* Categories Menu */}
       {isCategoriesOpen && (
         <CategoriesMenu
           isElectronicsOpen={isElectronicsOpen}
