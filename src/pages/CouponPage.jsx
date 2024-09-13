@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import Fuse from "fuse.js";
 import CouponCard from "../components/CouponCard";
-import Banner from "../components/Banner";
+import Banner from "../components/banner";
 import FilterBoard from "../components/FilterBoard";
 import Pagination from "../components/Pagination";
 import Layout from "../layout/layout";

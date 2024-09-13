@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
+import profilePic from "../assets/userIcon.png";
 import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 
@@ -7,6 +8,8 @@ const Navbar = () => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isElectronicsOpen, setIsElectronicsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
   const toggleCategories = () => {
     setIsCategoriesOpen(!isCategoriesOpen);
@@ -22,6 +25,15 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleLoginLogout = () => {
+    setIsLoggedIn(!isLoggedIn);
+    setIsProfileDropdownOpen(false);
+  };
+
+  const toggleProfileDropdown = () => {
+    setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
   return (
@@ -58,7 +70,7 @@ const Navbar = () => {
           </Link>
         </ul>
 
-        {/* Search and Login Section */}
+        {/* Search, User Section and Login/Logout Button */}
         <div className="flex items-center space-x-4 ml-2">
           <div className="relative">
             <input
@@ -80,11 +92,52 @@ const Navbar = () => {
               />
             </svg>
           </div>
-          <Link to="/login">
-            <button className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300 mr-2">
-              Login
-            </button>
-          </Link>
+
+          {isLoggedIn ? (
+            <div className="relative">
+              <button
+                onClick={toggleProfileDropdown}
+                className="focus:outline-none"
+              >
+                <img
+                  src={profilePic}
+                  alt="User Profile"
+                  className="h-10 w-10 rounded-full border-solid hover:border-blue-500 border-2 border-yellow-400"
+                />
+              </button>
+              {isProfileDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Your Profile
+                  </Link>
+                  <Link
+                    to="/settings"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Settings
+                  </Link>
+                  <button
+                    onClick={handleLoginLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login">
+              <button
+                onClick={handleLoginLogout}
+                className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300 mr-2"
+              >
+                Login
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Button */}

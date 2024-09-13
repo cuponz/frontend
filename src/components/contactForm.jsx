@@ -20,7 +20,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between p-5 border border-gray-300 rounded-lg bg-white max-w-5xl mx-auto mt-20 shadow-lg overflow-hidden">
+    <div className="flex flex-col md:flex-row justify-between p-5 border border-gray-300 rounded-lg bg-white max-w-5xl mx-auto mt-20 shadow-lg overflow-hidden mb-20">
       <div className="w-full md:w-2/5 p-8 relative  bg-purple-600 text-white rounded-t-lg md:rounded-l-lg md:rounded-t-none">
         <h2 className="mb-2 text-2xl font-semibold">Contact Information</h2>
         <p className="text-sm mb-6">Say something to start a live chat!</p>
