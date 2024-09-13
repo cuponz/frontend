@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.png"; // Correct path for logo
 import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 
+import { useUserStore } from "../store/user";
+
 const Navbar = () => {
+  const user = useUserStore((state) => state.user);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user])
+ 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isElectronicsOpen, setIsElectronicsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu

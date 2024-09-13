@@ -1,34 +1,51 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import CouponImage2 from "../assets/coupon2.png";
 import Layout from "../layout/layout";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
+import login from "../api/login";
+
+const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const loginMutation = useMutation(
+    {
+      mutationKey: ["login"],
+      mutationFn: login,
+      onSuccess: (data) => {
+        toast.success("Login successful!");
+        navigate("/");
+      },
+      onError: (err) => {
+        toast.error(`Login failed. ${err.message}`);
+      },
+    }
+  );
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const loginData = {
-      username: formData.email,
-      password: formData.password,
-    };
 
     if (formData.email === "" || formData.password === "") {
       toast.error("Please fill in all fields!");
     } else {
-      const jsonData = JSON.stringify(loginData);
-      console.log("Form submitted as JSON:", jsonData);
-      toast.success("Login successful!");
+      const loginData = {
+        email: formData.email,
+        password: formData.password,
+      };
+
+      loginMutation.mutate(loginData);
     }
   };
 
@@ -75,9 +92,9 @@ const RegisterPage = () => {
             <div className="mt-4 text-center">
               <p>
                 Don&apos;t have an account?{" "}
-                <a href="/register" className="text-blue-500 hover:underline">
+                <Link to="/register" className="text-blue-500 hover:underline">
                   Register
-                </a>
+                </Link>
               </p>
             </div>
           </div>
@@ -98,9 +115,8 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </Layout>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

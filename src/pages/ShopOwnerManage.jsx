@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import ShopOwnerInfo from "../components/ShopOwnerInfo";
 import MiniNav from "../components/ShopOwnerMiniNav";
 

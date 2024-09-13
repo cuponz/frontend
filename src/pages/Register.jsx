@@ -2,7 +2,8 @@ import { useState } from "react";
 import CouponImage1 from "../assets/coupon1.png";
 import CouponImage2 from "../assets/coupon2.png";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+
 import Layout from "../layout/layout";
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -128,15 +129,14 @@ const RegisterPage = () => {
             <div className="mt-4 text-center">
               <p>
                 Already have an account?{" "}
-                <a href="/login" className="text-blue-500 hover:underline">
+                <Link to="/login" className="text-blue-500 hover:underline">
                   Login
-                </a>
+                </Link>
               </p>
             </div>
           </div>
         </div>
       </div>
-      <ToastContainer />
     </Layout>
   );
 };

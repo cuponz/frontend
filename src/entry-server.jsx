@@ -5,6 +5,7 @@ import {
   createStaticRouter,
   StaticRouterProvider,
 } from "react-router-dom/server";
+import "react-toastify/dist/ReactToastify.css";
 
 import routes from "./routes"
 

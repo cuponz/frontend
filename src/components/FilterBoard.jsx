@@ -4,7 +4,6 @@ import MultiSelectDropdown from "../components/MultiSelectDropdown";
 const FilterBoard = ({
   onFilterChange,
   categories,
-  shopNames,
   closeFilterBoard,
   initialFilters,
 }) => {
@@ -54,12 +53,6 @@ const FilterBoard = ({
           options={categories}
           selectedOptions={selectedCategories}
           setSelectedOptions={setSelectedCategories}
-        />
-        <MultiSelectDropdown
-          label="Shop Name"
-          options={shopNames}
-          selectedOptions={selectedShopNames}
-          setSelectedOptions={setSelectedShopNames}
         />
         <div className="flex flex-col">
           <label htmlFor="start-date" className="text-gray-700 font-medium">

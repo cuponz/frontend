@@ -4,11 +4,7 @@ import Layout from "../layout/layout";
 
 function ContactUs() {
   return (
-    <>
-      <Layout>
-        <ContactForm />
-      </Layout>
-    </>
+    <ContactForm />
   );
 }
 export default ContactUs;
