@@ -1,3 +1,5 @@
+import AuthWrapper from "./components/AuthWrapper";
+
 import HomePage from "./pages/HomePage.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import "./index.css";
@@ -14,18 +16,26 @@ import ShopOwnerManage from "./pages/ShopOwnerManage.jsx";
 const routes = [
   {
     path: "/",
-    element: <HomePage />,
+    element: <AuthWrapper/>,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/contactus",
-    element: <ContactUs />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/aboutus",
-    element: <AboutUs />,
-    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contactus",
+        element: <ContactUs />,
+      },
+      {
+        path: "/coupon",
+        element: <CouponPage />,
+      },
+    ]
   },
   {
     path: "/customerProfile",
@@ -50,11 +60,6 @@ const routes = [
   {
     path: "/register",
     element: <Register />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/coupon",
-    element: <CouponPage />,
     errorElement: <ErrorPage />,
   },
 ];
