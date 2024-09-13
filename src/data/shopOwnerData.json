@@ -1,0 +1,44 @@
+[
+  {
+    "user_name": "Kevin Red",
+    "password": "kevinrxampleom",
+    "email": "kevinred@example.com",
+    "phoneNumber": "+1200334455"
+  },
+  {
+    "user_name": "Sarah Blue",
+    "password": "sarahblue123",
+    "email": "sarah.blue@example.com",
+    "phoneNumber": ""
+  },
+  {
+    "user_name": "Tom Green",
+    "password": "tomgreen123",
+    "email": "",
+    "phoneNumber": "+1344556677"
+  },
+  {
+    "user_name": "Emily White",
+    "password": "emilywhite123",
+    "email": "emilywhite@example.com",
+    "phoneNumber": "+1400111222"
+  },
+  {
+    "user_name": "John Black",
+    "password": "johnblackexample",
+    "email": "",
+    "phoneNumber": "+1500444333"
+  },
+  {
+    "user_name": "Lucy Gray",
+    "password": "lucygray123",
+    "email": "lucygray@example.com",
+    "phoneNumber": ""
+  },
+  {
+    "user_name": "GadgetHub",
+    "password": "gadgethubpassword",
+    "email": "contact@gadgethub.com",
+    "phoneNumber": ""
+  }
+]
