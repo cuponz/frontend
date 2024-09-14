@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import couponData from "../../data/couponData.json";
+import couponData from "../../../data/couponData.json";
 
 // Import images
 import dellLogo from "../../assets/dell.png";

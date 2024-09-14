@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
-import CouponCatalogue from "../components/CouponCatalogue";
+import CouponCatalogue from "../components/Core/Coupon/CouponCatalogue";
 import Banner from "../components/Banner";
-import FilterBoard from "../components/FilterBoard";
+import FilterBoard from "../components/Core/Coupon/FilterBoard";
 import InstructionPopup from "../components/InstructionPopup";
 
-const itemsPerPage = 8;
+import { debounce } from "../utils";
 
 const CouponPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,43 +21,8 @@ const CouponPage = () => {
   const [showPopup, setShowPopup] = useState(true);
   const location = useLocation();
 
-  // useEffect(() => {
-  //   getCoupons()
-  //     .then(data => {
-  //       setCoupons(data);
-
-  //       const params = new URLSearchParams(location.search);
-  //       const category = params.get("category");
-  //       if (category) {
-  //         const newFilters = {
-  //           ...appliedFilters,
-  //           selectedCategories: [category],
-  //         };
-  //         setAppliedFilters(newFilters);
-  //         applyFilters(newFilters, data);
-  //       } else {
-  //         setFilteredCoupons(data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching coupon data:", error);
-  //     });
-  // }, [location.search, data]);
-
   const handlePopupClose = () => {
     setShowPopup(false);
-  };
-
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
   };
 
   const uniqueCategories = [

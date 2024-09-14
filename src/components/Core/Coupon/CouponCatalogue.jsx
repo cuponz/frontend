@@ -2,11 +2,11 @@ import { useState, useEffect, useMemo } from "react";
 import Fuse from "fuse.js";
 
 import CouponCard from "./CouponCard";
-import Pagination from "./Pagination";
-import LoadingSpinner from "./LoadingSpinner"; // Import the new component
+import Pagination from "../../Utils/Pagination";
+import LoadingSpinner from "../../Utils/LoadingSpinner"; // Import the new component
 
 import { useQuery } from "@tanstack/react-query";
-import { getCoupons } from "../api/coupon";
+import { getCoupons } from "../../../api/coupon";
 
 const itemsPerPage = 8;
 

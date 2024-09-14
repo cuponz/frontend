@@ -1,6 +1,6 @@
-import Carousel from "../components/Carousel";
+import Carousel from "../components/Utils/Carousel";
 import Banner from "../components/Banner";
-import HomeCouponList from "../components/Home/CouponList";
+import HomeCouponList from "../components/Core/Home/CouponList";
 
 import image1 from "../assets/image1.png";
 import image2 from "../assets/image2.png";

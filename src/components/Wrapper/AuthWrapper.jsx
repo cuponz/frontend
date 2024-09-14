@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { useUserStore } from "../store/user";
-import auth from "../api/auth";
+import { useUserStore } from "../../store/user";
+import auth from "../../api/auth";
 
-import Layout from "../layout/layout";
+import Layout from "../../layout/layout";
 import { useEffect } from "react";
 
 const LoadingSpinner = () => <div>Loading...</div>;

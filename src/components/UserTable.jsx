@@ -1,6 +1,6 @@
 import { useState } from "react";
 import shopCusData from "../data/shopCusData.json";
-import Pagination from "../components/Pagination"; // Assuming you have a Pagination component
+import Pagination from "./Utils/Pagination"; // Assuming you have a Pagination component
 
 const itemsPerPage = 5;
 

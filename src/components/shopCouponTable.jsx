@@ -1,6 +1,6 @@
 import { useState } from "react";
 import shopCouponData from "../data/shopCouponData.json";
-import Pagination from "../components/Pagination";
+import Pagination from "./Utils/Pagination";
 
 const itemsPerPage = 5;
 

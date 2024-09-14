@@ -1,4 +1,4 @@
-import AuthWrapper from "./components/AuthWrapper";
+import AuthWrapper from "./components/Wrapper/AuthWrapper.jsx";
 
 import HomePage from "./pages/HomePage.jsx";
 import ContactUs from "./pages/ContactUs.jsx";

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import MultiSelectDropdown from "../components/MultiSelectDropdown";
+import MultiSelectDropdown from "../../Utils/MultiSelectDropdown";
 
 const FilterBoard = ({
   onFilterChange,
