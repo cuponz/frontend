@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ShopCoupon from "../components/ShopCoupon";
 import ShopCouponTable from "../components/shopCouponTable";
+import ShopOwnerSetting from "../components/Setting";
 import UserTable from "../components/UserTable"; // Assuming you have a UserTable component
 
 const ShopOwnerMiniNav = () => {
@@ -38,7 +39,11 @@ const ShopOwnerMiniNav = () => {
           </div>
         );
       case "Setting":
-        return <div>Setting Content</div>;
+        return (
+          <div>
+            <ShopOwnerSetting />
+          </div>
+        );
       default:
         return null;
     }
