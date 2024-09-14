@@ -6,9 +6,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useUserStore } from "../store/user";
+
 import login from "../api/login";
 
 const LoginPage = () => {
+  const logout = useUserStore((state) => state.logout);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,6 +29,7 @@ const LoginPage = () => {
       mutationKey: ["login"],
       mutationFn: login,
       onSuccess: (data) => {
+        logout();
         toast.success("Login successful!");
         navigate("/");
       },
