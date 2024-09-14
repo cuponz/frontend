@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import couponData from "../../../data/couponData.json";
 
 // Import images
-import dellLogo from "../../assets/dell.png";
-import hpLogo from "../../assets/hp.png";
+import dellLogo from "../../../assets/dell.png";
+import hpLogo from "../../../assets/hp.png";
 
 const logoMap = {
   "dell.png": dellLogo,

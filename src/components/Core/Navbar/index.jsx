@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import logo from "../assets/logo.png"; // Correct path for logo
+import logo from "../../../assets/logo.png"; // Correct path for logo
 import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 
-import { useUserStore } from "../store/user";
+import { useUserStore } from "../../../store/user";
 
 const Navbar = () => {
   const user = useUserStore((state) => state.user);
