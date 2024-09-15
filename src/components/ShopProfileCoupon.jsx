@@ -5,7 +5,6 @@ import FilterBoard from "../components/FilterBoard";
 import Pagination from "../components/Pagination";
 import LoadingSpinner from "../components/LoadingSpinner";
 import couponData from "../data/couponData.json";
-import shopCusData from "../data/shopCusData.json";
 
 const itemsPerPage = 8;
 
@@ -23,18 +22,10 @@ const UserCoupon = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Filter for user with user_id 1042
-    const userCoupons = shopCusData
-      .filter((user) => user.user_id === 1042)
-      .map((user) => user.coupon_id);
-
-    // Filter coupons based on user's coupon_ids
-    const userSpecificCoupons = couponData.filter((coupon) =>
-      userCoupons.includes(coupon.id)
-    );
-
-    setCoupons(userSpecificCoupons);
-    setFilteredCoupons(userSpecificCoupons);
+    // Filter for "GadgetHub" coupons and set initial state
+    const data = couponData.filter((coupon) => coupon.shopName === "GadgetHub");
+    setCoupons(data);
+    setFilteredCoupons(data);
 
     const params = new URLSearchParams(location.search);
     const category = params.get("category");
@@ -44,9 +35,9 @@ const UserCoupon = () => {
         selectedCategories: [category],
       };
       setAppliedFilters(newFilters);
-      applyFilters(newFilters, userSpecificCoupons);
+      applyFilters(newFilters, data);
     } else {
-      setFilteredCoupons(userSpecificCoupons);
+      setFilteredCoupons(data);
     }
 
     // Set loading state to false after data is ready
@@ -183,7 +174,7 @@ const UserCoupon = () => {
                   brand={coupon.brand}
                   name={coupon.name}
                   redeemCode={coupon.redeemCode}
-                  button="Use"
+                  button="Redeem Now"
                 />
               ))}
             </div>

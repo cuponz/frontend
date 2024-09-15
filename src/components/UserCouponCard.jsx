@@ -14,6 +14,7 @@ const UserCouponCard = ({
   brand,
   name,
   redeemCode,
+  button,
 }) => {
   const [isInfoFieldOpen, setIsInfoFieldOpen] = useState(false);
 
@@ -66,7 +67,7 @@ const UserCouponCard = ({
           className="bg-[#46467A] text-white px-4 py-2 rounded-md w-full"
           onClick={handleUseClick}
         >
-          Use
+          {button}
         </button>
       </div>
 
