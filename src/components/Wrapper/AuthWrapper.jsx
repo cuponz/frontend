@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { useUserStore } from "../../store/user";
-import auth from "../../api/auth";
+import { userAuth } from "../../api/user";
 
 import Layout from "../../layout/layout";
 import { useEffect } from "react";
@@ -11,18 +11,18 @@ import { useEffect } from "react";
 const LoadingSpinner = () => <div>Loading...</div>;
 
 const AuthWrapper = ({ isProtected }) => {
-  const [user, setUser, logout] = useUserStore((state) => [state.user, state.setUser, state.logout]);
+  const [user, setUser] = useUserStore((state) => [state.user, state.setUser, state.logout]);
   const navigate = useNavigate();
 
   const { isPending, isError, isFetched, data, error } = useQuery({
 		queryKey: ["auth"],
-		queryFn: auth,
+		queryFn: userAuth,
 		retry: false,
 		enabled: !user,
   });
 
 	if (isProtected && isFetched && !data) {
-		logout();
+		setUser(undefined)
 		navigate("/login");
 	}
 
@@ -33,7 +33,7 @@ const AuthWrapper = ({ isProtected }) => {
 		}
 		if (isError) {
 			toast.error(error?.message || "Authentication error");
-			logout();
+			setUser(undefined)
 			if (isProtected) {
 				navigate("/login");
 			}

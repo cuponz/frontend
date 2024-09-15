@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useUserStore } from "../store/user";
 
-import login from "../api/login";
+import { userLogin } from "../api/user";
 
 const LoginPage = () => {
   const logout = useUserStore((state) => state.logout);
@@ -27,7 +27,7 @@ const LoginPage = () => {
   const loginMutation = useMutation(
     {
       mutationKey: ["login"],
-      mutationFn: login,
+      mutationFn: userLogin,
       onSuccess: (data) => {
         logout();
         toast.success("Login successful!");

@@ -12,7 +12,7 @@
 
 ## Tasks
 
-- [ ] Group related api to a single file
+- [x] Group related api to a single file
 - [x] Store filters by react-router params
-- [ ] Finish Logout
-- [ ] Finish Navbar categories
+- [x] Finish Logout
+- [x] Finish Navbar categories
