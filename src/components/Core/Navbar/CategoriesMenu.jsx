@@ -1,7 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useIsCategoriesOpenStore } from "../../../store/categories";
 
 const CategoriesMenu = ({ groups, categories }) => {
   const [activeGroup, setActiveGroup] = useState(1);
+  const navigate = useNavigate();
+
+  const setIsCategoriesOpen = useIsCategoriesOpenStore(state => state.setIsCategoriesOpen);
+
+  const handleChangeCategory = (category) => () => {
+    setIsCategoriesOpen(false);
+    navigate(`/coupon?categories[]=${category}`);
+  }
 
   return (
     <div className="absolute left-0 mt-2 flex w-screen bg-[#e5e1f7] border-t border-gray-200 shadow-lg">
@@ -33,6 +43,7 @@ const CategoriesMenu = ({ groups, categories }) => {
                     <li
                       key={category.id}
                       className="hover:bg-purple-100 px-4 py-2 cursor-pointer"
+                      onClick={handleChangeCategory(category.name)}
                     >
                       {category.name}
                     </li>

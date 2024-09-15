@@ -44,7 +44,7 @@ const CouponPage = () => {
 
   useEffect(() => {
     updateFiltersFromParams();
-  }, [])
+  }, [searchParams])
 
   const handlePopupClose = () => {
     setShowPopup(false);

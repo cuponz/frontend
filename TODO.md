@@ -14,3 +14,5 @@
 
 - [ ] Group related api to a single file
 - [x] Store filters by react-router params
+- [ ] Finish Logout
+- [ ] Finish Navbar categories

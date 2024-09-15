@@ -5,21 +5,24 @@ import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 
 import { useUserStore } from "../../../store/user";
-import { useCategoryStore } from "../../../store/categories";
+import { useCategoryStore, useIsCategoriesOpenStore } from "../../../store/categories";
 import { getCategories } from "../../../api/category";
 import getGroups from "../../../api/group";
 
 import { useQueries } from "@tanstack/react-query";
+import LoadingSpinner from "../../Utils/LoadingSpinner";
 
 const Navbar = () => {
   const [user, logout] = useUserStore((state) => [state.user, state.logout]);
-  const [
-    categories,
-    setCategories
-  ] = useCategoryStore((state) => [
+  const [categories, setCategories] = useCategoryStore((state) => [
     state.categories,
     state.setCategories,
   ]);
+
+  const [isCategoriesOpen, toggleCategoriesOpen] = useIsCategoriesOpenStore((state) => [
+    state.isCategoriesOpen,
+    state.toggleCategoriesOpen,
+  ])
 
   const { isPending, data: [fetchedCategories, groups] } = useQueries({
 		queries: [
@@ -53,7 +56,7 @@ const Navbar = () => {
     console.log(user);
   }, [user])
  
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  // const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
@@ -72,7 +75,6 @@ const Navbar = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
-
   const routes = [
     {
       path: "/",
@@ -85,7 +87,7 @@ const Navbar = () => {
     {
       path: undefined,
       name: "Categories",
-      onClick: () => setIsCategoriesOpen(prev => !prev),
+      onClick: toggleCategoriesOpen,
     },
     {
       path: "/aboutus",
