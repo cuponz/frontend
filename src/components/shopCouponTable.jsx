@@ -1,6 +1,7 @@
 import { useState } from "react";
 import shopCouponData from "../data/shopCouponData.json";
 import Pagination from "./Utils/Pagination";
+import Pagination from "../components/Pagination";
 
 const itemsPerPage = 5;
 
@@ -11,6 +12,7 @@ const ShopCouponTable = () => {
   const [startDateFilter, setStartDateFilter] = useState("");
   const [endDateFilter, setEndDateFilter] = useState("");
   const [sortField, setSortField] = useState("id");
+  const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -75,6 +77,18 @@ const ShopCouponTable = () => {
     setCurrentPage(page);
   };
 
+  const handleCreateCoupon = () => {
+    setIsCreateCouponOpen(true);
+  };
+
+  const handleCloseCreateCoupon = () => {
+    setIsCreateCouponOpen(false);
+  };
+
+  const handleSubmitCreateCoupon = (newCoupon) => {
+    console.log("New coupon created:", newCoupon);
+  };
+
   return (
     <div className="p-4">
       {/* Search and Filters */}
@@ -125,7 +139,10 @@ const ShopCouponTable = () => {
         >
           Reset Filters
         </button>
-        <button className="w-full sm:w-auto px-4 py-2 bg-yellow-500 text-white rounded-md shadow-md hover:bg-yellow-600">
+        <button
+          onClick={handleCreateCoupon}
+          className="w-full sm:w-auto px-4 py-2 bg-yellow-500 text-white rounded-md shadow-md hover:bg-yellow-600"
+        >
           Create Coupon
         </button>
       </div>
@@ -187,6 +204,13 @@ const ShopCouponTable = () => {
         currentPage={currentPage}
         totalPages={Math.ceil(filteredData.length / itemsPerPage)}
         onPageChange={handlePageChange}
+      />
+
+      {/* Create Coupon Popup */}
+      <PopupCreateCoupon
+        isOpen={isCreateCouponOpen}
+        onClose={handleCloseCreateCoupon}
+        onSubmit={handleSubmitCreateCoupon}
       />
     </div>
   );

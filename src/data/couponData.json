@@ -12,7 +12,8 @@
     "startDate": "2023-01-15",
     "endDate": "2024-01-15",
     "shopName": "TechWorld",
-    "numUsers": 1200
+    "numUsers": 1200,
+    "redeemCode": "APPLE001XYZ"
   },
   {
     "id": 2,
@@ -27,7 +28,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 950
+    "numUsers": 950,
+    "redeemCode": "SAMSUNG002ABC"
   },
   {
     "id": 3,
@@ -42,7 +44,8 @@
     "startDate": "2023-03-10",
     "endDate": "2024-03-10",
     "shopName": "CompuStore",
-    "numUsers": 300
+    "numUsers": 300,
+    "redeemCode": "DELL003DEF"
   },
   {
     "id": 4,
@@ -57,7 +60,8 @@
     "startDate": "2023-04-05",
     "endDate": "2024-04-05",
     "shopName": "ElectroShop",
-    "numUsers": 480
+    "numUsers": 480,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 5,
@@ -72,7 +76,8 @@
     "startDate": "2023-05-15",
     "endDate": "2024-05-15",
     "shopName": "OfficeMart",
-    "numUsers": 650
+    "numUsers": 650,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 6,
@@ -87,7 +92,8 @@
     "startDate": "2023-06-20",
     "endDate": "2024-06-20",
     "shopName": "LaptopWorld",
-    "numUsers": 780
+    "numUsers": 780,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 7,
@@ -102,7 +108,8 @@
     "startDate": "2023-07-01",
     "endDate": "2024-07-01",
     "shopName": "SmartTech",
-    "numUsers": 1050
+    "numUsers": 1050,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 8,
@@ -117,7 +124,8 @@
     "startDate": "2023-08-10",
     "endDate": "2024-08-10",
     "shopName": "GadgetHub",
-    "numUsers": 870
+    "numUsers": 870,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 9,
@@ -132,7 +140,8 @@
     "startDate": "2023-09-15",
     "endDate": "2024-09-15",
     "shopName": "TechStore",
-    "numUsers": 540
+    "numUsers": 540,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 10,
@@ -147,7 +156,8 @@
     "startDate": "2023-10-05",
     "endDate": "2024-10-05",
     "shopName": "ElectroShop",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 21,
@@ -162,7 +172,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 22,
@@ -177,7 +188,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 23,
@@ -192,7 +204,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 24,
@@ -207,7 +220,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 25,
@@ -222,7 +236,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 26,
@@ -237,7 +252,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 27,
@@ -252,7 +268,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 28,
@@ -267,7 +284,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 29,
@@ -282,7 +300,8 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   },
   {
     "id": 299,
@@ -297,6 +316,7 @@
     "startDate": "2023-02-01",
     "endDate": "2024-02-01",
     "shopName": "GadgetHub",
-    "numUsers": 640
+    "numUsers": 640,
+    "redeemCode": "hpdfW003DEF"
   }
 ]

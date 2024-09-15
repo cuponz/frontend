@@ -12,6 +12,9 @@ import CouponPage from "./pages/CouponPage.jsx";
 import CustomerProfilePage from "./pages/CustomerProfilePage.jsx";
 import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage.jsx";
 import ShopOwnerManage from "./pages/ShopOwnerManage.jsx";
+import ShopOwnerProfile from "./pages/ShopOwnerProfile.jsx";
+import UserProfile from "./pages/UserProfile.jsx";
+import Noti from "./pages/ResultNoti.jsx";
 
 const routes = [
   {
@@ -61,6 +64,18 @@ const routes = [
     path: "/register",
     element: <Register />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/userprofile",
+    element: <UserProfile />,
+  },
+  {
+    path: "/shopprofile",
+    element: <ShopOwnerProfile />,
+  },
+  {
+    path: "/noti",
+    element: <Noti />,
   },
 ];
 
