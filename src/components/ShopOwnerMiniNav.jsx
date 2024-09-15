@@ -2,7 +2,7 @@ import { useState } from "react";
 import ShopCoupon from "../components/ShopCoupon";
 import ShopCouponTable from "../components/shopCouponTable";
 import ShopOwnerSetting from "../components/Setting";
-import UserTable from "../components/UserTable"; // Assuming you have a UserTable component
+import UserTable from "../components/UserTable";
 
 const ShopOwnerMiniNav = () => {
   const [activeTab, setActiveTab] = useState("Coupons");
