@@ -1,101 +1,40 @@
-import { useEffect, useState } from "react";
-import logo from "../../../assets/logo.png";
-import profilePic from "../../../assets/userIcon.png";
+import { useState } from "react";
+import logo from "../assets/logo.png";
+import profilePic from "../assets/userIcon.png";
 import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 
-import { useUserStore } from "../../../store/user";
-import { useCategoryStore } from "../../../store/categories";
-import { getCategories } from "../../../api/category";
-import getGroups from "../../../api/group";
-
-import { useQueries } from "@tanstack/react-query";
-
 const Navbar = () => {
-  const [user, logout] = useUserStore((state) => [state.user, state.logout]);
-  const [
-    categories,
-    setCategories
-  ] = useCategoryStore((state) => [
-    state.categories,
-    state.setCategories,
-  ]);
-
-  const { isPending, data: [fetchedCategories, groups] } = useQueries({
-		queries: [
-      {
-        queryKey: ["categories"],
-        queryFn: getCategories,
-        retry: false,
-        enabled: !categories,
-      },
-      {
-        queryKey: ["groups"],
-        queryFn: getGroups,
-        retry: false,
-      },
-    ],
-    combine: (results) => {
-      return {
-        data: results.map((result) => result.data),
-        isPending: results.some((result) => result.isPending),
-      }
-    },
-  });
-
-	useEffect(() => {
-		if (fetchedCategories) {
-			setCategories(fetchedCategories)
-		}
-	}, [isPending])
-
-  useEffect(() => {
-    console.log(user);
-  }, [user])
- 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [isElectronicsOpen, setIsElectronicsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
+  const toggleCategories = () => {
+    setIsCategoriesOpen(!isCategoriesOpen);
+    if (isCategoriesOpen) {
+      setIsElectronicsOpen(false);
+    }
+  };
+
+  const toggleElectronics = (e) => {
+    e.stopPropagation();
+    setIsElectronicsOpen(!isElectronicsOpen);
+  };
+
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev => !prev);
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleLoginLogout = () => {
-    if (user) {
-      logout();
-    }
+    setIsLoggedIn(!isLoggedIn);
     setIsProfileDropdownOpen(false);
   };
 
   const toggleProfileDropdown = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
-
-
-  const routes = [
-    {
-      path: "/",
-      name: "Home",
-    },
-    {
-      path: "/coupon",
-      name: "Coupons",
-    },
-    {
-      path: undefined,
-      name: "Categories",
-      onClick: () => setIsCategoriesOpen(prev => !prev),
-    },
-    {
-      path: "/aboutus",
-      name: "About Us",
-    },
-    {
-      path: "/contactus",
-      name: "Contact Us",
-    },
-  ];
 
   return (
     <nav className="bg-[#E9E7F9] p-4 z-50">
@@ -111,22 +50,24 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-10 text-[#25354C]">
-          {routes.map((route, index) =>
-            route.path
-              ? (
-                <Link to={route.path} key={index}>
-                  <li className="hover:underline cursor-pointer">{route.name}</li>
-                </Link>
-              ) : (
-                <li
-                  key={index}
-                  className="hover:underline relative cursor-pointer"
-                  onClick={route.onClick}
-                >
-                  {route.name}
-                </li>
-              )
-          )}
+          <Link to="/">
+            <li className="hover:underline cursor-pointer">Home</li>
+          </Link>
+          <Link to="/coupon">
+            <li className="hover:underline cursor-pointer">All Coupons</li>
+          </Link>
+          <li
+            className="hover:underline relative cursor-pointer"
+            onClick={toggleCategories}
+          >
+            Categories
+          </li>
+          <Link to="/contactus">
+            <li className="hover:underline cursor-pointer">Contact Us</li>
+          </Link>
+          <Link to="/aboutus">
+            <li className="hover:underline cursor-pointer">About Us</li>
+          </Link>
         </ul>
 
         {/* Search, User Section and Login/Logout Button */}
@@ -152,7 +93,7 @@ const Navbar = () => {
             </svg>
           </div>
 
-          {user ? (
+          {isLoggedIn ? (
             <div className="relative">
               <button
                 onClick={toggleProfileDropdown}
@@ -219,33 +160,37 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <ul className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
-          {routes.map((route, index) =>
-            route.path
-              ? (
-                <Link to={route.path} key={index} onClick={toggleMobileMenu}>
-                  <li className="hover:underline cursor-pointer">{route.name}</li>
-                </Link>
-              ) : (
-                <li
-                  key={index}
-                  className="hover:underline relative cursor-pointer"
-                  onClick={route.onClick}
-                >
-                  {route.name}
-                </li>
-              )
-          )}
-        </ul>
+        <div className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
+          <Link to="/" onClick={toggleMobileMenu}>
+            <p className="hover:underline">Home</p>
+          </Link>
+          <Link to="/coupon" onClick={toggleMobileMenu}>
+            <p className="hover:underline">All Coupons</p>
+          </Link>
+          <p
+            className="hover:underline cursor-pointer"
+            onClick={() => {
+              toggleCategories();
+              toggleMobileMenu();
+            }}
+          >
+            Categories
+          </p>
+          <Link to="/contactus" onClick={toggleMobileMenu}>
+            <p className="hover:underline">Contact Us</p>
+          </Link>
+          <Link to="/aboutus" onClick={toggleMobileMenu}>
+            <p className="hover:underline">About Us</p>
+          </Link>
+        </div>
       )}
 
+      {/* Categories Menu */}
       {isCategoriesOpen && (
-        isPending 
-          ? <LoadingSpinner />
-          : <CategoriesMenu
-              groups={groups}
-              categories={categories}
-            />
+        <CategoriesMenu
+          isElectronicsOpen={isElectronicsOpen}
+          toggleElectronics={toggleElectronics}
+        />
       )}
     </nav>
   );

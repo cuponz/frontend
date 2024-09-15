@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./contact_form.css";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -17,39 +16,38 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic here
     console.log("Form submitted:", formData);
   };
 
   return (
-    <div className="contact-form-container mt-20">
-      <div className="contact-info">
-        <h2>Contact Information</h2>
-        <p>Say something to start a live chat!</p>
-        <ul className="ul-u">
-          <li>
-            <i className="fas fa-phone-alt"></i> +012 3456 789
+    <div className="flex flex-col md:flex-row justify-between p-5 border border-gray-300 rounded-lg bg-white max-w-5xl mx-auto mt-20 shadow-lg overflow-hidden mb-20">
+      <div className="w-full md:w-2/5 p-8 relative  bg-purple-600 text-white rounded-t-lg md:rounded-l-lg md:rounded-t-none">
+        <h2 className="mb-2 text-2xl font-semibold">Contact Information</h2>
+        <p className="text-sm mb-6">Say something to start a live chat!</p>
+        <ul className="list-none p-0">
+          <li className="mb-4 flex items-center">
+            <i className="fas fa-phone-alt mr-3"></i> +012 3456 789
           </li>
-          <li>
-            <i className="fas fa-envelope"></i> demo@gmail.com
+          <li className="mb-4 flex items-center">
+            <i className="fas fa-envelope mr-3"></i> demo@gmail.com
           </li>
-          <li>
-            <i className="fas fa-map-marker-alt"></i> 132 Dartmouth Street
+          <li className="mb-4 flex items-center">
+            <i className="fas fa-map-marker-alt mr-3"></i> 132 Dartmouth Street
             Boston, Massachusetts 02156 United States
           </li>
         </ul>
-        <div className="social-icons">
-          <a href="#">
+        <div className="social-icons  mt-auto flex space-x-4">
+          <a href="#" className="text-white text-lg hover:text-yellow-400">
             <i className="fab fa-twitter"></i>
           </a>
-          <a href="#">
+          <a href="#" className="text-white text-lg hover:text-yellow-400">
             <i className="fab fa-instagram"></i>
           </a>
-          <a href="#">
+          <a href="#" className="text-white text-lg hover:text-yellow-400">
             <i className="fab fa-facebook"></i>
           </a>
         </div>
-        <div className="svg-container">
+        <div className="svg-container absolute bottom-0 right-0 pointer-events-none">
           <svg
             width="208"
             height="209"
@@ -62,14 +60,17 @@ const ContactForm = () => {
           </svg>
         </div>
       </div>
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="form-group">
+
+      {/* Right side - 3/5 width on medium screens and up, full width on small screens */}
+      <form className="w-full md:w-3/5 p-8 bg-white" onSubmit={handleSubmit}>
+        <div className="form-group flex flex-col md:flex-row justify-between mb-6">
           <input
             type="text"
             name="firstName"
             placeholder="First Name"
             value={formData.firstName}
             onChange={handleChange}
+            className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500 mb-4 md:mb-0"
             required
           />
           <input
@@ -78,16 +79,18 @@ const ContactForm = () => {
             placeholder="Last Name"
             value={formData.lastName}
             onChange={handleChange}
+            className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group flex flex-col md:flex-row justify-between mb-6">
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
+            className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500 mb-4 md:mb-0"
             required
           />
           <input
@@ -96,12 +99,13 @@ const ContactForm = () => {
             placeholder="Phone Number"
             value={formData.phoneNumber}
             onChange={handleChange}
+            className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
             required
           />
         </div>
-        <h2>Select Subject:</h2>
-        <div className="form-group radio-group">
-          <div>
+        <h2 className="text-lg font-semibold mb-4">Select Subject:</h2>
+        <div className="form-group radio-group flex flex-col md:flex-row justify-between items-center mb-6">
+          <div className="mb-4 md:mb-0">
             <input
               type="radio"
               id="generalInquiry"
@@ -109,10 +113,13 @@ const ContactForm = () => {
               value="generalInquiry"
               checked={formData.subject === "generalInquiry"}
               onChange={handleChange}
+              className="mr-2"
             />
-            <label htmlFor="generalInquiry">General Inquiry</label>
+            <label htmlFor="generalInquiry" className="text-gray-700">
+              General Inquiry
+            </label>
           </div>
-          <div>
+          <div className="mb-4 md:mb-0">
             <input
               type="radio"
               id="technicalSupport"
@@ -120,8 +127,11 @@ const ContactForm = () => {
               value="technicalSupport"
               checked={formData.subject === "technicalSupport"}
               onChange={handleChange}
+              className="mr-2"
             />
-            <label htmlFor="technicalSupport">Technical Support</label>
+            <label htmlFor="technicalSupport" className="text-gray-700">
+              Technical Support
+            </label>
           </div>
           <div>
             <input
@@ -131,21 +141,30 @@ const ContactForm = () => {
               value="billing"
               checked={formData.subject === "billing"}
               onChange={handleChange}
+              className="mr-2"
             />
-            <label htmlFor="billing">Billing</label>
+            <label htmlFor="billing" className="text-gray-700">
+              Billing
+            </label>
           </div>
         </div>
-        <div className="form-group">
+        <div className="form-group mb-6">
           <textarea
             name="message"
             placeholder="Write your message..."
             value={formData.message}
             onChange={handleChange}
+            className="w-full p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
             required
           ></textarea>
         </div>
-        <div className="button-container">
-          <button type="submit">Send Message</button>
+        <div className="text-right">
+          <button
+            type="submit"
+            className="bg-yellow-400 text-white py-3 px-8 rounded-md hover:bg-yellow-500 font-semibold"
+          >
+            Send Message
+          </button>
         </div>
       </form>
     </div>
