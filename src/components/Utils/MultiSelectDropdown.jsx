@@ -10,6 +10,8 @@ const MultiSelectDropdown = ({
     setSelectedOptions(selected ? selected.map((option) => option.value) : []);
   };
 
+  options ??= [];
+
   return (
     <div style={{ marginBottom: "16px" }}>
       <label>{label}</label>

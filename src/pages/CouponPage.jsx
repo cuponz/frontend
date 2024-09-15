@@ -1,40 +1,53 @@
 import { useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+
+import { debounce } from "../utils";
 
 import CouponCatalogue from "../components/Core/Coupon/CouponCatalogue";
 import Banner from "../components/Banner";
 import FilterBoard from "../components/Core/Coupon/FilterBoard";
 import InstructionPopup from "../components/InstructionPopup";
 
-import { debounce } from "../utils";
+import { useCouponFiltersStore } from "../store/filters";
 
 const CouponPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [appliedFilters, setAppliedFilters] = useState({
-    selectedCategories: [],
-    selectedShopNames: [],
-    startDate: "",
-    endDate: "",
-  });
   const [showPopup, setShowPopup] = useState(true);
-  const location = useLocation();
+
+  const [searchParams] = useSearchParams();
+
+  const { setStartDate, setEndDate, setSelectedCategories } = useCouponFiltersStore((state) => ({
+    setStartDate: state.setStartDate,
+    setEndDate: state.setEndDate,
+    setSelectedCategories: state.setSelectedCategories,
+  }));
+
+  const updateFiltersFromParams = useCallback(() => {
+    const startDate = searchParams.get('startDate');
+    const endDate = searchParams.get('endDate');
+    const categories = searchParams.getAll('categories[]');
+
+    if (startDate) {
+      setStartDate(startDate);
+    }
+
+    if (endDate) {
+      setEndDate(endDate);
+    }
+
+    if (categories) {
+      setSelectedCategories(categories);
+    }
+  });
+
+  useEffect(() => {
+    updateFiltersFromParams();
+  }, [])
 
   const handlePopupClose = () => {
     setShowPopup(false);
-  };
-
-  const uniqueCategories = [
-    // ...new Set(coupons.map((coupon) => coupon.category)),
-  ];
-
-  const handleFilterChange = (newFilters) => {
-    setAppliedFilters(newFilters);
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
   };
 
   const handleSearchChange = useCallback(
@@ -90,15 +103,12 @@ const CouponPage = () => {
           >
             {isFilterBoardVisible && (
               <FilterBoard
-                onFilterChange={handleFilterChange}
-                initialFilters={appliedFilters}
-                categories={uniqueCategories}
                 closeFilterBoard={toggleFilterBoard}
               />
             )}
           </div>
 
-          <CouponCatalogue searchTerm={searchTerm} appliedFilters={appliedFilters} />
+          <CouponCatalogue searchTerm={searchTerm} />
 
         </div>
       </div>

@@ -7,11 +7,13 @@ import LoadingSpinner from "../../Utils/LoadingSpinner"; // Import the new compo
 
 import { useQuery } from "@tanstack/react-query";
 import { getCoupons } from "../../../api/coupon";
+import { useCouponFiltersStore } from "../../../store/filters";
 
 const itemsPerPage = 8;
 
-const CouponCatalogue = ({ searchTerm, appliedFilters }) => {
+const CouponCatalogue = ({ searchTerm }) => {
 	const [currentPage, setCurrentPage] = useState(1);
+  const appliedFilters = useCouponFiltersStore((state) => state.appliedFilters)
 
 	const fuseOptions = {
 		keys: ["title", "description", "keywords", "name"],
@@ -71,6 +73,8 @@ const CouponCatalogue = ({ searchTerm, appliedFilters }) => {
 	if (isPending) {
 		return <LoadingSpinner />
 	}
+
+	console.log(coupons)
 
 	return (
 		<>

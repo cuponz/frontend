@@ -4,33 +4,86 @@ import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 
 import { useUserStore } from "../../../store/user";
+import { useCategoryStore } from "../../../store/categories";
+import { getCategories } from "../../../api/category";
+import getGroups from "../../../api/group";
+
+import { useQueries } from "@tanstack/react-query";
 
 const Navbar = () => {
   const user = useUserStore((state) => state.user);
+  const [
+    categories,
+    setCategories
+  ] = useCategoryStore((state) => [
+    state.categories,
+    state.setCategories,
+  ]);
+  const { isPending, data: [fetchedCategories, groups] } = useQueries({
+		queries: [
+      {
+        queryKey: ["categories"],
+        queryFn: getCategories,
+        retry: false,
+        enabled: !categories,
+      },
+      {
+        queryKey: ["groups"],
+        queryFn: getGroups,
+        retry: false,
+      },
+    ],
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+        isPending: results.some((result) => result.isPending),
+      }
+    },
+  });
+
+	useEffect(() => {
+		if (fetchedCategories) {
+			setCategories(fetchedCategories)
+		}
+	}, [isPending])
 
   useEffect(() => {
     console.log(user);
   }, [user])
  
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const [isElectronicsOpen, setIsElectronicsOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleCategories = () => {
-    setIsCategoriesOpen(!isCategoriesOpen);
-    if (isCategoriesOpen) {
-      setIsElectronicsOpen(false); // Close all submenus when categories close
-    }
-  };
-
-  const toggleElectronics = (e) => {
-    e.stopPropagation();
-    setIsElectronicsOpen(!isElectronicsOpen); // Toggle Electronics submenu
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu
+    setIsMobileMenuOpen(prev => !prev);
   };
+
+  const routes = [
+    {
+      path: "/",
+      name: "Home",
+    },
+    {
+      path: "/coupon",
+      name: "Coupons",
+    },
+    {
+      path: undefined,
+      name: "Categories",
+      onClick: () => setIsCategoriesOpen(prev => !prev),
+    },
+    {
+      path: "/aboutus",
+      name: "About Us",
+    },
+    {
+      path: "/contactus",
+      name: "Contact Us",
+    },
+  ];
 
   return (
     <nav className="bg-[#E9E7F9] p-4 z-50">
@@ -42,24 +95,22 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-10 text-[#25354C]">
-          <Link to="/">
-            <li className="hover:underline cursor-pointer">Home</li>
-          </Link>
-          <Link to="/coupon">
-            <li className="hover:underline cursor-pointer">All Coupons</li>
-          </Link>
-          <li
-            className="hover:underline relative cursor-pointer"
-            onClick={toggleCategories}
-          >
-            Categories
-          </li>
-          <Link to="/contactus">
-            <li className="hover:underline cursor-pointer">Contact Us</li>
-          </Link>
-          <Link to="/aboutus">
-            <li className="hover:underline cursor-pointer">About Us</li>
-          </Link>
+          {routes.map((route, index) =>
+            route.path
+              ? (
+                <Link to={route.path} key={index}>
+                  <li className="hover:underline cursor-pointer">{route.name}</li>
+                </Link>
+              ) : (
+                <li
+                  key={index}
+                  className="hover:underline relative cursor-pointer"
+                  onClick={route.onClick}
+                >
+                  {route.name}
+                </li>
+              )
+          )}
         </ul>
 
         {/* Search and Login Section */}
@@ -111,36 +162,33 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2 ">
-          <Link to="/" onClick={toggleMobileMenu}>
-            <p className="hover:underline">Home</p>
-          </Link>
-          <Link to="/coupon" onClick={toggleMobileMenu}>
-            <p className="hover:underline">All Coupons</p>
-          </Link>
-          <p
-            className="hover:underline cursor-pointer"
-            onClick={() => {
-              toggleCategories();
-              toggleMobileMenu(); // Close mobile menu after click
-            }}
-          >
-            Categories
-          </p>
-          <Link to="/contactus" onClick={toggleMobileMenu}>
-            <p className="hover:underline">Contact Us</p>
-          </Link>
-          <Link to="/aboutus" onClick={toggleMobileMenu}>
-            <p className="hover:underline">About Us</p>
-          </Link>
-        </div>
+        <ul className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
+          {routes.map((route, index) =>
+            route.path
+              ? (
+                <Link to={route.path} key={index} onClick={toggleMobileMenu}>
+                  <li className="hover:underline cursor-pointer">{route.name}</li>
+                </Link>
+              ) : (
+                <li
+                  key={index}
+                  className="hover:underline relative cursor-pointer"
+                  onClick={route.onClick}
+                >
+                  {route.name}
+                </li>
+              )
+          )}
+        </ul>
       )}
 
       {isCategoriesOpen && (
-        <CategoriesMenu
-          isElectronicsOpen={isElectronicsOpen}
-          toggleElectronics={toggleElectronics}
-        />
+        isPending 
+          ? <LoadingSpinner />
+          : <CategoriesMenu
+              groups={groups}
+              categories={categories}
+            />
       )}
     </nav>
   );

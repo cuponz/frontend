@@ -1,63 +1,49 @@
-const CategoriesMenu = ({ isElectronicsOpen, toggleElectronics }) => {
+import { useState } from "react";
+
+const CategoriesMenu = ({ groups, categories }) => {
+  const [activeGroup, setActiveGroup] = useState(1);
+
   return (
     <div className="absolute left-0 mt-2 flex w-screen bg-[#e5e1f7] border-t border-gray-200 shadow-lg">
       <ul className="w-1/4 bg-[#E9E7F9] p-4 border-r border-gray-200">
-        <li
-          className="hover:bg-purple-100 px-4 py-2 cursor-pointer flex justify-between"
-          onClick={toggleElectronics}
-        >
-          Electronics
-          <span
-            className={`ml-2 transform ${isElectronicsOpen ? "rotate-90" : ""}`}
+        {groups.map((group) => (
+          <li
+            key={group.id}
+            className="hover:bg-purple-100 px-4 py-2 cursor-pointer flex justify-between"
+            onClick={() => setActiveGroup(group.id)}
           >
-            {">"}
-          </span>
-        </li>
-        <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-          Clothing & Accessories
-        </li>
-        <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-          Health and Beauty
-        </li>
-        <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">Offers</li>
+            {group.name}
+            <span className={`ml-2 transform ${activeGroup === group.id ? "rotate-90" : ""}`}>
+              {">"}
+            </span>
+          </li>
+        ))}
       </ul>
-      {isElectronicsOpen && (
-        <div className="w-3/4 p-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <div className="px-4 py-2 font-bold">Type</div>
-              <ul>
-                <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-                  Desktop
-                </li>
-                <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-                  Laptop
-                </li>
-                <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-                  Mobile
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div className="px-4 py-2 font-bold">Brand</div>
-              <ul>
-                <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-                  Dell
-                </li>
-                <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-                  Xiaomi
-                </li>
-                <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-                  Huawei
-                </li>
-                <li className="hover:bg-purple-100 px-4 py-2 cursor-pointer">
-                  Microsoft
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="w-3/4 p-4">
+        {groups.map((group) => {
+          if (activeGroup === group.id) {
+            const groupCategories = categories.filter(
+              (category) => category.group_id === group.id
+            );
+            return (
+              <div key={group.id} className="mb-4">
+                <div className="px-4 py-2 font-bold">{group.name} Categories</div>
+                <ul>
+                  {groupCategories.map((category) => (
+                    <li
+                      key={category.id}
+                      className="hover:bg-purple-100 px-4 py-2 cursor-pointer"
+                    >
+                      {category.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          }
+          return null;
+        })}
+      </div>
     </div>
   );
 };

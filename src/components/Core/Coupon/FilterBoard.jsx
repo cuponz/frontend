@@ -1,42 +1,40 @@
-import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import MultiSelectDropdown from "../../Utils/MultiSelectDropdown";
 
-const FilterBoard = ({
-  onFilterChange,
-  categories,
-  closeFilterBoard,
-  initialFilters,
-}) => {
-  const [selectedCategories, setSelectedCategories] = useState(
-    initialFilters.selectedCategories
-  );
-  const [selectedShopNames, setSelectedShopNames] = useState(
-    initialFilters.selectedShopNames
-  );
-  const [startDate, setStartDate] = useState(initialFilters.startDate);
-  const [endDate, setEndDate] = useState(initialFilters.endDate);
+import { useCategoryStore } from "../../../store/categories";
+import { useCouponFiltersStore } from "../../../store/filters";
 
-  useEffect(() => {
-    onFilterChange({
-      selectedCategories,
-      selectedShopNames,
-      startDate,
-      endDate,
-    });
-  }, [selectedCategories, selectedShopNames, startDate, endDate]);
+const FilterBoard = ({ closeFilterBoard }) => {
+  const [_, setSearchParams] = useSearchParams();
+
+  const categories = useCategoryStore((state) => state.categories.map(category => category.name))
+  const [
+    appliedFilters,
+    setStartDate,
+    setEndDate,
+    storeSetSelectedCategories,
+  ] = useCouponFiltersStore((state) => [
+    state.appliedFilters,
+    state.setStartDate,
+    state.setEndDate,
+    state.setSelectedCategories,
+  ]);
+
+  const setSelectedCategories = (categories) => {
+    setSearchParams({ "categories[]": categories });
+    storeSetSelectedCategories(categories);
+  }
 
   const resetFilters = () => {
     setSelectedCategories([]);
-    setSelectedShopNames([]);
     setStartDate("");
     setEndDate("");
   };
 
   const appliedFilterCount =
-    selectedCategories.length +
-    selectedShopNames.length +
-    (startDate ? 1 : 0) +
-    (endDate ? 1 : 0);
+    appliedFilters.selectedCategories.length +
+    (appliedFilters.startDate ? 1 : 0) +
+    (appliedFilters.endDate ? 1 : 0);
 
   return (
     <div className="p-4 h-full flex flex-col space-y-4">
@@ -51,7 +49,7 @@ const FilterBoard = ({
         <MultiSelectDropdown
           label="Categories"
           options={categories}
-          selectedOptions={selectedCategories}
+          selectedOptions={appliedFilters.selectedCategories}
           setSelectedOptions={setSelectedCategories}
         />
         <div className="flex flex-col">
@@ -61,7 +59,7 @@ const FilterBoard = ({
           <input
             type="date"
             id="start-date"
-            value={startDate}
+            value={appliedFilters.startDate}
             onChange={(e) => setStartDate(e.target.value)}
             className="w-full px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
           />
@@ -73,7 +71,7 @@ const FilterBoard = ({
           <input
             type="date"
             id="end-date"
-            value={endDate}
+            value={appliedFilters.endDate}
             onChange={(e) => setEndDate(e.target.value)}
             className="w-full px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
           />
