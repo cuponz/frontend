@@ -11,7 +11,6 @@ import LoadingSpinner from "../../Utils/LoadingSpinner";
 import CouponCatalogue from "../Coupon/CouponCatalogue";
 
 const itemsPerPage = 8;
-i
 
 const UserCoupon = ({ type }) => {
   return (
