@@ -1,5 +1,7 @@
 import logo from "../../assets/logofooter.png";
 
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-indigo-800 text-gray-200 py-8">
@@ -8,34 +10,21 @@ const Footer = () => {
           <img src={logo} alt="CuponZ Logo" className="h-10 mr-2" />
         </div>
         <div className="flex justify-center space-x-12 mb-8">
-          <a href="/" className="hover:underline">
+          <Link href="/" className="hover:underline">
             Home
-          </a>
-          <a href="/coupon" className="hover:underline">
+          </Link>
+          <Link to="/coupon" className="hover:underline">
             Hot Deals
-          </a>
-          <a href="/contactus" className="hover:underline">
+          </Link>
+          <Link to="/contactus" className="hover:underline">
             Contact Us
-          </a>
-          <a href="/aboutus" className="hover:underline">
+          </Link>
+          <Link to="/aboutus" className="hover:underline">
             About Us
-          </a>
+          </Link>
         </div>
         <hr className="border-gray-400 mb-4" />
-        <div className="flex justify-between items-center text-sm mr-10 ml-10">
-          <div>© 2024 G71. All rights reserved.</div>
-          <div className="flex space-x-8">
-            <a href="/terms" className="hover:underline">
-              Terms
-            </a>
-            <a href="/privacy" className="hover:underline">
-              Privacy
-            </a>
-            <a href="/cookies" className="hover:underline">
-              Cookies
-            </a>
-          </div>
-        </div>
+        <div>© 2024 G71. All rights reserved.</div>
       </div>
     </footer>
   );

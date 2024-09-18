@@ -41,6 +41,17 @@ const routes = [
     ]
   },
   {
+    path: "/",
+    element: <AuthWrapper isProtected />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "profile",
+        element: <UserProfile />,
+      },
+    ]
+  },
+  {
     path: "/customerProfile",
     element: <CustomerProfilePage />,
     errorElement: <ErrorPage />,

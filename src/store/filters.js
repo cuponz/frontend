@@ -5,6 +5,7 @@ export const useCouponFiltersStore = create((set) => ({
     selectedCategories: [],
     startDate: "",
     endDate: "",
+    searchTerm: "",
   },
   setAppliedFilters: (newFilters) => set((state) => ({
     appliedFilters: { ...state.appliedFilters, ...newFilters }
@@ -17,5 +18,8 @@ export const useCouponFiltersStore = create((set) => ({
   })),
   setSelectedCategories: (newCategories) => set((state) => ({
     appliedFilters: { ...state.appliedFilters, selectedCategories: newCategories }
+  })),
+  setSearchTerm: (newSearchTerm) => set((state) => ({
+    appliedFilters: { ...state.appliedFilters, searchTerm: newSearchTerm }
   })),
 }));

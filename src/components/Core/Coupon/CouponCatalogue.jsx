@@ -1,116 +1,158 @@
-import { useState, useEffect, useMemo } from "react";
-import Fuse from "fuse.js";
-
-import CouponCard from "./CouponCard";
-import Pagination from "../../Utils/Pagination";
 import LoadingSpinner from "../../Utils/LoadingSpinner"; // Import the new component
+
+import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
+
+import FilterBoard from "./FilterBoard";
+import InstructionPopup from "../../InstructionPopup";
+
+import { useCouponFiltersStore } from "../../../store/filters";
+import { updateFiltersFromParams } from "../../Utils/Coupons";
 
 import { useQuery } from "@tanstack/react-query";
 import { getCoupons } from "../../../api/coupon";
-import { useCouponFiltersStore } from "../../../store/filters";
+import CouponBoard from "./CouponBoard";
+import { CouponCatalougeType } from "../../../constants";
 
-const itemsPerPage = 8;
-
-const CouponCatalogue = ({ searchTerm }) => {
-	const [currentPage, setCurrentPage] = useState(1);
-  const appliedFilters = useCouponFiltersStore((state) => state.appliedFilters)
-
-	const fuseOptions = {
-		keys: ["title", "description", "keywords", "name"],
-		threshold: 0.3,
-	};
-
-	const { isPending, data: coupons = [] } = useQuery({
+const AllCouponBoard = () => {
+	const { isPending, data } = useQuery({
 		queryKey: ["get", "coupons"],
 		queryFn: getCoupons,
 		retry: false,
 	});
 
-	const fuse = new Fuse(coupons, fuseOptions);
+	return <CouponBoard isPending={isPending} coupons={data} />
+};
 
-	const filteredCoupons = useMemo(() => {
-		let filtered = [...coupons];
+const ShopManageCouponBoard = () => {
+	const { isPending, data } = useQuery({
+		queryKey: ["get", "coupons"],
+		queryFn: getCoupons,
+		retry: false,
+	});
 
-		const {
-			selectedCategories,
-			startDate,
-			endDate
-		} = appliedFilters;
+	return <CouponBoard isPending={isPending} coupons={data} />
+};
 
-		if (searchTerm) {
-			const searchResults = fuse.search(searchTerm);
-			filtered = searchResults.map((result) => result.item);
-		}
+const ShopListCouponBoard = () => {
+	const { isPending, data } = useQuery({
+		queryKey: ["get", "coupons"],
+		queryFn: getCoupons,
+		retry: false,
+	});
 
-		filtered = filtered.filter((coupon) => {
-			if (selectedCategories.length > 0 && !selectedCategories.includes(coupon.category)) {
-				return false;
-			}
-			if (startDate && coupon.start_date < startDate) {
-				return false
-			}
-			if (endDate && coupon.end_date > endDate) {
-				return false
-			}
+	return <CouponBoard isPending={isPending} coupons={data} />
+};
 
-			return true;
-		});
+const UserCouponBoard = () => {
+	const { isPending, data } = useQuery({
+		queryKey: ["get", "coupons"],
+		queryFn: getCoupons,
+		retry: false,
+	});
 
-		setCurrentPage(1);
 
-		return filtered;
-	}, [isPending, appliedFilters, searchTerm]);
+	return <CouponBoard isPending={isPending} coupons={data} />
+};
 
-	const handlePageChange = (page) => {
-		setCurrentPage(page);
-	};
-
-	const currentCoupons = filteredCoupons.slice(
-		(currentPage - 1) * itemsPerPage,
-		currentPage * itemsPerPage
-	);
-
-	if (isPending) {
-		return <LoadingSpinner />
+const CouponCatalogueBoard = ({ type }) => {
+	switch (type) {
+		case CouponCatalougeType["All"]:
+			return <AllCouponBoard />
+		case CouponCatalougeType["ShopManage"]:
+			return <ShopManageCouponBoard />
+		case CouponCatalougeType["ShopList"]:
+			return <ShopListCouponBoard />
+		case CouponCatalougeType["User"]:
+			return <UserCouponBoard />
 	}
+}
 
-	console.log(coupons)
+const CouponCatalogue = ({ type }) => {
+  const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
+  const [showPopup, setShowPopup] = useState(true);
+
+  const [searchParams] = useSearchParams();
+
+  const [setStartDate, setEndDate, setSelectedCategories, setSearchTerm] = useCouponFiltersStore((state) => [
+    state.setStartDate,
+    state.setEndDate,
+    state.setSelectedCategories,
+    state.setSearchTerm,
+  ]);
+
+  const updateFiltersFromParamsCallback = useCallback(updateFiltersFromParams, [searchParams]);
+
+  useEffect(() => {
+    updateFiltersFromParamsCallback(searchParams, setStartDate, setEndDate, setSelectedCategories);
+  }, [searchParams])
+
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
+
+  const handleSearchChange = useCallback((e) => setSearchTerm(e.target.value), []);
+
+  const toggleFilterBoard = () => {
+    setIsFilterBoardVisible(!isFilterBoardVisible);
+    document.body.style.overflow = isFilterBoardVisible ? "auto" : "hidden";
+  };
+
 
 	return (
 		<>
-			<div className="flex justify-between items-center mt-4 mb-4">
-				<div className="text-lg font-medium">
-					{`${filteredCoupons.length} / ${coupons.length} Coupons found`}
+			<div className="flex items-center justify-between mb-4 mt-5">
+				<div>
+					<button
+						onClick={toggleFilterBoard}
+						className="bg-yellow-500 text-gray-800 px-4 py-2 rounded-md shadow-lg hover:bg-yellow-600 focus:outline-none flex items-center"
+					>
+						Filter
+						<i className="pl-2 fa-solid fa-caret-down"></i>
+					</button>
+				</div>
+				<div className="ml-4">
+					<input
+						type="text"
+						placeholder="Search coupons..."
+						onChange={handleSearchChange}
+						className="w-64 px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
+					/>
 				</div>
 			</div>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-				{currentCoupons.map((coupon, index) => (
-					<CouponCard
-						key={index}
-						logo={coupon.logo_url}
-						title={coupon.title}
-						keywords={coupon.keywords}
-						startDate={coupon.start_date}
-						endDate={coupon.end_date}
-						description={coupon.desc}
-						shopName={coupon.name}
-						maxUsage={coupon.max_usage}
-						usageCount={coupon.usage_count}
-					/>
-				))}
-			</div>
 
-			<div className="mt-8 mb-8">
-				<Pagination
-					currentPage={currentPage}
-					totalPages={Math.ceil(
-						filteredCoupons.length / itemsPerPage
-					)}
-					onPageChange={handlePageChange}
-				/>
+			{showPopup && <InstructionPopup onClose={handlePopupClose} />}
+
+			{isFilterBoardVisible && (
+				<div
+					className="fixed inset-0 bg-black bg-opacity-50 z-40"
+					onClick={toggleFilterBoard}
+				></div>
+			)}
+
+			<div
+				className={`fixed top-0 left-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 transform ${isFilterBoardVisible ? "translate-x-0" : "-translate-x-full"
+					}`}
+				style={{ width: "70%", maxWidth: "300px" }}
+			>
+				{isFilterBoardVisible && (
+					<FilterBoard
+						closeFilterBoard={toggleFilterBoard}
+					/>
+				)}
+
 			</div>
+			<CouponCatalogueBoard type={type} />
 		</>
-	);
+	)
+}
+
+export {
+	AllCouponBoard,
+	ShopManageCouponBoard,
+	ShopListCouponBoard,
+	UserCouponBoard,
 };
 
 export default CouponCatalogue;

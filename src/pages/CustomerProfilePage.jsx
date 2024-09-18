@@ -1,7 +1,7 @@
 import Navbar from "../components/Core/Navbar";
 import Footer from "../components/Core/Footer";
 import CouponsList from "../components/couponList";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/Core/Profiles/UserInfo";
 
 function CustomerProfilePage() {
   return (

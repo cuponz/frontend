@@ -3,6 +3,8 @@ import hpLogo from "../assets/hp.png";
 import dellLogo from "../assets/dell.png";
 import microsoftLogo from "../assets/windows.png";
 
+import { Link } from "react-router-dom";
+
 const Banner = () => {
   return (
     <div className="bg-indigo-900 text-white py-10 mt-5">
@@ -17,7 +19,7 @@ const Banner = () => {
             <img src={hpLogo} alt="HP" className="h-16" />
             <img src={dellLogo} alt="Dell" className="h-16" />
             <img src={microsoftLogo} alt="Microsoft" className="h-16" />
-            <a href="/coupon" className="text-white flex items-center">
+            <Link to="/coupon" className="text-white flex items-center">
               <svg
                 className="h-8 w-8 mr-2"
                 fill="currentColor"
@@ -26,7 +28,7 @@ const Banner = () => {
                 <path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12s12-5.373 12-12C24 5.373 18.627 0 12 0zM12 22C6.486 22 2 17.514 2 12 2 6.486 6.486 2 12 2c5.514 0 10 4.486 10 10C22 17.514 17.514 22 12 22zM16 11h-4V7h-2v6h6V11z" />
               </svg>
               view all shops
-            </a>
+            </Link>
           </div>
         </div>
       </div>

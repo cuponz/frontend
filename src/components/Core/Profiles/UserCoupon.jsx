@@ -1,15 +1,29 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
-import UserCouponCard from "../components/UserCouponCard";
-import FilterBoard from "../components/FilterBoard";
-import Pagination from "../components/Pagination";
-import LoadingSpinner from "../components/LoadingSpinner";
-import couponData from "../data/couponData.json";
-import shopCusData from "../data/shopCusData.json";
+import UserCouponCard from "../../UserCouponCard";
+import couponData from "../../../data/couponData.json";
+import shopCusData from "../../../data/shopCusData.json";
+
+import FilterBoard from "../Coupon/FilterBoard";
+
+import Pagination from "../../Utils/Pagination";
+import LoadingSpinner from "../../Utils/LoadingSpinner";
+import CouponCatalogue from "../Coupon/CouponCatalogue";
 
 const itemsPerPage = 8;
+i
 
-const UserCoupon = () => {
+const UserCoupon = ({ type }) => {
+  return (
+    <div className="min-h-screen">
+      <CouponCatalogue type={type} />
+    </div>
+  )
+};
+
+export default UserCoupon;
+
+const _UserCoupon = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredCoupons, setFilteredCoupons] = useState([]);
   const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
@@ -201,5 +215,3 @@ const UserCoupon = () => {
     </div>
   );
 };
-
-export default UserCoupon;

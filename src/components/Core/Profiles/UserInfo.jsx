@@ -1,19 +1,24 @@
-import shopCusData from "../data/shopCusData.json";
+import { UserType } from "../../../constants";
+import { useUserStore } from "../../../store/user";
+
+import LoadingSpinner from "../../Utils/LoadingSpinner";
 
 const UserInfo = () => {
-  const user = shopCusData.find((user) => user.user_id === 1042);
+  const user = useUserStore(state => state.user);
 
   const getContactInfo = () => {
-    if (user.phoneNumber && user.email) {
+    if (user.email) {
       return user.email;
-    } else if (user.phoneNumber) {
-      return user.phoneNumber;
-    } else if (user.email) {
-      return user.email;
+    } else if (user.phone_number) {
+      return user.phone_number;
     } else {
       return "No contact information provided";
     }
   };
+
+  if (!user) {
+    return <LoadingSpinner />
+  }
 
   return (
     <div className="container mx-auto justify-center">
@@ -36,7 +41,7 @@ const UserInfo = () => {
         </div>
         <div className="ml-6">
           <h2 className="sm:text-2xl font-medium text-gray-900 text-lg">
-            {user.user_name}
+            {user.name} ({Object.keys(UserType)[user.type]})
           </h2>
           <p className="sm:text-xl text-gray-500 text-sm">{getContactInfo()}</p>
         </div>

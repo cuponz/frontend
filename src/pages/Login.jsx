@@ -29,7 +29,6 @@ const LoginPage = () => {
       mutationKey: ["login"],
       mutationFn: userLogin,
       onSuccess: (data) => {
-        logout();
         toast.success("Login successful!");
         navigate("/");
       },

@@ -1,7 +1,7 @@
 import ShopOwnerInfo from "../components/ShopOwnerInfo";
 import MiniNav from "../components/ShopOwnerMiniNav";
 
-function App() {
+function ShopOwnerManage() {
   return (
     <div className="pt-16 sm:px-6 ">
       <ShopOwnerInfo />
@@ -10,4 +10,4 @@ function App() {
   );
 }
 
-export default App;
+export default ShopOwnerManage;
