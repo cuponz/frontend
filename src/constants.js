@@ -20,8 +20,14 @@ const CouponCatalougeType = Object.freeze({
 	User: 3,
 })
 
+const RedemptionState = Object.freeze({
+	Redeemed: 0,
+	Used: 1,
+});
+
 export {
 	UserType,
 	ProfileTab,
 	CouponCatalougeType,
+	RedemptionState,
 };

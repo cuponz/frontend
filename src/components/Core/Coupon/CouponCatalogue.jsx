@@ -1,6 +1,6 @@
 import LoadingSpinner from "../../Utils/LoadingSpinner"; // Import the new component
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import FilterBoard from "./FilterBoard";
@@ -10,95 +10,94 @@ import { useCouponFiltersStore } from "../../../store/filters";
 import { updateFiltersFromParams } from "../../Utils/Coupons";
 
 import { useQuery } from "@tanstack/react-query";
-import { getCoupons } from "../../../api/coupon";
+import { getCoupons, getCouponsByShopIdFromShop, getCouponsByShopIdFromOthers } from "../../../api/coupon";
 import CouponBoard from "./CouponBoard";
 import { CouponCatalougeType } from "../../../constants";
+import UserTable from "../Profiles/Shop/UserTable";
 
-const AllCouponBoard = () => {
+const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) => {
+	let [queryKey, queryFn] = useMemo(() => {
+		let queryKey, queryFn;
+		switch (type) {
+			case CouponCatalougeType.All:
+				queryKey = ["get", "coupons"];
+				queryFn = getCoupons;
+				break;
+			case CouponCatalougeType.ShopManage:
+				queryKey = ["get", "coupons", "shop"];
+				queryFn = getCouponsByShopIdFromShop;
+				break;
+			case CouponCatalougeType.ShopList:
+				queryKey = ["get", "coupons", "shop", shopId];
+				queryFn = () => getCouponsByShopIdFromOthers(shopId);
+				break;
+			case CouponCatalougeType.User:
+				queryKey = ["get", "user", "coupons"];
+				// queryFn = getUserRedeemedCoupons;
+				break;
+		}
+
+		return [queryKey, queryFn];
+	}, [type]);
+
 	const { isPending, data } = useQuery({
-		queryKey: ["get", "coupons"],
-		queryFn: getCoupons,
+		queryKey,
+		queryFn,
 		retry: false,
 	});
 
-	return <CouponBoard isPending={isPending} coupons={data} />
-};
-
-const ShopManageCouponBoard = () => {
-	const { isPending, data } = useQuery({
-		queryKey: ["get", "coupons"],
-		queryFn: getCoupons,
-		retry: false,
-	});
-
-	return <CouponBoard isPending={isPending} coupons={data} />
-};
-
-const ShopListCouponBoard = () => {
-	const { isPending, data } = useQuery({
-		queryKey: ["get", "coupons"],
-		queryFn: getCoupons,
-		retry: false,
-	});
-
-	return <CouponBoard isPending={isPending} coupons={data} />
-};
-
-const UserCouponBoard = () => {
-	const { isPending, data } = useQuery({
-		queryKey: ["get", "coupons"],
-		queryFn: getCoupons,
-		retry: false,
-	});
-
-
-	return <CouponBoard isPending={isPending} coupons={data} />
-};
-
-const CouponCatalogueBoard = ({ type }) => {
-	switch (type) {
-		case CouponCatalougeType["All"]:
-			return <AllCouponBoard />
-		case CouponCatalougeType["ShopManage"]:
-			return <ShopManageCouponBoard />
-		case CouponCatalougeType["ShopList"]:
-			return <ShopListCouponBoard />
-		case CouponCatalougeType["User"]:
-			return <UserCouponBoard />
+	if (isPending) {
+		return <LoadingSpinner />
 	}
+
+	return <CouponBoard coupons={data} type={type} setShowUserTable={setShowUserTable} setSelectedCouponId={setSelectedCouponId} />
 }
 
 const CouponCatalogue = ({ type }) => {
-  const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
-  const [showPopup, setShowPopup] = useState(true);
+	const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
+	const [showPopup, setShowPopup] = useState(true);
+	const [showUserTable, setShowUserTable] = useState(false);
+	const [selectedCouponId, setSelectedCouponId] = useState(null)
 
-  const [searchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 
-  const [setStartDate, setEndDate, setSelectedCategories, setSearchTerm] = useCouponFiltersStore((state) => [
-    state.setStartDate,
-    state.setEndDate,
-    state.setSelectedCategories,
-    state.setSearchTerm,
-  ]);
+	const [setStartDate, setEndDate, setSelectedCategories, setSearchTerm] = useCouponFiltersStore((state) => [
+		state.setStartDate,
+		state.setEndDate,
+		state.setSelectedCategories,
+		state.setSearchTerm,
+	]);
 
-  const updateFiltersFromParamsCallback = useCallback(updateFiltersFromParams, [searchParams]);
+	const updateFiltersFromParamsCallback = useCallback(updateFiltersFromParams, [searchParams]);
 
-  useEffect(() => {
-    updateFiltersFromParamsCallback(searchParams, setStartDate, setEndDate, setSelectedCategories);
-  }, [searchParams])
+	useEffect(() => {
+		updateFiltersFromParamsCallback(searchParams, setStartDate, setEndDate, setSelectedCategories);
+	}, [searchParams])
 
+	useEffect(() => {
+		// Scroll to the top of the page when toggle user table
+		window.scrollTo(0, 0);
+	}, [showUserTable]);
 
-  const handlePopupClose = () => {
-    setShowPopup(false);
-  };
+	const handlePopupClose = () => {
+		setShowPopup(false);
+	};
 
-  const handleSearchChange = useCallback((e) => setSearchTerm(e.target.value), []);
+	const handleSearchChange = useCallback((e) => setSearchTerm(e.target.value), []);
 
-  const toggleFilterBoard = () => {
-    setIsFilterBoardVisible(!isFilterBoardVisible);
-    document.body.style.overflow = isFilterBoardVisible ? "auto" : "hidden";
-  };
+	const toggleFilterBoard = () => {
+		setIsFilterBoardVisible(!isFilterBoardVisible);
+		document.body.style.overflow = isFilterBoardVisible ? "auto" : "hidden";
+	};
 
+	const handleBack = () => {
+		setShowUserTable(false);
+		setSelectedCouponId(null);
+	};
+
+	if (showUserTable && selectedCouponId) {
+		return <UserTable couponId={selectedCouponId} onBack={handleBack} />;
+	}
 
 	return (
 		<>
@@ -143,16 +142,9 @@ const CouponCatalogue = ({ type }) => {
 				)}
 
 			</div>
-			<CouponCatalogueBoard type={type} />
+			<CouponCatalogueBoard type={type} setShowUserTable={setShowUserTable} setSelectedCouponId={setSelectedCouponId} />
 		</>
 	)
 }
-
-export {
-	AllCouponBoard,
-	ShopManageCouponBoard,
-	ShopListCouponBoard,
-	UserCouponBoard,
-};
 
 export default CouponCatalogue;

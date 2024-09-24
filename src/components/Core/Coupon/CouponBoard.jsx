@@ -9,8 +9,9 @@ import { useCouponFiltersStore } from "../../../store/filters";
 
 const itemsPerPage = 8;
 
-const CouponBoard = ({ isPending, coupons = [] }) => {
+const CouponBoard = ({ isPending, coupons = [], type, setShowUserTable, setSelectedCouponId }) => {
 	const [currentPage, setCurrentPage] = useState(1);
+
   const appliedFilters = useCouponFiltersStore((state) => state.appliedFilters)
 
 	const fuse = useMemo(() => new Fuse(coupons, {
@@ -57,6 +58,11 @@ const CouponBoard = ({ isPending, coupons = [] }) => {
 		setCurrentPage(page);
 	};
 
+  const handleShowStats = (couponId) => {
+    setSelectedCouponId(couponId);
+    setShowUserTable(true);
+  };
+
 	const currentCoupons = useMemo(() => {
 		const start = (currentPage - 1) * itemsPerPage;
 		return filteredCoupons.slice(
@@ -80,15 +86,9 @@ const CouponBoard = ({ isPending, coupons = [] }) => {
 				{currentCoupons.map((coupon, index) => (
 					<CouponCard
 						key={index}
-						logo={coupon.logo_url}
-						title={coupon.title}
-						keywords={coupon.keywords}
-						startDate={coupon.start_date}
-						endDate={coupon.end_date}
-						description={coupon.desc}
-						shopName={coupon.name}
-						maxUsage={coupon.max_usage}
-						usageCount={coupon.usage_count}
+						coupon={coupon}
+						type={type}
+						onShowStats={handleShowStats}
 					/>
 				))}
 			</div>
