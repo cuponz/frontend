@@ -10,10 +10,11 @@ import { useCouponFiltersStore } from "../../../store/filters";
 import { updateFiltersFromParams } from "../../Utils/Coupons";
 
 import { useQuery } from "@tanstack/react-query";
-import { getCoupons, getCouponsByShopIdFromShop, getCouponsByShopIdFromOthers } from "../../../api/coupon";
 import CouponBoard from "./CouponBoard";
 import { CouponCatalougeType } from "../../../constants";
 import UserTable from "../Profiles/Shop/UserTable";
+
+import { getCoupons, getCouponsByShopIdFromShop, getCouponsByShopIdFromOthers } from "../../../api/coupon";
 
 const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) => {
 	let [queryKey, queryFn] = useMemo(() => {
@@ -33,7 +34,7 @@ const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) =
 				break;
 			case CouponCatalougeType.User:
 				queryKey = ["get", "user", "coupons"];
-				// queryFn = getUserRedeemedCoupons;
+				queryFn = getCoupons;
 				break;
 		}
 

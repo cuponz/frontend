@@ -9,10 +9,7 @@ import AboutUs from "./pages/AboutUs.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import CouponPage from "./pages/CouponPage.jsx";
-import CustomerProfilePage from "./pages/CustomerProfilePage.jsx";
 import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage.jsx";
-import ShopOwnerManage from "./pages/ShopOwnerManage.jsx";
-import ShopOwnerProfile from "./pages/ShopOwnerProfile.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import Noti from "./pages/ResultNoti.jsx";
 
@@ -52,16 +49,6 @@ const routes = [
     ]
   },
   {
-    path: "/customerProfile",
-    element: <CustomerProfilePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/shopmanage",
-    element: <ShopOwnerManage />,
-    errorElement: <ErrorPage />,
-  },
-  {
     path: "/shop",
     element: <ShopOwnerProfilePage />,
     errorElement: <ErrorPage />,
@@ -75,14 +62,6 @@ const routes = [
     path: "/register",
     element: <Register />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/userprofile",
-    element: <UserProfile />,
-  },
-  {
-    path: "/shopprofile",
-    element: <ShopOwnerProfile />,
   },
   {
     path: "/noti",

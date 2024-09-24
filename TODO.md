@@ -17,6 +17,10 @@
 - [x] Finish Logout
 - [x] Finish Navbar categories
 - [ ] Finish Profile Page for user, shop and admin
+	- [x] Shop
+	- [ ] User
+	- [ ] Manager
 - [ ] Finish Profile Page for shop when view as user
+	- [ ] Search Shop Profile in the search bar
 - [ ] Finish Setting Page for user profile page
 - [ ] Finish Redeem Coupon Flow

@@ -22,14 +22,12 @@ const UserContent = ({ activeTab }) => {
   }
 };
 
-const ShopContent = ({ activeTab, handleShowDetails, handleBackToCoupons, selectedCoupon }) => {
+const ShopContent = ({ activeTab }) => {
   switch (activeTab) {
     case ProfileTab["Coupons"]:
       return <UserCoupon type={CouponCatalougeType["ShopManage"]} />
     case ProfileTab["Management"]:
       return <ShopCouponTable />;
-    case ProfileTab["Details"]:
-      return <UserTable couponId={selectedCoupon} onBack={handleBackToCoupons} />;
     case ProfileTab["Settings"]:
       return <ShopOwnerSetting />;
     default:
@@ -40,17 +38,6 @@ const ShopContent = ({ activeTab, handleShowDetails, handleBackToCoupons, select
 const UserProfileMiniNav = () => {
   const user = useUserStore(state => state.user);
   const [activeTab, setActiveTab] = useState(ProfileTab["Coupons"]);
-  const [selectedCoupon, setSelectedCoupon] = useState(null);
-
-  const handleShowDetails = (couponId) => {
-    setSelectedCoupon(couponId);
-    setActiveTab(ProfileTab["Details"]);
-  };
-
-  const handleBackToCoupons = () => {
-    setSelectedCoupon(null);
-    setActiveTab(ProfileTab["Coupons"]);
-  };
 
   if (!user) {
     return <LoadingSpinner />
@@ -74,7 +61,7 @@ const UserProfileMiniNav = () => {
       <div className="grid grid-cols-2 md:flex justify-between max-w-xl">
         {tabs.map((tab) => (
           <button
-            key={tab.id}
+            key={tab.id * (user.type + 1)}
 
             className={`w-full md:w-1/${tabs.length} px-4 py-2 font-medium text-sm ${activeTab === tab.id
               ? "bg-indigo-900 text-white"
@@ -88,12 +75,7 @@ const UserProfileMiniNav = () => {
       </div>
       <div className="mt-4">{
         (user.type === UserType["Shop"]) ? (
-          <ShopContent
-            activeTab={activeTab}
-            handleShowDetails={handleShowDetails}
-            handleBackToCoupons={handleBackToCoupons}
-            selectedCoupon={selectedCoupon}
-          />
+          <ShopContent activeTab={activeTab} />
         ) : (user.type === UserType["User"]) ? (
           <UserContent activeTab={activeTab} />
         ) : (
