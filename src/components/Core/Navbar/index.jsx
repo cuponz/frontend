@@ -3,6 +3,11 @@ import logo from "../../../assets/logo.png";
 import profilePic from "../../../assets/userIcon.png";
 import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "./ShoppingCartIcon";
+import SearchBarNav from "./SearchBarNav";
+import { CiUser } from "react-icons/ci";
+import { CiMenuFries } from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
 
 import { useUserStore } from "../../../store/user";
 import { useCategoryStore, useIsCategoriesOpenStore } from "../../../store/categories";
@@ -59,9 +64,16 @@ const Navbar = () => {
   // const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prev => !prev);
+    setIsSearchOpen(false);
+  };
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+    setIsMobileMenuOpen(false);
   };
 
   const handleLoginLogout = () => {
@@ -101,12 +113,12 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#E9E7F9] p-4 z-50">
-      <div className="container mx-auto flex justify-between items-center relative">
+      <div className="container mx-auto flex flex-wrap justify-between items-center relative">
         {/* Logo Section */}
         <div className="flex items-center">
           <img
             src={logo}
-            alt="CuponZ Logo"
+            alt="CouponZ Logo"
             className="h-5 w-auto md:h-8 lg:h-10 mr-4"
           />
         </div>
@@ -133,38 +145,21 @@ const Navbar = () => {
 
         {/* Search, User Section and Login/Logout Button */}
         <div className="flex items-center space-x-4 ml-2">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className="pl-8 pr-4 py-1 border rounded-full"
-            />
-            <svg
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 1114 0 7 7 0 01-14 0z"
-              />
-            </svg>
+          <div className="hidden md:block">
+            <SearchBarNav />
           </div>
 
+					<ShoppingCartIcon />
           {user ? (
             <div className="relative">
               <button
                 onClick={toggleProfileDropdown}
                 className="focus:outline-none"
               >
-                <img
-                  src={profilePic}
-                  alt="User Profile"
-                  className="h-10 w-10 rounded-full border-solid hover:border-blue-500 border-2 border-yellow-400"
-                />
+                <div className="group relative p-2 flex items-center justify-center">
+                  <CiUser className="text-3xl" />
+                  <span className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-gray-900 transition-all duration-300"></span>
+                </div>
               </button>
               {isProfileDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
@@ -201,23 +196,29 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button onClick={toggleMobileMenu} className="focus:outline-none">
-            <svg
-              className="w-6 h-6 text-gray-800"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
+        {/* Mobile Menu and Search Buttons */}
+        <div className="md:hidden flex items-center space-x-2">
+          <button
+            onClick={toggleSearch}
+            className="p-2 rounded-full hover:bg-gray-200 transition-colors duration-200 focus:outline-none"
+          >
+            <CiSearch className="text-3xl" />
+          </button>
+          <button
+            onClick={toggleMobileMenu}
+            className="p-2 rounded-full hover:bg-gray-200 transition-colors duration-200 focus:outline-none"
+          >
+            <CiMenuFries className="text-3xl" />
           </button>
         </div>
       </div>
+
+      {/* Mobile Search Bar */}
+      {isSearchOpen && (
+        <div className="md:hidden mt-4">
+          <SearchBarNav />
+        </div>
+      )}
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
