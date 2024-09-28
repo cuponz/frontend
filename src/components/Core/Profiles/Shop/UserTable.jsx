@@ -1,10 +1,13 @@
 import { getRedemptionsByCouponId } from "../../../../api/redemptions";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../Utils/LoadingSpinner";
-import DataTable from "../../../DataTable";
+import DataTable from "../../../Wrapper/DataTable";
+import { RedemptionState } from "../../../../constants";
+import { useEffect } from "react";
+import { useMemo } from "react";
 
 const UserTable = ({ couponId, onBack }) => {
-  const { isLoading, error, data: redemptions = [] } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ['get', 'redemptions', couponId],
     queryFn: () => getRedemptionsByCouponId(couponId),
 		retry: false,
@@ -14,7 +17,21 @@ const UserTable = ({ couponId, onBack }) => {
     { header: 'Username', accessor: 'user_name' },
     { header: 'Email', accessor: 'email' },
     { header: 'Phone Number', accessor: 'phone_number' },
+    { header: 'Redeem State', accessor: 'redeem_state' },
   ];
+
+  const redemptions = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+
+    const RedemptionStateKeys = Object.keys(RedemptionState)
+
+    return data.map(redemption => {
+      redemption.redeem_state = RedemptionStateKeys[redemption.state];
+      return redemption;
+    })
+  }, [data])
 
   if (isLoading) {
     return <LoadingSpinner />;

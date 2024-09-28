@@ -1,9 +1,21 @@
-import couponData from "../data/couponData.json";
-const PopupSuccess = () => {
-  const coupon = couponData.find((coupon) => coupon.id === 1);
+import { useQuery } from "@tanstack/react-query";
+import { usingRedemptionById } from "../api/redemptions";
+import LoadingSpinner from "./Utils/LoadingSpinner";
+
+const PopupSuccess = ({ redeem }) => {
+  console.log(redeem)
+  const { isPending, data } = useQuery({
+		queryKey: ["redemptions", "using", redeem.id],
+		queryFn: () => usingRedemptionById(redeem.id),
+		retry: false,
+  });
+
+  if (isPending) {
+    return <LoadingSpinner />
+  }
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center z-50">
+    <div className="fixed inset-0 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg w-full max-w-sm">
         <div className="flex items-center justify-center mb-4">
           <div className="bg-green-500 rounded-full p-2">
@@ -26,33 +38,24 @@ const PopupSuccess = () => {
         <h2 className="text-3xl font-semibold mb-4 text-center">
           Redeem Successfully
         </h2>
-        {coupon && (
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold text-center">
-              {coupon.title}
-            </h3>
-            <div className="mt-2">
-              <p>
-                <span className="font-semibold">Brand:</span> {coupon.brand}
-              </p>
-              <p>
-                <span className="font-semibold">Category:</span>{" "}
-                {coupon.category}
-              </p>
-              <p>
-                <span className="font-semibold">Shop:</span> {coupon.shopName}
-              </p>
-              <p>
-                <span className="font-semibold">Redeem Code:</span>{" "}
-                {coupon.redeemCode}
-              </p>
-              <p>
-                <span className="font-semibold">Valid Until:</span>{" "}
-                {coupon.endDate}
-              </p>
-            </div>
+        <div className="mt-6">
+          <h3 className="text-lg font-semibold text-center">
+            {data.coupon_title}
+          </h3>
+          <div className="mt-2">
+            <p>
+              <span className="font-semibold">Category:</span>{" "}
+              {data.coupon_category}
+            </p>
+            <p>
+              <span className="font-semibold">Shop:</span> {data.shop}
+            </p>
+            <p>
+              <span className="font-semibold">Redeem Code:</span>{" "}
+              {data.coupon_code}
+            </p>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

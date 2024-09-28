@@ -15,8 +15,12 @@ import { CouponCatalougeType } from "../../../constants";
 import UserTable from "../Profiles/Shop/UserTable";
 
 import { getCoupons, getCouponsByShopIdFromShop, getCouponsByShopIdFromOthers } from "../../../api/coupon";
+import { getRedemptionsByUserId } from "../../../api/redemptions";
+import { useUserStore } from "../../../store/user";
 
-const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) => {
+const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId, shopId }) => {
+  const user = useUserStore((state) => state.user);
+
 	let [queryKey, queryFn] = useMemo(() => {
 		let queryKey, queryFn;
 		switch (type) {
@@ -29,12 +33,12 @@ const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) =
 				queryFn = getCouponsByShopIdFromShop;
 				break;
 			case CouponCatalougeType.ShopList:
-				queryKey = ["get", "coupons", "shop", shopId];
-				queryFn = () => getCouponsByShopIdFromOthers(shopId);
+				queryKey = ["get", "coupons", "shop", user.id];
+				queryFn = () => getCouponsByShopIdFromOthers(user.id);
 				break;
 			case CouponCatalougeType.User:
 				queryKey = ["get", "user", "coupons"];
-				queryFn = getCoupons;
+				queryFn = getRedemptionsByUserId;
 				break;
 		}
 

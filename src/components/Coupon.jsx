@@ -1,5 +1,3 @@
-import "./coupon.css";
-
 function Coupon({
   logo,
   title,

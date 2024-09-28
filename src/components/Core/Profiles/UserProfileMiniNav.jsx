@@ -48,9 +48,11 @@ const UserProfileMiniNav = () => {
         { id: ProfileTab.Coupons, label: 'Coupons' },
         { id: ProfileTab.Management, label: 'Management' },
         { id: ProfileTab.Setting, label: 'Setting' },
-      ]
-      : [
+      ] : user.type === UserType.User ? [
         { id: ProfileTab.Coupons, label: 'Coupons' },
+        { id: ProfileTab.Setting, label: 'Setting' },
+      ] : [
+        { id: ProfileTab.Management, label: 'Management' },
         { id: ProfileTab.Setting, label: 'Setting' },
       ];
 

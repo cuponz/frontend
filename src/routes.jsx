@@ -11,7 +11,7 @@ import Register from "./pages/Register.jsx";
 import CouponPage from "./pages/CouponPage.jsx";
 import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
-import Noti from "./pages/ResultNoti.jsx";
+import Noti from "./pages/RedeemResult.jsx";
 
 const routes = [
   {
@@ -46,6 +46,10 @@ const routes = [
         path: "profile",
         element: <UserProfile />,
       },
+      {
+        path: "/redeem/:redeemId",
+        element: <Noti />,
+      },
     ]
   },
   {
@@ -62,10 +66,6 @@ const routes = [
     path: "/register",
     element: <Register />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/noti",
-    element: <Noti />,
   },
 ];
 
