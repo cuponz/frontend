@@ -11,8 +11,6 @@ import { useUserStore } from "../store/user";
 import { userLogin } from "../api/user";
 
 const LoginPage = () => {
-  const logout = useUserStore((state) => state.logout);
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,7 +26,7 @@ const LoginPage = () => {
     {
       mutationKey: ["login"],
       mutationFn: userLogin,
-      onSuccess: (data) => {
+      onSuccess: (_) => {
         toast.success("Login successful!");
         navigate("/");
       },
@@ -44,12 +42,7 @@ const LoginPage = () => {
     if (formData.email === "" || formData.password === "") {
       toast.error("Please fill in all fields!");
     } else {
-      const loginData = {
-        email: formData.email,
-        password: formData.password,
-      };
-
-      loginMutation.mutate(loginData);
+      loginMutation.mutate(formData);
     }
   };
 

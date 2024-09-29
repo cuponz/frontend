@@ -1,50 +1,44 @@
+import { RedemptionState } from "../constants";
+import { apiRequest } from "./base";
+
 async function getRedemptionsByCouponId(couponId) {
-	const base = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
-  const res = await fetch(`${base}/api/redemption/coupon/${couponId}`, {
-		credentials: process.env.NODE_ENV === "development" ? "include" : "same-origin",
-	});
-
-  let data;
-  try {
-    data = await res.json();
-  } catch(e) {
-    data = undefined;
-  }
-
-  if (!res.ok) {
-    if (data) {
-      throw new Error(data.msg || data.error);
-    } 
-    throw new Error("Getting Redemptions Failed");
-  }
-
-	return data;
+  return apiRequest(`/api/redemption/coupon/${couponId}`, {
+    errorMessage: "Getting Redemptions Failed",
+  })
 }
 
-async function getRedemptionsByUserId(userId) {
-	const base = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
-  const res = await fetch(`${base}/api/redemption/coupon/${couponId}`, {
-		credentials: process.env.NODE_ENV === "development" ? "include" : "same-origin",
-	});
+async function getRedemptionsByUserId() {
+  return apiRequest(`/api/redemption/user`, {
+    errorMessage: "Getting Redemptions Failed",
+  })
+}
 
-  let data;
-  try {
-    data = await res.json();
-  } catch(e) {
-    data = undefined;
-  }
+async function getRedemptionsById(redemptionId) {
+  return apiRequest(`/api/redemption/${redemptionId}`, {
+    errorMessage: "Getting Redemption Failed",
+  })
+}
 
-  if (!res.ok) {
-    if (data) {
-      throw new Error(data.msg || data.error);
-    } 
-    throw new Error("Getting Redemptions Failed");
-  }
+async function usingRedemptionById(redemptionId) {
+  return apiRequest(`/api/redemption/${redemptionId}/state`, {
+    method: "PUT",
+    body: JSON.stringify({ state: RedemptionState.Used }),
+    errorMessage: "Updating Redemption Failed",
+  })
+}
 
-	return data;
+async function redeemCoupon(userInfo) {
+  return apiRequest(`/api/redemption`, {
+    method: "POST",
+    body: JSON.stringify(userInfo),
+    errorMessage: "Creating Redemption Failed",
+  })
 }
 
 export {
 	getRedemptionsByCouponId,
 	getRedemptionsByUserId,
+	getRedemptionsById,
+	usingRedemptionById,
+  redeemCoupon,
 }

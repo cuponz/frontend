@@ -25,9 +25,23 @@ const RedemptionState = Object.freeze({
 	Used: 1,
 });
 
+const CouponRequirementType = Object.freeze({
+  Email: 0,
+  PhoneNumber: 1,
+  EmailOrPhoneNumber: 2,
+  EmailAndPhoneNumber: 3,
+});
+
+const CouponCardModalType = Object.freeze({
+  PopUp: 1,
+  InfoField: 2,
+});
+
 export {
 	UserType,
 	ProfileTab,
 	CouponCatalougeType,
 	RedemptionState,
+	CouponRequirementType,
+	CouponCardModalType,
 };

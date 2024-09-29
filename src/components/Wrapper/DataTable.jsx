@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
-import Pagination from "./Utils/Pagination";
-import { saveAs } from 'file-saver';
+import Pagination from "../Utils/Pagination";
 
 const DataTable = ({ columns, data, itemsPerPage = 10, filename = 'data.csv' }) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -8,7 +7,7 @@ const DataTable = ({ columns, data, itemsPerPage = 10, filename = 'data.csv' }) 
 
 	const handleSearch = (e) => {
 		setSearchTerm(e.target.value);
-		setCurrentPage(1); // Reset to first page on search
+		// setCurrentPage(1); // Reset to first page on search
 	};
 
 	// Filter data based on search term
@@ -35,7 +34,13 @@ const DataTable = ({ columns, data, itemsPerPage = 10, filename = 'data.csv' }) 
 	const handleDownloadCSV = () => {
 		const csv = convertToCSV(filteredData);
 		const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-		saveAs(blob, filename);
+		const csvURL = URL.createObjectURL(blob);
+		const link = document.createElement('a');
+    link.href = csvURL;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 	};
 
 	const convertToCSV = (data) => {
@@ -43,7 +48,7 @@ const DataTable = ({ columns, data, itemsPerPage = 10, filename = 'data.csv' }) 
 			return '';
 		}
 
-		const headers = columns.map((col) => col.header);
+		const headers = columns.map((col) => col.headder);
 
 		const rows = data.map((row) =>
 			columns.map((col) => {
@@ -91,7 +96,7 @@ const DataTable = ({ columns, data, itemsPerPage = 10, filename = 'data.csv' }) 
 								<tr>
 									{columns.map((column) => (
 										<th key={column.accessor} className="px-4 py-2 border-b">
-											{column.Header}
+											{column.header}
 										</th>
 									))}
 								</tr>

@@ -9,13 +9,10 @@ import { CouponCatalougeType, ProfileTab, UserType } from "../../../constants";
 
 import ShopCouponTable from "../../shopCouponTable";
 import ShopOwnerSetting from "../../Setting";
-import CouponCatalogue from "../Coupon/CouponCatalogue";
 
 const UserContent = ({ activeTab }) => {
   switch (activeTab) {
-    case ProfileTab["Coupons"]:
-      return <UserCoupon type={CouponCatalougeType["User"]} />
-    case ProfileTab["Settings"]:
+    case ProfileTab.Settings:
       return <UserSetting />;
     default:
       return null;
@@ -24,11 +21,11 @@ const UserContent = ({ activeTab }) => {
 
 const ShopContent = ({ activeTab }) => {
   switch (activeTab) {
-    case ProfileTab["Coupons"]:
-      return <UserCoupon type={CouponCatalougeType["ShopManage"]} />
-    case ProfileTab["Management"]:
+    case ProfileTab.Coupons:
+      return <UserCoupon type={CouponCatalougeType.ShopManage} />
+    case ProfileTab.Management:
       return <ShopCouponTable />;
-    case ProfileTab["Settings"]:
+    case ProfileTab.Settings:
       return <ShopOwnerSetting />;
     default:
       return null;
@@ -49,9 +46,10 @@ const UserProfileMiniNav = () => {
         { id: ProfileTab.Coupons, label: 'Coupons' },
         { id: ProfileTab.Management, label: 'Management' },
         { id: ProfileTab.Setting, label: 'Setting' },
-      ]
-      : [
-        { id: ProfileTab.Coupons, label: 'Coupons' },
+      ] : user.type === UserType.User ? [
+        { id: ProfileTab.Setting, label: 'Setting' },
+      ] : [
+        { id: ProfileTab.Management, label: 'Management' },
         { id: ProfileTab.Setting, label: 'Setting' },
       ];
 

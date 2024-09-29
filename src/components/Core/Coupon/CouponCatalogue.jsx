@@ -15,8 +15,12 @@ import { CouponCatalougeType } from "../../../constants";
 import UserTable from "../Profiles/Shop/UserTable";
 
 import { getCoupons, getCouponsByShopIdFromShop, getCouponsByShopIdFromOthers } from "../../../api/coupon";
+import { getRedemptionsByUserId } from "../../../api/redemptions";
+import { useUserStore } from "../../../store/user";
 
 const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) => {
+  const user = useUserStore((state) => state.user);
+
 	let [queryKey, queryFn] = useMemo(() => {
 		let queryKey, queryFn;
 		switch (type) {
@@ -29,12 +33,12 @@ const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) =
 				queryFn = getCouponsByShopIdFromShop;
 				break;
 			case CouponCatalougeType.ShopList:
-				queryKey = ["get", "coupons", "shop", shopId];
-				queryFn = () => getCouponsByShopIdFromOthers(shopId);
+				queryKey = ["get", "coupons", "shop", user.id];
+				queryFn = () => getCouponsByShopIdFromOthers(user.id);
 				break;
 			case CouponCatalougeType.User:
 				queryKey = ["get", "user", "coupons"];
-				queryFn = getCoupons;
+				queryFn = getRedemptionsByUserId;
 				break;
 		}
 
@@ -51,7 +55,14 @@ const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) =
 		return <LoadingSpinner />
 	}
 
-	return <CouponBoard coupons={data} type={type} setShowUserTable={setShowUserTable} setSelectedCouponId={setSelectedCouponId} />
+	return (
+		<CouponBoard 
+			coupons={data}
+			type={type}
+			setShowUserTable={setShowUserTable}
+			setSelectedCouponId={setSelectedCouponId}
+		/>
+	)
 }
 
 const CouponCatalogue = ({ type }) => {
@@ -62,17 +73,20 @@ const CouponCatalogue = ({ type }) => {
 
 	const [searchParams] = useSearchParams();
 
-	const [setStartDate, setEndDate, setSelectedCategories, setSearchTerm] = useCouponFiltersStore((state) => [
+	const [
+		setStartDate,
+		setEndDate,
+		setSelectedCategories,
+		setSearchTerm
+	] = useCouponFiltersStore((state) => [
 		state.setStartDate,
 		state.setEndDate,
 		state.setSelectedCategories,
 		state.setSearchTerm,
 	]);
 
-	const updateFiltersFromParamsCallback = useCallback(updateFiltersFromParams, [searchParams]);
-
 	useEffect(() => {
-		updateFiltersFromParamsCallback(searchParams, setStartDate, setEndDate, setSelectedCategories);
+		updateFiltersFromParams(searchParams, setStartDate, setEndDate, setSelectedCategories);
 	}, [searchParams])
 
 	useEffect(() => {
@@ -141,9 +155,13 @@ const CouponCatalogue = ({ type }) => {
 						closeFilterBoard={toggleFilterBoard}
 					/>
 				)}
-
 			</div>
-			<CouponCatalogueBoard type={type} setShowUserTable={setShowUserTable} setSelectedCouponId={setSelectedCouponId} />
+
+			<CouponCatalogueBoard 
+				type={type}
+				setShowUserTable={setShowUserTable}
+				setSelectedCouponId={setSelectedCouponId}
+			/>
 		</>
 	)
 }

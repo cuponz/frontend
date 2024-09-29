@@ -47,6 +47,7 @@ const ContactForm = () => {
             <i className="fab fa-facebook"></i>
           </a>
         </div>
+        {/* Acceptable SVG */}
         <div className="svg-container absolute bottom-0 right-0 pointer-events-none">
           <svg
             width="208"
