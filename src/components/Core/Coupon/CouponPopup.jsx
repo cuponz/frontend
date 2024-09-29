@@ -3,7 +3,8 @@ import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 
 const CouponPopup = ({ coupon, onClose }) => {
-	const redemptionLink = `${window.location.origin}/redeem/${coupon.id}`;
+	console.log(coupon)
+	const redemptionLink = `${window.location.origin}/redeem/${coupon.redemption_id}`;
 
 	const [copied, setCopied] = useState(false);
 

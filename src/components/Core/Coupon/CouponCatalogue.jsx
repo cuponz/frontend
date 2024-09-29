@@ -18,7 +18,7 @@ import { getCoupons, getCouponsByShopIdFromShop, getCouponsByShopIdFromOthers } 
 import { getRedemptionsByUserId } from "../../../api/redemptions";
 import { useUserStore } from "../../../store/user";
 
-const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId, shopId }) => {
+const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) => {
   const user = useUserStore((state) => state.user);
 
 	let [queryKey, queryFn] = useMemo(() => {

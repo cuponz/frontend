@@ -7,12 +7,16 @@ import SearchBarNav from "./SearchBarNav";
 import { CiUser, CiMenuFries, CiSearch } from "react-icons/ci";
 
 import { useUserStore } from "../../../store/user";
-import { useCategoryStore, useIsCategoriesOpenStore } from "../../../store/categories";
+import {
+  useCategoryStore,
+  useIsCategoriesOpenStore,
+} from "../../../store/categories";
 import { getCategories } from "../../../api/category";
 import { getGroups } from "../../../api/group";
 
 import { useQueries } from "@tanstack/react-query";
 import LoadingSpinner from "../../Utils/LoadingSpinner";
+import { UserType } from "../../../constants";
 
 const Navbar = () => {
   const [user, logout] = useUserStore((state) => [state.user, state.logout]);
@@ -21,13 +25,15 @@ const Navbar = () => {
     state.setCategories,
   ]);
 
-  const [isCategoriesOpen, toggleCategoriesOpen] = useIsCategoriesOpenStore((state) => [
-    state.isCategoriesOpen,
-    state.toggleCategoriesOpen,
-  ])
+  const [isCategoriesOpen, toggleCategoriesOpen] = useIsCategoriesOpenStore(
+    (state) => [state.isCategoriesOpen, state.toggleCategoriesOpen]
+  );
 
-  const { isPending, data: [fetchedCategories, groups] } = useQueries({
-		queries: [
+  const {
+    isPending,
+    data: [fetchedCategories, groups],
+  } = useQueries({
+    queries: [
       {
         queryKey: ["categories"],
         queryFn: getCategories,
@@ -44,27 +50,26 @@ const Navbar = () => {
       return {
         data: results.map((result) => result.data),
         isPending: results.some((result) => result.isPending),
-      }
+      };
     },
   });
 
-	useEffect(() => {
-		if (fetchedCategories) {
-			setCategories(fetchedCategories)
-		}
-	}, [isPending])
+  useEffect(() => {
+    if (fetchedCategories) {
+      setCategories(fetchedCategories);
+    }
+  }, [isPending]);
 
   useEffect(() => {
     console.log(user);
-  }, [user])
- 
-  // const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  }, [user]);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev => !prev);
+    setIsMobileMenuOpen((prev) => !prev);
     setIsSearchOpen(false);
   };
 
@@ -123,20 +128,19 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-10 text-[#25354C]">
           {routes.map((route, index) =>
-            route.path
-              ? (
-                <Link to={route.path} key={index}>
-                  <li className="hover:underline cursor-pointer">{route.name}</li>
-                </Link>
-              ) : (
-                <li
-                  key={index}
-                  className="hover:underline relative cursor-pointer"
-                  onClick={route.onClick}
-                >
-                  {route.name}
-                </li>
-              )
+            route.path ? (
+              <Link to={route.path} key={index}>
+                <li className="hover:underline cursor-pointer">{route.name}</li>
+              </Link>
+            ) : (
+              <li
+                key={index}
+                className="hover:underline relative cursor-pointer"
+                onClick={route.onClick}
+              >
+                {route.name}
+              </li>
+            )
           )}
         </ul>
 
@@ -146,7 +150,11 @@ const Navbar = () => {
             <SearchBarNav />
           </div>
 
-					<ShoppingCartIcon />
+          {(!user || user.type === UserType.User) && (
+            <Link to="/cart">
+              <ShoppingCartIcon />
+            </Link>
+          )}
           {user ? (
             <div className="relative">
               <button
@@ -221,32 +229,29 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <ul className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
           {routes.map((route, index) =>
-            route.path
-              ? (
-                <Link to={route.path} key={index} onClick={toggleMobileMenu}>
-                  <li className="hover:underline cursor-pointer">{route.name}</li>
-                </Link>
-              ) : (
-                <li
-                  key={index}
-                  className="hover:underline relative cursor-pointer"
-                  onClick={route.onClick}
-                >
-                  {route.name}
-                </li>
-              )
+            route.path ? (
+              <Link to={route.path} key={index} onClick={toggleMobileMenu}>
+                <li className="hover:underline cursor-pointer">{route.name}</li>
+              </Link>
+            ) : (
+              <li
+                key={index}
+                className="hover:underline relative cursor-pointer"
+                onClick={route.onClick}
+              >
+                {route.name}
+              </li>
+            )
           )}
         </ul>
       )}
 
-      {isCategoriesOpen && (
-        isPending 
-          ? <LoadingSpinner />
-          : <CategoriesMenu
-              groups={groups}
-              categories={categories}
-            />
-      )}
+      {isCategoriesOpen &&
+        (isPending ? (
+          <LoadingSpinner />
+        ) : (
+          <CategoriesMenu groups={groups} categories={categories} />
+        ))}
     </nav>
   );
 };

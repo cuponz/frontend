@@ -12,8 +12,6 @@ import ShopOwnerSetting from "../../Setting";
 
 const UserContent = ({ activeTab }) => {
   switch (activeTab) {
-    case ProfileTab.Coupons:
-      return <UserCoupon type={CouponCatalougeType["User"]} />
     case ProfileTab.Settings:
       return <UserSetting />;
     default:
@@ -49,7 +47,6 @@ const UserProfileMiniNav = () => {
         { id: ProfileTab.Management, label: 'Management' },
         { id: ProfileTab.Setting, label: 'Setting' },
       ] : user.type === UserType.User ? [
-        { id: ProfileTab.Coupons, label: 'Coupons' },
         { id: ProfileTab.Setting, label: 'Setting' },
       ] : [
         { id: ProfileTab.Management, label: 'Management' },

@@ -21,6 +21,8 @@ async function getRedemptionsById(redemptionId) {
 
 async function usingRedemptionById(redemptionId) {
   return apiRequest(`/api/redemption/${redemptionId}/state`, {
+    method: "PUT",
+    body: JSON.stringify({ state: RedemptionState.Used }),
     errorMessage: "Updating Redemption Failed",
   })
 }
