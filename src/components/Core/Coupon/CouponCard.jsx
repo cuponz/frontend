@@ -60,13 +60,10 @@ const CouponCard = ({
     redemption_state: redemptionState,
   } = coupon;
 
-  console.log(coupon)
-
   keywords = keywords.split(",");
 
   startDate = (new Date(startDate)).toLocaleDateString();
   endDate = (new Date(endDate)).toLocaleDateString();
-
 
   const handleClose = () => {
     setModalType(null);
