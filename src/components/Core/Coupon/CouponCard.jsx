@@ -1,16 +1,16 @@
 import { CouponCardModalType, CouponCatalougeType, RedemptionState } from "../../../constants";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import CouponPopup from "./CouponPopup";
 import InfoField from "./InfoField";
 
-const CouponCardActionButton = ({ type, onAction, isUsed = false }) => {
+const CouponCardActionButton = ({ type, onAction, isRedeemed = false, isUsed = false }) => {
   let text;
 
   switch (type) {
     case CouponCatalougeType.All:
     case CouponCatalougeType.ShopList:
-      text = "Redeem Now";
+      text = isRedeemed ? "Redeemed" : "Redeem Now";
       break;
     case CouponCatalougeType.ShopManage:
       text = "Show Details";
@@ -24,8 +24,8 @@ const CouponCardActionButton = ({ type, onAction, isUsed = false }) => {
     <div className="mt-auto">
       <button
         onClick={onAction}
-        disabled={isUsed}
-        className={`px-4 py-2 rounded-md w-full text-white ${isUsed
+        disabled={isUsed || isRedeemed}
+        className={`px-4 py-2 rounded-md w-full text-white ${isUsed || isRedeemed
             ? "bg-gray-400 cursor-not-allowed"
             : "bg-[#46467A] hover:bg-green-700"
           }`}
@@ -57,13 +57,16 @@ const CouponCard = ({
     usage_count: usageCount,
     redeemed_count: numUsers,
     state,
+    redemption_state: redemptionState,
   } = coupon;
 
+  console.log(coupon)
 
   keywords = keywords.split(",");
 
   startDate = (new Date(startDate)).toLocaleDateString();
   endDate = (new Date(endDate)).toLocaleDateString();
+
 
   const handleClose = () => {
     setModalType(null);
@@ -131,12 +134,13 @@ const CouponCard = ({
         <InfoField
           onClose={handleClose}
           coupon={coupon}
-          onRedeem={() => setModalType(CouponCardModalType.PopUp)}
+          onRedeem={() => setModalType(null)}
         />
       )}
 
-      {modalType === CouponCardModalType.PopUp &&
-        <CouponPopup coupon={coupon} onClose={handleClose} />}
+      {modalType === CouponCardModalType.PopUp && (
+        <CouponPopup coupon={coupon} onClose={handleClose} />
+      )}
     </div>
   );
 };

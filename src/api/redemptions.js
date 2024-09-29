@@ -25,7 +25,7 @@ async function usingRedemptionById(redemptionId) {
   })
 }
 
-export async function redeemCoupon(userInfo) {
+async function redeemCoupon(userInfo) {
   return apiRequest(`/api/redemption`, {
     method: "POST",
     body: JSON.stringify(userInfo),

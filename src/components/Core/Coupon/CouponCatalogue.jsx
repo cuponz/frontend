@@ -55,7 +55,14 @@ const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId, sho
 		return <LoadingSpinner />
 	}
 
-	return <CouponBoard coupons={data} type={type} setShowUserTable={setShowUserTable} setSelectedCouponId={setSelectedCouponId} />
+	return (
+		<CouponBoard 
+			coupons={data}
+			type={type}
+			setShowUserTable={setShowUserTable}
+			setSelectedCouponId={setSelectedCouponId}
+		/>
+	)
 }
 
 const CouponCatalogue = ({ type }) => {
@@ -66,17 +73,20 @@ const CouponCatalogue = ({ type }) => {
 
 	const [searchParams] = useSearchParams();
 
-	const [setStartDate, setEndDate, setSelectedCategories, setSearchTerm] = useCouponFiltersStore((state) => [
+	const [
+		setStartDate,
+		setEndDate,
+		setSelectedCategories,
+		setSearchTerm
+	] = useCouponFiltersStore((state) => [
 		state.setStartDate,
 		state.setEndDate,
 		state.setSelectedCategories,
 		state.setSearchTerm,
 	]);
 
-	const updateFiltersFromParamsCallback = useCallback(updateFiltersFromParams, [searchParams]);
-
 	useEffect(() => {
-		updateFiltersFromParamsCallback(searchParams, setStartDate, setEndDate, setSelectedCategories);
+		updateFiltersFromParams(searchParams, setStartDate, setEndDate, setSelectedCategories);
 	}, [searchParams])
 
 	useEffect(() => {
@@ -145,9 +155,13 @@ const CouponCatalogue = ({ type }) => {
 						closeFilterBoard={toggleFilterBoard}
 					/>
 				)}
-
 			</div>
-			<CouponCatalogueBoard type={type} setShowUserTable={setShowUserTable} setSelectedCouponId={setSelectedCouponId} />
+
+			<CouponCatalogueBoard 
+				type={type}
+				setShowUserTable={setShowUserTable}
+				setSelectedCouponId={setSelectedCouponId}
+			/>
 		</>
 	)
 }

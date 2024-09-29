@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import logo from "../../../assets/logo.png";
-import profilePic from "../../../assets/userIcon.png";
 import CategoriesMenu from "./CategoriesMenu";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import SearchBarNav from "./SearchBarNav";
-import { CiUser } from "react-icons/ci";
-import { CiMenuFries } from "react-icons/ci";
-import { CiSearch } from "react-icons/ci";
+import { CiUser, CiMenuFries, CiSearch } from "react-icons/ci";
 
 import { useUserStore } from "../../../store/user";
 import { useCategoryStore, useIsCategoriesOpenStore } from "../../../store/categories";
 import { getCategories } from "../../../api/category";
-import getGroups from "../../../api/group";
+import { getGroups } from "../../../api/group";
 
 import { useQueries } from "@tanstack/react-query";
 import LoadingSpinner from "../../Utils/LoadingSpinner";
