@@ -10,7 +10,7 @@ const CouponPage = () => {
           <Banner message="Discover the Best Deals Today!" />
           <title>Discover Local Deals</title>
 
-          <CouponCatalogue type={CouponCatalougeType["All"]} />
+          <CouponCatalogue type={CouponCatalougeType.All} />
         </div>
       </div>
     </>

@@ -9,10 +9,14 @@ import PaginationContainer from "../../Wrapper/PaginationContainer";
 const CouponBoard = ({ isPending, coupons = [], type, setShowUserTable, setSelectedCouponId }) => {
   const appliedFilters = useCouponFiltersStore((state) => state.appliedFilters);
 
-  const fuse = useMemo(() => new Fuse(coupons, {
-    keys: ["title", "desc", "keywords", "shop_name"],
-    threshold: 0.3,
-  }), [coupons]);
+  const fuse = useMemo(
+    () =>
+      new Fuse(coupons, {
+        keys: ["title", "desc", "keywords", "shop_name"],
+        threshold: 0.3,
+      }),
+    [coupons]
+  );
 
 	const filteredCoupons = useMemo(() => {
 		let filtered = coupons;
@@ -34,17 +38,17 @@ const CouponBoard = ({ isPending, coupons = [], type, setShowUserTable, setSelec
 				return false;
 			}
 			if (startDate && coupon.start_date < startDate) {
-				return false
+				return false;
 			}
 			if (endDate && coupon.end_date > endDate) {
-				return false
+				return false;
 			}
 
 			return true;
 		});
 
 		return filtered;
-	}, [appliedFilters, fuse]);
+	}, [appliedFilters, fuse, coupons]);
 
   const handleShowStats = (couponId) => {
     setSelectedCouponId(couponId);

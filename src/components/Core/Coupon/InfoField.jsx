@@ -1,12 +1,37 @@
 import { useState } from "react";
 import { CouponRequirementType } from "../../../constants";
+import { useMutation } from "@tanstack/react-query";
+import { redeemCoupon } from "../../../api/redemptions";
+import { toast } from "react-toastify";
+import { useUserStore } from "../../../store/user";
 
 const InfoField = ({ onClose, coupon, onRedeem }) => {
-  const [formData, setFormData] = useState({ email: "", phone: "" });
-  const [errors, setErrors] = useState({ email: false, phone: false });
+  const [formData, setFormData] = useState({
+    email: "",
+    phone: "",
+  });
+  const [errors, setErrors] = useState({
+    email: false,
+    phone: false,
+  });
 
-  const showEmailField = coupon.requirement_type !== CouponRequirementType.PhoneNumber;
-  const showPhoneField = coupon.requirement_type !== CouponRequirementType.Email;
+  const user = useUserStore((state) => state.user);
+
+  const infoMutation = useMutation({
+    mutationKey: ["login"],
+    mutationFn: redeemCoupon,
+    onSuccess: (_) => {
+      toast.success("Redeem successful!");
+    },
+    onError: (err) => {
+      toast.error(`Redeem failed. ${err.message}`);
+    },
+  });
+
+  const showEmailField =
+    coupon.requirement_type !== CouponRequirementType.PhoneNumber;
+  const showPhoneField =
+    coupon.requirement_type !== CouponRequirementType.Email;
 
   const isEmailRequired =
     coupon.requirement_type === CouponRequirementType.Email ||
@@ -18,8 +43,6 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 
   const isEmailOrPhoneRequired =
     coupon.requirement_type === CouponRequirementType.EmailOrPhone;
-
-  const phoneRegex = /^\d{10,15}$/;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,8 +62,10 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
       toast.error("Phone number is required.");
     }
 
-    if (isEmailOrPhoneRequired &&
-      (!formData.email && !formData.phone) || (formData.email.length === 0 && formData.phone.length === 0)) {
+    if (
+      (isEmailOrPhoneRequired && !formData.email && !formData.phone) ||
+      (formData.email.length === 0 && formData.phone.length === 0)
+    ) {
       newErrors.email = true;
       newErrors.phone = true;
       hasError = true;
@@ -54,6 +79,12 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
     }
 
     console.log("Redeeming with:", formData);
+    infoMutation.mutate({
+      user_id: user ? user.id : undefined,
+      coupon_id: coupon.id,
+      user_email: formData.email.length > 0 ? formData.email : undefined,
+      user_phone: formData.phone.length > 0 ? formData.phone : undefined,
+    });
     onRedeem();
   };
 
@@ -62,7 +93,6 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
     setFormData({ ...formData, [name]: value });
     setErrors({ ...errors, [name]: false });
   };
-
 
   const handleClose = () => {
     setFormData({ email: "", phone: "" });
@@ -107,8 +137,9 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
             <input
               type="email"
               name="email"
-              className={`w-full p-2 border ${errors.email ? "border-red-500" : "border-gray-300"
-                } rounded mb-4`}
+              className={`w-full p-2 border ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              } rounded mb-4`}
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
@@ -119,8 +150,9 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
             <input
               type="tel"
               name="phone"
-              className={`w-full p-2 border ${errors.phone ? "border-red-500" : "border-gray-300"
-                } rounded mb-4`}
+              className={`w-full p-2 border ${
+                errors.phone ? "border-red-500" : "border-gray-300"
+              } rounded mb-4`}
               placeholder="Phone Number"
               pattern="\d{10,15}"
               value={formData.phone}

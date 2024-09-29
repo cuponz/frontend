@@ -1,17 +1,18 @@
-import AuthWrapper from "./components/Wrapper/AuthWrapper.jsx";
+import AuthWrapper from "./components/Wrapper/AuthWrapper";
 
-import HomePage from "./pages/HomePage.jsx";
-import ContactUs from "./pages/ContactUs.jsx";
+import HomePage from "./pages/HomePage";
+import ContactUs from "./pages/ContactUs";
 import "./index.css";
 
-import ErrorPage from "./pages/ErrorPage.jsx";
-import AboutUs from "./pages/AboutUs.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
-import CouponPage from "./pages/CouponPage.jsx";
-import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage.jsx";
-import UserProfile from "./pages/UserProfile.jsx";
-import Noti from "./pages/RedeemResult.jsx";
+import ErrorPage from "./pages/ErrorPage";
+import AboutUs from "./pages/AboutUs";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import CouponPage from "./pages/CouponPage";
+import ShopOwnerProfilePage from "./pages/ShopOwnerProfilePage";
+import UserProfile from "./pages/UserProfile";
+import Noti from "./pages/RedeemResult";
+import ShoppingCart from "./pages/ShoppingCart";
 
 const routes = [
   {
@@ -34,6 +35,10 @@ const routes = [
       {
         path: "/coupon",
         element: <CouponPage />,
+      },
+      {
+        path: "/cart",
+        element: <ShoppingCart />,
       },
     ]
   },

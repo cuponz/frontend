@@ -3,12 +3,14 @@ import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 
 const CouponPopup = ({ coupon, onClose }) => {
-	const redemptionLink = `${window.location.origin}/redeem/${coupon.id}`;
+	console.log(coupon)
+	const redemptionLink = `${window.location.origin}/redeem/${coupon.redemption_id}`;
 
 	const [copied, setCopied] = useState(false);
 
 	const handleCopy = () => {
-		navigator.clipboard.writeText(coupon.code)
+		navigator.clipboard
+			.writeText(coupon.code)
 			.then(() => {
 				setCopied(true);
 				setTimeout(() => setCopied(false), 2000);
@@ -18,9 +20,11 @@ const CouponPopup = ({ coupon, onClose }) => {
 			});
 	};
 
-	const date = new Date(coupon.end_date);
-	const options = { day: 'numeric', month: 'short', year: 'numeric' };
-	const formattedDate = date.toLocaleDateString('en-AU', options);
+  const formattedDate = (new Date(coupon.end_date)).toLocaleDateString("en-AU", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 
 	return (
 		<div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

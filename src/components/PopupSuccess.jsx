@@ -3,10 +3,9 @@ import { usingRedemptionById } from "../api/redemptions";
 import LoadingSpinner from "./Utils/LoadingSpinner";
 
 const PopupSuccess = ({ redeem }) => {
-  console.log(redeem)
   const { isPending, data } = useQuery({
-		queryKey: ["redemptions", "using", redeem.id],
-		queryFn: () => usingRedemptionById(redeem.id),
+		queryKey: ["redemptions", "using", redeem.redemption_id],
+		queryFn: () => usingRedemptionById(redeem.redemption_id),
 		retry: false,
   });
 
@@ -40,19 +39,19 @@ const PopupSuccess = ({ redeem }) => {
         </h2>
         <div className="mt-6">
           <h3 className="text-lg font-semibold text-center">
-            {data.coupon_title}
+            {data.title}
           </h3>
           <div className="mt-2">
             <p>
               <span className="font-semibold">Category:</span>{" "}
-              {data.coupon_category}
+              {data.category}
             </p>
             <p>
               <span className="font-semibold">Shop:</span> {data.shop}
             </p>
             <p>
               <span className="font-semibold">Redeem Code:</span>{" "}
-              {data.coupon_code}
+              {data.code}
             </p>
           </div>
         </div>

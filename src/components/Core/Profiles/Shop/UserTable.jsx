@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../Utils/LoadingSpinner";
 import DataTable from "../../../Wrapper/DataTable";
 import { RedemptionState } from "../../../../constants";
-import { useEffect } from "react";
 import { useMemo } from "react";
 
 const UserTable = ({ couponId, onBack }) => {
@@ -15,8 +14,8 @@ const UserTable = ({ couponId, onBack }) => {
 
   const columns = [
     { header: 'Username', accessor: 'user_name' },
-    { header: 'Email', accessor: 'email' },
-    { header: 'Phone Number', accessor: 'phone_number' },
+    { header: 'Email', accessor: 'user_email' },
+    { header: 'Phone Number', accessor: 'user_phone' },
     { header: 'Redeem State', accessor: 'redeem_state' },
   ];
 
