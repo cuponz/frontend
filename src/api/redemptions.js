@@ -1,100 +1,36 @@
 import { RedemptionState } from "../constants";
+import { apiRequest } from "./base";
 
 async function getRedemptionsByCouponId(couponId) {
-	const base = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
-  const res = await fetch(`${base}/api/redemption/coupon/${couponId}`, {
-		credentials: process.env.NODE_ENV === "development" ? "include" : "same-origin",
-	});
-
-  let data;
-  try {
-    data = await res.json();
-  } catch(e) {
-    data = undefined;
-  }
-
-  if (!res.ok) {
-    if (data) {
-      throw new Error(data.msg || data.error);
-    } 
-    throw new Error("Getting Redemptions Failed");
-  }
-
-	return data;
+  return apiRequest(`/api/redemption/coupon/${couponId}`, {
+    errorMessage: "Getting Redemptions Failed",
+  })
 }
 
 async function getRedemptionsByUserId() {
-	const base = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
-  const res = await fetch(`${base}/api/redemption/user`, {
-		credentials: process.env.NODE_ENV === "development" ? "include" : "same-origin",
-	});
-
-  let data;
-  try {
-    data = await res.json();
-  } catch(e) {
-    data = undefined;
-  }
-
-  if (!res.ok) {
-    if (data) {
-      throw new Error(data.msg || data.error);
-    } 
-    throw new Error("Getting Redemptions Failed");
-  }
-
-	return data;
+  return apiRequest(`/api/redemption/user`, {
+    errorMessage: "Getting Redemptions Failed",
+  })
 }
 
 async function getRedemptionsById(redemptionId) {
-	const base = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
-  const res = await fetch(`${base}/api/redemption/${redemptionId}`, {
-		credentials: process.env.NODE_ENV === "development" ? "include" : "same-origin",
-	});
-
-  let data;
-  try {
-    data = await res.json();
-  } catch(e) {
-    data = undefined;
-  }
-
-  if (!res.ok) {
-    if (data) {
-      throw new Error(data.msg || data.error);
-    } 
-    throw new Error("Getting Redemption Failed");
-  }
-
-	return data;
+  return apiRequest(`/api/redemption/${redemptionId}`, {
+    errorMessage: "Getting Redemption Failed",
+  })
 }
 
 async function usingRedemptionById(redemptionId) {
-	const base = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
-  const res = await fetch(`${base}/api/redemption/${redemptionId}/state`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ state: RedemptionState.Used }),
-		credentials: process.env.NODE_ENV === "development" ? "include" : "same-origin",
-	});
+  return apiRequest(`/api/redemption/${redemptionId}/state`, {
+    errorMessage: "Updating Redemption Failed",
+  })
+}
 
-  let data;
-  try {
-    data = await res.json();
-  } catch(e) {
-    data = undefined;
-  }
-
-  if (!res.ok) {
-    if (data) {
-      throw new Error(data.msg || data.error);
-    } 
-    throw new Error("Upading Redemption Failed");
-  }
-
-	return data;
+export async function redeemCoupon(userInfo) {
+  return apiRequest(`/api/redemption`, {
+    method: "POST",
+    body: JSON.stringify(userInfo),
+    errorMessage: "Creating Redemption Failed",
+  })
 }
 
 export {
@@ -102,4 +38,5 @@ export {
 	getRedemptionsByUserId,
 	getRedemptionsById,
 	usingRedemptionById,
+  redeemCoupon,
 }
