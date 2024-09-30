@@ -1,45 +1,107 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import PopupThankYou from "../components/PopupThankYou";
+import { CouponRequirementType } from "../constants";
+import { useCategoryStore } from "../store/categories";
+
+const userInfoOptions = {
+  Email: "Email",
+  PhoneNumber: "Phone Number",
+  EmailOrPhoneNumber: "Email or Phone Number",
+  EmailAndPhoneNumber: "Email and Phone Number",
+};
 
 const PopupCreateCoupon = ({ isOpen, onClose, onSubmit }) => {
-  const [category, setCategory] = useState("");
-  const [couponName, setCouponName] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [images, setImages] = useState([]);
-  const [description, setDescription] = useState("");
-  const [userInfoRequired, setUserInfoRequired] = useState("phone");
+  const [formData, setFormData] = useState({
+    category: "",
+    couponName: "",
+    startDate: "",
+    endDate: "",
+    image: null,
+    description: "",
+    userInfoRequired: CouponRequirementType.Email,
+  });
   const [showThankYou, setShowThankYou] = useState(false);
+  const categories = useCategoryStore((state) => state.categories);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({
-      category,
-      couponName,
-      startDate,
-      endDate,
-      images,
-      description,
-      userInfoRequired,
-    });
-    setShowThankYou(true);
-  };
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
-  const handleCloseThankYou = () => {
+  const handleImageUpload = useCallback((e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({ ...prev, image: file }));
+    }
+  }, []);
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!formData.image) {
+        alert("Please upload an image for the coupon.");
+        return;
+      }
+      console.log(formData);
+      onSubmit(formData);
+      setShowThankYou(true);
+    },
+    [formData, onSubmit]
+  );
+
+  const handleCloseThankYou = useCallback(() => {
     setShowThankYou(false);
     onClose();
-  };
+  }, [onClose]);
 
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    setImages((prevImages) => [...prevImages, ...files]);
-  };
+  const renderInput = useCallback(
+    ({ label, name, type = "text", ...rest }) => (
+      <div className="sm:col-span-2 md:col-span-1">
+        <label className="block text-sm font-medium text-gray-700">
+          {label}
+        </label>
+        <input
+          type={type}
+          name={name}
+          value={formData[name]}
+          onChange={handleChange}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+          required
+          {...rest}
+        />
+      </div>
+    ),
+    [formData, handleChange]
+  );
+
+  const renderSelect = useMemo(
+    () => (
+      <div className="sm:col-span-2 md:col-span-1">
+        <label className="block text-sm font-medium text-gray-700">
+          Category
+        </label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+          required
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    ),
+    [categories, formData.category, handleChange]
+  );
 
   if (!isOpen) return null;
-
-  if (showThankYou) {
+  if (showThankYou)
     return <PopupThankYou isOpen={true} onClose={handleCloseThankYou} />;
-  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4">
@@ -55,79 +117,40 @@ const PopupCreateCoupon = ({ isOpen, onClose, onSubmit }) => {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <div className="sm:col-span-2 md:col-span-1">
-              <label className="block text-sm font-medium text-gray-700">
-                Category
-              </label>
-              <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
-              />
-            </div>
-            <div className="sm:col-span-2 md:col-span-1">
-              <label className="block text-sm font-medium text-gray-700">
-                Coupon Name
-              </label>
-              <input
-                type="text"
-                value={couponName}
-                onChange={(e) => setCouponName(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
-              />
-            </div>
-            <div className="sm:col-span-2 md:col-span-1">
-              <label className="block text-sm font-medium text-gray-700">
-                Start Date
-              </label>
-              <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
-              />
-            </div>
-            <div className="sm:col-span-2 md:col-span-1">
-              <label className="block text-sm font-medium text-gray-700">
-                End Date
-              </label>
-              <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
-              />
-            </div>
+            {renderSelect}
+            {renderInput({ label: "Coupon Name", name: "couponName" })}
+            {renderInput({
+              label: "Start Date",
+              name: "startDate",
+              type: "date",
+            })}
+            {renderInput({ label: "End Date", name: "endDate", type: "date" })}
           </div>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
-              Images
+              Coupon Image
             </label>
             <div className="mt-1 flex items-center">
+              <input
+                id="image-upload"
+                type="file"
+                onChange={handleImageUpload}
+                className="hidden"
+                accept="image/*"
+                required
+              />
               <button
                 type="button"
                 onClick={() => document.getElementById("image-upload").click()}
                 className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 transition duration-200"
               >
-                Upload Images
+                {formData.image ? "Change Image" : "Upload Image"}
               </button>
-              <input
-                id="image-upload"
-                type="file"
-                multiple
-                onChange={handleImageUpload}
-                className="hidden"
-                accept="image/*"
-              />
-              <span className="ml-3 text-sm text-gray-600">
-                {images.length} {images.length === 1 ? "image" : "images"}{" "}
-                selected
-              </span>
+              {formData.image && (
+                <span className="ml-3 text-sm text-gray-600">
+                  {formData.image.name}
+                </span>
+              )}
             </div>
           </div>
           <div className="mb-4">
@@ -135,8 +158,9 @@ const PopupCreateCoupon = ({ isOpen, onClose, onSubmit }) => {
               Description
             </label>
             <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
               rows="3"
               placeholder="Write your message.."
@@ -147,26 +171,21 @@ const PopupCreateCoupon = ({ isOpen, onClose, onSubmit }) => {
               User Information Required
             </label>
             <div className="mt-2 space-x-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  value="phone"
-                  checked={userInfoRequired === "phone"}
-                  onChange={() => setUserInfoRequired("phone")}
-                  className="form-radio"
-                />
-                <span className="ml-2">Phone number</span>
-              </label>
-              <label className="inline-flex items-center">
-                <input
-                  type="radio"
-                  value="email"
-                  checked={userInfoRequired === "email"}
-                  onChange={() => setUserInfoRequired("email")}
-                  className="form-radio"
-                />
-                <span className="ml-2">Email</span>
-              </label>
+              {Object.entries(userInfoOptions).map(([key, value]) => (
+                <label key={key} className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="userInfoRequired"
+                    value={CouponRequirementType[key]}
+                    checked={
+                      formData.userInfoRequired === CouponRequirementType[key]
+                    }
+                    onChange={handleChange}
+                    className="form-radio"
+                  />
+                  <span className="ml-2">{value}</span>
+                </label>
+              ))}
             </div>
           </div>
           <button

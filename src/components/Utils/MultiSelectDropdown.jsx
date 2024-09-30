@@ -1,4 +1,7 @@
 import Select from "react-select";
+import makeAnimated from "react-select/animated";
+
+const animatedComponents = makeAnimated();
 
 const MultiSelectDropdown = ({
   label,
@@ -22,6 +25,7 @@ const MultiSelectDropdown = ({
           .filter((option) => selectedOptions.includes(option))
           .map((value) => ({ label: value, value }))}
         onChange={handleChange}
+        components={animatedComponents}
         className="basic-multi-select"
         classNamePrefix="select"
       />
