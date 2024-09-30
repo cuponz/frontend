@@ -5,10 +5,8 @@ import Layout from "../layout/layout";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
-
-import { useUserStore } from "../store/user";
-
 import { userLogin } from "../api/user";
+import TogglePassword from "../components/Utils/TogglePassword";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -22,19 +20,17 @@ const LoginPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const loginMutation = useMutation(
-    {
-      mutationKey: ["login"],
-      mutationFn: userLogin,
-      onSuccess: (_) => {
-        toast.success("Login successful!");
-        navigate("/");
-      },
-      onError: (err) => {
-        toast.error(`Login failed. ${err.message}`);
-      },
-    }
-  );
+  const loginMutation = useMutation({
+    mutationKey: ["login"],
+    mutationFn: userLogin,
+    onSuccess: () => {
+      toast.success("Login successful!");
+      navigate("/");
+    },
+    onError: (err) => {
+      toast.error(`Login failed. ${err.message}`);
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +65,7 @@ const LoginPage = () => {
                 />
               </div>
               <div className="mb-6 lg:mb-8">
-                <input
+                <TogglePassword
                   type="password"
                   name="password"
                   value={formData.password}

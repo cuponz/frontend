@@ -1,5 +1,5 @@
-import { create } from 'zustand'
-import { userLogout } from '../api/user';
+import { create } from "zustand";
+import { userLogout } from "../api/user";
 
 export const useUserStore = create((set) => ({
   user: null,
@@ -8,8 +8,9 @@ export const useUserStore = create((set) => ({
     try {
       await userLogout();
     } catch (err) {
+      console.log(err);
     }
 
-    set({ user: null })
+    set({ user: null });
   },
 }));
