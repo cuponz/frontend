@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { CouponRequirementType } from "../../../constants";
+import { CouponRequirementType, CountryListWithCode } from "../../../constants";
 import { useMutation } from "@tanstack/react-query";
 import { redeemCoupon } from "../../../api/redemptions";
 import { toast } from "react-toastify";
 import { useUserStore } from "../../../store/user";
+import {
+  parsePhoneNumberFromString,
+  isValidPhoneNumber,
+} from "libphonenumber-js";
+import validator from "validator";
 
 const InfoField = ({ onClose, coupon, onRedeem }) => {
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
+    region: "AU",
   });
   const [errors, setErrors] = useState({
     email: false,
@@ -20,11 +26,13 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
   const infoMutation = useMutation({
     mutationKey: ["login"],
     mutationFn: redeemCoupon,
-    onSuccess: (_) => {
+    onSuccess: () => {
       toast.success("Redeem successful!");
+      onRedeem();
     },
     onError: (err) => {
-      toast.error(`Redeem failed. ${err.message}`);
+      console.error("Redemption error:", err);
+      toast.error(`Redeem failed. ${err.message || "Please try again."}`);
     },
   });
 
@@ -33,39 +41,53 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
   const showPhoneField =
     coupon.requirement_type !== CouponRequirementType.Email;
 
-  const isEmailRequired =
-    coupon.requirement_type === CouponRequirementType.Email ||
-    coupon.requirement_type === CouponRequirementType.EmailAndPhone;
-
-  const isPhoneRequired =
-    coupon.requirement_type === CouponRequirementType.PhoneNumber ||
-    coupon.requirement_type === CouponRequirementType.EmailAndPhone;
-
+  const isEmailRequired = [
+    CouponRequirementType.Email,
+    CouponRequirementType.EmailAndPhone,
+  ].includes(coupon.requirement_type);
+  const isPhoneRequired = [
+    CouponRequirementType.PhoneNumber,
+    CouponRequirementType.EmailAndPhone,
+  ].includes(coupon.requirement_type);
   const isEmailOrPhoneRequired =
     coupon.requirement_type === CouponRequirementType.EmailOrPhone;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const formatPhoneNumber = (phone, region) => {
+    try {
+      const parsedPhone = parsePhoneNumberFromString(phone, region);
+      return parsedPhone && parsedPhone.isValid()
+        ? parsedPhone.format("E.164")
+        : null;
+    } catch (error) {
+      console.error("Phone parsing error:", error);
+      return null;
+    }
+  };
 
-    let hasError = false;
+  const validateForm = () => {
     const newErrors = { email: false, phone: false };
-
-    if (isEmailRequired && (!formData.email || formData.email.length === 0)) {
-      newErrors.email = true;
-      hasError = true;
-      toast.error("Email is required.");
-    }
-
-    if (isPhoneRequired && (!formData.phone || formData.phone.length === 0)) {
-      newErrors.phone = true;
-      hasError = true;
-      toast.error("Phone number is required.");
-    }
+    let hasError = false;
 
     if (
-      (isEmailOrPhoneRequired && !formData.email && !formData.phone) ||
-      (formData.email.length === 0 && formData.phone.length === 0)
+      showEmailField &&
+      isEmailRequired &&
+      (!formData.email || !validator.isEmail(formData.email))
     ) {
+      newErrors.email = true;
+      hasError = true;
+      toast.error("Invalid email format.");
+    }
+
+    if (showPhoneField && isPhoneRequired) {
+      const isValidPhone = isValidPhoneNumber(formData.phone, formData.region);
+      if (!isValidPhone) {
+        newErrors.phone = true;
+        hasError = true;
+        toast.error("Invalid phone number format.");
+      }
+    }
+
+    if (isEmailOrPhoneRequired && !formData.email && !formData.phone) {
       newErrors.email = true;
       newErrors.phone = true;
       hasError = true;
@@ -73,19 +95,30 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
     }
 
     setErrors(newErrors);
+    return !hasError;
+  };
 
-    if (hasError) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
       return;
     }
 
-    console.log("Redeeming with:", formData);
-    infoMutation.mutate({
-      user_id: user ? user.id : undefined,
+    const formattedPhone = formData.phone
+      ? formatPhoneNumber(formData.phone, formData.region)
+      : undefined;
+
+    const payload = {
       coupon_id: coupon.id,
-      user_email: formData.email.length > 0 ? formData.email : undefined,
-      user_phone: formData.phone.length > 0 ? formData.phone : undefined,
-    });
-    onRedeem();
+      user_id: user?.id,
+      user_email: formData.email || undefined,
+      user_phone: formattedPhone || undefined,
+    };
+
+    console.log("Submitting payload:", payload); // For debugging
+
+    infoMutation.mutate(payload);
   };
 
   const handleChange = (e) => {
@@ -95,25 +128,10 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
   };
 
   const handleClose = () => {
-    setFormData({ email: "", phone: "" });
+    setFormData({ email: "", phone: "", region: "AU" });
     setErrors({ email: false, phone: false });
     onClose();
   };
-
-  const guidanceMessage = (() => {
-    switch (coupon.requirement_type) {
-      case CouponRequirementType.Email:
-        return "Please enter your email to redeem the coupon.";
-      case CouponRequirementType.PhoneNumber:
-        return "Please enter your phone number to redeem the coupon.";
-      case CouponRequirementType.EmailOrPhoneNumber:
-        return "Please enter your email or phone number to redeem the coupon.";
-      case CouponRequirementType.EmailAndPhoneNumber:
-        return "Please enter both your email and phone number to redeem the coupon.";
-      default:
-        return "Please enter your details to redeem the coupon.";
-    }
-  })();
 
   return (
     <div
@@ -130,7 +148,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
           &times;
         </button>
         <h2 className="text-xl font-semibold mb-4 text-center">
-          {guidanceMessage}
+          Please enter your details to redeem the coupon.
         </h2>
         <form onSubmit={handleSubmit}>
           {showEmailField && (
@@ -147,25 +165,39 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
             />
           )}
           {showPhoneField && (
-            <input
-              type="tel"
-              name="phone"
-              className={`w-full p-2 border ${
-                errors.phone ? "border-red-500" : "border-gray-300"
-              } rounded mb-4`}
-              placeholder="Phone Number"
-              pattern="\d{10,15}"
-              value={formData.phone}
-              onChange={handleChange}
-              required={isPhoneRequired}
-            />
+            <>
+              <select
+                name="region"
+                value={formData.region}
+                onChange={handleChange}
+                className="w-full p-2 border mb-4"
+              >
+                {CountryListWithCode.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.name} ({country.callingCode})
+                  </option>
+                ))}
+              </select>
+              <input
+                type="tel"
+                name="phone"
+                className={`w-full p-2 border ${
+                  errors.phone ? "border-red-500" : "border-gray-300"
+                } rounded mb-4`}
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={handleChange}
+                required={isPhoneRequired}
+              />
+            </>
           )}
           <div className="flex justify-between gap-4">
             <button
               type="submit"
               className="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition duration-200"
+              disabled={infoMutation.isLoading}
             >
-              Redeem code
+              {infoMutation.isLoading ? "Redeeming..." : "Redeem code"}
             </button>
           </div>
         </form>
