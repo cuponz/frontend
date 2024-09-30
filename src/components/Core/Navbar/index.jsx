@@ -60,10 +60,6 @@ const Navbar = () => {
     }
   }, [isPending]);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -90,43 +86,30 @@ const Navbar = () => {
   };
 
   const routes = [
-    {
-      path: "/",
-      name: "Home",
-    },
-    {
-      path: "/coupon",
-      name: "Coupons",
-    },
-    {
-      path: undefined,
-      name: "Categories",
-      onClick: toggleCategoriesOpen,
-    },
-    {
-      path: "/aboutus",
-      name: "About Us",
-    },
-    {
-      path: "/contactus",
-      name: "Contact Us",
-    },
+    { path: "/", name: "Home" },
+    { path: "/coupon", name: "Coupons" },
+    { path: undefined, name: "Categories", onClick: toggleCategoriesOpen },
+    { path: "/aboutus", name: "About Us" },
+    { path: "/contactus", name: "Contact Us" },
   ];
 
   return (
     <nav className="bg-[#E9E7F9] p-4 z-50">
-      <div className="container mx-auto flex flex-wrap justify-between items-center relative">
+      <div className="container mx-auto flex justify-between items-center relative">
         {/* Logo Section */}
         <div className="flex items-center">
-          <img
-            src={logo}
-            alt="CouponZ Logo"
-            className="h-5 w-auto md:h-8 lg:h-10 mr-4"
-          />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="CuponZ Logo"
+              className="h-8 w-auto sm:h-10 mr-4"
+            />
+            <span className="text-xl font-semibold hidden sm:inline"></span>
+          </Link>
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-10 text-[#25354C]">
+        <ul className="hidden lg:flex space-x-6 text-[#25354C]">
           {routes.map((route, index) =>
             route.path ? (
               <Link to={route.path} key={index}>
@@ -144,17 +127,29 @@ const Navbar = () => {
           )}
         </ul>
 
-        {/* Search, User Section and Login/Logout Button */}
-        <div className="flex items-center space-x-4 ml-2">
-          <div className="hidden md:block">
+        {/* Right-aligned items */}
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          {/* Search Bar (hidden on mobile) */}
+          <div className="hidden sm:block w-48 lg:w-64">
             <SearchBarNav />
           </div>
 
+          {/* Mobile Search Icon */}
+          <button
+            onClick={toggleSearch}
+            className="p-2 rounded-full hover:bg-gray-200 transition-colors duration-200 focus:outline-none sm:hidden"
+          >
+            <CiSearch className="text-2xl" />
+          </button>
+
+          {/* Shopping Cart Icon */}
           {(!user || user.type === UserType.User) && (
             <Link to="/cart">
               <ShoppingCartIcon />
             </Link>
           )}
+
+          {/* User Profile / Login Button */}
           {user ? (
             <div className="relative">
               <button
@@ -162,7 +157,7 @@ const Navbar = () => {
                 className="focus:outline-none"
               >
                 <div className="group relative p-2 flex items-center justify-center">
-                  <CiUser className="text-3xl" />
+                  <CiUser className="text-2xl sm:text-3xl" />
                   <span className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-gray-900 transition-all duration-300"></span>
                 </div>
               </button>
@@ -193,41 +188,33 @@ const Navbar = () => {
             <Link to="/login">
               <button
                 onClick={handleLoginLogout}
-                className="bg-[#FFC212] text-black px-4 py-2 rounded-full hover:bg-purple-300 mr-2"
+                className="bg-[#FFC212] text-black px-3 py-1 sm:px-4 sm:py-2 rounded-full hover:bg-purple-300 text-sm sm:text-base"
               >
                 Login
               </button>
             </Link>
           )}
-        </div>
 
-        {/* Mobile Menu and Search Buttons */}
-        <div className="md:hidden flex items-center space-x-2">
-          <button
-            onClick={toggleSearch}
-            className="p-2 rounded-full hover:bg-gray-200 transition-colors duration-200 focus:outline-none"
-          >
-            <CiSearch className="text-3xl" />
-          </button>
+          {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="p-2 rounded-full hover:bg-gray-200 transition-colors duration-200 focus:outline-none"
+            className="lg:hidden p-2 rounded-full hover:bg-gray-200 transition-colors duration-200 focus:outline-none"
           >
-            <CiMenuFries className="text-3xl" />
+            <CiMenuFries className="text-2xl sm:text-3xl" />
           </button>
         </div>
       </div>
 
       {/* Mobile Search Bar */}
       {isSearchOpen && (
-        <div className="md:hidden mt-4">
+        <div className="sm:hidden mt-4">
           <SearchBarNav />
         </div>
       )}
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <ul className="md:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2">
+        <ul className="lg:hidden bg-[#E9E7F9] flex flex-col space-y-4 px-4 py-2 mt-4">
           {routes.map((route, index) =>
             route.path ? (
               <Link to={route.path} key={index} onClick={toggleMobileMenu}>
@@ -237,7 +224,10 @@ const Navbar = () => {
               <li
                 key={index}
                 className="hover:underline relative cursor-pointer"
-                onClick={route.onClick}
+                onClick={() => {
+                  route.onClick();
+                  toggleMobileMenu();
+                }}
               >
                 {route.name}
               </li>
