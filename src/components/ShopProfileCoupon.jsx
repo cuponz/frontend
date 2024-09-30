@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import UserCouponCard from "../components/UserCouponCard";
-import FilterBoard from "../components/FilterBoard";
-import Pagination from "../components/Pagination";
-import LoadingSpinner from "../components/LoadingSpinner";
+import FilterBoard from "../components/Core/Coupon/FilterBoard";
 import couponData from "../data/couponData.json";
+
+import Pagination from "./Utils/Pagination";
+import LoadingSpinner from "./Utils/LoadingSpinner";
 
 const itemsPerPage = 8;
 

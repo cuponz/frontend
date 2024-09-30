@@ -1,4 +1,4 @@
-import Coupon from "./coupon";
+import Coupon from "./Coupon";
 import { couponData } from "../data/couponData";
 
 function ShopCouponList() {

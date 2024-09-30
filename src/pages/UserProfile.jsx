@@ -1,12 +1,10 @@
-import Navbar from "../components/navbar";
-import UserInfo from "../components/UserInfo";
-import MiniNav from "../components/UserProfileMiniNav";
+import UserInfo from "../components/Core/Profiles/UserInfo";
+import MiniNav from "../components/Core/Profiles/UserProfileMiniNav";
 
-function App() {
+function UserProfile() {
   return (
     <div>
-      <Navbar />
-      <div className="pt-16 sm:px-6 ">
+      <div className="pt-16 sm:px-6">
         <UserInfo />
         <MiniNav />
       </div>
@@ -14,4 +12,4 @@ function App() {
   );
 }
 
-export default App;
+export default UserProfile;

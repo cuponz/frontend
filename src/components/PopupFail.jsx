@@ -1,17 +1,15 @@
-import couponData from "../data/couponData.json";
-
-const PopupFail = ({ errorType, couponId }) => {
-  const coupon = couponData.find((coupon) => coupon.id === couponId);
-
+const PopupFail = ({ errorType, startDate }) => {
   const getErrorMessage = () => {
     switch (errorType) {
+      case "only-shop":
+        return "Only shop able to apply coupon";
       case "already-redeemed":
         return "The code has already been redeemed";
       case "expired":
         return "The code has expired";
       case "not-started":
-        return coupon
-          ? `The coupon is not available until ${coupon.startDate}`
+        return  startDate
+          ? `The coupon is not available until ${startDate}`
           : "The coupon is not yet available";
       case "location":
         return "This coupon is not available at this location";
@@ -21,7 +19,7 @@ const PopupFail = ({ errorType, couponId }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center z-50">
+    <div className="fixed inset-0 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg w-full max-w-sm">
         <div className="flex items-center justify-center mb-4">
           <div className="bg-red-500 rounded-full p-2">
