@@ -1,4 +1,14 @@
-function App() {
-  return <h1>Contact Us</h1>;
+import ContactForm from "../components/contactForm";
+
+import Layout from "../layout/layout";
+
+function ContactUs() {
+  return (
+    <>
+      <Layout>
+        <ContactForm />
+      </Layout>
+    </>
+  );
 }
-export default App;
+export default ContactUs;

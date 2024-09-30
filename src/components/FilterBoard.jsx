@@ -4,11 +4,15 @@ import MultiSelectDropdown from "../components/MultiSelectDropdown";
 const FilterBoard = ({
   onFilterChange,
   categories,
+  shopNames,
   closeFilterBoard,
   initialFilters,
 }) => {
   const [selectedCategories, setSelectedCategories] = useState(
     initialFilters.selectedCategories
+  );
+  const [selectedShopNames, setSelectedShopNames] = useState(
+    initialFilters.selectedShopNames
   );
   const [startDate, setStartDate] = useState(initialFilters.startDate);
   const [endDate, setEndDate] = useState(initialFilters.endDate);
@@ -16,19 +20,24 @@ const FilterBoard = ({
   useEffect(() => {
     onFilterChange({
       selectedCategories,
+      selectedShopNames,
       startDate,
       endDate,
     });
-  }, [selectedCategories, startDate, endDate]);
+  }, [selectedCategories, selectedShopNames, startDate, endDate]);
 
   const resetFilters = () => {
     setSelectedCategories([]);
+    setSelectedShopNames([]);
     setStartDate("");
     setEndDate("");
   };
 
   const appliedFilterCount =
-    selectedCategories.length + (startDate ? 1 : 0) + (endDate ? 1 : 0);
+    selectedCategories.length +
+    selectedShopNames.length +
+    (startDate ? 1 : 0) +
+    (endDate ? 1 : 0);
 
   return (
     <div className="p-4 h-full flex flex-col space-y-4">
@@ -45,6 +54,12 @@ const FilterBoard = ({
           options={categories}
           selectedOptions={selectedCategories}
           setSelectedOptions={setSelectedCategories}
+        />
+        <MultiSelectDropdown
+          label="Shop Name"
+          options={shopNames}
+          selectedOptions={selectedShopNames}
+          setSelectedOptions={setSelectedShopNames}
         />
         <div className="flex flex-col">
           <label htmlFor="start-date" className="text-gray-700 font-medium">

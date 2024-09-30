@@ -1,12 +1,4 @@
-import Navbar from "../components/navbar";
-
-// function App() {
-//   return (
-//     <>
-//       <Navbar />
-//     </>
-//   );
-// }
+import Layout from "../layout/layout";
 import Carousel from "../components/Carousel";
 import Banner from "../components/banner";
 import HomeCouponList from "../components/HomeCouponList";
@@ -23,12 +15,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <Navbar />
-      <div className="pt-16 p-6">
-        <Carousel images={carouselImages} rightImages={rightImages} />
-        <Banner />
-        <HomeCouponList />
-      </div>
+      <Layout>
+        <div className="pt-16 p-6">
+          <Carousel images={carouselImages} rightImages={rightImages} />
+          <Banner />
+          <HomeCouponList />
+        </div>
+      </Layout>
     </div>
   );
 };

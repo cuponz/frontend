@@ -1,4 +1,3 @@
-// Setting for shop owner profile (shop owner view)
 import { useState, useEffect } from "react";
 import shopOwnerData from "../data/shopOwnerData.json";
 import ChangePasswordModal from "../components/ChangePasswordModal";

@@ -1,6 +1,6 @@
-import "./userInfo.css"; // Assuming you have specific CSS for CustomerInfo
+import "./ShopOwnerProfile.css"; // Assuming you have specific CSS for CustomerInfo
 
-function UserInfo() {
+function ShopOwnerProfile() {
   // Static data for demonstration
   const clientInfo = {
     name: "My Name",
@@ -18,14 +18,10 @@ function UserInfo() {
               <p>{clientInfo.email}</p>
             </div>
           </div>
-          <div className="profile-tabs">
-            <button className="tab">Coupons</button>
-            <button className="tab">Settings</button>
-          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default UserInfo;
+export default ShopOwnerProfile;
