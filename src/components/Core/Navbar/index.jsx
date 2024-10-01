@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import CategoriesMenu from "./CategoriesMenu";
-import { Link } from "react-router-dom";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import SearchBarNav from "./SearchBarNav";
 import { CiUser, CiMenuFries, CiSearch } from "react-icons/ci";
@@ -28,6 +28,8 @@ const Navbar = () => {
   const [isCategoriesOpen, toggleCategoriesOpen] = useIsCategoriesOpenStore(
     (state) => [state.isCategoriesOpen, state.toggleCategoriesOpen]
   );
+
+  const location = useLocation();
 
   const {
     isPending,
@@ -63,6 +65,13 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Close dropdowns and menus when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsProfileDropdownOpen(false);
+    setIsSearchOpen(false);
+  }, [location]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -168,6 +177,12 @@ const Navbar = () => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Your Profile
+                  </Link>
+                  <Link
+                    to="/cart"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Cart
                   </Link>
                   <Link
                     to="/settings"
