@@ -5,6 +5,7 @@ import CategoriesMenu from "./CategoriesMenu";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import SearchBarNav from "./SearchBarNav";
 import { CiUser, CiMenuFries, CiSearch } from "react-icons/ci";
+import { MdLanguage } from "react-icons/md";
 
 import { useUserStore } from "../../../store/user";
 import {
@@ -17,8 +18,10 @@ import { getGroups } from "../../../api/group";
 import { useQueries } from "@tanstack/react-query";
 import LoadingSpinner from "../../Utils/LoadingSpinner";
 import { UserType } from "../../../constants";
+import { useTranslations } from "../../../store/languages";
 
 const Navbar = () => {
+  const { t, language, setLanguage, supportedLanguages } = useTranslations();
   const [user, logout] = useUserStore((state) => [state.user, state.logout]);
   const [categories, setCategories] = useCategoryStore((state) => [
     state.categories,
@@ -65,12 +68,13 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
-  // Close dropdowns and menus when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsProfileDropdownOpen(false);
     setIsSearchOpen(false);
+    setIsLanguageDropdownOpen(false);
   }, [location]);
 
   const toggleMobileMenu = () => {
@@ -94,13 +98,27 @@ const Navbar = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
+  const toggleLanguageDropdown = () => {
+    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
+  };
+
+  const changeLanguage = (lng) => {
+    setLanguage(lng);
+    setIsLanguageDropdownOpen(false);
+  };
+
   const routes = [
-    { path: "/", name: "Home" },
-    { path: "/coupon", name: "Coupons" },
-    { path: undefined, name: "Categories", onClick: toggleCategoriesOpen },
-    { path: "/aboutus", name: "About Us" },
-    { path: "/contactus", name: "Contact Us" },
+    { path: "/", name: t("Home") },
+    { path: "/coupon", name: t("Coupons") },
+    { path: undefined, name: t("Categories"), onClick: toggleCategoriesOpen },
+    { path: "/aboutus", name: t("About Us") },
+    { path: "/contactus", name: t("Contact Us") },
   ];
+
+  const languageNames = {
+    en: "English",
+    es: "Español",
+  };
 
   return (
     <nav className="bg-[#E9E7F9] p-4 z-50">
@@ -158,6 +176,39 @@ const Navbar = () => {
             </Link>
           )}
 
+          {/* Language Selector */}
+          <div className="relative">
+            <button
+              onClick={toggleLanguageDropdown}
+              className="focus:outline-none"
+            >
+              <div className="group relative p-2 flex items-center justify-center">
+                <MdLanguage className="text-2xl sm:text-3xl" />
+                <span className="text-xs ml-1">
+                  {languageNames[language] || language}
+                </span>{" "}
+                <span className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-gray-900 transition-all duration-300"></span>
+              </div>
+            </button>
+            {isLanguageDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                {supportedLanguages.map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => changeLanguage(lang)}
+                    className={`block w-full text-left px-4 py-2 text-sm ${
+                      lang === language
+                        ? "bg-gray-100 font-semibold"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    {languageNames[lang] || lang}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           {/* User Profile / Login Button */}
           {user ? (
             <div className="relative">
@@ -176,25 +227,25 @@ const Navbar = () => {
                     to="/profile"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    Your Profile
+                    {t("Your Profile")}
                   </Link>
                   <Link
                     to="/cart"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    Cart
+                    {t("Cart")}
                   </Link>
                   <Link
                     to="/settings"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    Settings
+                    {t("Settings")}
                   </Link>
                   <button
                     onClick={handleLoginLogout}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    Logout
+                    {t("Logout")}
                   </button>
                 </div>
               )}
@@ -205,7 +256,7 @@ const Navbar = () => {
                 onClick={handleLoginLogout}
                 className="bg-[#FFC212] text-black px-3 py-1 sm:px-4 sm:py-2 rounded-full hover:bg-purple-300 text-sm sm:text-base"
               >
-                Login
+                {t("Login")}
               </button>
             </Link>
           )}
@@ -248,6 +299,18 @@ const Navbar = () => {
               </li>
             )
           )}
+          {/* Language options in mobile menu */}
+          {supportedLanguages.map((lang) => (
+            <li
+              key={lang}
+              className={`hover:underline cursor-pointer ${
+                lang === language ? "font-semibold" : ""
+              }`}
+              onClick={() => changeLanguage(lang)}
+            >
+              {lang}
+            </li>
+          ))}
         </ul>
       )}
 
