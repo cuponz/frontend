@@ -1,10 +1,10 @@
 import { useState } from "react";
 import CouponImage1 from "../assets/coupon1.png";
 import CouponImage2 from "../assets/coupon2.png";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
-import Layout from "../layout/layout";
+import Layout from "../layout/Layout";
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     firstName: "",

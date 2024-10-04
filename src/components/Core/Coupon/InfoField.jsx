@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CouponRequirementType, CountryListWithCode } from "../../../constants";
 import { useMutation } from "@tanstack/react-query";
 import { redeemCoupon } from "../../../api/redemptions";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useUserStore } from "../../../store/user";
 import {
   parsePhoneNumberFromString,
