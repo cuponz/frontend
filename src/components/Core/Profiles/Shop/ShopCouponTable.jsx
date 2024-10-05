@@ -25,8 +25,8 @@ const ShopCouponTable = () => {
 
   // Mutations
   const editMutation = useMutation({
-    queryKey: ["get", "coupons", "shop"],
-    mutationFn: editCoupon,
+    queryKey: ["edit", "coupons", "shop"],
+    mutationFn: ({ couponId, data }) => editCoupon(couponId, data),
     onSuccess: () => {
       toast.success("Coupon edited successfully");
     },
@@ -36,6 +36,7 @@ const ShopCouponTable = () => {
   });
 
   const pauseMutation = useMutation({
+    queryKey: ["edit", "coupons", "shop"],
     mutationFn: pauseCoupon,
     onSuccess: () => {
       toast.success("Coupon paused successfully");
@@ -118,14 +119,14 @@ const ShopCouponTable = () => {
           <div className="flex justify-center space-x-2">
             <Button
               onClick={() => handleEdit(row.id)}
-              colour="yellow"
+              colour="yellow-500"
               disabled={editMutation.isLoading}
             >
               Edit
             </Button>
             <Button
               onClick={() => handlePause(row.id)}
-              colour="blue"
+              colour="blue-500"
               disabled={
                 row["state"] === CouponState.Pending || pauseMutation.isLoading
               }
@@ -134,7 +135,7 @@ const ShopCouponTable = () => {
             </Button>
             <Button
               onClick={() => handleDelete(row.id)}
-              colour="red"
+              colour="red-500"
               disabled={deleteMutation.isLoading}
             >
               Delete
@@ -176,7 +177,7 @@ const ShopCouponTable = () => {
     <div className="p-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Shop Coupons</h1>
-        <Button onClick={() => setIsCreateCouponOpen(true)} colour="yellow">
+        <Button onClick={() => setIsCreateCouponOpen(true)} colour="yellow-500">
           Create Coupon
         </Button>
       </div>

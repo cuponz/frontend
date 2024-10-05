@@ -168,7 +168,7 @@ const DataTable = ({
         <Button
           onClick={handleResetFilters}
           className="w-full sm:w-auto"
-          colour="gray"
+          colour="gray-500"
         >
           Reset Filters
         </Button>
@@ -176,7 +176,7 @@ const DataTable = ({
         <Button
           className="w-full sm:w-auto"
           onClick={handleDownloadCSV}
-          colour="blue"
+          colour="blue-500"
         >
           Download CSV
         </Button>

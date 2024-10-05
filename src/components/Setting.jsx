@@ -19,7 +19,7 @@ const Setting = () => {
   const inputClasses =
     "w-full rounded-md sm:text-sm border-2 border-gray-300 focus:border-[#E0DFFE] focus:ring focus:ring-[#E0DFFE] focus:ring-opacity-50 px-3 py-2";
   const buttonClasses =
-    "w-full sm:w-24 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-[#E0DFFE] hover:bg-[#D0CFFE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E0DFFE]";
+    "w-full sm:w-24 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-[#E0DFFE] hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E0DFFE]";
 
   const handlePasswordChange = (newPassword) => {
     setUserData((prevData) => ({
