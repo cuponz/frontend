@@ -1,6 +1,4 @@
-import ContactForm from "../components/contactForm";
-
-import Layout from "../layout/layout";
+import ContactForm from "@/components/contactForm";
 
 function ContactUs() {
   return (

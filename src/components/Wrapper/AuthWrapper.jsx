@@ -28,7 +28,6 @@ const AuthWrapper = ({ isProtected }) => {
 
 	useEffect(() => {
 		if (data) {
-			console.log(data.user);
 			toast.success("Logged in");
 			setUser(data.user)
 		}

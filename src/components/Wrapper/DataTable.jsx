@@ -1,129 +1,224 @@
-import { useState, useMemo } from 'react';
-import Pagination from "../Utils/Pagination";
+import { useState, useMemo, useCallback, Fragment } from "react";
+import Pagination from "@/components/Utils/Pagination";
+import {
+  dataTableCompareValues,
+  downloadCSV,
+  filterMatchCheck,
+} from "@/components/Utils/DataTableUtils";
 
-const DataTable = ({ columns, data, itemsPerPage = 10, filename = 'data.csv' }) => {
-	const [currentPage, setCurrentPage] = useState(1);
-	const [searchTerm, setSearchTerm] = useState('');
+import Button from "@/components/Utils/Button";
 
-	const handleSearch = (e) => {
-		setSearchTerm(e.target.value);
-		// setCurrentPage(1); // Reset to first page on search
-	};
+const DataTable = ({
+  columns,
+  data,
+  itemsPerPage = 10,
+  filename = "data.csv",
+  additionalFilters = [],
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortField, setSortField] = useState(columns[0].accessor);
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [filters, setFilters] = useState({});
 
-	// Filter data based on search term
-	const filteredData = useMemo(() => {
-		const term = searchTerm.toLowerCase();
-		return data.filter((item) =>
-			columns.some((column) => {
-				const value = item[column.accessor];
-				return value && value.toString().toLowerCase().includes(term);
-			})
-		);
-	}, [data, searchTerm, columns]);
+  const handleSearch = useCallback((e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+  }, []);
 
-	// Paginate the filtered data
-	const paginatedData = useMemo(() => {
-		const startIndex = (currentPage - 1) * itemsPerPage;
-		return filteredData.slice(startIndex, startIndex + itemsPerPage);
-	}, [filteredData, currentPage, itemsPerPage]);
+  const handleSortChange = useCallback((e) => {
+    const [field, direction] = e.target.value.split("-");
+    setSortField(field);
+    setSortDirection(direction);
+  }, []);
 
-	const handlePageChange = (page) => {
-		setCurrentPage(page);
-	};
+  const handleFilterChange = useCallback((filterName, value) => {
+    setFilters((prev) => ({ ...prev, [filterName]: value }));
+    setCurrentPage(1);
+  }, []);
 
-	const handleDownloadCSV = () => {
-		const csv = convertToCSV(filteredData);
-		const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-		const csvURL = URL.createObjectURL(blob);
-		const link = document.createElement('a');
-    link.href = csvURL;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-	};
+  const handleResetFilters = useCallback(() => {
+    setSearchTerm("");
+    setFilters({});
+    setSortField(columns[0].accessor);
+    setSortDirection("asc");
+    setCurrentPage(1);
+  }, [columns]);
 
-	const convertToCSV = (data) => {
-		if (!data || data.length === 0) {
-			return '';
-		}
+  const filteredAndSortedData = useMemo(() => {
+    return data
+      .filter((item) => {
+        const searchMatch = columns.some((column) => {
+          const value = item[column.accessor];
+          return (
+            value &&
+            value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        });
 
-		const headers = columns.map((col) => col.headder);
+        const filterMatch = filterMatchCheck(item, filters);
 
-		const rows = data.map((row) =>
-			columns.map((col) => {
-				const value = row[col.accessor];
-				// Escape quotes and wrap in double quotes
-				return `"${String(value).replace(/"/g, '""')}"`
-			})
-		);
+        return searchMatch && filterMatch;
+      })
+      .sort((a, b) => {
+        const column = columns.find((col) => col.accessor === sortField);
+        const sortType = column?.sortType || "string";
+        const multiplier = sortDirection === "asc" ? 1 : -1;
 
-		const csvContent = [
-			headers.join(','), // Header row
-			...rows.map((row) => row.join(',')), // Data rows
-		].join('\n');
+        return (
+          multiplier *
+          dataTableCompareValues(a[sortField], b[sortField], sortType)
+        );
+      });
+  }, [data, searchTerm, filters, sortField, sortDirection, columns]);
 
-		return csvContent;
-	};
+  const paginatedData = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return filteredAndSortedData.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredAndSortedData, currentPage, itemsPerPage]);
 
-	return (
-		<div className="p-4">
-			<div className="flex justify-between mb-4">
-				<div>
-					<button
-						className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-						onClick={handleDownloadCSV}
-					>
-						Download CSV
-					</button>
-				</div>
-				<input
-					type="text"
-					placeholder="Search"
-					value={searchTerm}
-					onChange={handleSearch}
-					className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-				/>
-			</div>
+  const handlePageChange = useCallback((page) => {
+    setCurrentPage(page);
+  }, []);
 
-			{filteredData.length === 0 ? (
-				<div className="text-center text-gray-500">No records found</div>
-			) : (
-				<>
-					<div className="overflow-x-auto">
-						<table className="min-w-full bg-white">
-							<thead>
-								<tr>
-									{columns.map((column) => (
-										<th key={column.accessor} className="px-4 py-2 border-b">
-											{column.header}
-										</th>
-									))}
-								</tr>
-							</thead>
-							<tbody>
-								{paginatedData.map((item, index) => (
-									<tr key={index} className="text-center">
-										{columns.map((column) => (
-											<td key={column.accessor} className="px-4 py-2 border-b">
-												{item[column.accessor]}
-											</td>
-										))}
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
+  const handleDownloadCSV = useCallback(() => {
+    const exportData = filteredAndSortedData.map((item) => {
+      const exportItem = {};
+      columns.forEach((column) => {
+        if (column.cell) {
+          exportItem[column.accessor] = column.cell(
+            item[column.accessor],
+            item
+          );
+        } else {
+          exportItem[column.accessor] = item[column.accessor];
+        }
+      });
+      return exportItem;
+    });
 
-					<Pagination
-						currentPage={currentPage}
-						totalPages={Math.ceil(filteredData.length / itemsPerPage)}
-						onPageChange={handlePageChange}
-					/>
-				</>
-			)}
-		</div>
-	);
+    downloadCSV(columns, exportData, filename);
+  }, [columns, filteredAndSortedData, filename]);
+
+  const renderCell = useCallback((item, column) => {
+    if (column.cell) {
+      return column.cell(item[column.accessor], item);
+    }
+    return item[column.accessor];
+  }, []);
+
+  return (
+    <div className="p-4">
+      <div className="flex flex-wrap justify-between mb-4 space-y-2 sm:space-y-0 sm:space-x-2">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleSearch}
+          className="w-full sm:w-auto flex-grow px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+        />
+        <select
+          value={`${sortField}-${sortDirection}`}
+          onChange={handleSortChange}
+          className="w-full sm:w-auto px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+        >
+          {columns.map((column) => (
+            <Fragment key={column.accessor}>
+              <option value={`${column.accessor}-asc`}>
+                Sort by {column.header} (Asc)
+              </option>
+              <option value={`${column.accessor}-desc`}>
+                Sort by {column.header} (Desc)
+              </option>
+            </Fragment>
+          ))}
+        </select>
+
+        {additionalFilters.map((filter) => (
+          <div key={filter.name} className="w-full sm:w-auto">
+            {filter.type === "select" ? (
+              <select
+                value={filters[filter.name] || ""}
+                onChange={(e) =>
+                  handleFilterChange(filter.name, e.target.value)
+                }
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="">{filter.placeholder}</option>
+                {filter.options.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type={filter.type}
+                placeholder={filter.placeholder}
+                value={filters[filter.name] || ""}
+                onChange={(e) =>
+                  handleFilterChange(filter.name, e.target.value)
+                }
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            )}
+          </div>
+        ))}
+
+        <Button
+          onClick={handleResetFilters}
+          className="w-full sm:w-auto"
+          colour="gray"
+        >
+          Reset Filters
+        </Button>
+
+        <Button
+          className="w-full sm:w-auto"
+          onClick={handleDownloadCSV}
+          colour="blue"
+        >
+          Download CSV
+        </Button>
+      </div>
+
+      {filteredAndSortedData.length === 0 ? (
+        <div className="text-center text-gray-500">No records found</div>
+      ) : (
+        <>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th key={column.accessor} className="px-4 py-2 border-b">
+                      {column.header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedData.map((item, index) => (
+                  <tr key={index} className="text-center">
+                    {columns.map((column) => (
+                      <td key={column.accessor} className="px-4 py-2 border-b">
+                        {renderCell(item, column)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(filteredAndSortedData.length / itemsPerPage)}
+            onPageChange={handlePageChange}
+          />
+        </>
+      )}
+    </div>
+  );
 };
 
 export default DataTable;

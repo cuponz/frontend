@@ -7,7 +7,7 @@ import UserCoupon from "./UserCoupon";
 import UserSetting from "../../Setting";
 import { CouponCatalougeType, ProfileTab, UserType } from "../../../constants";
 
-import ShopCouponTable from "../../shopCouponTable";
+import ShopCouponTable from "./Shop/ShopCouponTable";
 import ShopOwnerSetting from "../../Setting";
 
 const UserContent = ({ activeTab }) => {

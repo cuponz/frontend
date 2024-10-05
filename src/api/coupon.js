@@ -26,9 +26,35 @@ async function creatingCoupon(couponData) {
   });
 }
 
+async function editCoupon(couponId, couponData) {
+  return apiRequest(`/api/coupon/${couponId}`, {
+    method: "POST",
+    body: JSON.stringify(couponData),
+    errorMessage: "Editng Coupon Failed",
+  })
+}
+
+async function pauseCoupon(couponId, state) {
+  return apiRequest(`/api/coupon/${couponId}/state`, {
+    method: "POST",
+    body: JSON.stringify({ state }),
+    errorMessage: "Editng Coupon's State Failed",
+  })
+}
+
+async function deleteCoupon(couponId, couponData) {
+  return apiRequest(`/api/coupon/${couponId}`, {
+    method: "POST",
+    body: JSON.stringify(couponData),
+    errorMessage: "Deleting Coupon Failed",
+  });
+}
+
 export {
 	getCoupons,
 	getCouponsByShopIdFromOthers,
 	getCouponsByShopIdFromShop,
 	creatingCoupon,
+  editCoupon,
+  deleteCoupon,
 }

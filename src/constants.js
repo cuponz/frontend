@@ -34,6 +34,12 @@ const CouponRequirementType = Object.freeze({
   EmailAndPhoneNumber: 3,
 });
 
+const CouponState = Object.freeze({
+	Pending: 0,
+	Pause: 1,
+	Active: 2,
+});
+
 const CouponCardModalType = Object.freeze({
   PopUp: 1,
   InfoField: 2,
@@ -63,6 +69,7 @@ export {
   CouponCatalougeType,
   RedemptionState,
   CouponRequirementType,
+  CouponState,
   CouponCardModalType,
   CountryListWithCode,
 };
