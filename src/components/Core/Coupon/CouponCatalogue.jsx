@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import CouponBoard from "./CouponBoard";
 import { CouponCatalougeType } from "../../../constants";
 import UserTable from "../Profiles/Shop/UserTable";
+import { useTranslations } from "../../../store/languages";
 
 import {
 	getCoupons,
@@ -74,6 +75,7 @@ const CouponCatalogueBoard = ({
 };
 
 const CouponCatalogue = ({ type }) => {
+	const { t } = useTranslations();
 	const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
 	const [showPopup, setShowPopup] = useState(true);
 	const [showUserTable, setShowUserTable] = useState(false);
@@ -94,7 +96,7 @@ const CouponCatalogue = ({ type }) => {
 			searchParams,
 			setStartDate,
 			setEndDate,
-			setSelectedCategories,
+			setSelectedCategories
 		);
 	}, [searchParams]);
 
@@ -109,7 +111,7 @@ const CouponCatalogue = ({ type }) => {
 
 	const handleSearchChange = useCallback(
 		(e) => setSearchTerm(e.target.value),
-		[],
+		[]
 	);
 
 	const toggleFilterBoard = () => {
@@ -134,7 +136,7 @@ const CouponCatalogue = ({ type }) => {
 						onClick={toggleFilterBoard}
 						className="bg-yellow-500 text-gray-800 px-4 py-2 rounded-md shadow-lg hover:bg-yellow-600 focus:outline-none flex items-center"
 					>
-						Filter
+						{t(["filter", "display"])}
 						<i className="pl-2 fa-solid fa-caret-down"></i>
 					</button>
 				</div>

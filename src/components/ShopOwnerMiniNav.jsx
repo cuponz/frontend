@@ -3,8 +3,10 @@ import ShopCoupon from "../components/ShopCoupon";
 import ShopCouponTable from "../components/shopCouponTable";
 import ShopOwnerSetting from "../components/Setting";
 import UserTable from "./Core/Profiles/Shop/UserTable"; // Assuming you have a UserTable component
+import { useTranslations } from "../store/languages";
 
 const ShopOwnerMiniNav = () => {
+	const { t } = useTranslations();
 	const [activeTab, setActiveTab] = useState("Coupons");
 	const [selectedCoupon, setSelectedCoupon] = useState(null);
 
@@ -61,7 +63,7 @@ const ShopOwnerMiniNav = () => {
 					}`}
 					onClick={() => setActiveTab("Coupons")}
 				>
-					Coupons
+					{t(["miniNav", "coupon"])}
 				</button>
 				<button
 					className={`w-full md:w-1/3 px-4 py-2 font-medium text-sm ${
@@ -71,7 +73,7 @@ const ShopOwnerMiniNav = () => {
 					}`}
 					onClick={() => setActiveTab("Management")}
 				>
-					Management
+					{t(["miniNav", "management"])}
 				</button>
 				<button
 					className={`w-full md:w-1/3 px-4 py-2 font-medium text-sm ${
@@ -81,7 +83,7 @@ const ShopOwnerMiniNav = () => {
 					}`}
 					onClick={() => setActiveTab("Setting")}
 				>
-					Setting
+					{t(["miniNav", "setting"])}
 				</button>
 			</div>
 			<div className="mt-4">{renderContent()}</div>

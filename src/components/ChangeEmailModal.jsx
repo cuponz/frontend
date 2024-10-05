@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import { Validators } from "../constants";
 import OTPModal from "../components/OTP/OTPModal";
 import Popup from "../components/OTP/Popup";
+import { useTranslations } from "../store/languages";
 
 const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
+	const { t } = useTranslations();
 	const [newEmail, setNewEmail] = useState("");
 	const [error, setError] = useState("");
 	const [isVerified, setIsVerified] = useState(false);
@@ -92,14 +94,16 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 				ref={modalRef}
 				className="bg-white p-5 rounded-lg shadow-xl max-w-md w-full modal-content"
 			>
-				<h2 className="text-xl font-bold mb-4">Change Email</h2>
+				<h2 className="text-xl font-bold mb-4">
+					{t(["changeEmailModal", "title"])}
+				</h2>
 				<form onSubmit={handleSubmit}>
 					<div className="mb-4">
 						<label
 							htmlFor="newEmail"
 							className="block text-sm font-medium text-gray-700 mb-1"
 						>
-							New Email
+							{t(["changeEmailModal", "newEmail"])}
 						</label>
 						<div className="flex">
 							<input
@@ -119,14 +123,16 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 								className={verifyButtonClasses}
 								disabled={isVerified}
 							>
-								{isVerified ? "Verified" : "Verify"}
+								{isVerified
+									? t(["changeEmailModal", "verified"])
+									: t(["changeEmailModal", "verify"])}
 							</button>
 						</div>
 					</div>
 					{error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 					{isVerified && (
 						<p className="text-green-500 text-sm mb-4">
-							Email verified successfully!
+							{t(["changeEmailModal", "successnoti"])}
 						</p>
 					)}
 					<button
@@ -134,7 +140,7 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 						className={buttonClasses}
 						disabled={!isVerified}
 					>
-						Change Email
+						{t(["changeEmailModal", "changeEmailBtn"])}
 					</button>
 				</form>
 			</div>

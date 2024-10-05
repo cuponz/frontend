@@ -3,8 +3,10 @@ import shopOwnerData from "../data/shopOwnerData.json";
 import ChangePasswordModal from "../components/ChangePasswordModal";
 import ChangeEmailModal from "../components/ChangeEmailModal";
 import ChangePhoneModal from "../components/ChangePhoneModal";
+import { useTranslations } from "../store/languages";
 
 const Setting = () => {
+	const { t } = useTranslations();
 	const [userData, setUserData] = useState(null);
 	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 	const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
@@ -56,7 +58,7 @@ const Setting = () => {
 						htmlFor="username"
 						className="block text-sm font-medium text-gray-700 mb-1"
 					>
-						Username
+						{t(["userSetting", "username"])}
 					</label>
 					<div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
 						<input
@@ -76,7 +78,7 @@ const Setting = () => {
 						htmlFor="password"
 						className="block text-sm font-medium text-gray-700 mb-1"
 					>
-						Password
+						{t(["userSetting", "password"])}
 					</label>
 					<div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
 						<input
@@ -91,7 +93,7 @@ const Setting = () => {
 							className={buttonClasses}
 							onClick={() => setIsPasswordModalOpen(true)}
 						>
-							Change
+							{t(["userSetting", "changeBtn"])}
 						</button>
 					</div>
 				</div>
@@ -101,7 +103,7 @@ const Setting = () => {
 						htmlFor="email"
 						className="block text-sm font-medium text-gray-700 mb-1"
 					>
-						Email
+						{t(["userSetting", "email"])}
 					</label>
 					<div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
 						<input
@@ -117,7 +119,9 @@ const Setting = () => {
 							className={buttonClasses}
 							onClick={() => setIsEmailModalOpen(true)}
 						>
-							{userData.email ? "Change" : "Add"}
+							{userData.email
+								? t(["userSetting", "changeBtn"])
+								: t(["userSetting", "addBtn"])}
 						</button>
 					</div>
 				</div>
@@ -127,7 +131,7 @@ const Setting = () => {
 						htmlFor="phone"
 						className="block text-sm font-medium text-gray-700 mb-1"
 					>
-						Phone number
+						{t(["userSetting", "phoneNumber"])}
 					</label>
 					<div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
 						<input

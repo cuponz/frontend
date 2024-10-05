@@ -6,12 +6,14 @@ import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../api/user";
 import TogglePassword from "../components/Utils/TogglePassword";
+import { useTranslations } from "../store/languages";
 
 const LoginPage = () => {
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	});
+	const { t } = useTranslations();
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
@@ -49,7 +51,7 @@ const LoginPage = () => {
 					{/* Left Section */}
 					<div className="w-full lg:w-3/5 p-6 sm:p-8 lg:p-12 bg-white">
 						<h2 className="text-2xl lg:text-3xl font-bold mb-6 lg:mb-8 text-center lg:text-left">
-							Login Account
+							{t(["login", "form", "title"])}
 						</h2>
 						<form onSubmit={handleSubmit}>
 							<div className="mb-6 lg:mb-8">
@@ -58,7 +60,7 @@ const LoginPage = () => {
 									name="email"
 									value={formData.email}
 									onChange={handleChange}
-									placeholder="Email"
+									placeholder={t(["login", "form", "email"])}
 									className="w-full p-3 border border-gray-300 rounded"
 									required
 								/>
@@ -69,7 +71,7 @@ const LoginPage = () => {
 									name="password"
 									value={formData.password}
 									onChange={handleChange}
-									placeholder="Password"
+									placeholder={t(["login", "form", "password"])}
 									className="w-full p-3 border border-gray-300 rounded"
 									required
 								/>
@@ -78,14 +80,14 @@ const LoginPage = () => {
 								type="submit"
 								className="w-full bg-yellow-500 text-white font-bold p-3 rounded hover:bg-yellow-600 transition duration-200"
 							>
-								Login
+								{t(["login", "form", "button"])}
 							</button>
 						</form>
 						<div className="mt-4 text-center">
 							<p>
-								Don&apos;t have an account?{" "}
+								{t(["login", "form", "registerQuote"])}{" "}
 								<Link to="/register" className="text-blue-500 hover:underline">
-									Register
+									{t(["login", "form", "registerLink"])}
 								</Link>
 							</p>
 						</div>
@@ -95,9 +97,9 @@ const LoginPage = () => {
 					<div className="hidden lg:flex w-full lg:w-2/5 p-8 bg-gradient-to-tr from-purple-400 via-purple-600 to-purple-800">
 						<div className="flex flex-col items-center justify-center text-center">
 							<h1 className="text-3xl lg:text-4xl font-bold mb-2 text-white">
-								CuponZ
+								{t(["login", "title"])}
 							</h1>
-							<p className="text-lg text-white">Generate Cupon everywhere!</p>
+							<p className="text-lg text-white">{t(["login", "quote"])}</p>
 							<img
 								src={CouponImage2}
 								alt="Coupon Graphic"

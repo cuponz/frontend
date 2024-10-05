@@ -9,6 +9,7 @@ import { CouponCatalougeType, ProfileTab, UserType } from "../../../constants";
 
 import ShopCouponTable from "./Shop/ShopCouponTable";
 import ShopOwnerSetting from "../../Setting";
+import { useTranslations } from "../../../store/languages";
 
 const UserContent = ({ activeTab }) => {
 	switch (activeTab) {
@@ -33,6 +34,7 @@ const ShopContent = ({ activeTab }) => {
 };
 
 const UserProfileMiniNav = () => {
+	const { t } = useTranslations();
 	const user = useUserStore((state) => state.user);
 	const [activeTab, setActiveTab] = useState(ProfileTab["Coupons"]);
 
@@ -43,16 +45,16 @@ const UserProfileMiniNav = () => {
 	const tabs =
 		user.type === UserType["Shop"]
 			? [
-					{ id: ProfileTab.Coupons, label: "Coupons" },
-					{ id: ProfileTab.Management, label: "Management" },
-					{ id: ProfileTab.Settings, label: "Settings" },
-				]
+					{ id: ProfileTab.Coupons, label: t(["miniNav", "coupon"]) },
+					{ id: ProfileTab.Management, label: t(["miniNav", "management"]) },
+					{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
+			  ]
 			: user.type === UserType.User
-				? [{ id: ProfileTab.Settings, label: "Settings" }]
-				: [
-						{ id: ProfileTab.Management, label: "Management" },
-						{ id: ProfileTab.Settings, label: "Settings" },
-					];
+			? [{ id: ProfileTab.Settings, label: t(["miniNav", "coupon"]) }]
+			: [
+					{ id: ProfileTab.Management, label: t(["miniNav", "management"]) },
+					{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
+			  ];
 
 	return (
 		<div className="container mx-auto">
@@ -61,7 +63,9 @@ const UserProfileMiniNav = () => {
 				{tabs.map((tab) => (
 					<button
 						key={tab.id * (user.type + 1)}
-						className={`w-full md:w-1/${tabs.length} px-4 py-2 font-medium text-sm ${
+						className={`w-full md:w-1/${
+							tabs.length
+						} px-4 py-2 font-medium text-sm ${
 							activeTab === tab.id
 								? "bg-indigo-900 text-white"
 								: "text-gray-700"

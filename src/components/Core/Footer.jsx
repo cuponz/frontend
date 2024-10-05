@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logofooter.png";
+import { useTranslations } from "../../store/languages";
 
 const Footer = () => {
+	const { t } = useTranslations();
 	const links = [
-		{ to: "/", text: "Home" },
-		{ to: "/coupon", text: "Hot Deals" },
-		{ to: "/contactus", text: "Contact Us" },
-		{ to: "/aboutus", text: "About Us" },
+		{ to: "/", text: t(["footer", "home"]) },
+		{ to: "/coupon", text: t(["footer", "coupons"]) },
+		{ to: "/contactus", text: t(["footer", "contactUs"]) },
+		{ to: "/aboutus", text: t(["footer", "aboutUs"]) },
 	];
 
 	return (
@@ -30,7 +32,9 @@ const Footer = () => {
 				</div>
 				<hr className="border-gray-600 mb-5" />
 				<div className="flex flex-col md:flex-row justify-between items-center">
-					<div className="mb-4 md:mb-0">© 2024 G71. All rights reserved.</div>
+					<div className="mb-4 md:mb-0">
+						<span>{t(["footer", "copyright"])}</span>
+					</div>
 				</div>
 			</div>
 		</footer>

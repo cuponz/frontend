@@ -2,10 +2,12 @@ import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaShop } from "react-icons/fa6";
 // import couponData from "../../../data/couponData.json";
+import { useTranslations } from "../../../store/languages";
 
 const couponData = {};
 
 const SearchBarNav = () => {
+	const { t } = useTranslations();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filteredCoupons, setFilteredCoupons] = useState([]);
 
@@ -27,7 +29,7 @@ const SearchBarNav = () => {
 		} else {
 			const results = couponData
 				.filter((coupon) =>
-					coupon.shopName.toLowerCase().includes(value.toLowerCase()),
+					coupon.shopName.toLowerCase().includes(value.toLowerCase())
 				)
 				.reduce((unique, coupon) => {
 					if (!unique.some((item) => item.shopName === coupon.shopName)) {
@@ -45,7 +47,7 @@ const SearchBarNav = () => {
 				<input
 					id="search-input"
 					type="text"
-					placeholder="Search"
+					placeholder={t(["navigation", "searchBar"])}
 					value={searchTerm}
 					onChange={handleSearchChange}
 					className="w-full pl-10 pr-4 py-2 border rounded-full shadow-md"

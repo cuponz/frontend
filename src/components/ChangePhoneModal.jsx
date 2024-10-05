@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Validators, CountryListWithCode } from "../constants";
+import { useTranslations } from "../store/languages";
 
 const ChangePhoneModal = ({
 	isOpen,
@@ -7,6 +8,7 @@ const ChangePhoneModal = ({
 	onSubmit,
 	currentPhoneNumber,
 }) => {
+	const { t } = useTranslations();
 	const [newPhoneNumber, setNewPhoneNumber] = useState("");
 	const [confirmPhoneNumber, setConfirmPhoneNumber] = useState("");
 	const [selectedRegion, setSelectedRegion] = useState("AU"); // Default to Australia
@@ -69,14 +71,16 @@ const ChangePhoneModal = ({
 				ref={modalRef}
 				className="bg-white p-5 rounded-lg shadow-xl max-w-md w-full"
 			>
-				<h2 className="text-xl font-bold mb-4">Change Phone Number</h2>
+				<h2 className="text-xl font-bold mb-4">
+					{t(["changePhoneModal", "title"])}
+				</h2>
 				<form onSubmit={handleSubmit}>
 					<div className="mb-4">
 						<label
 							htmlFor="region"
 							className="block text-sm font-medium text-gray-700 mb-1"
 						>
-							Region
+							{t(["changePhoneModal", "region"])}
 						</label>
 						<select
 							id="region"
@@ -96,7 +100,7 @@ const ChangePhoneModal = ({
 							htmlFor="newPhoneNumber"
 							className="block text-sm font-medium text-gray-700 mb-1"
 						>
-							New Phone Number
+							{t(["changePhoneModal", "newNumber"])}
 						</label>
 						<input
 							type="tel"
@@ -112,7 +116,7 @@ const ChangePhoneModal = ({
 							htmlFor="confirmPhoneNumber"
 							className="block text-sm font-medium text-gray-700 mb-1"
 						>
-							Confirm New Phone Number
+							{t(["changePhoneModal", "confirmNumber"])}
 						</label>
 						<input
 							type="tel"
@@ -125,7 +129,7 @@ const ChangePhoneModal = ({
 					</div>
 					{error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 					<button type="submit" className={buttonClasses}>
-						Change Phone Number
+						{t(["changePhoneModal", "changeNumBtn"])}
 					</button>
 				</form>
 			</div>

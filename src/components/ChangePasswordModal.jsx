@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "../store/languages";
 
 const ChangePasswordModal = ({ isOpen, onClose, onSubmit }) => {
+	const { t } = useTranslations();
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -45,14 +47,16 @@ const ChangePasswordModal = ({ isOpen, onClose, onSubmit }) => {
 				ref={modalRef}
 				className="bg-white p-5 rounded-lg shadow-xl max-w-md w-full"
 			>
-				<h2 className="text-xl font-bold mb-4">Change Password</h2>
+				<h2 className="text-xl font-bold mb-4">
+					{t(["changePasswordModal", "title"])}
+				</h2>
 				<form onSubmit={handleSubmit}>
 					<div className="mb-4">
 						<label
 							htmlFor="oldPassword"
 							className="block text-sm font-medium text-gray-700 mb-1"
 						>
-							Old Password
+							{t(["changePasswordModal", "oldPassword"])}
 						</label>
 						<input
 							type={showPassword ? "text" : "password"}
@@ -68,7 +72,7 @@ const ChangePasswordModal = ({ isOpen, onClose, onSubmit }) => {
 							htmlFor="newPassword"
 							className="block text-sm font-medium text-gray-700 mb-1"
 						>
-							New Password
+							{t(["changePasswordModal", "newPassword"])}
 						</label>
 						<input
 							type={showPassword ? "text" : "password"}
@@ -84,7 +88,7 @@ const ChangePasswordModal = ({ isOpen, onClose, onSubmit }) => {
 							htmlFor="confirmPassword"
 							className="block text-sm font-medium text-gray-700 mb-1"
 						>
-							Confirm New Password
+							{t(["changePasswordModal", "confirmNewPass"])}
 						</label>
 						<input
 							type={showPassword ? "text" : "password"}
@@ -103,11 +107,13 @@ const ChangePasswordModal = ({ isOpen, onClose, onSubmit }) => {
 								onChange={() => setShowPassword(!showPassword)}
 								className="mr-2"
 							/>
-							<span className="text-sm text-gray-700">Show password</span>
+							<span className="text-sm text-gray-700">
+								{t(["changePasswordModal", "showPass"])}
+							</span>
 						</label>
 					</div>
 					<button type="submit" className={buttonClasses}>
-						Change Password
+						{t(["changePasswordModal", "changePassBtn"])}
 					</button>
 				</form>
 			</div>

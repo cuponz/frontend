@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import OTPInput from "./OTPInput";
 import Popup from "./Popup";
+import { useTranslations } from "../../store/languages";
 
-const OTPModal = ({ isOpen, onClose, onVerify, email, onChangeEmail }) => {
+const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
+	const { t } = useTranslations();
 	const [error, setError] = useState("");
 	const [isVerifying, setIsVerifying] = useState(false);
 	const [popup, setPopup] = useState(null);
@@ -49,11 +51,6 @@ const OTPModal = ({ isOpen, onClose, onVerify, email, onChangeEmail }) => {
 		}, 2000);
 	};
 
-	const handleChangeEmail = () => {
-		onChangeEmail();
-		onClose();
-	};
-
 	if (!isOpen) return null;
 
 	return (
@@ -62,8 +59,10 @@ const OTPModal = ({ isOpen, onClose, onVerify, email, onChangeEmail }) => {
 				ref={modalRef}
 				className="bg-white p-5 rounded-lg shadow-xl max-w-md w-full modal-content"
 			>
-				<h2 className="text-xl font-bold mb-4">Verify Email</h2>
-				<p className="mb-2">Please enter the OTP sent to:</p>
+				<h2 className="text-xl font-bold mb-4">
+					{t(["changeEmailModal", "OTP", "title"])}
+				</h2>
+				<p className="mb-2">{t(["changeEmailModal", "OTP", "quote"])}</p>
 				<p className="mb-4 font-semibold">{email}</p>
 				<OTPInput
 					length={6}
@@ -75,23 +74,18 @@ const OTPModal = ({ isOpen, onClose, onVerify, email, onChangeEmail }) => {
 				{isVerifying && (
 					<div className="mt-4 flex items-center justify-center">
 						<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-						<span className="ml-2">Verifying...</span>
+						<span className="ml-2">
+							{t(["changeEmailModal", "OTP", "verifying"])}
+						</span>
 					</div>
 				)}
 				<div className="mt-4 flex justify-between">
-					<button
-						className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-						onClick={handleChangeEmail}
-						disabled={isVerifying}
-					>
-						Change Email
-					</button>
 					<button
 						className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-[#E0DFFE] hover:bg-[#D0CFFE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E0DFFE]"
 						onClick={onClose}
 						disabled={isVerifying}
 					>
-						Cancel
+						{t(["changeEmailModal", "OTP", "cancelBtn"])}
 					</button>
 				</div>
 			</div>
