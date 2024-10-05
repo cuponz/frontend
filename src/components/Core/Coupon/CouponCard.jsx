@@ -50,6 +50,7 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
   const [modalType, setModalType] = useState(null);
 
   let {
+    code,
     logo_url: logo,
     title,
     desc: description,
@@ -116,6 +117,9 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
             className="sm:w-48 md:w-96 h-96 object-contain"
           />
         </div>
+        <h1 className="text-3xl font-semibold font-mono mb-3 transition-all tracking-wide hover:tracking-widest hover:text-[#46467A]">
+          {code}
+        </h1>
         <h2 className="text-lg font-semibold mb-1">{title}</h2>
         <p className="text-gray-700 text-sm mb-2">{shop}</p>
         <p className="mt-2 text-gray-600 text-sm">{categoryName}</p>

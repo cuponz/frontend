@@ -1,6 +1,6 @@
-import Navbar from "../components/Core/Navbar";
-import Footer from "../components/Core/Footer";
-import { ToastContainer } from "react-toastify";
+import Navbar from "@/components/Core/Navbar";
+import Footer from "@/components/Core/Footer";
+import { Toaster } from "sonner";
 
 const Layout = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
           {children}
         </main>
         <Footer />
-        <ToastContainer />
+        <Toaster closeButton richColors position="bottom-right" />
       </div>
     </>
   );

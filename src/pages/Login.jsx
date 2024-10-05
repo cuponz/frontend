@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import CouponImage2 from "../assets/coupon2.png";
-import Layout from "../layout/layout";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Layout from "../layout/Layout";
+import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../api/user";
 import TogglePassword from "../components/Utils/TogglePassword";

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import CouponImage1 from "../assets/coupon1.png";
 import CouponImage2 from "../assets/coupon2.png";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
+
+import Layout from "../layout/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../layout/layout";
 import { UserType, CountryListWithCode } from "../constants";

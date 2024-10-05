@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, Outlet } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
-import { useUserStore } from "../../store/user";
-import { userAuth } from "../../api/user";
+import { useUserStore } from "@/store/user";
+import { userAuth } from "@/api/user";
 
-import Layout from "../../layout/layout";
+import Layout from "@/layout/Layout";
 import { useEffect } from "react";
 
 const LoadingSpinner = () => <div>Loading...</div>;
@@ -25,9 +25,27 @@ const AuthWrapper = ({ isProtected }) => {
     enabled: !user,
   });
 
-  if (isProtected && isFetched && !data) {
-    setUser(undefined);
-    navigate("/login");
+	if (isProtected && isFetched && !data) {
+		setUser(undefined)
+		navigate("/login");
+	}
+
+	useEffect(() => {
+		if (data) {
+			toast.success("Logged in");
+			setUser(data.user)
+		}
+		if (isError) {
+			toast.error(error?.message || "Authentication error");
+			setUser(undefined)
+			if (isProtected) {
+				navigate("/login");
+			}
+		}
+	}, [data, error])
+
+  if (isPending) {
+		return <Layout><LoadingSpinner /></Layout>
   }
 
   useEffect(() => {
