@@ -1,15 +1,18 @@
-// Setting for shop owner profile (shop owner view)
 import { useState, useEffect } from "react";
 import shopOwnerData from "../data/shopOwnerData.json";
 import ChangePasswordModal from "../components/ChangePasswordModal";
+import ChangeEmailModal from "../components/ChangeEmailModal";
+import ChangePhoneModal from "../components/ChangePhoneModal";
 
 const Setting = () => {
 	const [userData, setUserData] = useState(null);
 	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+	const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+	const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
 
 	useEffect(() => {
 		const gadgetHubUser = shopOwnerData.find(
-			(user) => user.user_name === "GadgetHub",
+			(user) => user.user_name === "GadgetHub"
 		);
 		setUserData(gadgetHubUser);
 	}, []);
@@ -17,7 +20,7 @@ const Setting = () => {
 	if (!userData) return null;
 
 	const inputClasses =
-		"w-full rounded-md sm:text-sm border-2 border-gray-300 focus:border-[#E0DFFE] focus:ring focus:ring-[#E0DFFE] focus:ring-opacity-50 px-3 py-2";
+		"w-full rounded-md sm:text-sm border-2 border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed focus:border-gray-300 focus:ring-0 px-3 py-2";
 	const buttonClasses =
 		"w-full sm:w-24 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-[#E0DFFE] hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E0DFFE]";
 
@@ -29,8 +32,24 @@ const Setting = () => {
 		setIsPasswordModalOpen(false);
 	};
 
+	const handleEmailChange = (newEmail) => {
+		setUserData((prevData) => ({
+			...prevData,
+			email: newEmail,
+		}));
+		setIsEmailModalOpen(false);
+	};
+
+	const handlePhoneChange = (newPhoneNumber) => {
+		setUserData((prevData) => ({
+			...prevData,
+			phoneNumber: newPhoneNumber,
+		}));
+		setIsPhoneModalOpen(false);
+	};
+
 	return (
-		<div className="max-w-2xl mx-auto  p-4 sm:p-6 bg-white rounded-lg ">
+		<div className="max-w-2xl mx-auto p-4 sm:p-6 bg-white rounded-lg">
 			<div className="space-y-6">
 				<div>
 					<label
@@ -94,7 +113,10 @@ const Setting = () => {
 							placeholder="Add your email"
 							readOnly
 						/>
-						<button className={buttonClasses}>
+						<button
+							className={buttonClasses}
+							onClick={() => setIsEmailModalOpen(true)}
+						>
 							{userData.email ? "Change" : "Add"}
 						</button>
 					</div>
@@ -117,7 +139,10 @@ const Setting = () => {
 							placeholder="Add your phone number"
 							readOnly
 						/>
-						<button className={buttonClasses}>
+						<button
+							className={buttonClasses}
+							onClick={() => setIsPhoneModalOpen(true)}
+						>
 							{userData.phoneNumber ? "Change" : "Add"}
 						</button>
 					</div>
@@ -127,6 +152,20 @@ const Setting = () => {
 					isOpen={isPasswordModalOpen}
 					onClose={() => setIsPasswordModalOpen(false)}
 					onSubmit={handlePasswordChange}
+				/>
+
+				<ChangeEmailModal
+					isOpen={isEmailModalOpen}
+					onClose={() => setIsEmailModalOpen(false)}
+					onSubmit={handleEmailChange}
+					currentEmail={userData.email}
+				/>
+
+				<ChangePhoneModal
+					isOpen={isPhoneModalOpen}
+					onClose={() => setIsPhoneModalOpen(false)}
+					onSubmit={handlePhoneChange}
+					currentPhoneNumber={userData.phoneNumber}
 				/>
 			</div>
 		</div>

@@ -4,15 +4,10 @@ import CouponImage2 from "../assets/coupon2.png";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/layout/Layout";
-import { UserType, CountryListWithCode } from "../constants";
+import { UserType, CountryListWithCode, Validators } from "../constants";
 import { useMutation } from "@tanstack/react-query";
 import { userRegister } from "../api/user";
-import validator from "validator";
 import TogglePassword from "../components/Utils/TogglePassword";
-import {
-	parsePhoneNumberFromString,
-	isValidPhoneNumber,
-} from "libphonenumber-js";
 
 const RegisterPage = () => {
 	const [formData, setFormData] = useState({
@@ -48,43 +43,23 @@ const RegisterPage = () => {
 		},
 	});
 
-	const formatPhoneNumber = (phone, region) => {
-		try {
-			const parsedPhone = parsePhoneNumberFromString(phone, region);
-			return parsedPhone && parsedPhone.isValid()
-				? parsedPhone.format("E.164")
-				: null;
-		} catch (error) {
-			console.error("Phone parsing error:", error);
-			return null;
-		}
-	};
-
 	const validateForm = () => {
 		let formErrors = {};
 
-		if (!validator.isLength(formData.firstName, { min: 2 })) {
+		if (!Validators.isValidName(formData.firstName)) {
 			formErrors.firstName = "First name should be at least 2 characters long";
 		}
-		if (!validator.isLength(formData.lastName, { min: 2 })) {
+		if (!Validators.isValidName(formData.lastName)) {
 			formErrors.lastName = "Last name should be at least 2 characters long";
 		}
-		if (!validator.isEmail(formData.email)) {
+		if (!Validators.isValidEmail(formData.email)) {
 			formErrors.email = "Please enter a valid email address";
 		}
-
-		if (formData.phoneNumber.trim() !== "") {
-			const isValidPhone = isValidPhoneNumber(
-				formData.phoneNumber,
-				formData.region,
-			);
-			if (!isValidPhone) {
-				formErrors.phoneNumber =
-					"Please enter a valid phone number or leave it blank";
-			}
+		if (!Validators.isValidPhoneNumber(formData.phoneNumber, formData.region)) {
+			formErrors.phoneNumber =
+				"Please enter a valid phone number or leave it blank";
 		}
-
-		if (!validator.isLength(formData.password, { min: 8 })) {
+		if (!Validators.isValidPassword(formData.password)) {
 			formErrors.password = "Password should be at least 8 characters long";
 		}
 		if (formData.password !== formData.confirmPassword) {
@@ -103,7 +78,7 @@ const RegisterPage = () => {
 		if (validateForm()) {
 			const formattedPhone =
 				formData.phoneNumber.trim() !== ""
-					? formatPhoneNumber(formData.phoneNumber, formData.region)
+					? Validators.formatPhoneNumber(formData.phoneNumber, formData.region)
 					: null;
 
 			const registerData = {
