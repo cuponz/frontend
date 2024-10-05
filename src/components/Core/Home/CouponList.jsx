@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCoupons } from "../../../api/coupon";
 import LoadingSpinner from "../../Utils/LoadingSpinner";
+import { CiTimer } from "react-icons/ci";
 
 const HomeCouponList = () => {
-	const { isPending, data: coupons = [] } = useQuery({
-		queryKey: ["get", "coupons"],
-		queryFn: getCoupons,
-		retry: false,
-	});
+  const { isPending, data: coupons = [] } = useQuery({
+    queryKey: ["get", "coupons"],
+    queryFn: getCoupons,
+    retry: false,
+  });
 
   if (isPending) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
   return (
@@ -27,10 +28,7 @@ const HomeCouponList = () => {
             className="flex bg-blue-200 rounded-lg p-6 items-center"
           >
             <div className="flex-shrink-0">
-              <img
-                src={coupon.logo_url}
-                className="h-20 w-20 rounded-full"
-              />
+              <img src={coupon.logo_url} className="h-20 w-20 rounded-full" />
             </div>
             <div className="ml-6">
               <h3 className="text-xl font-bold text-indigo-900 mb-2">
@@ -47,9 +45,8 @@ const HomeCouponList = () => {
           className="text-indigo-900 text-lg font-semibold flex items-center"
         >
           View All Coupons
-          <svg className="ml-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12s12-5.373 12-12C24 5.373 18.627 0 12 0zM12 22C6.486 22 2 17.514 2 12 2 6.486 6.486 2 12 2c5.514 0 10 4.486 10 10C22 17.514 17.514 22 12 22zM16 11h-4V7h-2v6h6V11z" />
-          </svg>
+          {/* svg delete */}
+          <CiTimer className="text-3xl ml-2" />
         </Link>
       </div>
     </div>
