@@ -2,31 +2,31 @@ import Coupon from "./Coupon";
 import { couponData } from "../data/couponData";
 
 function ShopCouponList() {
-  // Select only the first 4 coupons from the data array
-  const topFourCoupons = couponData.slice(0, 4);
+	// Select only the first 4 coupons from the data array
+	const topFourCoupons = couponData.slice(0, 4);
 
-  return (
-    <div className="flex justify-center">
-      <div className="max-w-4xl w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-          {" "}
-          {topFourCoupons.map((coupon, index) => (
-            <Coupon
-              key={index}
-              logo={coupon.logo}
-              title={coupon.title}
-              description={coupon.description}
-              keywords={coupon.keywords}
-              startDate={coupon.startDate}
-              endDate={coupon.endDate}
-              couponCount={coupon.couponCount}
-              shopName={coupon.shopName}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="flex justify-center">
+			<div className="max-w-4xl w-full">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+					{" "}
+					{topFourCoupons.map((coupon, index) => (
+						<Coupon
+							key={index}
+							logo={coupon.logo}
+							title={coupon.title}
+							description={coupon.description}
+							keywords={coupon.keywords}
+							startDate={coupon.startDate}
+							endDate={coupon.endDate}
+							couponCount={coupon.couponCount}
+							shopName={coupon.shopName}
+						/>
+					))}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default ShopCouponList;

@@ -14,12 +14,20 @@ import CouponBoard from "./CouponBoard";
 import { CouponCatalougeType } from "../../../constants";
 import UserTable from "../Profiles/Shop/UserTable";
 
-import { getCoupons, getCouponsByShopIdFromShop, getCouponsByShopIdFromOthers } from "../../../api/coupon";
+import {
+	getCoupons,
+	getCouponsByShopIdFromShop,
+	getCouponsByShopIdFromOthers,
+} from "../../../api/coupon";
 import { getRedemptionsByUserId } from "../../../api/redemptions";
 import { useUserStore } from "../../../store/user";
 
-const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) => {
-  const user = useUserStore((state) => state.user);
+const CouponCatalogueBoard = ({
+	type,
+	setShowUserTable,
+	setSelectedCouponId,
+}) => {
+	const user = useUserStore((state) => state.user);
 
 	let [queryKey, queryFn] = useMemo(() => {
 		let queryKey, queryFn;
@@ -52,42 +60,43 @@ const CouponCatalogueBoard = ({ type, setShowUserTable, setSelectedCouponId }) =
 	});
 
 	if (isPending) {
-		return <LoadingSpinner />
+		return <LoadingSpinner />;
 	}
 
 	return (
-		<CouponBoard 
+		<CouponBoard
 			coupons={data}
 			type={type}
 			setShowUserTable={setShowUserTable}
 			setSelectedCouponId={setSelectedCouponId}
 		/>
-	)
-}
+	);
+};
 
 const CouponCatalogue = ({ type }) => {
 	const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);
 	const [showPopup, setShowPopup] = useState(true);
 	const [showUserTable, setShowUserTable] = useState(false);
-	const [selectedCouponId, setSelectedCouponId] = useState(null)
+	const [selectedCouponId, setSelectedCouponId] = useState(null);
 
 	const [searchParams] = useSearchParams();
 
-	const [
-		setStartDate,
-		setEndDate,
-		setSelectedCategories,
-		setSearchTerm
-	] = useCouponFiltersStore((state) => [
-		state.setStartDate,
-		state.setEndDate,
-		state.setSelectedCategories,
-		state.setSearchTerm,
-	]);
+	const [setStartDate, setEndDate, setSelectedCategories, setSearchTerm] =
+		useCouponFiltersStore((state) => [
+			state.setStartDate,
+			state.setEndDate,
+			state.setSelectedCategories,
+			state.setSearchTerm,
+		]);
 
 	useEffect(() => {
-		updateFiltersFromParams(searchParams, setStartDate, setEndDate, setSelectedCategories);
-	}, [searchParams])
+		updateFiltersFromParams(
+			searchParams,
+			setStartDate,
+			setEndDate,
+			setSelectedCategories,
+		);
+	}, [searchParams]);
 
 	useEffect(() => {
 		// Scroll to the top of the page when toggle user table
@@ -98,7 +107,10 @@ const CouponCatalogue = ({ type }) => {
 		setShowPopup(false);
 	};
 
-	const handleSearchChange = useCallback((e) => setSearchTerm(e.target.value), []);
+	const handleSearchChange = useCallback(
+		(e) => setSearchTerm(e.target.value),
+		[],
+	);
 
 	const toggleFilterBoard = () => {
 		setIsFilterBoardVisible(!isFilterBoardVisible);
@@ -146,24 +158,23 @@ const CouponCatalogue = ({ type }) => {
 			)}
 
 			<div
-				className={`fixed top-0 left-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 transform ${isFilterBoardVisible ? "translate-x-0" : "-translate-x-full"
-					}`}
+				className={`fixed top-0 left-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 transform ${
+					isFilterBoardVisible ? "translate-x-0" : "-translate-x-full"
+				}`}
 				style={{ width: "70%", maxWidth: "300px" }}
 			>
 				{isFilterBoardVisible && (
-					<FilterBoard
-						closeFilterBoard={toggleFilterBoard}
-					/>
+					<FilterBoard closeFilterBoard={toggleFilterBoard} />
 				)}
 			</div>
 
-			<CouponCatalogueBoard 
+			<CouponCatalogueBoard
 				type={type}
 				setShowUserTable={setShowUserTable}
 				setSelectedCouponId={setSelectedCouponId}
 			/>
 		</>
-	)
-}
+	);
+};
 
 export default CouponCatalogue;

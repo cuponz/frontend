@@ -15,63 +15,63 @@ import Noti from "@/pages/RedeemResult";
 import ShoppingCart from "@/pages/ShoppingCart";
 
 const routes = [
-  {
-    path: "/",
-    element: <AuthWrapper/>,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/aboutus",
-        element: <AboutUs />,
-      },
-      {
-        path: "/contactus",
-        element: <ContactUs />,
-      },
-      {
-        path: "/coupon",
-        element: <CouponPage />,
-      },
-      {
-        path: "/cart",
-        element: <ShoppingCart />,
-      },
-    ]
-  },
-  {
-    path: "/",
-    element: <AuthWrapper isProtected />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "profile",
-        element: <UserProfile />,
-      },
-      {
-        path: "/redeem/:redeemId",
-        element: <Noti />,
-      },
-    ]
-  },
-  {
-    path: "/shop",
-    element: <ShopOwnerProfilePage />,
-    errorElement: <ErrorPage />,
+	{
+		path: "/",
+		element: <AuthWrapper />,
+		errorElement: <ErrorPage />,
+		children: [
+			{
+				path: "/",
+				element: <HomePage />,
+			},
+			{
+				path: "/aboutus",
+				element: <AboutUs />,
+			},
+			{
+				path: "/contactus",
+				element: <ContactUs />,
+			},
+			{
+				path: "/coupon",
+				element: <CouponPage />,
+			},
+			{
+				path: "/cart",
+				element: <ShoppingCart />,
+			},
+		],
 	},
 	{
-    path: "/login",
-    element: <Login />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-    errorElement: <ErrorPage />,
-  },
+		path: "/",
+		element: <AuthWrapper isProtected />,
+		errorElement: <ErrorPage />,
+		children: [
+			{
+				path: "profile",
+				element: <UserProfile />,
+			},
+			{
+				path: "/redeem/:redeemId",
+				element: <Noti />,
+			},
+		],
+	},
+	{
+		path: "/shop",
+		element: <ShopOwnerProfilePage />,
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: "/login",
+		element: <Login />,
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: "/register",
+		element: <Register />,
+		errorElement: <ErrorPage />,
+	},
 ];
 
 export default routes;

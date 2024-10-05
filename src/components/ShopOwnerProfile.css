@@ -1,49 +1,49 @@
 .profile-section {
-    padding: 20px;
-    margin: 10px;
-    text-align: center;
-    display: flex; /* Use flex to align children */
-    flex-direction: column; /* Stack children vertically */
-    justify-content: space-between; /* Space between header and tabs */
-    padding-bottom: 40px; /* Remove padding from bottom */
-  }
-  
-  .profile-header {
-    display: flex;
-    align-items: center;
-  }
-  
-  .avatar {
-    height: 80px;
-    width: 80px;
-    background-color: #ccc;
-    border-radius: 50%;
-    margin-right: 20px;
-  }
-  
-  .profile-details h1, .profile-details p {
-    margin: 0;
-  }
-  
-  .profile-tabs {
-    margin-top: 50px;
-    display: flex;
-    justify-content: flex-start; /* Align tabs to the right */
-    border-top: 2px solid #000000;
-    padding-top: 10px;
-  }
-  
-  .tab {
-    padding: 10px 20px;
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px; /* Spacing between buttons */
-  }
-  
-  .tab:not(.active) {
-    background-color: gray;
-  }
-  
+	padding: 20px;
+	margin: 10px;
+	text-align: center;
+	display: flex; /* Use flex to align children */
+	flex-direction: column; /* Stack children vertically */
+	justify-content: space-between; /* Space between header and tabs */
+	padding-bottom: 40px; /* Remove padding from bottom */
+}
+
+.profile-header {
+	display: flex;
+	align-items: center;
+}
+
+.avatar {
+	height: 80px;
+	width: 80px;
+	background-color: #ccc;
+	border-radius: 50%;
+	margin-right: 20px;
+}
+
+.profile-details h1,
+.profile-details p {
+	margin: 0;
+}
+
+.profile-tabs {
+	margin-top: 50px;
+	display: flex;
+	justify-content: flex-start; /* Align tabs to the right */
+	border-top: 2px solid #000000;
+	padding-top: 10px;
+}
+
+.tab {
+	padding: 10px 20px;
+	background-color: blue;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: 10px; /* Spacing between buttons */
+}
+
+.tab:not(.active) {
+	background-color: gray;
+}

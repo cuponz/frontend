@@ -3,25 +3,25 @@ import ShopCoupon from "../components/ShopCoupon";
 import UserTable from "../components/UserTable";
 
 const CouponApp = () => {
-  const [selectedCouponId, setSelectedCouponId] = useState(null);
+	const [selectedCouponId, setSelectedCouponId] = useState(null);
 
-  const handleShowDetails = (couponId) => {
-    setSelectedCouponId(couponId);
-  };
+	const handleShowDetails = (couponId) => {
+		setSelectedCouponId(couponId);
+	};
 
-  const handleBack = () => {
-    setSelectedCouponId(null);
-  };
+	const handleBack = () => {
+		setSelectedCouponId(null);
+	};
 
-  return (
-    <div>
-      {selectedCouponId ? (
-        <UserTable onBack={handleBack} couponId={selectedCouponId} />
-      ) : (
-        <ShopCoupon onShowDetails={handleShowDetails} />
-      )}
-    </div>
-  );
+	return (
+		<div>
+			{selectedCouponId ? (
+				<UserTable onBack={handleBack} couponId={selectedCouponId} />
+			) : (
+				<ShopCoupon onShowDetails={handleShowDetails} />
+			)}
+		</div>
+	);
 };
 
 export default CouponApp;

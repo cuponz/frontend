@@ -1,8 +1,14 @@
-const updateFiltersFromParams = (params, setStartDate, setEndDate, setSelectedCategories, setSearchTerm) => {
-	const startDate = params.get('start');
-	const endDate = params.get('end');
-	const categories = params.getAll('categories[]');
-	const searchTerm = params.get('search');
+const updateFiltersFromParams = (
+	params,
+	setStartDate,
+	setEndDate,
+	setSelectedCategories,
+	setSearchTerm,
+) => {
+	const startDate = params.get("start");
+	const endDate = params.get("end");
+	const categories = params.getAll("categories[]");
+	const searchTerm = params.get("search");
 
 	if (startDate) {
 		setStartDate(startDate);
@@ -19,8 +25,6 @@ const updateFiltersFromParams = (params, setStartDate, setEndDate, setSelectedCa
 	if (searchTerm) {
 		setSearchTerm(searchTerm);
 	}
-}
+};
 
-export {
-	updateFiltersFromParams,
-}
+export { updateFiltersFromParams };

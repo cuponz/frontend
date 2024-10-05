@@ -6,27 +6,29 @@ import CouponCard from "./CouponCard";
 import { useCouponFiltersStore } from "../../../store/filters";
 import PaginationContainer from "../../Wrapper/PaginationContainer";
 
-const CouponBoard = ({ isPending, coupons = [], type, setShowUserTable, setSelectedCouponId }) => {
-  const appliedFilters = useCouponFiltersStore((state) => state.appliedFilters);
+const CouponBoard = ({
+	isPending,
+	coupons = [],
+	type,
+	setShowUserTable,
+	setSelectedCouponId,
+}) => {
+	const appliedFilters = useCouponFiltersStore((state) => state.appliedFilters);
 
-  const fuse = useMemo(
-    () =>
-      new Fuse(coupons, {
-        keys: ["title", "desc", "keywords", "shop_name"],
-        threshold: 0.3,
-      }),
-    [coupons]
-  );
+	const fuse = useMemo(
+		() =>
+			new Fuse(coupons, {
+				keys: ["title", "desc", "keywords", "shop_name"],
+				threshold: 0.3,
+			}),
+		[coupons],
+	);
 
 	const filteredCoupons = useMemo(() => {
 		let filtered = coupons;
 
-		const {
-			selectedCategories,
-			startDate,
-			endDate,
-			searchTerm,
-		} = appliedFilters;
+		const { selectedCategories, startDate, endDate, searchTerm } =
+			appliedFilters;
 
 		if (searchTerm) {
 			const searchResults = fuse.search(searchTerm);
@@ -34,7 +36,10 @@ const CouponBoard = ({ isPending, coupons = [], type, setShowUserTable, setSelec
 		}
 
 		filtered = filtered.filter((coupon) => {
-			if (selectedCategories.length > 0 && !selectedCategories.includes(coupon.category)) {
+			if (
+				selectedCategories.length > 0 &&
+				!selectedCategories.includes(coupon.category)
+			) {
 				return false;
 			}
 			if (startDate && coupon.start_date < startDate) {
@@ -50,25 +55,27 @@ const CouponBoard = ({ isPending, coupons = [], type, setShowUserTable, setSelec
 		return filtered;
 	}, [appliedFilters, fuse, coupons]);
 
-  const handleShowStats = (couponId) => {
-    setSelectedCouponId(couponId);
-    setShowUserTable(true);
-  };
+	const handleShowStats = (couponId) => {
+		setSelectedCouponId(couponId);
+		setShowUserTable(true);
+	};
 
-  return (
-    <PaginationContainer
-      items={filteredCoupons}
-      isPending={isPending}
-      renderItems={(currentCoupons) => currentCoupons.map((coupon, index) => (
-        <CouponCard
-          key={index}
-          coupon={coupon}
-          type={type}
-          onShowStats={handleShowStats}
-        />
-      ))}
-    />
-  );
+	return (
+		<PaginationContainer
+			items={filteredCoupons}
+			isPending={isPending}
+			renderItems={(currentCoupons) =>
+				currentCoupons.map((coupon, index) => (
+					<CouponCard
+						key={index}
+						coupon={coupon}
+						type={type}
+						onShowStats={handleShowStats}
+					/>
+				))
+			}
+		/>
+	);
 };
 
 export default CouponBoard;
