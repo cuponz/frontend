@@ -7,8 +7,21 @@ const DEFAULT_LANGUAGE = "en";
 
 const getSupportedLanguages = async () => {
   try {
-    const context = require.context("../locales", false, /\.json$/);
-    return context.keys().map((key) => key.match(/\.\/(.*)\.json/)[1]);
+    const languages = ["en", "es"]; // Add your supported languages here.
+    
+    const loadedLanguages = await Promise.all(
+      languages.map(async (lang) => {
+        try {
+          await import(`../locales/${lang}.json`);
+          return lang;
+        } catch (error) {
+          console.warn(`Language file for ${lang} could not be loaded.`, error);
+          return null; // Return null or handle unavailable languages.
+        }
+      })
+    );
+
+    return loadedLanguages.filter(Boolean); // Filter out any null values.
   } catch (error) {
     console.error("Failed to load supported languages", error);
     return ["en", "es"];

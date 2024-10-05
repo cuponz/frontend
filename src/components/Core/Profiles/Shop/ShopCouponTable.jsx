@@ -25,10 +25,10 @@ const ShopCouponTable = () => {
 
   // Mutations
   const editMutation = useMutation({
-    // mutationFn: editCoupon,
-    mutationFn: () => {},
+    queryKey: ["get", "coupons", "shop"],
+    mutationFn: editCoupon,
     onSuccess: () => {
-      queryClient.invalidateQueries(["get", "coupons", "shop"]);
+      toast.success("Coupon edited successfully");
     },
     onError: (error) => {
       toast.error(error.message || "Failed to update coupon");
@@ -36,8 +36,7 @@ const ShopCouponTable = () => {
   });
 
   const pauseMutation = useMutation({
-    // mutationFn: pauseCoupon,
-    mutationFn: () => {},
+    mutationFn: pauseCoupon,
     onSuccess: () => {
       toast.success("Coupon paused successfully");
     },
