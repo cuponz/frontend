@@ -1,10 +1,10 @@
 ## API
- 
+
 - [x] Get Coupons
 - [x] Get Categories
 - [x] Get Groups
 - [x] Auth
-- [x] Login 
+- [x] Login
 - [ ] Register
 - [ ] Create Category
 - [ ] Create Coupon
@@ -17,10 +17,10 @@
 - [x] Finish Logout
 - [x] Finish Navbar categories
 - [ ] Finish Profile Page for user, shop and admin
-	- [x] Shop
-	- [ ] User
-	- [ ] Manager
+  - [x] Shop
+  - [ ] User
+  - [ ] Manager
 - [ ] Finish Profile Page for shop when view as user
-	- [ ] Search Shop Profile in the search bar
+  - [ ] Search Shop Profile in the search bar
 - [ ] Finish Setting Page for user profile page
 - [ ] Finish Redeem Coupon Flow

@@ -4,22 +4,22 @@ import { useUserStore } from "../store/user";
 import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
-	const user = useUserStore(state => state.user);
+	const user = useUserStore((state) => state.user);
 	const navigate = useNavigate();
 
 	if (user && user.type !== UserType.User) {
 		navigate("/");
 	}
 
-  return (
-    <>
-      <div className="min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-10">
+	return (
+		<>
+			<div className="min-h-screen">
+				<div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-10">
 					<UserCoupon type={CouponCatalougeType.User} />
-        </div>
-      </div>
-    </>
-  );
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default ShoppingCart;

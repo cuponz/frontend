@@ -1,12 +1,12 @@
 {
-  "Home": "Home",
-  "Coupons": "Coupons",
-  "Categories": "Categories",
-  "About Us": "About Us",
-  "Contact Us": "Contact Us",
-  "Your Profile": "Your Profile",
-  "Cart": "Cart",
-  "Settings": "Settings",
-  "Logout": "Logout",
-  "Login": "Login"
+	"Home": "Home",
+	"Coupons": "Coupons",
+	"Categories": "Categories",
+	"About Us": "About Us",
+	"Contact Us": "Contact Us",
+	"Your Profile": "Your Profile",
+	"Cart": "Cart",
+	"Settings": "Settings",
+	"Logout": "Logout",
+	"Login": "Login"
 }
