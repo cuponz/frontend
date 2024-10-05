@@ -56,5 +56,6 @@ export {
 	getCouponsByShopIdFromShop,
 	creatingCoupon,
   editCoupon,
+  pauseCoupon,
   deleteCoupon,
 }

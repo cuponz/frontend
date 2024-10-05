@@ -2,8 +2,8 @@ import { useState } from "react";
 import { format } from "date-fns";
 
 import PopupCreateCoupon from "@/components/PopupCreateCoupon";
-import { getCouponsByShopIdFromShop } from "@/api/coupon";
-import { getCouponsByShopIdFromShop, editCoupon, deleteCoupon } from "@/api/coupon";
+// import { getCouponsByShopIdFromShop } from "@/api/coupon";
+import { getCouponsByShopIdFromShop, editCoupon, pauseCoupon, deleteCoupon } from "@/api/coupon";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
 import { CouponState } from "@/constants";
@@ -200,4 +200,4 @@ const ShopCouponTable = () => {
   );
 };
 
-export default ShopCouponTable;
+export default ShopCouponTable
