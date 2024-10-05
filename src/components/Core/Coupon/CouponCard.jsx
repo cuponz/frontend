@@ -50,7 +50,6 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
   const [modalType, setModalType] = useState(null);
 
   let {
-    id,
     code,
     logo_url: logo,
     title,
@@ -64,7 +63,6 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
     usage_count: usageCount,
     redeemed_count: numUsers,
     state,
-    redemption_state: redemptionState,
   } = coupon;
 
   keywords = keywords.split(",");

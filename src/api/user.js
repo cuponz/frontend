@@ -19,3 +19,10 @@ export async function userLogin(loginData) {
     errorMessage: "Login failed",
   });
 }
+export async function userRegister(registerData) {
+  return apiRequest(`/api/user/register`, {
+    method: "POST",
+    body: JSON.stringify(registerData),
+    errorMessage: "Register failed",
+  });
+}

@@ -10,6 +10,7 @@ const PopupFail = ({ errorType, startDate }) => {
       case "expired":
         return "The code has expired";
       case "not-started":
+        return startDate
           ? `The coupon is not available until ${startDate}`
           : "The coupon is not yet available";
       case "location":

@@ -1,30 +1,37 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/logofooter.png";
 
-import { Link } from "react-router-dom";
-
 const Footer = () => {
+  const links = [
+    { to: "/", text: "Home" },
+    { to: "/coupon", text: "Hot Deals" },
+    { to: "/contactus", text: "Contact Us" },
+    { to: "/aboutus", text: "About Us" },
+  ];
+
   return (
-    <footer className="bg-indigo-800 text-gray-200 py-8">
-      <div className="container mx-auto text-center">
-        <div className="flex justify-center items-center mb-4">
-          <img src={logo} alt="CuponZ Logo" className="h-10 mr-2" />
+    <footer className="bg-indigo-800 text-gray-200 py-8 px-4">
+      <div className="container mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+          <div className="flex items-center mb-4 md:mb-0">
+            <img src={logo} alt="CuponZ Logo" className="h-10 mr-2" />
+          </div>
+          <nav className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-8">
+            {links.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="hover:text-white hover:underline transition-colors duration-200 mb-2 md:mb-0"
+              >
+                {link.text}
+              </Link>
+            ))}
+          </nav>
         </div>
-        <div className="flex justify-center space-x-12 mb-8">
-          <Link href="/" className="hover:underline">
-            Home
-          </Link>
-          <Link to="/coupon" className="hover:underline">
-            Hot Deals
-          </Link>
-          <Link to="/contactus" className="hover:underline">
-            Contact Us
-          </Link>
-          <Link to="/aboutus" className="hover:underline">
-            About Us
-          </Link>
+        <hr className="border-gray-600 mb-5" />
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0">© 2024 G71. All rights reserved.</div>
         </div>
-        <hr className="border-gray-400 mb-4" />
-        <div>© 2024 G71. All rights reserved.</div>
       </div>
     </footer>
   );

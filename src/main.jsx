@@ -6,10 +6,10 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 
-import routes from "./routes"
+import routes from "./routes";
 
 const router = createBrowserRouter(routes);
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 hydrateRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,4 +18,3 @@ hydrateRoot(document.getElementById("root")).render(
     </QueryClientProvider>
   </StrictMode>
 );
-
