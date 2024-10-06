@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ReactCountryFlag from "react-country-flag";
 import logo from "../../../assets/logo.png";
@@ -9,10 +9,7 @@ import { CiUser, CiMenuFries, CiSearch } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
 
 import { useUserStore } from "@/store/user";
-import {
-	useCategoryStore,
-	useIsCategoriesOpenStore,
-} from "@/store/categories";
+import { useCategoryStore, useIsCategoriesOpenStore } from "@/store/categories";
 import { getCategories } from "@/api/category";
 import { getGroups } from "@/api/group";
 
@@ -28,6 +25,7 @@ const Navbar = () => {
 		state.categories,
 		state.setCategories,
 	]);
+	const categoriesButtonRef = useRef(null);
 
 	const [isCategoriesOpen, setIsCategoriesOpen] = useIsCategoriesOpenStore(
 		(state) => [state.isCategoriesOpen, state.setIsCategoriesOpen]
@@ -115,7 +113,7 @@ const Navbar = () => {
 	};
 
 	const toggleCategoriesOpen = () => {
-		setIsCategoriesOpen((prev) => !prev);
+		setIsCategoriesOpen(!isCategoriesOpen);
 	};
 
 	const routes = [
@@ -170,6 +168,7 @@ const Navbar = () => {
 							</Link>
 						) : (
 							<li
+								ref={categoriesButtonRef}
 								key={index}
 								className="hover:underline relative cursor-pointer"
 								onClick={route.onClick}
@@ -338,7 +337,7 @@ const Navbar = () => {
 				(isPending ? (
 					<LoadingSpinner />
 				) : (
-					<CategoriesMenu groups={groups} categories={categories} />
+					<CategoriesMenu groups={groups} categories={categories} categoriesButtonRef={categoriesButtonRef} />
 				))}
 		</nav>
 	);
