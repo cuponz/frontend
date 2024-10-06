@@ -2,22 +2,6 @@
 	"navigation": {
 		"home": "Home",
 		"coupons": "Coupons",
-		"categories": "Categories",
-		"aboutUs": "About Us",
-		"contactUs": "Contact Us",
-		"searchBar": "Search",
-		"userActions": {
-			"yourProfile": "Your Profile",
-			"cart": "Cart",
-			"settings": "Settings",
-			"logout": "Logout",
-			"login": "Login"
-		}
-	},
-	"footer": {
-		"home": "Home",
-		"hotdeals": "Hot Deals",
-		"coupons": "Coupons",
 		"aboutUs": "About Us",
 		"contactUs": "Contact Us",
 		"copyright": "© 2024 G71. All rights reserved."
@@ -26,7 +10,7 @@
 		"header": "What Is CuponZ And How Valid Is It?",
 		"description": "CuponZ is a leading platform for finding and sharing discount coupons across a wide range of products and services. Our mission is to help consumers save money while supporting businesses in reaching new customers.",
 		"searchCoupons": "Search Coupons",
-		"contactUs": "Search Coupons",
+		"contactUs": "Contact Us",
 		"imageAlt": "About CuponZ",
 		"company": {
 			"title": "Our Company",
