@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useIsCategoriesOpenStore } from "../../../store/categories";
 import { CiCircleChevRight } from "react-icons/ci";
 
-const CategoriesMenu = ({ groups, categories, categoriesButtonRef }) => {
+const CategoriesMenu = ({
+	groups,
+	categories,
+	categoriesButtonRef,
+	categoriesButtonMobileRef,
+}) => {
 	const [activeGroup, setActiveGroup] = useState(null);
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 	const navigate = useNavigate();
@@ -22,7 +27,14 @@ const CategoriesMenu = ({ groups, categories, categoriesButtonRef }) => {
 			if (
 				menuRef.current &&
 				!menuRef.current.contains(event.target) &&
-				!(categoriesButtonRef.current && categoriesButtonRef.current.contains(event.target))
+				!(
+					categoriesButtonRef.current &&
+					categoriesButtonRef.current.contains(event.target)
+				) &&
+				!(
+					categoriesButtonMobileRef.current &&
+					categoriesButtonMobileRef.current.contains(event.target)
+				)
 			) {
 				setIsCategoriesOpen(false);
 			}

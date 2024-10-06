@@ -2,9 +2,17 @@
 	"navigation": {
 		"home": "Home",
 		"coupons": "Coupons",
+    "categories": "Categories",
 		"aboutUs": "About Us",
 		"contactUs": "Contact Us",
-		"copyright": "© 2024 G71. All rights reserved."
+		"copyright": "© 2024 G71. All rights reserved.",
+    "userActions": {
+      "yourProfile": "Profile",
+      "cart": "Cart",
+      "settings": "Settings",
+      "logout": "Logout",
+      "login": "Login"
+    }
 	},
 	"aboutUsPage": {
 		"header": "What Is CuponZ And How Valid Is It?",
