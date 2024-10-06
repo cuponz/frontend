@@ -52,15 +52,17 @@ const columns = (
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(row.state);
 
+      const isEditing = mutationLoadingStates.editingId === row.id;
+      const isPausing = mutationLoadingStates.pausingId === row.id;
+      const isDeleting = mutationLoadingStates.deletingId === row.id;
+
 			return (
 				<div className="flex justify-center space-x-2">
 					<Button
-						onClick={(e) => {
-							e.preventDefault();
-							handleEdit(row.id);
-						}}
+						onClick={() => handleEdit(row.id)}
 						colour="yellow-500"
-						disabled={mutationLoadingStates.isEditLoading}
+						disabled={isEditing}
+						isLoading={isEditing}
 					>
 						Edit
 					</Button>
@@ -71,8 +73,9 @@ const columns = (
 						}}
 						colour={toggleButtonProps.colour}
 						disabled={
-							toggleButtonProps.disabled || mutationLoadingStates.isPauseLoading
+							toggleButtonProps.disabled || isPausing
 						}
+						isLoading={isPausing}
 					>
 						{toggleButtonProps.text}
 					</Button>
@@ -82,7 +85,8 @@ const columns = (
 							handleDelete(row.id);
 						}}
 						colour="red-500"
-						disabled={mutationLoadingStates.isDeleteLoading}
+						disabled={isDeleting}
+						isLoading={isDeleting}
 					>
 						Delete
 					</Button>

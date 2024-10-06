@@ -1,22 +1,16 @@
 import { useMemo, useState } from "react";
 
 import PopupCreateCoupon from "@/components/PopupCreateCoupon";
-import {
-	getCouponsByShopIdFromShop,
-	editCoupon,
-	pauseCoupon,
-	deleteCoupon,
-} from "@/api/coupon";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCouponsByShopIdFromShop } from "@/api/coupon";
+import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
 import { CouponState } from "@/constants";
 
 import Button from "@/components/Utils/Button";
 import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
-import getStateToggleButtonProps from "./getStateToggleButtonProps";
 
-import { toast } from "sonner";
+import useShopCouponTableMutations from "./useShopCouponTableMutations";
 
 const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
@@ -25,57 +19,20 @@ const ShopCouponTable = () => {
 		[categoryObjects]
 	);
 
-	const queryClient = useQueryClient();
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
-	const QUERY_KEY = ["get", "coupons", "shop"];
 
 	const {
 		isLoading,
 		error,
 		data: coupons = [],
 	} = useQuery({
-		queryKey: QUERY_KEY,
+		queryKey: ["get", "coupons", "shop"],
 		queryFn: getCouponsByShopIdFromShop,
 		retry: false,
 	});
 
-	// Mutations
-	const editMutation = useMutation({
-		mutationFn: editCoupon,
-		onSuccess: () => {
-			toast.success("Coupon edited successfully");
-			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-		},
-		onError: (error) => {
-			toast.error(error.message || "Failed to update coupon");
-		},
-	});
-
-	const pauseMutation = useMutation({
-		mutationFn: pauseCoupon,
-		onSuccess: (data) => {
-			const message =
-				data.state === CouponState.Pause
-					? "Coupon paused successfully"
-					: "Coupon activated successfully";
-			toast.success(message);
-			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-		},
-		onError: (error) => {
-			toast.error(error.message || "Failed to pause coupon");
-		},
-	});
-
-	const deleteMutation = useMutation({
-		mutationFn: deleteCoupon,
-		onSuccess: () => {
-			toast.success("Coupon deleted successfully");
-			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-		},
-		onError: (error) => {
-			toast.error(error.message || "Failed to delete coupon");
-		},
-	});
+	const [editMutation, pauseMutation, deleteMutation] =
+		useShopCouponTableMutations();
 
 	// Action handlers
 	const handleEdit = (couponId) => {
@@ -97,11 +54,23 @@ const ShopCouponTable = () => {
 		}
 	};
 
-	const mutationLoadingStates = {
-		isEditLoading: editMutation.isPending,
-		isPauseLoading: pauseMutation.isPending,
-		isDeleteLoading: deleteMutation.isPending,
-	};
+	const mutationLoadingStates = useMemo(
+		() => ({
+			editingId: editMutation.isPending ? editMutation.variables : null,
+			pausingId: pauseMutation.isPending
+				? pauseMutation.variables?.couponId
+				: null,
+			deletingId: deleteMutation.isPending ? deleteMutation.variables : null,
+		}),
+		[
+			editMutation.isPending,
+			editMutation.variables,
+			pauseMutation.isPending,
+			pauseMutation.variables,
+			deleteMutation.isPending,
+			deleteMutation.variables,
+		]
+	);
 
 	const additionalFilters = [
 		{
