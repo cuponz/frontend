@@ -1,39 +1,50 @@
-import { useState } from "react";
-import { format } from "date-fns";
+import { useMemo, useState } from "react";
 
 import PopupCreateCoupon from "@/components/PopupCreateCoupon";
-// import { getCouponsByShopIdFromShop } from "@/api/coupon";
 import {
 	getCouponsByShopIdFromShop,
 	editCoupon,
 	pauseCoupon,
 	deleteCoupon,
 } from "@/api/coupon";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
 import { CouponState } from "@/constants";
 
 import Button from "@/components/Utils/Button";
+import columns from "./columns";
+import { useCategoryStore } from "@/store/categories";
+import getStateToggleButtonProps from "./getStateToggleButtonProps";
+
+import { toast } from "sonner";
 
 const ShopCouponTable = () => {
+	const categoryObjects = useCategoryStore((state) => state.categories);
+	const categories = useMemo(
+		() => categoryObjects.map((category) => category.name),
+		[categoryObjects]
+	);
+
+	const queryClient = useQueryClient();
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
+	const QUERY_KEY = ["get", "coupons", "shop"];
 
 	const {
 		isLoading,
 		error,
 		data: coupons = [],
 	} = useQuery({
-		queryKey: ["get", "coupons", "shop"],
+		queryKey: QUERY_KEY,
 		queryFn: getCouponsByShopIdFromShop,
 		retry: false,
 	});
 
 	// Mutations
 	const editMutation = useMutation({
-		queryKey: ["edit", "coupons", "shop"],
 		mutationFn: editCoupon,
 		onSuccess: () => {
 			toast.success("Coupon edited successfully");
+			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to update coupon");
@@ -41,10 +52,14 @@ const ShopCouponTable = () => {
 	});
 
 	const pauseMutation = useMutation({
-		queryKey: ["edit", "coupons", "shop"],
 		mutationFn: pauseCoupon,
-		onSuccess: () => {
-			toast.success("Coupon paused successfully");
+		onSuccess: (data) => {
+			const message =
+				data.state === CouponState.Pause
+					? "Coupon paused successfully"
+					: "Coupon activated successfully";
+			toast.success(message);
+			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to pause coupon");
@@ -52,10 +67,10 @@ const ShopCouponTable = () => {
 	});
 
 	const deleteMutation = useMutation({
-		queryKey: ["delete", "coupons", "shop"],
 		mutationFn: deleteCoupon,
 		onSuccess: () => {
 			toast.success("Coupon deleted successfully");
+			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to delete coupon");
@@ -67,8 +82,13 @@ const ShopCouponTable = () => {
 		editMutation.mutate(couponId);
 	};
 
-	const handlePause = (couponId) => {
-		pauseMutation.mutate(couponId);
+	const handleStateToggle = (couponId, currentState) => {
+		const newState =
+			currentState === CouponState.Active
+				? CouponState.Pause
+				: CouponState.Active;
+
+		pauseMutation.mutate({ couponId, state: newState });
 	};
 
 	const handleDelete = (couponId) => {
@@ -77,86 +97,18 @@ const ShopCouponTable = () => {
 		}
 	};
 
-	// Table columns configuration
-	// TODO: considering about using
-	const columns = [
-		{
-			header: "ID",
-			accessor: "id",
-		},
-		{
-			header: "Code",
-			accessor: "code",
-		},
-		{
-			header: "Title",
-			accessor: "title",
-		},
-		{
-			header: "Category",
-			accessor: "category",
-		},
-		{
-			header: "Start Date",
-			accessor: "start_date",
-			cell: (value) => format(new Date(value), "dd/MM/yyyy"),
-		},
-		{
-			header: "End Date",
-			accessor: "end_date",
-			cell: (value) => format(new Date(value), "dd/MM/yyyy"),
-		},
-		{
-			header: "Usage",
-			accessor: "usage_count",
-			cell: (value, row) => `${value}/${row.max_usage || "∞"}`,
-		},
-		{
-			header: "State",
-			accessor: "state",
-			cell: (value) => Object.keys(CouponState)[value],
-		},
-		{
-			header: "Actions",
-			accessor: "actions",
-			cell: (_, row) => {
-				return (
-					<div className="flex justify-center space-x-2">
-						<Button
-							onClick={() => handleEdit(row.id)}
-							colour="yellow-500"
-							disabled={editMutation.isLoading}
-						>
-							Edit
-						</Button>
-						<Button
-							onClick={() => handlePause(row.id)}
-							colour="blue-500"
-							disabled={
-								row["state"] === CouponState.Pending || pauseMutation.isLoading
-							}
-						>
-							Pause
-						</Button>
-						<Button
-							onClick={() => handleDelete(row.id)}
-							colour="red-500"
-							disabled={deleteMutation.isLoading}
-						>
-							Delete
-						</Button>
-					</div>
-				);
-			},
-		},
-	];
+	const mutationLoadingStates = {
+		isEditLoading: editMutation.isPending,
+		isPauseLoading: pauseMutation.isPending,
+		isDeleteLoading: deleteMutation.isPending,
+	};
 
 	const additionalFilters = [
 		{
 			name: "category",
 			type: "select",
 			placeholder: "Filter by Category",
-			options: [...new Set(coupons.map((coupon) => coupon.category))],
+			options: categories,
 		},
 		{
 			name: "start_date",
@@ -188,7 +140,12 @@ const ShopCouponTable = () => {
 			</div>
 
 			<DataTable
-				columns={columns}
+				columns={columns(
+					handleEdit,
+					handleStateToggle,
+					handleDelete,
+					mutationLoadingStates
+				)}
 				data={coupons}
 				filename="shop_coupons.csv"
 				additionalFilters={additionalFilters}

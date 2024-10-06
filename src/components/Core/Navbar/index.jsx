@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../../assets/logo.png";
+import logo from "@/assets/logo.png";
 import CategoriesMenu from "./CategoriesMenu";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import SearchBarNav from "./SearchBarNav";
 import { CiUser, CiMenuFries, CiSearch } from "react-icons/ci";
 import { MdLanguage } from "react-icons/md";
 
-import { useUserStore } from "../../../store/user";
+import { useUserStore } from "@/store/user";
 import {
 	useCategoryStore,
 	useIsCategoriesOpenStore,
-} from "../../../store/categories";
-import { getCategories } from "../../../api/category";
-import { getGroups } from "../../../api/group";
+} from "@/store/categories";
+import { getCategories } from "@/api/category";
+import { getGroups } from "@/api/group";
 
 import { useQueries } from "@tanstack/react-query";
-import LoadingSpinner from "../../Utils/LoadingSpinner";
-import { UserType } from "../../../constants";
-import { useTranslations } from "../../../store/languages";
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
+import { UserType } from "@/constants";
+import { useTranslations } from "@/store/languages";
 
 const Navbar = () => {
 	const { t, language, setLanguage, supportedLanguages } = useTranslations();
@@ -121,7 +121,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className="bg-[#E9E7F9] p-4 z-50">
+		<nav className="bg-[#E9E7F9] p-4 z-50 shadow-md">
 			<div className="container mx-auto flex justify-between items-center relative">
 				{/* Logo Section */}
 				<div className="flex items-center">
