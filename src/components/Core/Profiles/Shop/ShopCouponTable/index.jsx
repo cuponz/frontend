@@ -21,6 +21,14 @@ const ShopCouponTable = () => {
 
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
 
+	const handleCloseCreateCoupon = () => {
+		setIsCreateCouponOpen(false);
+	};
+
+	const handleSubmitCreateCoupon = (newCoupon) => {
+		console.log("New coupon created:", newCoupon);
+	};
+
 	const {
 		isLoading,
 		error,
