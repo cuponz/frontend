@@ -29,7 +29,7 @@ const AboutUs = () => {
 
 	return (
 		<div className="flex flex-col items-center text-gray-800">
-			<section className="w-full flex flex-col md:flex-row">
+			<section className="w-full flex flex-col md:flex-row bg-[#e0dffe]">
 				<div className="w-full md:w-1/2 bg-[#e0dffe] py-12 px-5 md:px-24 flex flex-col justify-center min-h-[400px]">
 					<h1 className="text-3xl md:text-4xl mb-5 text-[#4b4b92] font-bold">
 						{t(["aboutUsPage", "header"])}
@@ -48,7 +48,7 @@ const AboutUs = () => {
 						</Link>
 					</div>
 				</div>
-				<div className="w-full md:w-1/2 h-64 md:h-auto">
+				<div className="w-full md:w-1/2 md:h-auto">
 					<img
 						src={img7}
 						alt={t(["aboutUsPage", "imageAlt"])}
@@ -57,7 +57,7 @@ const AboutUs = () => {
 				</div>
 			</section>
 
-			<section className="w-full py-12 px-5 md:px-24 bg-white">
+			<section className="w-full py-12 px-5 md:px-24 bg-white container">
 				<div className="flex flex-col md:flex-row items-center justify-between mb-8">
 					<div className="w-full md:w-1/2 mb-8 md:mb-0 md:mr-8">
 						<img
