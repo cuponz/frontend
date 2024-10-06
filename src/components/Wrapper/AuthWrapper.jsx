@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, Outlet } from "react-router-dom";
 import { toast } from "sonner";
@@ -9,12 +9,9 @@ import { userAuth } from "@/api/user";
 import Layout from "@/layout/Layout";
 import LoadingSpinner from "../../components/Utils/LoadingSpinner"; // Ensure this path is correct
 
-const MINIMUM_LOADING_TIME = 3000; // 3 seconds
-
 const AuthWrapper = ({ isProtected }) => {
 	const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
 	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState(true);
 
 	const { isPending, isError, isFetched, data, error } = useQuery({
 		queryKey: ["auth"],
@@ -24,21 +21,11 @@ const AuthWrapper = ({ isProtected }) => {
 	});
 
 	useEffect(() => {
-		let timer;
-		if (isFetched) {
-			timer = setTimeout(() => {
-				setIsLoading(false);
-			}, MINIMUM_LOADING_TIME);
-		}
-		return () => clearTimeout(timer);
-	}, [isFetched]);
-
-	useEffect(() => {
 		if (isProtected && isFetched && !data) {
 			setUser(undefined);
 			navigate("/login");
 		}
-	}, [isProtected, isFetched, data]);
+	}, [isProtected, isFetched, data, navigate, setUser]);
 
 	useEffect(() => {
 		if (data) {
@@ -53,15 +40,15 @@ const AuthWrapper = ({ isProtected }) => {
 				navigate("/login");
 			}
 		}
-	}, [data, error]);
+	}, [data, error, isError, isProtected, navigate, setUser]);
 
-	if (isPending || isLoading) {
+	if (isPending) {
 		return (
 			<Layout>
 				<div className="flex flex-col justify-center items-center h-screen">
 					<LoadingSpinner size="large" color="blue" />
 					<p className="mt-4 text-lg text-gray-600">
-						Please wait while we verify your credentials...
+						Verifying your credentials...
 					</p>
 				</div>
 			</Layout>
