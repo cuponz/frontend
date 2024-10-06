@@ -7,7 +7,7 @@ const DEFAULT_LANGUAGE = "en";
 
 const getSupportedLanguages = async () => {
 	try {
-		const languages = ["en", "es"]; // Add your supported languages here.
+		const languages = ["en", "es", "hindi", "bengali", "urdu"]; // Add your supported languages here.
 
 		const loadedLanguages = await Promise.all(
 			languages.map(async (lang) => {
@@ -18,7 +18,7 @@ const getSupportedLanguages = async () => {
 					console.warn(`Language file for ${lang} could not be loaded.`, error);
 					return null; // Return null or handle unavailable languages.
 				}
-			}),
+			})
 		);
 
 		return loadedLanguages.filter(Boolean); // Filter out any null values.
@@ -55,8 +55,8 @@ export const useTranslationStore = create(
 			storage: createJSONStorage(() => localStorage),
 			version: STORAGE_VERSION,
 			partialize: (state) => ({ language: state.language }),
-		},
-	),
+		}
+	)
 );
 
 export const useTranslations = () => {
@@ -72,7 +72,19 @@ export const useTranslations = () => {
 		loadTranslations(language).then(setTranslations);
 	}, [language]);
 
-	const t = useCallback((key) => translations[key] || key, [translations]);
+	const t = useCallback(
+		(keys) => {
+			let value = translations;
+			for (const key of keys) {
+				if (!value) {
+					return "undefined";
+				}
+				value = value[key];
+			}
+			return value;
+		},
+		[translations]
+	);
 
 	return { t, language, setLanguage, supportedLanguages };
 };

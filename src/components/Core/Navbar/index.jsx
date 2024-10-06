@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/logo.png";
+import ReactCountryFlag from "react-country-flag";
+import logo from "../../../assets/logo.png";
 import CategoriesMenu from "./CategoriesMenu";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import SearchBarNav from "./SearchBarNav";
 import { CiUser, CiMenuFries, CiSearch } from "react-icons/ci";
-import { MdLanguage } from "react-icons/md";
+import { MdExpandMore } from "react-icons/md";
 
 import { useUserStore } from "@/store/user";
 import {
@@ -28,8 +29,8 @@ const Navbar = () => {
 		state.setCategories,
 	]);
 
-	const [isCategoriesOpen, toggleCategoriesOpen] = useIsCategoriesOpenStore(
-		(state) => [state.isCategoriesOpen, state.toggleCategoriesOpen],
+	const [isCategoriesOpen, setIsCategoriesOpen] = useIsCategoriesOpenStore(
+		(state) => [state.isCategoriesOpen, state.setIsCategoriesOpen]
 	);
 
 	const location = useLocation();
@@ -75,16 +76,19 @@ const Navbar = () => {
 		setIsProfileDropdownOpen(false);
 		setIsSearchOpen(false);
 		setIsLanguageDropdownOpen(false);
+		setIsCategoriesOpen(false);
 	}, [location]);
 
 	const toggleMobileMenu = () => {
 		setIsMobileMenuOpen((prev) => !prev);
 		setIsSearchOpen(false);
+		setIsLanguageDropdownOpen(false);
 	};
 
 	const toggleSearch = () => {
 		setIsSearchOpen(!isSearchOpen);
 		setIsMobileMenuOpen(false);
+		setIsLanguageDropdownOpen(false);
 	};
 
 	const handleLoginLogout = () => {
@@ -96,10 +100,13 @@ const Navbar = () => {
 
 	const toggleProfileDropdown = () => {
 		setIsProfileDropdownOpen(!isProfileDropdownOpen);
+		setIsLanguageDropdownOpen(false);
 	};
 
 	const toggleLanguageDropdown = () => {
 		setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
+		setIsMobileMenuOpen(false);
+		setIsProfileDropdownOpen(false);
 	};
 
 	const changeLanguage = (lng) => {
@@ -107,17 +114,36 @@ const Navbar = () => {
 		setIsLanguageDropdownOpen(false);
 	};
 
+	const toggleCategoriesOpen = () => {
+		setIsCategoriesOpen((prev) => !prev);
+	};
+
 	const routes = [
-		{ path: "/", name: t("Home") },
-		{ path: "/coupon", name: t("Coupons") },
-		{ path: undefined, name: t("Categories"), onClick: toggleCategoriesOpen },
-		{ path: "/aboutus", name: t("About Us") },
-		{ path: "/contactus", name: t("Contact Us") },
+		{ path: "/", name: t(["navigation", "home"]) },
+		{ path: "/coupon", name: t(["navigation", "coupons"]) },
+		{
+			path: undefined,
+			name: t(["navigation", "categories"]),
+			onClick: toggleCategoriesOpen,
+		},
+		{ path: "/aboutus", name: t(["navigation", "aboutUs"]) },
+		{ path: "/contactus", name: t(["navigation", "contactUs"]) },
 	];
 
 	const languageNames = {
 		en: "English",
 		es: "Español",
+		hindi: "हिन्दी",
+		bengali: "বাংলা",
+		urdu: "اردو",
+	};
+
+	const languageFlags = {
+		en: "GB",
+		es: "ES",
+		hindi: "IN",
+		bengali: "BD",
+		urdu: "PK",
 	};
 
 	return (
@@ -150,7 +176,7 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						),
+						)
 					)}
 				</ul>
 
@@ -176,19 +202,22 @@ const Navbar = () => {
 						</Link>
 					)}
 
-					{/* Language Selector */}
+					{/* Language Selector Dropdown */}
 					<div className="relative">
 						<button
 							onClick={toggleLanguageDropdown}
-							className="focus:outline-none"
+							className="flex items-center space-x-1 focus:outline-none"
 						>
-							<div className="group relative p-2 flex items-center justify-center">
-								<MdLanguage className="text-2xl sm:text-3xl" />
-								<span className="text-xs ml-1">
-									{languageNames[language] || language}
-								</span>{" "}
-								<span className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-gray-900 transition-all duration-300"></span>
-							</div>
+							<ReactCountryFlag
+								countryCode={languageFlags[language]}
+								svg
+								style={{
+									width: "1.5em",
+									height: "1.5em",
+								}}
+								title={languageFlags[language]}
+							/>
+							<MdExpandMore className="text-xl" />
 						</button>
 						{isLanguageDropdownOpen && (
 							<div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
@@ -200,9 +229,18 @@ const Navbar = () => {
 											lang === language
 												? "bg-gray-100 font-semibold"
 												: "text-gray-700 hover:bg-gray-100"
-										}`}
+										} flex items-center`}
 									>
-										{languageNames[lang] || lang}
+										<ReactCountryFlag
+											countryCode={languageFlags[lang]}
+											svg
+											style={{
+												width: "1.5em",
+												height: "1.5em",
+											}}
+											title={languageFlags[lang]}
+										/>
+										<span className="ml-2">{languageNames[lang] || lang}</span>
 									</button>
 								))}
 							</div>
@@ -227,25 +265,19 @@ const Navbar = () => {
 										to="/profile"
 										className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 									>
-										{t("Your Profile")}
+										{t(["navigation", "userActions", "yourProfile"])}
 									</Link>
 									<Link
 										to="/cart"
 										className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 									>
-										{t("Cart")}
-									</Link>
-									<Link
-										to="/settings"
-										className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-									>
-										{t("Settings")}
+										{t(["navigation", "userActions", "cart"])}
 									</Link>
 									<button
 										onClick={handleLoginLogout}
 										className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 									>
-										{t("Logout")}
+										{t(["navigation", "userActions", "logout"])}
 									</button>
 								</div>
 							)}
@@ -256,7 +288,7 @@ const Navbar = () => {
 								onClick={handleLoginLogout}
 								className="bg-[#FFC212] text-black px-3 py-1 sm:px-4 sm:py-2 rounded-full hover:bg-purple-300 text-sm sm:text-base"
 							>
-								{t("Login")}
+								{t(["navigation", "userActions", "login"])}
 							</button>
 						</Link>
 					)}
@@ -297,20 +329,8 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						),
+						)
 					)}
-					{/* Language options in mobile menu */}
-					{supportedLanguages.map((lang) => (
-						<li
-							key={lang}
-							className={`hover:underline cursor-pointer ${
-								lang === language ? "font-semibold" : ""
-							}`}
-							onClick={() => changeLanguage(lang)}
-						>
-							{lang}
-						</li>
-					))}
 				</ul>
 			)}
 

@@ -2,20 +2,16 @@ import { useState } from "react";
 import CouponImage1 from "../assets/coupon1.png";
 import CouponImage2 from "../assets/coupon2.png";
 import { toast } from "sonner";
-
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/layout/Layout";
-import { UserType, CountryListWithCode } from "../constants";
+import { UserType, CountryListWithCode, Validators } from "../constants";
 import { useMutation } from "@tanstack/react-query";
 import { userRegister } from "../api/user";
-import validator from "validator";
 import TogglePassword from "../components/Utils/TogglePassword";
-import {
-	parsePhoneNumberFromString,
-	isValidPhoneNumber,
-} from "libphonenumber-js";
+import { useTranslations } from "../store/languages";
 
 const RegisterPage = () => {
+	const { t } = useTranslations();
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
@@ -49,43 +45,23 @@ const RegisterPage = () => {
 		},
 	});
 
-	const formatPhoneNumber = (phone, region) => {
-		try {
-			const parsedPhone = parsePhoneNumberFromString(phone, region);
-			return parsedPhone && parsedPhone.isValid()
-				? parsedPhone.format("E.164")
-				: null;
-		} catch (error) {
-			console.error("Phone parsing error:", error);
-			return null;
-		}
-	};
-
 	const validateForm = () => {
 		let formErrors = {};
 
-		if (!validator.isLength(formData.firstName, { min: 2 })) {
+		if (!Validators.isValidName(formData.firstName)) {
 			formErrors.firstName = "First name should be at least 2 characters long";
 		}
-		if (!validator.isLength(formData.lastName, { min: 2 })) {
+		if (!Validators.isValidName(formData.lastName)) {
 			formErrors.lastName = "Last name should be at least 2 characters long";
 		}
-		if (!validator.isEmail(formData.email)) {
+		if (!Validators.isValidEmail(formData.email)) {
 			formErrors.email = "Please enter a valid email address";
 		}
-
-		if (formData.phoneNumber.trim() !== "") {
-			const isValidPhone = isValidPhoneNumber(
-				formData.phoneNumber,
-				formData.region,
-			);
-			if (!isValidPhone) {
-				formErrors.phoneNumber =
-					"Please enter a valid phone number or leave it blank";
-			}
+		if (!Validators.isValidPhoneNumber(formData.phoneNumber, formData.region)) {
+			formErrors.phoneNumber =
+				"Please enter a valid phone number or leave it blank";
 		}
-
-		if (!validator.isLength(formData.password, { min: 8 })) {
+		if (!Validators.isValidPassword(formData.password)) {
 			formErrors.password = "Password should be at least 8 characters long";
 		}
 		if (formData.password !== formData.confirmPassword) {
@@ -104,7 +80,7 @@ const RegisterPage = () => {
 		if (validateForm()) {
 			const formattedPhone =
 				formData.phoneNumber.trim() !== ""
-					? formatPhoneNumber(formData.phoneNumber, formData.region)
+					? Validators.formatPhoneNumber(formData.phoneNumber, formData.region)
 					: null;
 
 			const registerData = {
@@ -129,8 +105,10 @@ const RegisterPage = () => {
 					{/* Left Section */}
 					<div className="hidden lg:flex lg:flex-col lg:justify-between w-2/5 bg-gradient-to-tr from-purple-400 via-purple-600 to-purple-800 p-8 text-white relative">
 						<div className="flex flex-col items-start">
-							<h1 className="text-4xl font-bold mb-2">CuponZ</h1>
-							<p className="mb-6 text-lg">Generate Cupon everywhere!</p>
+							<h1 className="text-4xl font-bold mb-2">
+								{t(["register", "title"])}
+							</h1>
+							<p className="mb-6 text-lg">{t(["register", "quote"])}</p>
 							<img
 								src={CouponImage2}
 								alt="Coupon Graphic"
@@ -149,7 +127,7 @@ const RegisterPage = () => {
 					{/* Right Section */}
 					<div className="w-full lg:w-3/5 p-12 bg-white rounded-tl-[1-0px]">
 						<h2 className="text-3xl font-bold mb-8 text-center lg:text-left">
-							Create Account
+							{t(["register", "form", "title"])}
 						</h2>
 						<form onSubmit={handleSubmit}>
 							<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
@@ -159,7 +137,7 @@ const RegisterPage = () => {
 										name="firstName"
 										value={formData.firstName}
 										onChange={handleChange}
-										placeholder="First Name"
+										placeholder={t(["register", "form", "fname"])}
 										className="p-3 border border-gray-300 rounded w-full"
 										required
 									/>
@@ -175,7 +153,7 @@ const RegisterPage = () => {
 										name="lastName"
 										value={formData.lastName}
 										onChange={handleChange}
-										placeholder="Last Name"
+										placeholder={t(["register", "form", "lname"])}
 										className="p-3 border border-gray-300 rounded w-full"
 										required
 									/>
@@ -192,7 +170,7 @@ const RegisterPage = () => {
 									name="email"
 									value={formData.email}
 									onChange={handleChange}
-									placeholder="Email"
+									placeholder={t(["register", "form", "email"])}
 									className="w-full p-3 border border-gray-300 rounded"
 									required
 								/>
@@ -219,7 +197,7 @@ const RegisterPage = () => {
 										name="phoneNumber"
 										value={formData.phoneNumber}
 										onChange={handleChange}
-										placeholder="Phone Number (optional)"
+										placeholder={t(["register", "form", "phoneNumber"])}
 										className="w-2/3 p-3 border border-gray-300 rounded-r"
 									/>
 								</div>
@@ -229,22 +207,21 @@ const RegisterPage = () => {
 									</p>
 								)}
 								<p className="text-gray-500 text-xs mt-1">
-									Optional: Enter a valid phone number for your selected region
-									or leave blank
+									{t(["register", "form", "miniNote"])}
 								</p>
 							</div>
 							<TogglePassword
 								name="password"
 								value={formData.password}
 								onChange={handleChange}
-								placeholder="Password"
+								placeholder={t(["register", "form", "password"])}
 								error={errors.password}
 							/>
 							<TogglePassword
 								name="confirmPassword"
 								value={formData.confirmPassword}
 								onChange={handleChange}
-								placeholder="Re-enter Password"
+								placeholder={t(["register", "form", "reconfirmPassword"])}
 								error={errors.confirmPassword}
 							/>
 							<div className="mb-6">
@@ -255,7 +232,9 @@ const RegisterPage = () => {
 									className="w-full p-3 border border-gray-300 rounded"
 									required
 								>
-									<option value="">Select User Type</option>
+									<option value="">
+										{t(["register", "form", "select", "title"])}
+									</option>
 									{Object.entries(UserType).map(([key, value]) => (
 										<option key={value} value={value}>
 											{key}
@@ -270,14 +249,14 @@ const RegisterPage = () => {
 								type="submit"
 								className="w-full bg-yellow-500 text-white font-bold p-3 rounded hover:bg-yellow-600 transition duration-200"
 							>
-								Create Account
+								{t(["register", "form", "button"])}
 							</button>
 						</form>
 						<div className="mt-4 text-center">
 							<p>
-								Already have an account?{" "}
+								{t(["register", "form", "registerQuote"])}{" "}
 								<Link to="/login" className="text-blue-500 hover:underline">
-									Login
+									{t(["register", "form", "registerLink"])}
 								</Link>
 							</p>
 						</div>

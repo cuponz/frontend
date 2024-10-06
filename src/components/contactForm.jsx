@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { FaCircle } from "react-icons/fa";
+import { useTranslations } from "../store/languages";
 
 const ContactForm = () => {
+	const { t } = useTranslations();
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
@@ -23,8 +24,10 @@ const ContactForm = () => {
 	return (
 		<div className="flex flex-col md:flex-row justify-between p-5 border border-gray-300 rounded-lg bg-white max-w-5xl mx-auto mt-20 shadow-lg overflow-hidden mb-20">
 			<div className="w-full md:w-2/5 p-8 relative  bg-purple-600 text-white rounded-t-lg md:rounded-l-lg md:rounded-t-none">
-				<h2 className="mb-2 text-2xl font-semibold">Contact Information</h2>
-				<p className="text-sm mb-6">Say something to start a live chat!</p>
+				<h2 className="mb-2 text-2xl font-semibold">
+					{t(["contactUs", "contactInfo"])}
+				</h2>
+				<p className="text-sm mb-6">{t(["contactUs", "quote"])}</p>
 				<ul className="list-none p-0">
 					<li className="mb-4 flex items-center">
 						<i className="fas fa-phone-alt mr-3"></i> +012 3456 789
@@ -33,8 +36,8 @@ const ContactForm = () => {
 						<i className="fas fa-envelope mr-3"></i> demo@gmail.com
 					</li>
 					<li className="mb-4 flex items-center">
-						<i className="fas fa-map-marker-alt mr-3"></i> 132 Dartmouth Street
-						Boston, Massachusetts 02156 United States
+						<i className="fas fa-map-marker-alt mr-3"></i>{" "}
+						{t(["contactUs", "address"])}
 					</li>
 				</ul>
 				<div className="social-icons  mt-auto flex space-x-4">
@@ -69,7 +72,7 @@ const ContactForm = () => {
 					<input
 						type="text"
 						name="firstName"
-						placeholder="First Name"
+						placeholder={t(["contactUs", "form", "fname"])}
 						value={formData.firstName}
 						onChange={handleChange}
 						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500 mb-4 md:mb-0"
@@ -78,7 +81,7 @@ const ContactForm = () => {
 					<input
 						type="text"
 						name="lastName"
-						placeholder="Last Name"
+						placeholder={t(["contactUs", "form", "lname"])}
 						value={formData.lastName}
 						onChange={handleChange}
 						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
@@ -89,7 +92,7 @@ const ContactForm = () => {
 					<input
 						type="email"
 						name="email"
-						placeholder="Email"
+						placeholder={t(["contactUs", "form", "email"])}
 						value={formData.email}
 						onChange={handleChange}
 						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500 mb-4 md:mb-0"
@@ -98,14 +101,16 @@ const ContactForm = () => {
 					<input
 						type="tel"
 						name="phoneNumber"
-						placeholder="Phone Number"
+						placeholder={t(["contactUs", "form", "phoneNumber"])}
 						value={formData.phoneNumber}
 						onChange={handleChange}
 						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
 						required
 					/>
 				</div>
-				<h2 className="text-lg font-semibold mb-4">Select Subject:</h2>
+				<h2 className="text-lg font-semibold mb-4">
+					{t(["contactUs", "form", "selection", "title"])}
+				</h2>
 				<div className="form-group radio-group flex flex-col md:flex-row justify-between items-center mb-6">
 					<div className="mb-4 md:mb-0">
 						<input
@@ -118,7 +123,7 @@ const ContactForm = () => {
 							className="mr-2"
 						/>
 						<label htmlFor="generalInquiry" className="text-gray-700">
-							General Inquiry
+							{t(["contactUs", "form", "selection", "generalInquiry"])}
 						</label>
 					</div>
 					<div className="mb-4 md:mb-0">
@@ -132,7 +137,7 @@ const ContactForm = () => {
 							className="mr-2"
 						/>
 						<label htmlFor="technicalSupport" className="text-gray-700">
-							Technical Support
+							{t(["contactUs", "form", "selection", "technicalSupport"])}
 						</label>
 					</div>
 					<div>
@@ -146,14 +151,14 @@ const ContactForm = () => {
 							className="mr-2"
 						/>
 						<label htmlFor="billing" className="text-gray-700">
-							Billing
+							{t(["contactUs", "form", "selection", "billing"])}
 						</label>
 					</div>
 				</div>
 				<div className="form-group mb-6">
 					<textarea
 						name="message"
-						placeholder="Write your message..."
+						placeholder={t(["contactUs", "form", "selection", "message"])}
 						value={formData.message}
 						onChange={handleChange}
 						className="w-full p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
@@ -165,7 +170,7 @@ const ContactForm = () => {
 						type="submit"
 						className="bg-yellow-400 text-white py-3 px-8 rounded-md hover:bg-yellow-500 font-semibold"
 					>
-						Send Message
+						{t(["contactUs", "button"])}
 					</button>
 				</div>
 			</form>

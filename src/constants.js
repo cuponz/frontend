@@ -1,6 +1,11 @@
 "use strict";
 import { getCode, getNames } from "country-list";
 import metadata from "libphonenumber-js/metadata.min.json";
+import validator from "validator";
+import {
+	parsePhoneNumberFromString,
+	isValidPhoneNumber,
+} from "libphonenumber-js";
 
 const UserType = Object.freeze({
 	Manager: 0,
@@ -60,8 +65,29 @@ const CountryListWithCode = Object.freeze(
 			code: countryCode,
 			callingCode: callingCode ? `+${callingCode}` : "",
 		};
-	}),
+	})
 );
+
+const Validators = Object.freeze({
+	isValidName: (name) => validator.isLength(name, { min: 2 }),
+	isValidEmail: (email) => validator.isEmail(email),
+	isValidPassword: (password) => validator.isLength(password, { min: 8 }),
+	isValidPhoneNumber: (phoneNumber, region) => {
+		if (phoneNumber.trim() === "") return true; // Optional field
+		return isValidPhoneNumber(phoneNumber, region);
+	},
+	formatPhoneNumber: (phone, region) => {
+		try {
+			const parsedPhone = parsePhoneNumberFromString(phone, region);
+			return parsedPhone && parsedPhone.isValid()
+				? parsedPhone.format("E.164")
+				: null;
+		} catch (error) {
+			console.error("Phone parsing error:", error);
+			return null;
+		}
+	},
+});
 
 export {
 	UserType,
@@ -72,4 +98,5 @@ export {
 	CouponState,
 	CouponCardModalType,
 	CountryListWithCode,
+	Validators,
 };
