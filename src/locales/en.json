@@ -1,58 +1,58 @@
 {
-  "navigation": {
-    "home": "Home",
-    "coupons": "Coupons",
-    "categories": "Categories",
-    "aboutUs": "About Us",
-    "contactUs": "Contact Us",
-		"searchBar": "Search",
-    "userActions": {
-      "yourProfile": "Your Profile",
-      "cart": "Cart",
-      "settings": "Settings",
-      "logout": "Logout",
-      "login": "Login"
-    }
-  },
-	"footer": {
-    "home": "Home",
-    "hotdeals": "Hot Deals",
+	"navigation": {
+		"home": "Home",
 		"coupons": "Coupons",
-    "aboutUs": "About Us",
-    "contactUs": "Contact Us",
-    "copyright": "© 2024 G71. All rights reserved."
-  },
-  "aboutUsPage": {
-    "header": "What Is CuponZ And How Valid Is It?",
-    "description": "CuponZ is a leading platform for finding and sharing discount coupons across a wide range of products and services. Our mission is to help consumers save money while supporting businesses in reaching new customers.",
-    "searchCoupons": "Search Coupons",
+		"categories": "Categories",
+		"aboutUs": "About Us",
+		"contactUs": "Contact Us",
+		"searchBar": "Search",
+		"userActions": {
+			"yourProfile": "Your Profile",
+			"cart": "Cart",
+			"settings": "Settings",
+			"logout": "Logout",
+			"login": "Login"
+		}
+	},
+	"footer": {
+		"home": "Home",
+		"hotdeals": "Hot Deals",
+		"coupons": "Coupons",
+		"aboutUs": "About Us",
+		"contactUs": "Contact Us",
+		"copyright": "© 2024 G71. All rights reserved."
+	},
+	"aboutUsPage": {
+		"header": "What Is CuponZ And How Valid Is It?",
+		"description": "CuponZ is a leading platform for finding and sharing discount coupons across a wide range of products and services. Our mission is to help consumers save money while supporting businesses in reaching new customers.",
+		"searchCoupons": "Search Coupons",
 		"contactUs": "Search Coupons",
-    "imageAlt": "About CuponZ",
-    "company": {
-      "title": "Our Company",
-      "content": "CuponZ was founded with the vision of revolutionizing the way people save money on their purchases. We've grown from a small startup to a trusted name in the coupon industry, always putting our users first."
-    },
-    "products": {
-      "title": "Our Products",
-      "content": "We offer a wide range of digital coupons and promotional codes for various categories including electronics, fashion, food, travel, and more. Our platform is designed to be user-friendly and accessible across all devices."
-    },
-    "team": {
-      "title": "Meet Our Team",
-      "content": "Our team is composed of passionate individuals from diverse backgrounds. We believe in fostering a collaborative environment where creativity and innovation thrive. Together, we work towards delivering exceptional value to our customers."
-    },
-    "sectionNames": {
-      "company": "Company",
-      "products": "Products",
-      "team": "Our Team"
-    }
-  },
+		"imageAlt": "About CuponZ",
+		"company": {
+			"title": "Our Company",
+			"content": "CuponZ was founded with the vision of revolutionizing the way people save money on their purchases. We've grown from a small startup to a trusted name in the coupon industry, always putting our users first."
+		},
+		"products": {
+			"title": "Our Products",
+			"content": "We offer a wide range of digital coupons and promotional codes for various categories including electronics, fashion, food, travel, and more. Our platform is designed to be user-friendly and accessible across all devices."
+		},
+		"team": {
+			"title": "Meet Our Team",
+			"content": "Our team is composed of passionate individuals from diverse backgrounds. We believe in fostering a collaborative environment where creativity and innovation thrive. Together, we work towards delivering exceptional value to our customers."
+		},
+		"sectionNames": {
+			"company": "Company",
+			"products": "Products",
+			"team": "Our Team"
+		}
+	},
 	"contactUs": {
-    "contactInfo": "Contact Information",
-    "quote": "Say something to start a live chat!",
-    "address": "132 Dartmouth Street Boston, Massachusetts 02156 United States",
-    "form": {
-      "fname": "First Name",
-      "lname": "Last Name",
+		"contactInfo": "Contact Information",
+		"quote": "Say something to start a live chat!",
+		"address": "132 Dartmouth Street Boston, Massachusetts 02156 United States",
+		"form": {
+			"fname": "First Name",
+			"lname": "Last Name",
 			"email": "Email",
 			"phoneNumber": "Phone Number",
 			"selection": {
@@ -64,90 +64,90 @@
 			}
 		},
 		"button": "Send Message"
-    },
+	},
 	"filter": {
 		"display": "Filters",
-		"categories":"Categories",
+		"categories": "Categories",
 		"startDate": "Start Date",
-		"endDate":"End Date",	
-		"apply":"Apply",
-		"reset":"Reset"
+		"endDate": "End Date",
+		"apply": "Apply",
+		"reset": "Reset"
 	},
 	"login": {
-		"form":{
+		"form": {
 			"title": "Login Account",
 			"email": "Email",
 			"password": "Password",
-			"button":"Login",
-			"registerQuote":"Don't have an account?",
-			"registerLink":"Register"
+			"button": "Login",
+			"registerQuote": "Don't have an account?",
+			"registerLink": "Register"
 		},
-		"title":"CuponZ",
+		"title": "CuponZ",
 		"quote": "Generate Cupon everywhere!"
 	},
 	"register": {
-		"form":{
+		"form": {
 			"title": "Create Account",
-			"fname":"First Name",
-			"lname":"Last Name",
+			"fname": "First Name",
+			"lname": "Last Name",
 			"email": "Email",
-			"phoneNumber":"Phone Number (optional)",
+			"phoneNumber": "Phone Number (optional)",
 			"miniNote": "Optional: Enter a valid phone number for your selected region or leave blank",
 			"password": "Password",
-			"reconfirmPassword":"Re-enter Password",
-			"select":{
-				"title":"Select User Type",
+			"reconfirmPassword": "Re-enter Password",
+			"select": {
+				"title": "Select User Type",
 				"manager": "Manager",
-				"shop":"Shop",
-				"user":"User"
+				"shop": "Shop",
+				"user": "User"
 			},
-			"button":"Create Account",
-			"registerQuote":"Already have an account?",
-			"registerLink":"Login"
+			"button": "Create Account",
+			"registerQuote": "Already have an account?",
+			"registerLink": "Login"
 		},
-		"title":"CuponZ",
+		"title": "CuponZ",
 		"quote": "Generate Cupon everywhere!"
 	},
 	"userSetting": {
-		"username":"Username",
-		"password":"Password",
-		"email":"Email",
-		"phoneNumber":"Phone Number",
+		"username": "Username",
+		"password": "Password",
+		"email": "Email",
+		"phoneNumber": "Phone Number",
 		"changeBtn": "Change",
 		"addBtn": "Add"
 	},
 	"changePasswordModal": {
-		"title":"Change Password",
-		"oldPassword":"Old Password",
-		"newPassword":"New Password",
-		"confirmNewPass":"Confirm New Password",
-		"showPass":"Show Password",
-		"changePassBtn":"Change Password"
+		"title": "Change Password",
+		"oldPassword": "Old Password",
+		"newPassword": "New Password",
+		"confirmNewPass": "Confirm New Password",
+		"showPass": "Show Password",
+		"changePassBtn": "Change Password"
 	},
 	"changeEmailModal": {
-		"title":"Change Email",
-		"newEmail":"New Email",
-		"verify":"Verify",
-		"verifying":"Verifying...",
-		"verified":"verified",
-		"changeEmailBtn":"Change Email",
-		"successnoti":"Email verified successfully!",
-		"OTP":{
+		"title": "Change Email",
+		"newEmail": "New Email",
+		"verify": "Verify",
+		"verifying": "Verifying...",
+		"verified": "verified",
+		"changeEmailBtn": "Change Email",
+		"successnoti": "Email verified successfully!",
+		"OTP": {
 			"title": "Verify Email",
-			"quote":"Please enter the OTP sent to",
-			"cancelBtn":"Cancel"
+			"quote": "Please enter the OTP sent to",
+			"cancelBtn": "Cancel"
 		}
 	},
 	"changePhoneModal": {
-		"title":"Change Phone Number",
-		"region":"Region",
-		"newNumber":"New Phone Number",
-		"confirmNumber":"Confirm New Phone Number",
-		"changeNumBtn":"Change Phone Number"
+		"title": "Change Phone Number",
+		"region": "Region",
+		"newNumber": "New Phone Number",
+		"confirmNumber": "Confirm New Phone Number",
+		"changeNumBtn": "Change Phone Number"
 	},
 	"miniNav": {
-		"coupon":"Coupons",
-		"management":"management",
-		"setting":"Setting"
+		"coupon": "Coupons",
+		"management": "Management",
+		"setting": "Setting"
 	}
 }
