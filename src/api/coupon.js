@@ -1,4 +1,4 @@
-import { apiRequest } from "./base";
+import { apiRequest, apiRequestFormBody } from "./base";
 
 async function getCoupons() {
 	return apiRequest(`/api/coupon`, {
@@ -19,7 +19,7 @@ async function getCouponsByShopIdFromOthers(shopId) {
 }
 
 async function creatingCoupon(couponData) {
-	return apiRequest(`/api/coupon/`, {
+	return apiRequestFormBody(`/api/coupon/`, {
 		method: "POST",
 		body: couponData,
 		errorMessage: "Creating Coupon Failed",
