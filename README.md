@@ -10,17 +10,17 @@ To setup the CuponZ Backend project, follow these steps:
 git clone https://github.com/cuponz/frontend && cd frontend
 ```
 
-2. Install dependencies: We use pnpm instead of npm for managing dependencies. Make sure you have pnpm installed. If not, you can install it using:
-```
-npm install -g pnpm
-```
-
-3. Install the project dependencies:
+2. Install the project dependencies:
 ```
 pnpm install
 ```
 
-4. Start the development server:
+3. Start the development server:
 ```
-pnpm run dev
+npm run dev
+```
+
+4. Build the frontend:
+```
+npm run build
 ```
