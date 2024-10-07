@@ -21,7 +21,7 @@ async function getCouponsByShopIdFromOthers(shopId) {
 async function creatingCoupon(couponData) {
 	return apiRequest(`/api/coupon/`, {
 		method: "POST",
-		body: JSON.stringify(couponData),
+		body: couponData,
 		errorMessage: "Creating Coupon Failed",
 	});
 }
@@ -29,7 +29,7 @@ async function creatingCoupon(couponData) {
 async function editCoupon(couponId, couponData) {
 	return apiRequest(`/api/coupon/${couponId}`, {
 		method: "PUT",
-		body: JSON.stringify(couponData),
+		body: couponData,
 		errorMessage: "Editng Coupon Failed",
 	});
 }

@@ -7,7 +7,6 @@ async function apiRequest(endpoint, options = {}) {
 	const fetchOptions = {
 		credentials: CREDENTIALS,
 		headers: {
-			"Content-Type": "application/json",
 			...(options.headers || {}),
 		},
 		...options,
@@ -29,4 +28,6 @@ async function apiRequest(endpoint, options = {}) {
 	}
 }
 
-export { apiRequest };
+export { 
+	apiRequest,
+};

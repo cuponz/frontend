@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 
-import PopupCreateCoupon from "@/components/PopupCreateCoupon";
+// import PopupCreateCoupon from "@/components/PopupCreateCoupon";
+import PopupCreateCoupon from "@/components/Popup/CreateCoupon";
+import PopupThankYou from "@/components/Popup/ThankYou";
 import { getCouponsByShopIdFromShop } from "@/api/coupon";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
@@ -11,6 +13,7 @@ import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
 
 import useShopCouponTableMutations from "./useShopCouponTableMutations";
+import { creatingCoupon } from "@/api/coupon";
 
 const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
@@ -20,13 +23,15 @@ const ShopCouponTable = () => {
 	);
 
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
+	const [isShowThankYou, setIsShowThankYou] = useState(false);
 
 	const handleCloseCreateCoupon = () => {
 		setIsCreateCouponOpen(false);
 	};
 
-	const handleSubmitCreateCoupon = (newCoupon) => {
-		console.log("New coupon created:", newCoupon);
+	const handleCloseThankYou = () => {
+		setIsCreateCouponOpen(false);
+		setIsShowThankYou(false);
 	};
 
 	const {
@@ -39,8 +44,22 @@ const ShopCouponTable = () => {
 		retry: false,
 	});
 
-	const [editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations();
+	const [createMutation, editMutation, pauseMutation, deleteMutation] =
+		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou);
+
+	const handleSubmitCreateCoupon = (couponData) => {
+		const formData = new FormData();
+
+		for (const key in couponData) {
+			if (couponData.hasOwnProperty(key)) {
+				formData.append(key, couponData[key]);
+			}
+		}
+
+		console.log(formData)
+
+		createMutation.mutate(formData);
+	};
 
 	// Action handlers
 	const handleEdit = (couponId) => {
@@ -133,7 +152,13 @@ const ShopCouponTable = () => {
 					isOpen={isCreateCouponOpen}
 					onClose={handleCloseCreateCoupon}
 					onSubmit={handleSubmitCreateCoupon}
+					isCreating={createMutation.isPending}
+					createError={createMutation.error} 
 				/>
+			)}
+
+			{isShowThankYou && (
+				<PopupThankYou isOpen={true} onClose={handleCloseThankYou} />
 			)}
 		</div>
 	);

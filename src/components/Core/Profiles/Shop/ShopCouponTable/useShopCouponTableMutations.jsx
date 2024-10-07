@@ -1,11 +1,31 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { editCoupon, pauseCoupon, deleteCoupon } from '@/api/coupon';
-import { toast } from 'sonner';
-import { CouponState } from '@/constants';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+	creatingCoupon,
+	editCoupon,
+	pauseCoupon,
+	deleteCoupon,
+} from "@/api/coupon";
+import { toast } from "sonner";
+import { CouponState } from "@/constants";
 
-const useShopCouponTableMutations = () => {
+const useShopCouponTableMutations = (
+	setIsCreateCouponOpen,
+	setIsShowThankYou
+) => {
 	const QUERY_KEY = ["get", "coupons", "shop"];
-  const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
+
+	const createMutation = useMutation({
+		mutationFn: creatingCoupon,
+		onSuccess: () => {
+			setIsCreateCouponOpen(false);
+			setIsShowThankYou(true);
+			refetch();
+		},
+		onError: () => {
+			cosnole.log(error);
+		},
+	});
 
 	const editMutation = useMutation({
 		mutationFn: editCoupon,
@@ -44,12 +64,7 @@ const useShopCouponTableMutations = () => {
 		},
 	});
 
-
-  return [
-    editMutation,
-    pauseMutation,
-    deleteMutation,
-  ];
+	return [createMutation, editMutation, pauseMutation, deleteMutation];
 };
 
 export default useShopCouponTableMutations;
