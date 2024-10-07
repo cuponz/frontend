@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, Outlet } from "react-router-dom";
 import { toast } from "sonner";
@@ -6,8 +6,8 @@ import { toast } from "sonner";
 import { useUserStore } from "@/store/user";
 import { userAuth } from "@/api/user";
 
-import Layout from "@/layout/Layout";
-import LoadingSpinner from "../../components/Utils/LoadingSpinner"; // Ensure this path is correct
+const Layout = lazy(() => import("@/layout/Layout"));
+import LoadingSpinner from "@/components/Utils/LoadingSpinner"; // Ensure this path is correct
 
 const AuthWrapper = ({ isProtected }) => {
 	const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
@@ -54,9 +54,18 @@ const AuthWrapper = ({ isProtected }) => {
 	}
 
 	return (
-		<Layout>
-			<Outlet />
-		</Layout>
+		<Suspense
+			fallback={
+				<div className="flex flex-col justify-center items-center h-screen">
+					<LoadingSpinner size="large" color="blue" />
+					<p className="mt-4 text-lg text-gray-600">Loading...</p>
+				</div>
+			}
+		>
+			<Layout>
+				<Outlet />
+			</Layout>
+		</Suspense>
 	);
 };
 
