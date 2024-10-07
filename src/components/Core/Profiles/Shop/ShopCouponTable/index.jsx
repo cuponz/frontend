@@ -58,7 +58,7 @@ const ShopCouponTable = () => {
 
 		console.log(formData);
 
-		// createMutation.mutate(formData);
+		createMutation.mutate(formData);
 	};
 
 	// Action handlers
