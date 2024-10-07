@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { usingRedemptionById } from "../api/redemptions";
-import LoadingSpinner from "./Utils/LoadingSpinner";
+import { usingRedemptionById } from "../../api/redemptions";
+import LoadingSpinner from "../Utils/LoadingSpinner";
 import { FaCheck } from "react-icons/fa";
 
 const PopupSuccess = ({ redeem }) => {

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 
 const OTPInput = ({ length, onComplete, value, onChange }) => {
 	const inputRefs = useRef([]);
@@ -15,23 +15,29 @@ const OTPInput = ({ length, onComplete, value, onChange }) => {
 		}
 	}, [value]);
 
-	const handleChange = (element, index) => {
-		if (isNaN(element.value)) return false;
+	const handleChange = useCallback(
+		(element, index) => {
+			if (isNaN(element.value)) return false;
 
-		const newOtp = value.split("");
-		newOtp[index] = element.value;
-		onChange(newOtp.join(""));
+			const newOtp = value.split("");
+			newOtp[index] = element.value;
+			onChange(newOtp.join(""));
 
-		if (element.nextSibling && newOtp[index] !== "") {
-			element.nextSibling.focus();
-		}
-	};
+			if (element.nextSibling && newOtp[index] !== "") {
+				element.nextSibling.focus();
+			}
+		},
+		[value, onChange]
+	);
 
-	const handleKeyDown = (e, index) => {
-		if (e.key === "Backspace" && !value[index] && index > 0) {
-			inputRefs.current[index - 1].focus();
-		}
-	};
+	const handleKeyDown = useCallback(
+		(e, index) => {
+			if (e.key === "Backspace" && !value[index] && index > 0) {
+				inputRefs.current[index - 1].focus();
+			}
+		},
+		[value]
+	);
 
 	useEffect(() => {
 		if (value.length === length) {
@@ -39,9 +45,9 @@ const OTPInput = ({ length, onComplete, value, onChange }) => {
 		}
 	}, [value, length, onComplete]);
 
-	return (
-		<div className="flex justify-center items-center space-x-2">
-			{Array.from({ length }, (_, index) => (
+	const inputs = useMemo(
+		() =>
+			Array.from({ length }, (_, index) => (
 				<input
 					key={index}
 					ref={(ref) => (inputRefs.current[index] = ref)}
@@ -53,8 +59,12 @@ const OTPInput = ({ length, onComplete, value, onChange }) => {
 					onKeyDown={(e) => handleKeyDown(e, index)}
 					onFocus={(e) => e.target.select()}
 				/>
-			))}
-		</div>
+			)),
+		[handleChange, handleKeyDown, length, value]
+	);
+
+	return (
+		<div className="flex justify-center items-center space-x-2">{inputs}</div>
 	);
 };
 

@@ -21,30 +21,30 @@ async function getCouponsByShopIdFromOthers(shopId) {
 async function creatingCoupon(couponData) {
 	return apiRequest(`/api/coupon/`, {
 		method: "POST",
-		body: JSON.stringify(couponData),
+		body: couponData,
 		errorMessage: "Creating Coupon Failed",
 	});
 }
 
 async function editCoupon(couponId, couponData) {
 	return apiRequest(`/api/coupon/${couponId}`, {
-		method: "POST",
-		body: JSON.stringify(couponData),
+		method: "PUT",
+		body: couponData,
 		errorMessage: "Editng Coupon Failed",
 	});
 }
 
-async function pauseCoupon(couponId, state) {
+async function pauseCoupon({ couponId, state }) {
 	return apiRequest(`/api/coupon/${couponId}/state`, {
-		method: "POST",
-		body: JSON.stringify({ state }),
+		method: "PUT",
+		body: JSON.stringify({ state: state }),
 		errorMessage: "Editng Coupon's State Failed",
 	});
 }
 
 async function deleteCoupon(couponId, couponData) {
 	return apiRequest(`/api/coupon/${couponId}`, {
-		method: "POST",
+		method: "DELETE",
 		body: JSON.stringify(couponData),
 		errorMessage: "Deleting Coupon Failed",
 	});

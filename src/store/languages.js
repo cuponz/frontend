@@ -1,44 +1,42 @@
-import { useState, useCallback, useEffect } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+
+import { supportedLanguages } from "@/generated/supportedLanguages";
 
 const STORAGE_VERSION = 1;
 const DEFAULT_LANGUAGE = "en";
 
-const getSupportedLanguages = async () => {
-	try {
-		const languages = ["en", "es", "hindi", "bengali", "urdu"]; // Add your supported languages here.
+const translationCache = {};
 
-		const loadedLanguages = await Promise.all(
-			languages.map(async (lang) => {
-				try {
-					await import(`../locales/${lang}.json`);
-					return lang;
-				} catch (error) {
-					console.warn(`Language file for ${lang} could not be loaded.`, error);
-					return null; // Return null or handle unavailable languages.
-				}
-			})
-		);
-
-		return loadedLanguages.filter(Boolean); // Filter out any null values.
-	} catch (error) {
+const getSupportedLanguages = () => {
+	if (!supportedLanguages) {
 		console.error("Failed to load supported languages", error);
-		return ["en", "es"];
+		return ["en"]; // Fallback to a default set if something goes wrong
 	}
+
+	return supportedLanguages;
 };
 
 const loadTranslations = async (language) => {
+	if (translationCache[language]) {
+		return translationCache[language]; // Return cached translations if available
+	}
+
 	try {
 		const module = await import(`../locales/${language}.json`);
-		return module.default;
+		const translations = module.default;
+		translationCache[language] = translations; // Cache the loaded translations
+		return translations;
 	} catch (error) {
 		console.error(`Failed to load translations for ${language}`, error);
 		if (language !== DEFAULT_LANGUAGE) {
 			const fallbackModule = await import(
 				`../locales/${DEFAULT_LANGUAGE}.json`
 			);
-			return fallbackModule.default;
+			const fallbackTranslations = fallbackModule.default;
+			translationCache[DEFAULT_LANGUAGE] = fallbackTranslations; // Cache fallback translations
+			return fallbackTranslations;
 		}
 		return {};
 	}
@@ -62,11 +60,9 @@ export const useTranslationStore = create(
 export const useTranslations = () => {
 	const { language, setLanguage } = useTranslationStore();
 	const [translations, setTranslations] = useState({});
-	const [supportedLanguages, setSupportedLanguages] = useState([]);
 
-	useEffect(() => {
-		getSupportedLanguages().then(setSupportedLanguages);
-	}, []);
+	// Cache supported languages using useMemo
+	const supportedLanguages = useMemo(() => getSupportedLanguages(), []);
 
 	useEffect(() => {
 		loadTranslations(language).then(setTranslations);
@@ -74,14 +70,7 @@ export const useTranslations = () => {
 
 	const t = useCallback(
 		(keys) => {
-			let value = translations;
-			for (const key of keys) {
-				if (!value) {
-					return "undefined";
-				}
-				value = value[key];
-			}
-			return value;
+			return keys.reduce((acc, key) => acc?.[key], translations) ?? "undefined";
 		},
 		[translations]
 	);

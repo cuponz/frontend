@@ -5,12 +5,12 @@ import {
 	createStaticRouter,
 	StaticRouterProvider,
 } from "react-router-dom/server";
-import "react-toastify/dist/ReactToastify.css";
-
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import routes from "./routes";
 
 export async function render(req, rep) {
 	const { query, dataRoutes } = createStaticHandler(routes);
+	const queryClient = new QueryClient();
 	const remixRequest = createFetchRequest(req, rep);
 	const context = await query(remixRequest);
 
@@ -23,12 +23,14 @@ export async function render(req, rep) {
 
 	const appHtml = renderToString(
 		<React.StrictMode>
-			<StaticRouterProvider
-				router={router}
-				context={context}
-				nonce="the-nonce"
-			/>
-		</React.StrictMode>,
+			<QueryClientProvider client={queryClient}>
+				<StaticRouterProvider
+					router={router}
+					context={context}
+					nonce="the-nonce"
+				/>
+			</QueryClientProvider>
+		</React.StrictMode>
 	);
 
 	return {

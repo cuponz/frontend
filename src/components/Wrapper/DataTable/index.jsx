@@ -4,7 +4,7 @@ import {
 	dataTableCompareValues,
 	downloadCSV,
 	filterMatchCheck,
-} from "@/components/Utils/DataTableUtils";
+} from "./utils";
 
 import Button from "@/components/Utils/Button";
 
@@ -56,7 +56,7 @@ const DataTable = ({
 					);
 				});
 
-				const filterMatch = filterMatchCheck(item, filters);
+				const filterMatch = filterMatchCheck(item, filters, additionalFilters);
 
 				return searchMatch && filterMatch;
 			})
