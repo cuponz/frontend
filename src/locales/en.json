@@ -2,17 +2,25 @@
 	"navigation": {
 		"home": "Home",
 		"coupons": "Coupons",
-    "categories": "Categories",
+		"categories": "Categories",
 		"aboutUs": "About Us",
 		"contactUs": "Contact Us",
-		"copyright": "© 2024 G71. All rights reserved.",
-    "userActions": {
-      "yourProfile": "Profile",
-      "cart": "Cart",
-      "settings": "Settings",
-      "logout": "Logout",
-      "login": "Login"
-    }
+		"searchBar": "Search",
+		"userActions": {
+			"yourProfile": "Your Profile",
+			"cart": "Cart",
+			"settings": "Settings",
+			"logout": "Logout",
+			"login": "Login"
+		}
+	},
+	"footer": {
+		"home": "Home",
+		"hotdeals": "Hot Deals",
+		"coupons": "Coupons",
+		"aboutUs": "About Us",
+		"contactUs": "Contact Us",
+		"copyright": "© 2024 G71. All rights reserved."
 	},
 	"aboutUsPage": {
 		"header": "What Is CuponZ And How Valid Is It?",
@@ -139,7 +147,7 @@
 	},
 	"miniNav": {
 		"coupon": "Coupons",
-		"management": "Management",
+		"management": "management",
 		"setting": "Setting"
 	}
 }
