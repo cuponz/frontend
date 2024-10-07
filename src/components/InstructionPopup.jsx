@@ -9,12 +9,11 @@ const InstructionPopup = ({ onClose }) => {
 		if (!isFirstVisit) {
 			onClose();
 		} else {
-			// Set a timeout to delay the appearance of the popup
 			const timer = setTimeout(() => {
 				setIsVisible(true);
-			}, 500); // Delay in milliseconds (0.5 seconds)
+			}, 500);
 
-			return () => clearTimeout(timer); // Cleanup timeout on unmount
+			return () => clearTimeout(timer);
 		}
 	}, [onClose]);
 
@@ -23,7 +22,7 @@ const InstructionPopup = ({ onClose }) => {
 			localStorage.setItem("isFirstVisit", "false");
 		}
 		setIsVisible(false);
-		setTimeout(onClose, 300); // Allow transition to finish before closing
+		setTimeout(onClose, 300);
 	};
 
 	return (

@@ -6,16 +6,19 @@ const PopupThankYou = ({ isOpen, onClose }) => {
 
 	if (!isOpen) return null;
 
+	const handleClose = () => {
+		onClose(dontShowAgain);
+	};
+
 	return (
 		<div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4">
-			<div className="bg-[#8475CA] text-white p-6  w-full max-w-md relative min-h-[60vh] flex flex-colborder  border-white border-4 ">
+			<div className="bg-[#8475CA] text-white p-6 w-full max-w-md relative min-h-[60vh] flex flex-col border border-white border-4">
 				<button
-					onClick={onClose}
-					className="absolute top-2 left-2 text-white hover:text-gray-300 "
+					onClick={handleClose}
+					className="absolute top-2 left-2 text-white hover:text-gray-300"
 					aria-label="Close"
 				>
-					{/* svg delete */}
-					<IoIosClose className="text-4xl text-white m-2 " />
+					<IoIosClose className="text-4xl text-white m-2" />
 				</button>
 				<div className="flex-grow mt-2">
 					<h2 className="text-2xl font-bold mb-4 mt-8">
@@ -25,8 +28,8 @@ const PopupThankYou = ({ isOpen, onClose }) => {
 						You will not see your product right away after uploading.
 					</p>
 					<p className="mb-6">
-						Thank you for being patiently waiting for our admin to approve your
-						product.
+						Thank you for being patient while waiting for our admin to approve
+						your product.
 					</p>
 					<label className="flex items-center mb-6">
 						<input

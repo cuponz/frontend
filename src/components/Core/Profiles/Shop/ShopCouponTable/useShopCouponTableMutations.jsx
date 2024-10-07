@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState, useEffect, useCallback } from "react";
 import {
 	creatingCoupon,
 	editCoupon,
@@ -8,22 +9,35 @@ import {
 import { toast } from "sonner";
 import { CouponState } from "@/constants";
 
-const useShopCouponTableMutations = (
-	setIsCreateCouponOpen,
-	setIsShowThankYou
-) => {
+const useShopCouponTableMutations = (setIsCreateCouponOpen) => {
 	const QUERY_KEY = ["get", "coupons", "shop"];
 	const queryClient = useQueryClient();
+	const [isShowThankYou, setIsShowThankYou] = useState(false);
+
+	useEffect(() => {
+		const shouldShow = localStorage.getItem("showThankYouPopup");
+		if (shouldShow === "false") {
+			setIsShowThankYou(false);
+		}
+	}, []);
+
+	const showThankYouPopup = useCallback(() => {
+		const shouldShow = localStorage.getItem("showThankYouPopup");
+		if (shouldShow !== "false") {
+			setIsShowThankYou(true);
+		}
+	}, []);
 
 	const createMutation = useMutation({
 		mutationFn: creatingCoupon,
 		onSuccess: () => {
 			setIsCreateCouponOpen(false);
-			setIsShowThankYou(true);
-			refetch();
+			showThankYouPopup();
+			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
 		},
-		onError: () => {
-			cosnole.log(error);
+		onError: (error) => {
+			console.error(error);
+			toast.error("Failed to create coupon");
 		},
 	});
 
@@ -64,7 +78,21 @@ const useShopCouponTableMutations = (
 		},
 	});
 
-	return [createMutation, editMutation, pauseMutation, deleteMutation];
+	const handleCloseThankYou = useCallback((dontShowAgain) => {
+		if (dontShowAgain) {
+			localStorage.setItem("showThankYouPopup", "false");
+		}
+		setIsShowThankYou(false);
+	}, []);
+
+	return {
+		createMutation,
+		editMutation,
+		pauseMutation,
+		deleteMutation,
+		isShowThankYou,
+		handleCloseThankYou,
+	};
 };
 
 export default useShopCouponTableMutations;
