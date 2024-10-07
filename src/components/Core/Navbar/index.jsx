@@ -160,7 +160,7 @@ const Navbar = () => {
 						<Link to="/login">
 							<Button
 								onClick={handleLoginLogout}
-								colour="[#FFC212]"
+								colour="yellow-500"
 							>
 								{t(["navigation", "userActions", "login"])}
 							</Button>

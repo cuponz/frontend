@@ -9,6 +9,7 @@ export default defineConfig({
 		alias: {
 			"@": "/src",
 		},
+		extensions: ['.js', '.jsx'],
 	},
 	server: {
 		proxy: {
