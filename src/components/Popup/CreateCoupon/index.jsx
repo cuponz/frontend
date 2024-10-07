@@ -2,7 +2,6 @@ import { useState } from "react";
 import { CouponRequirementType } from "@/constants";
 import { useCategoryStore } from "@/store/categories";
 import { IoIosClose } from "react-icons/io";
-
 import { toast } from "sonner";
 
 import UserInfoOptions from "./UserInfoOptions";
@@ -27,12 +26,17 @@ const PopupCreateCoupon = ({
 		logo: null,
 		desc: "",
 		type: CouponRequirementType.Email,
+		keywords: [],
 	});
 	const categories = useCategoryStore((state) => state.categories);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const handleKeywordsChange = (keywords) => {
+		setFormData((prev) => ({ ...prev, keywords }));
 	};
 
 	const handleImageUpload = (e) => {
@@ -80,6 +84,7 @@ const PopupCreateCoupon = ({
 					<CouponFormFields
 						formData={formData}
 						handleChange={handleChange}
+						handleKeywordsChange={handleKeywordsChange}
 						categories={categories}
 					/>
 

@@ -56,9 +56,9 @@ const ShopCouponTable = () => {
 			}
 		}
 
-		console.log(formData)
+		console.log(formData);
 
-		createMutation.mutate(formData);
+		// createMutation.mutate(formData);
 	};
 
 	// Action handlers
@@ -153,7 +153,7 @@ const ShopCouponTable = () => {
 					onClose={handleCloseCreateCoupon}
 					onSubmit={handleSubmitCreateCoupon}
 					isCreating={createMutation.isPending}
-					createError={createMutation.error} 
+					createError={createMutation.error}
 				/>
 			)}
 
