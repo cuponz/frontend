@@ -44,14 +44,12 @@ const AuthWrapper = ({ isProtected }) => {
 
 	if (isPending) {
 		return (
-			<Layout>
-				<div className="flex flex-col justify-center items-center h-screen">
-					<LoadingSpinner size="large" color="blue" />
-					<p className="mt-4 text-lg text-gray-600">
-						Verifying your credentials...
-					</p>
-				</div>
-			</Layout>
+			<div className="flex flex-col justify-center items-center h-screen">
+				<LoadingSpinner size="large" color="blue" />
+				<p className="mt-4 text-lg text-gray-600">
+					Verifying your credentials...
+				</p>
+			</div>
 		);
 	}
 
