@@ -27,7 +27,7 @@ async function apiRequest(url, options = {}) {
 	}
 }
 
-async function apiRequestFormBody(url, options = {}) {
+async function apiRequestAuto(url, options = {}) {
 	const fetchOptions = {
 		credentials: CREDENTIALS,
 		headers: {
@@ -54,5 +54,5 @@ async function apiRequestFormBody(url, options = {}) {
 
 export { 
 	apiRequest,
-	apiRequestFormBody,
+	apiRequestAuto,
 };

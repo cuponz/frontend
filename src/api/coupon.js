@@ -1,4 +1,4 @@
-import { apiRequest, apiRequestFormBody } from "./base";
+import { apiRequest, apiRequestAuto } from "./base";
 
 async function getCoupons() {
 	return apiRequest(`/api/coupon`, {
@@ -19,7 +19,7 @@ async function getCouponsByShopIdFromOthers(shopId) {
 }
 
 async function creatingCoupon(couponData) {
-	return apiRequestFormBody(`/api/coupon/`, {
+	return apiRequestAuto(`/api/coupon/`, {
 		method: "POST",
 		body: couponData,
 		errorMessage: "Creating Coupon Failed",
@@ -42,10 +42,9 @@ async function pauseCoupon({ couponId, state }) {
 	});
 }
 
-async function deleteCoupon(couponId, couponData) {
-	return apiRequest(`/api/coupon/${couponId}`, {
+async function deleteCoupon(couponId) {
+	return apiRequestAuto(`/api/coupon/${couponId}`, {
 		method: "DELETE",
-		body: JSON.stringify(couponData),
 		errorMessage: "Deleting Coupon Failed",
 	});
 }
