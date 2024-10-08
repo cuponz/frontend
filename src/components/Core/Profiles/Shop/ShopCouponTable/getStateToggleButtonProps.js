@@ -1,4 +1,3 @@
-import React from "react";
 import { CouponState } from "@/constants";
 
 const getStateToggleButtonProps = (state) => {

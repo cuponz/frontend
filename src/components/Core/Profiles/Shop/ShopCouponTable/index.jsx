@@ -63,7 +63,11 @@ const ShopCouponTable = () => {
 
 	// Action handlers
 	const handleEdit = (couponId) => {
-		editMutation.mutate(couponId);
+		updateLoadingState(couponId, "isEditing", true);
+
+		editMutation.mutate(couponId, {
+			onSettled: () => updateLoadingState(couponId, "isEditing", false),
+		});
 	};
 
 	const handleStateToggle = (couponId, currentState) => {
@@ -72,32 +76,36 @@ const ShopCouponTable = () => {
 				? CouponState.Pause
 				: CouponState.Active;
 
-		pauseMutation.mutate({ couponId, state: newState });
+		updateLoadingState(couponId, "isPausing", true);
+
+		pauseMutation.mutate(
+			{ couponId, state: newState },
+			{
+				onSettled: () => updateLoadingState(couponId, "isPausing", false),
+			}
+		);
 	};
 
 	const handleDelete = (couponId) => {
 		if (window.confirm("Are you sure you want to delete this coupon?")) {
-			deleteMutation.mutate(couponId);
+			updateLoadingState(couponId, "isEditing", true);
+			deleteMutation.mutate(couponId, {
+				onSettled: () => updateLoadingState(couponId, "isEditing", false),
+			});
 		}
 	};
 
-	const mutationLoadingStates = useMemo(
-		() => ({
-			editingId: editMutation.isPending ? editMutation.variables : null,
-			pausingId: pauseMutation.isPending
-				? pauseMutation.variables?.couponId
-				: null,
-			deletingId: deleteMutation.isPending ? deleteMutation.variables : null,
-		}),
-		[
-			editMutation.isPending,
-			editMutation.variables,
-			pauseMutation.isPending,
-			pauseMutation.variables,
-			deleteMutation.isPending,
-			deleteMutation.variables,
-		]
-	);
+	const [mutationLoadingStates, setMutationLoadingStates] = useState({});
+
+	const updateLoadingState = (id, key, value) => {
+		setMutationLoadingStates((prevState) => ({
+			...prevState,
+			[id]: {
+				...prevState[id],
+				[key]: value,
+			},
+		}));
+	};
 
 	const additionalFilters = [
 		{
@@ -140,7 +148,8 @@ const ShopCouponTable = () => {
 					handleEdit,
 					handleStateToggle,
 					handleDelete,
-					mutationLoadingStates
+					mutationLoadingStates,
+					updateLoadingState
 				)}
 				data={coupons}
 				filename="shop_coupons.csv"

@@ -1,4 +1,3 @@
-import React from "react";
 import { format } from "date-fns";
 import Button from "@/components/Utils/Button";
 import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create this helper function
@@ -8,7 +7,7 @@ const columns = (
 	handleEdit,
 	handleStateToggle,
 	handleDelete,
-	mutationLoadingStates
+	mutationLoadingStates,
 ) => [
 	{
 		header: "ID",
@@ -52,9 +51,9 @@ const columns = (
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(row.state);
 
-      const isEditing = mutationLoadingStates.editingId === row.id;
-      const isPausing = mutationLoadingStates.pausingId === row.id;
-      const isDeleting = mutationLoadingStates.deletingId === row.id;
+			const isEditing = mutationLoadingStates[row.id]?.isEditing;
+			const isPausing = mutationLoadingStates[row.id]?.isPausing;
+			const isDeleting = mutationLoadingStates[row.id]?.isDeleting;
 
 			return (
 				<div className="flex justify-center space-x-2">
@@ -67,23 +66,15 @@ const columns = (
 						Edit
 					</Button>
 					<Button
-						onClick={(e) => {
-							e.preventDefault();
-							handleStateToggle(row.id, row.state);
-						}}
+						onClick={() => handleStateToggle(row.id, row.state)}
 						colour={toggleButtonProps.colour}
-						disabled={
-							toggleButtonProps.disabled || isPausing
-						}
+						disabled={toggleButtonProps.disabled || isPausing}
 						isLoading={isPausing}
 					>
 						{toggleButtonProps.text}
 					</Button>
 					<Button
-						onClick={(e) => {
-							e.preventDefault();
-							handleDelete(row.id);
-						}}
+						onClick={() => handleDelete(row.id)}
 						colour="red-500"
 						disabled={isDeleting}
 						isLoading={isDeleting}

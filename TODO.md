@@ -7,8 +7,9 @@
 - [x] Login
 - [ ] Register
 - [ ] Create Category
-- [ ] Create Coupon
-- [ ] Redem Coupon
+- [x] Create Coupon
+- [ ] Edit Coupon
+- [x] Redem Coupon
 
 ## Tasks
 
@@ -16,11 +17,12 @@
 - [x] Store filters by react-router params
 - [x] Finish Logout
 - [x] Finish Navbar categories
+- [ ] Make New Shop User need to be validated by Manager
 - [ ] Finish Profile Page for user, shop and admin
   - [x] Shop
-  - [ ] User
+  - [x] User
   - [ ] Manager
 - [ ] Finish Profile Page for shop when view as user
   - [ ] Search Shop Profile in the search bar
 - [ ] Finish Setting Page for user profile page
-- [ ] Finish Redeem Coupon Flow
+- [x] Finish Redeem Coupon Flow
