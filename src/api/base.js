@@ -1,9 +1,7 @@
 const isDevelopment = process.env.NODE_ENV === "development";
-const BASE_URL = isDevelopment ? "http://localhost:3000" : "";
 const CREDENTIALS = isDevelopment ? "include" : "same-origin";
 
-async function apiRequest(endpoint, options = {}) {
-	const url = `${BASE_URL}${endpoint}`;
+async function apiRequest(url, options = {}) {
 	const fetchOptions = {
 		credentials: CREDENTIALS,
 		headers: {
@@ -29,8 +27,7 @@ async function apiRequest(endpoint, options = {}) {
 	}
 }
 
-async function apiRequestFormBody(endpoint, options = {}) {
-	const url = `${BASE_URL}${endpoint}`;
+async function apiRequestFormBody(url, options = {}) {
 	const fetchOptions = {
 		credentials: CREDENTIALS,
 		headers: {

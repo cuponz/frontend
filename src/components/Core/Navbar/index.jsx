@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import CategoriesMenu from "./CategoriesMenu";
@@ -7,7 +7,7 @@ import SearchBarNav from "./SearchBarNav";
 import { CiMenuFries, CiSearch } from "react-icons/ci";
 
 import { useUserStore } from "@/store/user";
-import { useCategoryStore, useIsCategoriesOpenStore } from "@/store/categories";
+import { useCategoryStore } from "@/store/categories";
 import { getCategories } from "@/api/category";
 import { getGroups } from "@/api/group";
 

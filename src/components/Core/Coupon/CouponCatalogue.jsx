@@ -21,7 +21,7 @@ import {
 	getCouponsByShopIdFromOthers,
 } from "../../../api/coupon";
 import { getRedemptionsByUserId } from "../../../api/redemptions";
-import { useUserStore } from "../../../store/user";
+import { useUserStore } from "@/store/user";
 
 const CouponCatalogueBoard = ({
 	type,

@@ -7,6 +7,8 @@ import { useState } from "react";
 
 import CouponPopup from "./CouponPopup";
 import InfoField from "./InfoField";
+import { useUserStore } from "@/store/user";
+import { UserType } from "@/constants";
 
 const CouponCardActionButton = ({
 	type,
@@ -48,6 +50,7 @@ const CouponCardActionButton = ({
 
 const CouponCard = ({ coupon, type, onShowStats }) => {
 	const [modalType, setModalType] = useState(null);
+	const user = useUserStore((state) => state.user);
 
 	let {
 		code,
@@ -135,11 +138,13 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 				)}
 			</div>
 
-			<CouponCardActionButton
-				type={type}
-				onAction={handleAction}
-				isUsed={state === RedemptionState.Used}
-			/>
+			{(!user || user.type === UserType.User) && (
+				<CouponCardActionButton
+					type={type}
+					onAction={handleAction}
+					isUsed={state === RedemptionState.Used}
+				/>
+			)}
 
 			{modalType === CouponCardModalType.InfoField && (
 				<InfoField

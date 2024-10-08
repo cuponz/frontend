@@ -1,24 +1,19 @@
-import { Suspense } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/layout/Layout";
-import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
 export default function ErrorPage() {
 	return (
-		<Suspense
-			fallback={
-				<div className="flex flex-col justify-center items-center h-screen">
-					<LoadingSpinner size="large" color="blue" />
-					<p className="mt-4 text-lg text-gray-600">Loading...</p>
+			<div className="flex items-center justify-center h-screen bg-gray-100">
+				<div className="text-center">
+					<h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
+					<p className="text-2xl text-gray-600 mb-8">Page Not Found</p>
+					<Link
+						to="/"
+						className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+					>
+						Go Back Home
+					</Link>
 				</div>
-			}
-		>
-			<Layout>
-				<div className="flex flex-col gap-2">
-					404 Not Found
-					<Link to="/">Home</Link>
-				</div>
-			</Layout>
-		</Suspense>
+			</div>
 	);
 }

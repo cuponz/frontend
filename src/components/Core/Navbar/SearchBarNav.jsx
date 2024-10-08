@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaShop } from "react-icons/fa6";
 import couponData from "../../../data/couponData.json";
-import { useTranslations } from "../../../store/languages";
+import { useTranslations } from "@/store/languages";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SearchBarNav = () => {

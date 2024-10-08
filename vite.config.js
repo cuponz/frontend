@@ -15,7 +15,6 @@ export default defineConfig({
 		alias: {
 			"@": "/src",
 		},
-		extensions: [".js", ".jsx"],
 	},
 	server: {
 		warmup: {
@@ -29,12 +28,8 @@ export default defineConfig({
 			],
 		},
 		proxy: {
-			"/api": {
-				target: "http://localhost:3000",
-				changeOrigin: true,
-				secure: false,
-				rewrite: (path) => path.replace(/^\/api/, ""), // rewrites /api prefix
-			},
+			"/api": "http://localhost:3000/",
+			"/images": "http://localhost:3000/"
 		},
 	},
 });
