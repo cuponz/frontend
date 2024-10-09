@@ -15,6 +15,7 @@ const PopupCreateCoupon = ({
 	onSubmit,
 	couponImage = null,
 	isCreating,
+	required = true,
 	createError,
 }) => {
 	const [formData, setFormData] = useState({
@@ -23,9 +24,9 @@ const PopupCreateCoupon = ({
 		code: "",
 		start_date: "",
 		end_date: "",
-		logo: null,
+		logo: undefined,
 		desc: "",
-		type: CouponRequirementType.Email,
+		type: required ? CouponRequirementType.Email : undefined,
 		keywords: [],
 		max_usage: 0,
 	});
@@ -50,12 +51,24 @@ const PopupCreateCoupon = ({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		console.log(formData);
+		if (formData.max_usage === 0) {
+			formData.max_usage = undefined;
+		}
 
-		if (!formData.logo) {
+		const hasChanges = Object.keys(formData).some(
+			(key) => !(formData[key] === undefined || formData[key]?.length === 0)
+		);
+
+		console.log(hasChanges, formData);
+
+		if (!required && !hasChanges) {
+			toast.error("Please make at least one change to update the coupon.");
+			return;
+		} else if (!formData.logo) {
 			toast.error("Please upload an image for the coupon.");
 			return;
 		}
+		console.log(formData);
 
 		onSubmit(formData);
 	};
@@ -87,6 +100,7 @@ const PopupCreateCoupon = ({
 						handleChange={handleChange}
 						handleKeywordsChange={handleKeywordsChange}
 						categories={categories}
+						required={required}
 					/>
 
 					<ImageUpload
@@ -106,10 +120,14 @@ const PopupCreateCoupon = ({
 							className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
 							rows="3"
 							placeholder="Write your message.."
-							required
+							required={required}
 						></textarea>
 					</div>
-					<UserInfoOptions formData={formData} handleChange={handleChange} />
+					<UserInfoOptions
+						formData={formData}
+						handleChange={handleChange}
+						required={required}
+					/>
 					<Button
 						type="submit"
 						colour="yellow-500"

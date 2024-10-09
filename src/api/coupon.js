@@ -26,7 +26,7 @@ async function creatingCoupon(couponData) {
 	});
 }
 
-async function editCoupon(couponId, couponData) {
+async function editCoupon({ couponId, couponData }) {
 	return apiRequest(`/api/coupon/${couponId}`, {
 		method: "PUT",
 		body: couponData,

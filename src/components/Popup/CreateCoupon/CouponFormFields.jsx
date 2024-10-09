@@ -29,6 +29,7 @@ const CouponFormFields = ({
 	handleChange,
 	handleKeywordsChange,
 	categories,
+	required,
 }) => {
 	const [keyword, setKeyword] = useState("");
 
@@ -93,7 +94,7 @@ const CouponFormFields = ({
 					value={formData.category}
 					onChange={handleChange}
 					className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-					required
+					required={required}
 				>
 					<option value="">Select a category</option>
 					{categories.map((category) => (
@@ -124,6 +125,7 @@ const CouponFormFields = ({
 						onChange={handleNumberChange}
 						className="block w-full border border-gray-300 rounded-none shadow-sm p-2"
 						min="0"
+						required={required}
 					/>
 					<button
 						type="button"
@@ -140,12 +142,14 @@ const CouponFormFields = ({
 				handleChange,
 				label: "Coupon Name",
 				name: "name",
+				required,
 			})}
 			{CouponFormInput({
 				formData,
 				handleChange,
 				label: "Coupon Code",
 				name: "code",
+				required,
 			})}
 			{CouponFormInput({
 				formData,
@@ -153,6 +157,7 @@ const CouponFormFields = ({
 				label: "Start Date",
 				name: "start_date",
 				type: "date",
+				required,
 			})}
 			{CouponFormInput({
 				formData,
@@ -160,6 +165,7 @@ const CouponFormFields = ({
 				label: "End Date",
 				name: "end_date",
 				type: "date",
+				required,
 			})}
 
 			{/* Keywords Input */}

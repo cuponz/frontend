@@ -41,7 +41,6 @@ const ImageUpload = ({ formData, handleImageUpload, defaultImage }) => {
 						className="hidden"
 						accept="image/*"
 						name="logo"
-						// required
 					/>
 					<button
 						type="button"

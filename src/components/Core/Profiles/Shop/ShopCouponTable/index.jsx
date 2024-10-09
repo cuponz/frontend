@@ -22,6 +22,8 @@ const ShopCouponTable = () => {
 	);
 
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
+	const [isEditCouponOpen, setIsEditCouponOpen] = useState(false);
+	const [editId, setEditId] = useState(false);
 	const [isShowThankYou, setIsShowThankYou] = useState(false);
 
 	const handleCloseCreateCoupon = () => {
@@ -31,6 +33,10 @@ const ShopCouponTable = () => {
 	const handleCloseThankYou = () => {
 		setIsCreateCouponOpen(false);
 		setIsShowThankYou(false);
+	};
+
+	const handleCloseEditCoupon = () => {
+		setIsEditCouponOpen(false);
 	};
 
 	const {
@@ -50,9 +56,7 @@ const ShopCouponTable = () => {
 		const formData = new FormData();
 
 		for (const key in couponData) {
-			if (couponData.hasOwnProperty(key)) {
-				formData.append(key, couponData[key]);
-			}
+			formData.append(key, couponData[key]);
 		}
 
 		console.log(formData);
@@ -60,13 +64,24 @@ const ShopCouponTable = () => {
 		createMutation.mutate(formData);
 	};
 
+	const handleSubmitEditCoupon = (couponData) => {
+		const formData = new FormData();
+
+		for (const key in couponData) {
+			if (couponData[key] !== undefined) {
+				formData.append(key, couponData[key]);
+			}
+		}
+
+		console.log(formData);
+
+		editMutation.mutate({ couponId: editId, couponData: formData });
+	};
+
 	// Action handlers
 	const handleEdit = (couponId) => {
-		updateLoadingState(couponId, "isEditing", true);
-
-		editMutation.mutate(couponId, {
-			onSettled: () => updateLoadingState(couponId, "isEditing", false),
-		});
+		setIsEditCouponOpen(true);
+		setEditId(couponId);
 	};
 
 	const handleStateToggle = (couponId, currentState) => {
@@ -162,6 +177,18 @@ const ShopCouponTable = () => {
 					onSubmit={handleSubmitCreateCoupon}
 					isCreating={createMutation.isPending}
 					createError={createMutation.error}
+				/>
+			)}
+
+			{isEditCouponOpen && (
+				<PopupCreateCoupon
+					isOpen={isEditCouponOpen}
+					onClose={handleCloseEditCoupon}
+					onSubmit={handleSubmitEditCoupon}
+					isCreating={createMutation.isPending}
+					createError={createMutation.error}
+					couponImage={coupons[editId].logo_url}
+					required={false}
 				/>
 			)}
 
