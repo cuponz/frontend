@@ -13,7 +13,6 @@ import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
 
 import useShopCouponTableMutations from "./useShopCouponTableMutations";
-import { creatingCoupon } from "@/api/coupon";
 
 const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);

@@ -27,6 +27,7 @@ const PopupCreateCoupon = ({
 		desc: "",
 		type: CouponRequirementType.Email,
 		keywords: [],
+		max_usage: 0,
 	});
 	const categories = useCategoryStore((state) => state.categories);
 

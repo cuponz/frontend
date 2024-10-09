@@ -23,7 +23,7 @@ const useShopCouponTableMutations = (
 			refetch();
 		},
 		onError: () => {
-			cosnole.log(error);
+			console.log(error);
 		},
 	});
 
