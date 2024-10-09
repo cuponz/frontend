@@ -1,6 +1,6 @@
 import CouponCatalogue from "../components/Core/Coupon/CouponCatalogue";
 import Banner from "../components/Banner";
-import { CouponCatalougeType } from "../constants";
+import { CouponCatalogueType } from "../constants";
 
 const CouponPage = () => {
 	return (
@@ -10,7 +10,7 @@ const CouponPage = () => {
 					<Banner message="Discover the Best Deals Today!" />
 					<title>Discover Local Deals</title>
 
-					<CouponCatalogue type={CouponCatalougeType.All} />
+					<CouponCatalogue type={CouponCatalogueType.All} />
 				</div>
 			</div>
 		</>

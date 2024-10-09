@@ -11,7 +11,7 @@ import { updateFiltersFromParams } from "../../Utils/Coupons";
 
 import { useQuery } from "@tanstack/react-query";
 import CouponBoard from "./CouponBoard";
-import { CouponCatalougeType } from "../../../constants";
+import { CouponCatalogueType } from "../../../constants";
 import UserTable from "../Profiles/Shop/UserTable";
 import { useTranslations } from "../../../store/languages";
 
@@ -33,19 +33,19 @@ const CouponCatalogueBoard = ({
 	let [queryKey, queryFn] = useMemo(() => {
 		let queryKey, queryFn;
 		switch (type) {
-			case CouponCatalougeType.All:
+			case CouponCatalogueType.All:
 				queryKey = ["get", "coupons"];
 				queryFn = getCoupons;
 				break;
-			case CouponCatalougeType.ShopManage:
+			case CouponCatalogueType.ShopManage:
 				queryKey = ["get", "coupons", "shop"];
 				queryFn = getCouponsByShopIdFromShop;
 				break;
-			case CouponCatalougeType.ShopList:
+			case CouponCatalogueType.ShopList:
 				queryKey = ["get", "coupons", "shop", user.id];
 				queryFn = () => getCouponsByShopIdFromOthers(user.id);
 				break;
-			case CouponCatalougeType.User:
+			case CouponCatalogueType.User:
 				queryKey = ["get", "user", "coupons"];
 				queryFn = getRedemptionsByUserId;
 				break;

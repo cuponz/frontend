@@ -20,7 +20,7 @@ const ProfileTab = Object.freeze({
 	Details: 3,
 });
 
-const CouponCatalougeType = Object.freeze({
+const CouponCatalogueType = Object.freeze({
 	All: 0,
 	ShopManage: 1,
 	ShopList: 2,
@@ -92,7 +92,7 @@ const Validators = Object.freeze({
 export {
 	UserType,
 	ProfileTab,
-	CouponCatalougeType,
+	CouponCatalogueType,
 	RedemptionState,
 	CouponRequirementType,
 	CouponState,

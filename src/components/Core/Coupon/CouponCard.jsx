@@ -1,8 +1,8 @@
 import {
 	CouponCardModalType,
-	CouponCatalougeType,
+	CouponCatalogueType,
 	RedemptionState,
-} from "../../../constants";
+} from "@/constants";
 import { useState } from "react";
 
 import CouponPopup from "./CouponPopup";
@@ -19,14 +19,14 @@ const CouponCardActionButton = ({
 	let text;
 
 	switch (type) {
-		case CouponCatalougeType.All:
-		case CouponCatalougeType.ShopList:
+		case CouponCatalogueType.All:
+		case CouponCatalogueType.ShopList:
 			text = isRedeemed ? "Redeemed" : "Redeem Now";
 			break;
-		case CouponCatalougeType.ShopManage:
+		case CouponCatalogueType.ShopManage:
 			text = "Show Details";
 			break;
-		case CouponCatalougeType.User:
+		case CouponCatalogueType.User:
 			text = isUsed ? "Used" : "Use Now";
 			break;
 	}
@@ -79,14 +79,14 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 
 	const handleAction = () => {
 		switch (type) {
-			case CouponCatalougeType.All:
-			case CouponCatalougeType.ShopList:
+			case CouponCatalogueType.All:
+			case CouponCatalogueType.ShopList:
 				setModalType(CouponCardModalType.InfoField);
 				break;
-			case CouponCatalougeType.ShopManage:
+			case CouponCatalogueType.ShopManage:
 				onShowStats(coupon.id);
 				break;
-			case CouponCatalougeType.User:
+			case CouponCatalogueType.User:
 				if (coupon.state !== RedemptionState.Used) {
 					setModalType(CouponCardModalType.PopUp);
 				}
@@ -98,15 +98,15 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 
 	return (
 		<div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full relative">
-			{(type === CouponCatalougeType.All ||
-				type === CouponCatalougeType.ShopList) &&
+			{(type === CouponCatalogueType.All ||
+				type === CouponCatalogueType.ShopList) &&
 				maxUsage && (
 					<div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
 						{maxUsage - usageCount} coupons left!
 					</div>
 				)}
 
-			{type === CouponCatalougeType.ShopManage && (
+			{type === CouponCatalogueType.ShopManage && (
 				<div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
 					{numUsers} Users
 				</div>
@@ -120,9 +120,11 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 						className="sm:w-48 md:w-96 h-96 object-contain"
 					/>
 				</div>
-				<h1 className="text-3xl font-semibold font-mono mb-3 transition-all tracking-wide hover:tracking-widest hover:text-[#46467A]">
-					{code}
-				</h1>
+				{code && (
+					<h1 className="text-3xl font-semibold font-mono mb-3 transition-all tracking-wide hover:tracking-widest hover:text-[#46467A]">
+						{code}
+					</h1>
+				)}
 				<h2 className="text-lg font-semibold mb-1">{name}</h2>
 				<p className="text-gray-700 text-sm mb-2">{shop}</p>
 				<p className="mt-2 text-gray-600 text-sm">{categoryName}</p>
