@@ -98,13 +98,15 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 
 	return (
 		<div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full relative">
-			{(type === CouponCatalogueType.All ||
-				type === CouponCatalogueType.ShopList) &&
-				maxUsage && (
-					<div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
-						{maxUsage - usageCount} coupons left!
-					</div>
-				)}
+			{Boolean(
+				(type === CouponCatalogueType.All ||
+					type === CouponCatalogueType.ShopList) &&
+					maxUsage
+			) && (
+				<div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
+					{maxUsage - usageCount} coupons left!
+				</div>
+			)}
 
 			{type === CouponCatalogueType.ShopManage && (
 				<div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
