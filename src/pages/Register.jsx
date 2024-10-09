@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CouponImage1 from "../assets/coupon1.png";
-import CouponImage2 from "../assets/coupon2.png";
+import CouponImage1 from "@/assets/coupon1";
+import CouponImage2 from "@/assets/coupon2";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import { UserType, CountryListWithCode, Validators } from "../constants";

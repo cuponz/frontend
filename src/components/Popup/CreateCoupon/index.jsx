@@ -13,7 +13,6 @@ const PopupCreateCoupon = ({
 	isOpen,
 	onClose,
 	onSubmit,
-	couponImage = null,
 	isCreating,
 	required = true,
 	createError,
@@ -51,20 +50,19 @@ const PopupCreateCoupon = ({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (formData.max_usage === 0) {
-			formData.max_usage = undefined;
-		}
-
 		const hasChanges = Object.keys(formData).some(
-			(key) => !(formData[key] === undefined || formData[key]?.length === 0)
+			(key) =>
+				!(
+					formData[key] === undefined ||
+					formData[key]?.length === 0 ||
+					formData[key] === 0
+				)
 		);
-
-		console.log(hasChanges, formData);
 
 		if (!required && !hasChanges) {
 			toast.error("Please make at least one change to update the coupon.");
 			return;
-		} else if (!formData.logo) {
+		} else if (required && !formData.logo) {
 			toast.error("Please upload an image for the coupon.");
 			return;
 		}
@@ -106,7 +104,6 @@ const PopupCreateCoupon = ({
 					<ImageUpload
 						formData={formData}
 						handleImageUpload={handleImageUpload}
-						defaultImage={couponImage}
 					/>
 
 					<div className="mb-4">

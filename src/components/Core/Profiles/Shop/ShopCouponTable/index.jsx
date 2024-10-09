@@ -43,6 +43,7 @@ const ShopCouponTable = () => {
 		isLoading,
 		error,
 		data: coupons = [],
+		refetch,
 	} = useQuery({
 		queryKey: ["get", "coupons", "shop"],
 		queryFn: getCouponsByShopIdFromShop,
@@ -50,7 +51,7 @@ const ShopCouponTable = () => {
 	});
 
 	const [createMutation, editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou);
+		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou, refetch);
 
 	const handleSubmitCreateCoupon = (couponData) => {
 		const formData = new FormData();
@@ -68,7 +69,13 @@ const ShopCouponTable = () => {
 		const formData = new FormData();
 
 		for (const key in couponData) {
-			if (couponData[key] !== undefined) {
+			if (
+				!(
+					couponData[key] === undefined ||
+					couponData[key]?.length === 0 ||
+					couponData[key] === 0
+				)
+			) {
 				formData.append(key, couponData[key]);
 			}
 		}
@@ -80,8 +87,8 @@ const ShopCouponTable = () => {
 
 	// Action handlers
 	const handleEdit = (couponId) => {
-		setIsEditCouponOpen(true);
 		setEditId(couponId);
+		setIsEditCouponOpen(true);
 	};
 
 	const handleStateToggle = (couponId, currentState) => {
@@ -188,6 +195,7 @@ const ShopCouponTable = () => {
 					isCreating={createMutation.isPending}
 					createError={createMutation.error}
 					couponImage={coupons[editId].logo_url}
+					couponData={coupons[editId]}
 					required={false}
 				/>
 			)}

@@ -17,7 +17,7 @@ async function apiRequest(url, options = {}) {
 
 		if (!response.ok) {
 			const errorMsg =
-				data?.msg || data?.error || options.errorMessage || "Request failed";
+				data?.msg || data?.message || data?.error || options.errorMessage || "Request failed";
 			throw new Error(errorMsg);
 		}
 
@@ -42,7 +42,7 @@ async function apiRequestAuto(url, options = {}) {
 
 		if (!response.ok) {
 			const errorMsg =
-				data?.msg || data?.error || options.errorMessage || "Request failed";
+				data?.msg || data?.message || data?.error || options.errorMessage || "Request failed";
 			throw new Error(errorMsg);
 		}
 
