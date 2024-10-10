@@ -54,8 +54,8 @@ const ContactForm = () => {
 				{/* Acceptable SVG */}
 				<div className="svg-container absolute bottom-0 right-0 pointer-events-none">
 					<svg
-						width="208"
-						height="209"
+						width="180"
+						height="180"
 						viewBox="0 0 208 209"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,8 @@ const ContactForm = () => {
 						placeholder={t(["contactUs", "form", "selection", "message"])}
 						value={formData.message}
 						onChange={handleChange}
-						className="w-full p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500   "
+						className="   w-full p-3 border border-gray-300 rounded"
+						// w-full p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500
 						required
 					></textarea>
 				</div>
