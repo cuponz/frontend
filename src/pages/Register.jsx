@@ -9,6 +9,8 @@ import { userRegister } from "../api/user";
 import TogglePassword from "../components/Utils/TogglePassword";
 import { useTranslations } from "../store/languages";
 
+import Button from "@/components/Utils/Button";
+
 const RegisterPage = () => {
 	const { t } = useTranslations();
 	const [formData, setFormData] = useState({
@@ -232,7 +234,7 @@ const RegisterPage = () => {
 									{t(["register", "form", "select", "title"])}
 								</option>
 								{Object.entries(UserType).map(([key, value]) => (
-									<option key={value} value={value}>
+									key !== "Manager" && <option key={value} value={value}>
 										{key}
 									</option>
 								))}
@@ -241,12 +243,15 @@ const RegisterPage = () => {
 								<p className="text-red-500 text-sm mt-1">{errors.userType}</p>
 							)}
 						</div>
-						<button
+						<Button
 							type="submit"
-							className="w-full bg-yellow-500 text-white font-bold p-3 rounded hover:bg-yellow-600 transition duration-200"
+							// className="w-full bg-yellow-500 text-white font-bold p-3 rounded hover:bg-yellow-600 "
+							colour="yellow-500"
+							className="w-full font-bold p-3"
+							isLoading={registerMutation.isPending}
 						>
 							{t(["register", "form", "button"])}
-						</button>
+						</Button>
 					</form>
 					<div className="mt-4 text-center">
 						<p>

@@ -10,16 +10,16 @@ const Button = ({
 	return (
 		<button
 			onClick={onClick}
-			className={`px-4 py-2 text-white rounded-md shadow-md bg-${colour} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${colour} focus:ring-offset-${colour} ${className || ""} ${
-				disabled ? "opacity-50 cursor-not-allowed" : `hover:brightness-90`
-			}`}
+			className={`flex items-center justify-center px-4 py-2 text-white rounded-md shadow-md bg-${colour} transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${colour} focus:ring-offset-${colour} ${
+				className || ""
+			} ${disabled ? "opacity-50 cursor-not-allowed" : `hover:brightness-90`}`}
 			disabled={disabled}
 			{...props}
 		>
 			{isLoading ? (
 				<svg
 					aria-hidden="true"
-					className="animate-spin h-5 w-5 text-gray-200 fill-gray-600"
+					className="animate-spin h-6 w-6 text-gray-200 fill-gray-600"
 					viewBox="0 0 100 101"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
