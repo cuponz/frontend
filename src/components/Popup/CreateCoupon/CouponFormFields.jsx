@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaPlus, FaMinus } from "react-icons/fa6";
 
 const CouponFormInput = ({
 	formData,
@@ -28,6 +29,7 @@ const CouponFormFields = ({
 	handleChange,
 	handleKeywordsChange,
 	categories,
+	required,
 }) => {
 	const [keyword, setKeyword] = useState("");
 
@@ -51,6 +53,35 @@ const CouponFormFields = ({
 		}
 	};
 
+	const handleNumberChange = (e) => {
+		const value = parseInt(e.target.value, 10);
+		handleChange({
+			target: {
+				name: "max_usage",
+				value: isNaN(value) ? 0 : Math.max(0, value),
+			},
+		});
+	};
+
+	const incrementNumber = () => {
+		handleChange({
+			target: {
+				name: "max_usage",
+				value: (formData.max_usage || 0) + 1,
+			},
+		});
+	};
+
+	const decrementNumber = () => {
+		handleChange({
+			target: {
+				name: "max_usage",
+				value: Math.max(0, (formData.max_usage || 0) - 1),
+			},
+		});
+		console.log(formData.max_usage);
+	};
+
 	return (
 		<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
 			{/* Category Select */}
@@ -63,7 +94,7 @@ const CouponFormFields = ({
 					value={formData.category}
 					onChange={handleChange}
 					className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-					required
+					required={required}
 				>
 					<option value="">Select a category</option>
 					{categories.map((category) => (
@@ -74,17 +105,51 @@ const CouponFormFields = ({
 				</select>
 			</div>
 
+			{/* Incrementing Number Input */}
+			<div className="sm:col-span-2 md:col-span-1">
+				<label className="block text-sm font-medium text-gray-700">
+					Max Usage
+				</label>
+				<div className="mt-1 flex rounded-md shadow-sm">
+					<button
+						type="button"
+						onClick={decrementNumber}
+						className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-gray-50 text-gray-500 hover:bg-gray-100"
+					>
+						<FaMinus className="h-5 w-5" />
+					</button>
+					<input
+						type="number"
+						name="max_usage"
+						value={formData.max_usage || 0}
+						onChange={handleNumberChange}
+						className="block w-full border border-gray-300 rounded-none shadow-sm p-2"
+						min="0"
+						required={required}
+					/>
+					<button
+						type="button"
+						onClick={incrementNumber}
+						className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-gray-50 text-gray-500 hover:bg-gray-100"
+					>
+						<FaPlus className="h-5 w-5" />
+					</button>
+				</div>
+			</div>
+
 			{CouponFormInput({
 				formData,
 				handleChange,
 				label: "Coupon Name",
 				name: "name",
+				required,
 			})}
 			{CouponFormInput({
 				formData,
 				handleChange,
 				label: "Coupon Code",
 				name: "code",
+				required,
 			})}
 			{CouponFormInput({
 				formData,
@@ -92,6 +157,7 @@ const CouponFormFields = ({
 				label: "Start Date",
 				name: "start_date",
 				type: "date",
+				required,
 			})}
 			{CouponFormInput({
 				formData,
@@ -99,6 +165,7 @@ const CouponFormFields = ({
 				label: "End Date",
 				name: "end_date",
 				type: "date",
+				required,
 			})}
 
 			{/* Keywords Input */}

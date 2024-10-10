@@ -1,4 +1,4 @@
-import { CouponCatalougeType, UserType } from "../constants";
+import { CouponCatalogueType, UserType } from "../constants";
 import UserCoupon from "../components/Core/Profiles/UserCoupon";
 import { useUserStore } from "../store/user";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const ShoppingCart = () => {
 		<>
 			<div className="min-h-screen">
 				<div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-10">
-					<UserCoupon type={CouponCatalougeType.User} />
+					<UserCoupon type={CouponCatalogueType.User} />
 				</div>
 			</div>
 		</>

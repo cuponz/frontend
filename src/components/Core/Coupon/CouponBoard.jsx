@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import Fuse from "fuse.js";
+import { CouponCatalogueType } from "@/constants";
 
 import CouponCard from "./CouponCard";
 
@@ -21,7 +22,7 @@ const CouponBoard = ({
 				keys: ["title", "desc", "keywords", "shop_name"],
 				threshold: 0.3,
 			}),
-		[coupons],
+		[coupons]
 	);
 
 	const filteredCoupons = useMemo(() => {
@@ -65,14 +66,22 @@ const CouponBoard = ({
 			items={filteredCoupons}
 			isPending={isPending}
 			renderItems={(currentCoupons) =>
-				currentCoupons.map((coupon, index) => (
-					<CouponCard
-						key={index}
-						coupon={coupon}
-						type={type}
-						onShowStats={handleShowStats}
-					/>
-				))
+				currentCoupons.map((coupon, index) => {
+					if (
+						type === CouponCatalogueType.ShopList ||
+						type === CouponCatalogueType.All
+					) {
+						coupon.code = undefined;
+					}
+					return (
+						<CouponCard
+							key={index}
+							coupon={coupon}
+							type={type}
+							onShowStats={handleShowStats}
+						/>
+					);
+				})
 			}
 		/>
 	);

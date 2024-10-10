@@ -26,8 +26,8 @@ async function creatingCoupon(couponData) {
 	});
 }
 
-async function editCoupon(couponId, couponData) {
-	return apiRequest(`/api/coupon/${couponId}`, {
+async function editCoupon({ couponId, couponData }) {
+	return apiRequestAuto(`/api/coupon/${couponId}`, {
 		method: "PUT",
 		body: couponData,
 		errorMessage: "Editng Coupon Failed",

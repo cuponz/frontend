@@ -13,8 +13,8 @@ const PopupCreateCoupon = ({
 	isOpen,
 	onClose,
 	onSubmit,
-	couponImage = null,
 	isCreating,
+	required = true,
 	createError,
 }) => {
 	const [formData, setFormData] = useState({
@@ -23,10 +23,11 @@ const PopupCreateCoupon = ({
 		code: "",
 		start_date: "",
 		end_date: "",
-		logo: null,
+		logo: undefined,
 		desc: "",
-		type: CouponRequirementType.Email,
+		type: required ? CouponRequirementType.Email : undefined,
 		keywords: [],
+		max_usage: 0,
 	});
 	const categories = useCategoryStore((state) => state.categories);
 
@@ -49,12 +50,23 @@ const PopupCreateCoupon = ({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		console.log(formData);
+		const hasChanges = Object.keys(formData).some(
+			(key) =>
+				!(
+					formData[key] === undefined ||
+					formData[key]?.length === 0 ||
+					formData[key] === 0
+				)
+		);
 
-		if (!formData.logo) {
+		if (!required && !hasChanges) {
+			toast.error("Please make at least one change to update the coupon.");
+			return;
+		} else if (required && !formData.logo) {
 			toast.error("Please upload an image for the coupon.");
 			return;
 		}
+		console.log(formData);
 
 		onSubmit(formData);
 	};
@@ -86,12 +98,12 @@ const PopupCreateCoupon = ({
 						handleChange={handleChange}
 						handleKeywordsChange={handleKeywordsChange}
 						categories={categories}
+						required={required}
 					/>
 
 					<ImageUpload
 						formData={formData}
 						handleImageUpload={handleImageUpload}
-						defaultImage={couponImage}
 					/>
 
 					<div className="mb-4">
@@ -105,10 +117,14 @@ const PopupCreateCoupon = ({
 							className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
 							rows="3"
 							placeholder="Write your message.."
-							required
+							required={required}
 						></textarea>
 					</div>
-					<UserInfoOptions formData={formData} handleChange={handleChange} />
+					<UserInfoOptions
+						formData={formData}
+						handleChange={handleChange}
+						required={required}
+					/>
 					<Button
 						type="submit"
 						colour="yellow-500"

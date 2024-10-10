@@ -7,7 +7,7 @@ const columns = (
 	handleEdit,
 	handleStateToggle,
 	handleDelete,
-	mutationLoadingStates,
+	mutationLoadingStates
 ) => [
 	{
 		header: "ID",
@@ -18,8 +18,8 @@ const columns = (
 		accessor: "code",
 	},
 	{
-		header: "Title",
-		accessor: "title",
+		header: "Name",
+		accessor: "name",
 	},
 	{
 		header: "Category",

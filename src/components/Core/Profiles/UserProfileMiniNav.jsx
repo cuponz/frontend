@@ -5,7 +5,7 @@ import LoadingSpinner from "../../Utils/LoadingSpinner";
 
 import UserCoupon from "./UserCoupon";
 import UserSetting from "../../Setting";
-import { CouponCatalougeType, ProfileTab, UserType } from "../../../constants";
+import { CouponCatalogueType, ProfileTab, UserType } from "../../../constants";
 
 import ShopCouponTable from "./Shop/ShopCouponTable";
 import ShopOwnerSetting from "../../Setting";
@@ -23,7 +23,7 @@ const UserContent = ({ activeTab }) => {
 const ShopContent = ({ activeTab }) => {
 	switch (activeTab) {
 		case ProfileTab.Coupons:
-			return <UserCoupon type={CouponCatalougeType.ShopManage} />;
+			return <UserCoupon type={CouponCatalogueType.ShopManage} />;
 		case ProfileTab.Management:
 			return <ShopCouponTable />;
 		case ProfileTab.Settings:

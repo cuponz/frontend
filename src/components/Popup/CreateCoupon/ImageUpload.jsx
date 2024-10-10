@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-const ImageUpload = ({ formData, handleImageUpload, defaultImage }) => {
+const ImageUpload = ({ formData, handleImageUpload }) => {
 	const fileInputRef = useRef(null);
-	const [preview, setPreview] = useState(defaultImage || null); // Use default image if provided
+	const [preview, setPreview] = useState(null);
 
 	const triggerImageUpload = () => {
 		if (fileInputRef.current) {
@@ -41,7 +41,6 @@ const ImageUpload = ({ formData, handleImageUpload, defaultImage }) => {
 						className="hidden"
 						accept="image/*"
 						name="logo"
-						// required
 					/>
 					<button
 						type="button"
