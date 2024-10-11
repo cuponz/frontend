@@ -1,9 +1,9 @@
 import { useTranslations } from "../store/languages";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import img1 from "../assets/image2.png";
-import img2 from "../assets/image5.png";
-import img7 from "../assets/image7.png";
+import img1 from "@/assets/image2";
+import img2 from "@/assets/image5";
+import img7 from "@/assets/image7";
 
 const AboutUs = () => {
 	const { t } = useTranslations();
