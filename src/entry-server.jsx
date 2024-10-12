@@ -1,12 +1,20 @@
-import React from "react";
+import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import {
 	createStaticHandler,
 	createStaticRouter,
 	StaticRouterProvider,
 } from "react-router-dom/server";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import {
+	HydrationBoundary,
+	dehydrate,
+	QueryClientProvider,
+	QueryClient,
+} from "@tanstack/react-query";
 import routes from "./routes";
+
+import { getCategories } from "@/api/category";
+import { getGroups } from "@/api/group";
 
 export async function render(req, rep) {
 	const { query, dataRoutes } = createStaticHandler(routes);
@@ -21,21 +29,39 @@ export async function render(req, rep) {
 
 	const router = createStaticRouter(dataRoutes, context);
 
+	// Prefetch your react-query data here, e.g., for categories and groups
+	await Promise.all([
+		queryClient.prefetchQuery({
+			queryKey: ["categories"],
+			queryFn: getCategories,
+		}),
+		queryClient.prefetchQuery({
+			queryKey: ["groups"],
+			queryFn: getGroups,
+		}),
+	]);
+
+	const dehydratedState = dehydrate(queryClient);
+	console.log(JSON.stringify(dehydratedState, null, 2));
+
 	const appHtml = renderToString(
-		<React.StrictMode>
+		<StrictMode>
 			<QueryClientProvider client={queryClient}>
-				<StaticRouterProvider
-					router={router}
-					context={context}
-					nonce="the-nonce"
-				/>
+				<HydrationBoundary state={dehydratedState}>
+					<StaticRouterProvider
+						router={router}
+						context={context}
+						nonce="the-nonce"
+					/>
+				</HydrationBoundary>
 			</QueryClientProvider>
-		</React.StrictMode>
+		</StrictMode>
 	);
 
 	return {
 		html: appHtml,
 		context,
+		dehydratedState,
 	};
 }
 
