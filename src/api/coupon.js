@@ -35,10 +35,18 @@ async function editCoupon({ couponId, couponData }) {
 }
 
 async function pauseCoupon({ couponId, state }) {
+	return apiRequest(`/api/coupon/${couponId}/active`, {
+		method: "PUT",
+		body: JSON.stringify({ state: state }),
+		errorMessage: "Editng Coupon's Active State Failed",
+	});
+}
+
+async function approveCoupon({ couponId, state }) {
 	return apiRequest(`/api/coupon/${couponId}/state`, {
 		method: "PUT",
 		body: JSON.stringify({ state: state }),
-		errorMessage: "Editng Coupon's State Failed",
+		errorMessage: "Editng Coupon's Approval Failed",
 	});
 }
 
@@ -56,5 +64,6 @@ export {
 	creatingCoupon,
 	editCoupon,
 	pauseCoupon,
+	approveCoupon,
 	deleteCoupon,
 };

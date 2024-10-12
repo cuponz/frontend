@@ -43,7 +43,6 @@ const ShopCouponTable = () => {
 		isLoading,
 		error,
 		data: coupons = [],
-		refetch,
 	} = useQuery({
 		queryKey: ["get", "coupons", "shop"],
 		queryFn: getCouponsByShopIdFromShop,
@@ -51,7 +50,7 @@ const ShopCouponTable = () => {
 	});
 
 	const [createMutation, editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou, refetch);
+		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou);
 
 	const handleSubmitCreateCoupon = (couponData) => {
 		const formData = new FormData();
@@ -92,10 +91,7 @@ const ShopCouponTable = () => {
 	};
 
 	const handleStateToggle = (couponId, currentState) => {
-		const newState =
-			currentState === CouponState.Active
-				? CouponState.Pause
-				: CouponState.Active;
+		const newState = !currentState;
 
 		updateLoadingState(couponId, "isPausing", true);
 

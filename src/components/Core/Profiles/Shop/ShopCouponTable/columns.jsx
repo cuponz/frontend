@@ -1,7 +1,9 @@
+import React from "react";
 import { format } from "date-fns";
 import Button from "@/components/Utils/Button";
 import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create this helper function
-import { CouponState } from "@/constants";
+
+import StatusBadge from "@/components/Core/Profiles/StatusBadge"
 
 const columns = (
 	handleEdit,
@@ -41,15 +43,19 @@ const columns = (
 		cell: (value, row) => `${value}/${row.max_usage || "∞"}`,
 	},
 	{
-		header: "State",
-		accessor: "state",
-		cell: (value) => Object.keys(CouponState)[value],
+		header: "Status",
+		cell: (_, row) => (
+			<StatusBadge active={row.active} state={row.state} />
+		),
 	},
 	{
 		header: "Actions",
 		accessor: "actions",
 		cell: (_, row) => {
-			const toggleButtonProps = getStateToggleButtonProps(row.state);
+			const toggleButtonProps = getStateToggleButtonProps(
+				row.active,
+				row.state
+			);
 
 			const isEditing = mutationLoadingStates[row.id]?.isEditing;
 			const isPausing = mutationLoadingStates[row.id]?.isPausing;
@@ -66,7 +72,7 @@ const columns = (
 						Edit
 					</Button>
 					<Button
-						onClick={() => handleStateToggle(row.id, row.state)}
+						onClick={() => handleStateToggle(row.id, row.active)}
 						colour={toggleButtonProps.colour}
 						disabled={toggleButtonProps.disabled || isPausing}
 						isLoading={isPausing}
