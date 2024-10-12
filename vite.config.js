@@ -7,24 +7,34 @@ import ViteWebp from "vite-plugin-webp-generator";
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv) => {
-	console.log(configEnv);
-	console.log(configEnv.mode === "development");
+	const isDevelopment = configEnv.mode === "development";
 	return {
 		plugins: [
 			react(),
 			tailwindPurgeCss(),
-			ViteWebp.default({
-				extensions: ["png", "jpg"],
-			}),
+			// ViteWebp.default({
+			// 	extensions: ["png", "jpg"],
+			// }),
 			ViteImageOptimizer(),
 			compression(),
 		],
-		base: "http://localhost:3000/",
 		resolve: {
 			alias: {
 				"@": "/src",
 			},
-			extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.webp', '.jpg', '.jpeg', '.png']
+			extensions: [
+				".mjs",
+				".js",
+				".mts",
+				".ts",
+				".jsx",
+				".tsx",
+				".json",
+				".webp",
+				".jpg",
+				".jpeg",
+				".png",
+			],
 		},
 		server: {
 			warmup: {
@@ -43,7 +53,7 @@ export default defineConfig((configEnv) => {
 			},
 		},
 		build: {
-			sourcemap: true,
+			sourcemap: isDevelopment,
 		},
 	};
 });
