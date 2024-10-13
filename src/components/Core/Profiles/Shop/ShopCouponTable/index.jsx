@@ -3,23 +3,21 @@ import { useMemo, useState } from "react";
 // import PopupCreateCoupon from "@/components/PopupCreateCoupon";
 import PopupCreateCoupon from "@/components/Popup/CreateCoupon";
 import PopupThankYou from "@/components/Popup/ThankYou";
-import DeleteConfirm from "@/components/Popup/DeleteConfirm";
-
 import { getCouponsByShopIdFromShop } from "@/api/coupon";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
-import { CouponState } from "@/constants";
 
 import Button from "@/components/Utils/Button";
 import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
 
 import useShopCouponTableMutations from "./useShopCouponTableMutations";
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
 const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
 	const categories = useMemo(
-		() => categoryObjects.map((category) => category.name),
+		() => (categoryObjects || []).map((category) => category.name),
 		[categoryObjects]
 	);
 
@@ -27,11 +25,6 @@ const ShopCouponTable = () => {
 	const [isEditCouponOpen, setIsEditCouponOpen] = useState(false);
 	const [editId, setEditId] = useState(false);
 	const [isShowThankYou, setIsShowThankYou] = useState(false);
-
-	// Add new state for delete confirmation
-	const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
-	const [couponToDelete, setCouponToDelete] = useState(null);
-	//
 
 	const handleCloseCreateCoupon = () => {
 		setIsCreateCouponOpen(false);
@@ -50,7 +43,6 @@ const ShopCouponTable = () => {
 		isLoading,
 		error,
 		data: coupons = [],
-		refetch,
 	} = useQuery({
 		queryKey: ["get", "coupons", "shop"],
 		queryFn: getCouponsByShopIdFromShop,
@@ -58,11 +50,7 @@ const ShopCouponTable = () => {
 	});
 
 	const [createMutation, editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations(
-			setIsCreateCouponOpen,
-			setIsShowThankYou,
-			refetch
-		);
+		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou);
 
 	const handleSubmitCreateCoupon = (couponData) => {
 		const formData = new FormData();
@@ -103,10 +91,7 @@ const ShopCouponTable = () => {
 	};
 
 	const handleStateToggle = (couponId, currentState) => {
-		const newState =
-			currentState === CouponState.Active
-				? CouponState.Pause
-				: CouponState.Active;
+		const newState = !currentState;
 
 		updateLoadingState(couponId, "isPausing", true);
 
@@ -118,36 +103,14 @@ const ShopCouponTable = () => {
 		);
 	};
 
-	// const handleDelete = (couponId) => {
-	// 	if (window.confirm("Are you sure you want to delete this coupon?")) {
-	// 		updateLoadingState(couponId, "isEditing", true);
-	// 		deleteMutation.mutate(couponId, {
-	// 			onSettled: () => updateLoadingState(couponId, "isEditing", false),
-	// 		});
-	// 	}
-	// };
-
-	// Update handleDelete function
 	const handleDelete = (couponId) => {
-		setCouponToDelete(couponId);
-		setIsDeleteConfirmOpen(true);
-	};
-	//
-
-	// Add new function to handle deletion confirmation
-	const handleConfirmDelete = () => {
-		if (couponToDelete) {
-			updateLoadingState(couponToDelete, "isDeleting", true);
-			deleteMutation.mutate(couponToDelete, {
-				onSettled: () => {
-					updateLoadingState(couponToDelete, "isDeleting", false);
-					setIsDeleteConfirmOpen(false);
-					setCouponToDelete(null);
-				},
+		if (window.confirm("Are you sure you want to delete this coupon?")) {
+			updateLoadingState(couponId, "isEditing", true);
+			deleteMutation.mutate(couponId, {
+				onSettled: () => updateLoadingState(couponId, "isEditing", false),
 			});
 		}
 	};
-	//
 
 	const [mutationLoadingStates, setMutationLoadingStates] = useState({});
 
@@ -203,7 +166,6 @@ const ShopCouponTable = () => {
 					handleStateToggle,
 					handleDelete,
 					mutationLoadingStates,
-					updateLoadingState
 				)}
 				data={coupons}
 				filename="shop_coupons.csv"
@@ -236,12 +198,6 @@ const ShopCouponTable = () => {
 			{isShowThankYou && (
 				<PopupThankYou isOpen={true} onClose={handleCloseThankYou} />
 			)}
-			<DeleteConfirm
-				isOpen={isDeleteConfirmOpen}
-				onClose={() => setIsDeleteConfirmOpen(false)}
-				onConfirm={handleConfirmDelete}
-				itemName="this coupon"
-			/>
 		</div>
 	);
 };

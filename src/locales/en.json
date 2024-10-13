@@ -147,7 +147,8 @@
 	},
 	"miniNav": {
 		"coupon": "Coupons",
-		"management": "Management",
+		"couponManagement": "Coupon Management",
+		"userManagement": "User Management",
 		"setting": "Setting"
 	}
 }

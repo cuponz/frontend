@@ -147,7 +147,8 @@
   },
   "miniNav": {
     "coupon": "کوپن",
-    "management": "انتظام",
+    "couponManagement": "کوپن مینجمنٹ",
+    "userManagement": "صارف کا انتظام",
     "setting": "ترتیبات"
   }
 }

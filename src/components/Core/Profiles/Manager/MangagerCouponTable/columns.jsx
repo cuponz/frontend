@@ -6,8 +6,7 @@ import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create t
 import StatusBadge from "@/components/Core/Profiles/StatusBadge";
 
 const columns = (
-	handleEdit,
-	handleStateToggle,
+	handleToogleApproval,
 	handleDelete,
 	mutationLoadingStates
 ) => [
@@ -55,33 +54,18 @@ const columns = (
 		header: "Actions",
 		accessor: "actions",
 		cell: (_, row) => {
-			const toggleButtonProps = getStateToggleButtonProps(
-				row.active,
-				row.state
-			);
+			const toggleButtonProps = getStateToggleButtonProps(row.state);
 
-			const isEditing = mutationLoadingStates[row.id]?.isEditing;
-			const isPausing = mutationLoadingStates[row.id]?.isPausing;
+			const isApproving = mutationLoadingStates[row.id]?.isEditing;
 			const isDeleting = mutationLoadingStates[row.id]?.isDeleting;
 
 			return (
-				<div
-					key={`${row.id}-btn-actions`}
-					className="flex justify-center space-x-2"
-				>
+				<div className="flex justify-center space-x-2">
 					<Button
-						onClick={() => handleEdit(row.id)}
-						colour="yellow-500"
-						disabled={isEditing}
-						isLoading={isEditing}
-					>
-						Edit
-					</Button>
-					<Button
-						onClick={() => handleStateToggle(row.id, row.active)}
+						onClick={() => handleToogleApproval(row.id, row.state)}
 						colour={toggleButtonProps.colour}
-						disabled={toggleButtonProps.disabled || isPausing}
-						isLoading={isPausing}
+						disabled={isApproving}
+						isLoading={isApproving}
 					>
 						{toggleButtonProps.text}
 					</Button>
