@@ -46,7 +46,7 @@ async function approveCoupon({ couponId, state }) {
 	return apiRequest(`/api/coupon/${couponId}/state`, {
 		method: "PUT",
 		body: JSON.stringify({ state: state }),
-		errorMessage: "Editng Coupon's Approval Failed",
+		errorMessage: "Editng Coupon's State Failed",
 	});
 }
 

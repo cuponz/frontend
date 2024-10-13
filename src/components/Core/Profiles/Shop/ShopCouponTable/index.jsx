@@ -6,18 +6,18 @@ import PopupThankYou from "@/components/Popup/ThankYou";
 import { getCouponsByShopIdFromShop } from "@/api/coupon";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
-import { CouponState } from "@/constants";
 
 import Button from "@/components/Utils/Button";
 import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
 
 import useShopCouponTableMutations from "./useShopCouponTableMutations";
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
 const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
 	const categories = useMemo(
-		() => categoryObjects.map((category) => category.name),
+		() => (categoryObjects || []).map((category) => category.name),
 		[categoryObjects]
 	);
 
@@ -166,7 +166,6 @@ const ShopCouponTable = () => {
 					handleStateToggle,
 					handleDelete,
 					mutationLoadingStates,
-					updateLoadingState
 				)}
 				data={coupons}
 				filename="shop_coupons.csv"
