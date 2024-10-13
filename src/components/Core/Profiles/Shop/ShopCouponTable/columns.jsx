@@ -1,9 +1,9 @@
-import React from "react";
+import { Fragment } from "react";
 import { format } from "date-fns";
 import Button from "@/components/Utils/Button";
 import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create this helper function
 
-import StatusBadge from "@/components/Core/Profiles/StatusBadge"
+import StatusBadge from "@/components/Core/Profiles/StatusBadge";
 
 const columns = (
 	handleEdit,
@@ -14,6 +14,7 @@ const columns = (
 	{
 		header: "ID",
 		accessor: "id",
+		sortType: "number",
 	},
 	{
 		header: "Code",
@@ -45,7 +46,9 @@ const columns = (
 	{
 		header: "Status",
 		cell: (_, row) => (
-			<StatusBadge active={row.active} state={row.state} />
+			<Fragment key={`${row.id}-status-badge`}>
+				<StatusBadge active={row.active} state={row.state} />
+			</Fragment>
 		),
 	},
 	{
@@ -62,7 +65,10 @@ const columns = (
 			const isDeleting = mutationLoadingStates[row.id]?.isDeleting;
 
 			return (
-				<div className="flex justify-center space-x-2">
+				<div
+					key={`${row.id}-btn-actions`}
+					className="flex justify-center space-x-2"
+				>
 					<Button
 						onClick={() => handleEdit(row.id)}
 						colour="yellow-500"
