@@ -10,7 +10,8 @@ const CategoriesMenu = ({
 	categoriesButtonMobileRef,
 }) => {
 	const [activeGroup, setActiveGroup] = useState(null);
-	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+	// const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+	const [isMobile, setIsMobile] = useState(false);
 	const navigate = useNavigate();
 	const menuRef = useRef(null);
 
@@ -18,28 +19,34 @@ const CategoriesMenu = ({
 		(state) => state.setIsCategoriesOpen
 	);
 
-	useEffect(() => {
-		const handleResize = () => {
+	const handleResize = () => {
+		if (typeof window !== "undefined") {
 			setIsMobile(window.innerWidth < 768);
-		};
+		}
+	};
 
-		const handleClickOutside = (event) => {
-			if (
-				menuRef.current &&
-				!menuRef.current.contains(event.target) &&
-				!(
-					categoriesButtonRef.current &&
-					categoriesButtonRef.current.contains(event.target)
-				) &&
-				!(
-					categoriesButtonMobileRef.current &&
-					categoriesButtonMobileRef.current.contains(event.target)
-				)
-			) {
-				setIsCategoriesOpen(false);
-			}
-		};
+	const handleClickOutside = (event) => {
+		if (
+			menuRef.current &&
+			!menuRef.current.contains(event.target) &&
+			!(
+				categoriesButtonRef.current &&
+				categoriesButtonRef.current.contains(event.target)
+			) &&
+			!(
+				categoriesButtonMobileRef.current &&
+				categoriesButtonMobileRef.current.contains(event.target)
+			)
+		) {
+			setIsCategoriesOpen(false);
+		}
+	};
 
+	useEffect(() => {
+		handleResize();
+	}, []);
+
+	useEffect(() => {
 		window.addEventListener("resize", handleResize);
 		document.addEventListener("mousedown", handleClickOutside);
 
