@@ -56,7 +56,7 @@ const PopupCreateCoupon = ({
 					formData[key] === undefined ||
 					formData[key]?.length === 0 ||
 					formData[key] === 0
-				)
+				),
 		);
 
 		if (!required && !hasChanges) {

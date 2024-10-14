@@ -5,11 +5,7 @@ import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create t
 
 import StatusBadge from "@/components/Core/Profiles/StatusBadge";
 
-const columns = (
-	handleToogleApproval,
-	handleDelete,
-	mutationLoadingStates
-) => [
+const columns = (handleToogleApproval, handleDelete, mutationLoadingStates) => [
 	{
 		header: "ID",
 		accessor: "id",

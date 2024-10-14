@@ -13,15 +13,26 @@
 		"preview": "vite preview",
 		"build-dev": "pnpm run dev:client & pnpm run dev:server",
 		"build-dev:client": "vite build --ssrManifest --outDir dist/client --watch",
-		"build-dev:server": "vite build --ssr src/entry-server.jsx --outDir dist/server --watch"
+		"build-dev:server": "vite build --ssr src/entry-server.jsx --outDir dist/server --watch",
+		"test": "vitest run",
+		"test-report": "vitest --reporter json --output-file TEST_REPORT.json",
+		"format": "prettier . --write --ignore-unknown"
+	},
+	"lint-staged": {
+		"*": "prettier . --write --ignore-unknown"
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^5.56.2",
+		"@testing-library/jest-dom": "^6.5.0",
+		"@testing-library/react": "^16.0.1",
 		"country-list": "^2.3.0",
 		"date-fns": "^4.1.0",
 		"framer-motion": "^11.11.1",
 		"fuse.js": "^7.0.0",
+		"husky": "^9.1.6",
+		"json-to-markdown": "^1.0.4",
 		"libphonenumber-js": "^1.11.9",
+		"prettier": "^3.3.3",
 		"prop-types": "^15.8.1",
 		"react": "^18.3.1",
 		"react-country-flag": "^3.1.0",
@@ -48,6 +59,7 @@
 		"eslint-plugin-react-hooks": "^4.6.2",
 		"eslint-plugin-react-refresh": "^0.4.12",
 		"http-proxy": "^1.18.1",
+		"jsdom": "^25.0.1",
 		"postcss": "^8.4.47",
 		"sharp": "^0.33.5",
 		"svgo": "^3.3.2",
@@ -57,7 +69,8 @@
 		"vite-plugin-image-optimizer": "^1.1.8",
 		"vite-plugin-purge": "^1.0.3",
 		"vite-plugin-tailwind-purgecss": "^0.3.3",
-		"vite-plugin-webp-generator": "^0.1.0"
+		"vite-plugin-webp-generator": "^0.1.0",
+		"vitest": "^2.1.2"
 	},
 	"packageManager": "pnpm@9.12.0+sha512.4abf725084d7bcbafbd728bfc7bee61f2f791f977fd87542b3579dcb23504d170d46337945e4c66485cd12d588a0c0e570ed9c477e7ccdd8507cf05f3f92eaca"
 }

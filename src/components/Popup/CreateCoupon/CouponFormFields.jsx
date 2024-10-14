@@ -42,7 +42,7 @@ const CouponFormFields = ({
 
 	const removeKeyword = (keywordToRemove) => {
 		handleKeywordsChange(
-			formData.keywords.filter((k) => k !== keywordToRemove)
+			formData.keywords.filter((k) => k !== keywordToRemove),
 		);
 	};
 

@@ -101,7 +101,7 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 			{Boolean(
 				(type === CouponCatalogueType.All ||
 					type === CouponCatalogueType.ShopList) &&
-					maxUsage
+					maxUsage,
 			) && (
 				<div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-bl-lg">
 					{maxUsage - usageCount} coupons left!

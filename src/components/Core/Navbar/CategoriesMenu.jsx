@@ -16,7 +16,7 @@ const CategoriesMenu = ({
 	const menuRef = useRef(null);
 
 	const setIsCategoriesOpen = useIsCategoriesOpenStore(
-		(state) => state.setIsCategoriesOpen
+		(state) => state.setIsCategoriesOpen,
 	);
 
 	const handleResize = () => {
@@ -104,7 +104,7 @@ const CategoriesMenu = ({
 					{groups.map((group) => {
 						if (activeGroup === group.id) {
 							const groupCategories = categories.filter(
-								(category) => category.group_id === group.id
+								(category) => category.group_id === group.id,
 							);
 							return (
 								<div key={group.id} className="mb-4">

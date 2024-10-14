@@ -55,7 +55,7 @@ export async function render(req, rep) {
 					/>
 				</HydrationBoundary>
 			</QueryClientProvider>
-		</StrictMode>
+		</StrictMode>,
 	);
 
 	return {

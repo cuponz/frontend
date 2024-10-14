@@ -10,7 +10,7 @@ import { CouponState } from "@/constants";
 
 const useShopCouponTableMutations = (
 	setIsCreateCouponOpen,
-	setIsShowThankYou
+	setIsShowThankYou,
 ) => {
 	const QUERY_KEY = ["get", "coupons", "shop"];
 	const queryClient = useQueryClient();

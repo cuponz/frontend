@@ -6,7 +6,7 @@ const ReCaptchaV3 = ({ onVerify }) => {
 		const loadRecaptchaScript = () => {
 			if (
 				!document.querySelector(
-					'[src="https://www.google.com/recaptcha/api.js?render=6Le95mAqAAAAACNrixGV0kZyrNmfHEYoKlerEKP5"]'
+					'[src="https://www.google.com/recaptcha/api.js?render=6Le95mAqAAAAACNrixGV0kZyrNmfHEYoKlerEKP5"]',
 				)
 			) {
 				const script = document.createElement("script");
@@ -25,7 +25,7 @@ const ReCaptchaV3 = ({ onVerify }) => {
 					"6Le95mAqAAAAACNrixGV0kZyrNmfHEYoKlerEKP5",
 					{
 						action,
-					}
+					},
 				);
 				console.log(token);
 				onVerify(token);

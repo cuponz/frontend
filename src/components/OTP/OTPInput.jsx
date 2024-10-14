@@ -27,7 +27,7 @@ const OTPInput = ({ length, onComplete, value, onChange }) => {
 				element.nextSibling.focus();
 			}
 		},
-		[value, onChange]
+		[value, onChange],
 	);
 
 	const handleKeyDown = useCallback(
@@ -36,7 +36,7 @@ const OTPInput = ({ length, onComplete, value, onChange }) => {
 				inputRefs.current[index - 1].focus();
 			}
 		},
-		[value]
+		[value],
 	);
 
 	useEffect(() => {
@@ -60,7 +60,7 @@ const OTPInput = ({ length, onComplete, value, onChange }) => {
 					onFocus={(e) => e.target.select()}
 				/>
 			)),
-		[handleChange, handleKeyDown, length, value]
+		[handleChange, handleKeyDown, length, value],
 	);
 
 	return (

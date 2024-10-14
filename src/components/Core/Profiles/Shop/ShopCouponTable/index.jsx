@@ -18,7 +18,7 @@ const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
 	const categories = useMemo(
 		() => (categoryObjects || []).map((category) => category.name),
-		[categoryObjects]
+		[categoryObjects],
 	);
 
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
@@ -99,7 +99,7 @@ const ShopCouponTable = () => {
 			{ couponId, state: newState },
 			{
 				onSettled: () => updateLoadingState(couponId, "isPausing", false),
-			}
+			},
 		);
 	};
 

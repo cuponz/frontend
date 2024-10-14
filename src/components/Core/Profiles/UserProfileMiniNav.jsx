@@ -63,20 +63,20 @@ const UserProfileMiniNav = () => {
 						label: t(["miniNav", "couponManagement"]),
 					},
 					{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
-			  ]
+				]
 			: user.type === UserType.User
-			? [{ id: ProfileTab.Settings, label: t(["miniNav", "coupon"]) }]
-			: [
-					{
-						id: ProfileTab.CouponManagement,
-						label: t(["miniNav", "couponManagement"]),
-					},
-					{
-						id: ProfileTab.UserManagement,
-						label: t(["miniNav", "userManagement"]),
-					},
-					{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
-			  ];
+				? [{ id: ProfileTab.Settings, label: t(["miniNav", "coupon"]) }]
+				: [
+						{
+							id: ProfileTab.CouponManagement,
+							label: t(["miniNav", "couponManagement"]),
+						},
+						{
+							id: ProfileTab.UserManagement,
+							label: t(["miniNav", "userManagement"]),
+						},
+						{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
+					];
 
 	const [activeTab, setActiveTab] = useState(tabs[0].id);
 

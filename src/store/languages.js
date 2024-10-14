@@ -53,8 +53,8 @@ export const useTranslationStore = create(
 			storage: createJSONStorage(() => localStorage),
 			version: STORAGE_VERSION,
 			partialize: (state) => ({ language: state.language }),
-		}
-	)
+		},
+	),
 );
 
 export const useTranslations = () => {
@@ -72,7 +72,7 @@ export const useTranslations = () => {
 		(keys) => {
 			return keys.reduce((acc, key) => acc?.[key], translations) ?? "undefined";
 		},
-		[translations]
+		[translations],
 	);
 
 	return { t, language, setLanguage, supportedLanguages };

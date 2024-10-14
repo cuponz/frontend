@@ -38,7 +38,7 @@ const LoginPage = () => {
 			// Once reCAPTCHA is verified, submit the login form with the token
 			loginMutation.mutate({ ...formData, recaptchaToken: token });
 		},
-		[formData, loginMutation]
+		[formData, loginMutation],
 	);
 
 	const handleSubmit = async (e) => {

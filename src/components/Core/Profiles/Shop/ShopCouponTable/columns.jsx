@@ -9,7 +9,7 @@ const columns = (
 	handleEdit,
 	handleStateToggle,
 	handleDelete,
-	mutationLoadingStates
+	mutationLoadingStates,
 ) => [
 	{
 		header: "ID",
@@ -57,7 +57,7 @@ const columns = (
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(
 				row.active,
-				row.state
+				row.state,
 			);
 
 			const isEditing = mutationLoadingStates[row.id]?.isEditing;

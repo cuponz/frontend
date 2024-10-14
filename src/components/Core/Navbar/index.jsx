@@ -117,7 +117,7 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						)
+						),
 					)}
 				</ul>
 
@@ -204,7 +204,7 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						)
+						),
 					)}
 				</ul>
 			)}

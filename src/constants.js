@@ -66,7 +66,7 @@ const CountryListWithCode = Object.freeze(
 			code: countryCode,
 			callingCode: callingCode ? `+${callingCode}` : "",
 		};
-	})
+	}),
 );
 
 const Validators = Object.freeze({

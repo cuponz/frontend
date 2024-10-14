@@ -32,12 +32,12 @@ const LanguageDropdown = ({ language, toggleMenuState, isOpen }) => {
 				<span className="ml-2">{languageNames[lang] || lang}</span>
 			</button>
 		),
-		[changeLanguage, language]
+		[changeLanguage, language],
 	);
 
 	const memoizedSupportedLanguages = useMemo(
 		() => supportedLanguages.map(renderFlagButton),
-		[supportedLanguages, renderFlagButton]
+		[supportedLanguages, renderFlagButton],
 	);
 
 	return (

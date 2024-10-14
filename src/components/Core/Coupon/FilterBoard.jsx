@@ -9,7 +9,7 @@ const FilterBoard = ({ closeFilterBoard }) => {
 	const [_, setSearchParams] = useSearchParams();
 
 	const categories = useCategoryStore((state) =>
-		state.categories.map((category) => category.name)
+		state.categories.map((category) => category.name),
 	);
 	const [appliedFilters, setStartDate, setEndDate, storeSetSelectedCategories] =
 		useCouponFiltersStore((state) => [

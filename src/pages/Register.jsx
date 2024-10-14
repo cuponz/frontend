@@ -233,11 +233,14 @@ const RegisterPage = () => {
 								<option value="">
 									{t(["register", "form", "select", "title"])}
 								</option>
-								{Object.entries(UserType).map(([key, value]) => (
-									key !== "Manager" && <option key={value} value={value}>
-										{key}
-									</option>
-								))}
+								{Object.entries(UserType).map(
+									([key, value]) =>
+										key !== "Manager" && (
+											<option key={value} value={value}>
+												{key}
+											</option>
+										),
+								)}
 							</select>
 							{errors.userType && (
 								<p className="text-red-500 text-sm mt-1">{errors.userType}</p>
