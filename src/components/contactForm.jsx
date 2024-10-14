@@ -54,8 +54,8 @@ const ContactForm = () => {
 				{/* Acceptable SVG */}
 				<div className="svg-container absolute bottom-0 right-0 pointer-events-none">
 					<svg
-						width="208"
-						height="209"
+						width="180"
+						height="180"
 						viewBox="0 0 208 209"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -68,14 +68,14 @@ const ContactForm = () => {
 
 			{/* Right side - 3/5 width on medium screens and up, full width on small screens */}
 			<form className="w-full md:w-3/5 p-8 bg-white" onSubmit={handleSubmit}>
-				<div className="form-group flex flex-col md:flex-row justify-between mb-6">
+				<div className="form-group flex flex-col md:flex-row justify-between mb-6 gap-4">
 					<input
 						type="text"
 						name="firstName"
 						placeholder={t(["contactUs", "form", "fname"])}
 						value={formData.firstName}
 						onChange={handleChange}
-						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500 mb-4 md:mb-0"
+						className="    p-3 border border-gray-300 rounded w-full"
 						required
 					/>
 					<input
@@ -84,18 +84,18 @@ const ContactForm = () => {
 						placeholder={t(["contactUs", "form", "lname"])}
 						value={formData.lastName}
 						onChange={handleChange}
-						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
+						className="p-3 border border-gray-300 rounded w-full "
 						required
 					/>
 				</div>
-				<div className="form-group flex flex-col md:flex-row justify-between mb-6">
+				<div className="form-group flex flex-col md:flex-row justify-between mb-6 gap-4">
 					<input
 						type="email"
 						name="email"
 						placeholder={t(["contactUs", "form", "email"])}
 						value={formData.email}
 						onChange={handleChange}
-						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500 mb-4 md:mb-0"
+						className="p-3 border border-gray-300 rounded w-full"
 						required
 					/>
 					<input
@@ -104,7 +104,7 @@ const ContactForm = () => {
 						placeholder={t(["contactUs", "form", "phoneNumber"])}
 						value={formData.phoneNumber}
 						onChange={handleChange}
-						className="w-full md:w-1/2 p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
+						className="p-3 border border-gray-300 rounded w-full"
 						required
 					/>
 				</div>
@@ -161,7 +161,8 @@ const ContactForm = () => {
 						placeholder={t(["contactUs", "form", "selection", "message"])}
 						value={formData.message}
 						onChange={handleChange}
-						className="w-full p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500"
+						className="   w-full p-3 border border-gray-300 rounded"
+						// w-full p-3 border-b-2 border-gray-300 focus:border-purple-600 outline-none text-gray-700 placeholder-gray-500
 						required
 					></textarea>
 				</div>
