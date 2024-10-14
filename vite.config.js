@@ -2,18 +2,29 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { purgeCss as tailwindPurgeCss } from "vite-plugin-tailwind-purgecss";
 import compression from "vite-plugin-compression";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import ViteWebp from "vite-plugin-webp-generator";
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv) => {
 	console.log(configEnv);
 	console.log(configEnv.mode === "development");
 	return {
-		plugins: [react(), tailwindPurgeCss(), compression()],
+		plugins: [
+			react(),
+			tailwindPurgeCss(),
+			ViteWebp.default({
+				extensions: ["png", "jpg"],
+			}),
+			ViteImageOptimizer(),
+			compression(),
+		],
 		base: "http://localhost:3000/",
 		resolve: {
 			alias: {
 				"@": "/src",
 			},
+			extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.webp', '.jpg', '.jpeg', '.png']
 		},
 		server: {
 			warmup: {
@@ -32,7 +43,7 @@ export default defineConfig((configEnv) => {
 			},
 		},
 		build: {
-			// sourcemap: false,
+			sourcemap: true,
 		},
 	};
 });

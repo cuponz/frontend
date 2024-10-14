@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import CouponImage2 from "../assets/coupon2.png";
+import CouponImage2 from "@/assets/coupon2";
 import Layout from "../layout/Layout";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";

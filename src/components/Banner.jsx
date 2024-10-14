@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { RiGalleryView2 } from "react-icons/ri";
-import xiaomiLogo from "../assets/xiaomi.png";
-import hpLogo from "../assets/hp.png";
-import dellLogo from "../assets/dell.png";
-import microsoftLogo from "../assets/windows.png";
+import xiaomiLogo from "@/assets/xiaomi";
+import hpLogo from "@/assets/hp";
+import dellLogo from "@/assets/dell";
+import microsoftLogo from "@/assets/windows";
 
 const Banner = () => {
 	return (

@@ -10,7 +10,8 @@ import { CouponState } from "@/constants";
 
 const useShopCouponTableMutations = (
 	setIsCreateCouponOpen,
-	setIsShowThankYou
+	setIsShowThankYou,
+	refetch,
 ) => {
 	const QUERY_KEY = ["get", "coupons", "shop"];
 	const queryClient = useQueryClient();
@@ -20,7 +21,7 @@ const useShopCouponTableMutations = (
 		onSuccess: () => {
 			setIsCreateCouponOpen(false);
 			setIsShowThankYou(true);
-			refetch();
+		refetch();
 		},
 		onError: () => {
 			console.log(error);
@@ -31,7 +32,7 @@ const useShopCouponTableMutations = (
 		mutationFn: editCoupon,
 		onSuccess: () => {
 			toast.success("Coupon edited successfully");
-			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+		refetch();
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to update coupon");

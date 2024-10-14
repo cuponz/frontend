@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../../assets/logo.png";
+import logo from "@/assets/logo";
 import CategoriesMenu from "./CategoriesMenu";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import SearchBarNav from "./SearchBarNav";
