@@ -48,8 +48,8 @@ export default defineConfig((configEnv) => {
 				],
 			},
 			proxy: {
-				"/api": "http://192.168.0.188:3000/",
-				"/images": "http://192.168.0.188:3000/",
+				"/api": "http://localhost:3000/",
+				"/images": "http://localhost:3000/",
 			},
 		},
 		build: {
