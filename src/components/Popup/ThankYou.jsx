@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { IoIosClose } from "react-icons/io";
+import { useTranslations } from "@/store/languages";
 
 const PopupThankYou = ({ isOpen, onClose }) => {
+	const { t } = useTranslations();
 	const [dontShowAgain, setDontShowAgain] = useState(false);
 
 	if (!isOpen) return null;
@@ -22,15 +24,10 @@ const PopupThankYou = ({ isOpen, onClose }) => {
 				</button>
 				<div className="flex-grow mt-2">
 					<h2 className="text-2xl font-bold mb-4 mt-8">
-						Thank You for Adding your Product to CuponZ
+						{t(["thankYou", "content"])}
 					</h2>
-					<p className="mb-4">
-						You will not see your product right away after uploading.
-					</p>
-					<p className="mb-6">
-						Thank you for being patient while waiting for our admin to approve
-						your product.
-					</p>
+					<p className="mb-4">{t(["thankYou", "content1"])}</p>
+					<p className="mb-6">{t(["thankYou", "content2"])}</p>
 					<label className="flex items-center mb-6">
 						<input
 							type="checkbox"
@@ -38,7 +35,7 @@ const PopupThankYou = ({ isOpen, onClose }) => {
 							onChange={() => setDontShowAgain(!dontShowAgain)}
 							className="mr-2"
 						/>
-						Do not show this again
+						{t(["thankYou", "showOneTime"])}
 					</label>
 				</div>
 				<div className="absolute bottom-0 right-0 m-4">

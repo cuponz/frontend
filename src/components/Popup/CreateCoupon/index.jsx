@@ -8,7 +8,7 @@ import UserInfoOptions from "./UserInfoOptions";
 import CouponFormFields from "./CouponFormFields";
 import ImageUpload from "./ImageUpload";
 import Button from "@/components/Utils/Button";
-
+import { useTranslations } from "@/store/languages";
 const PopupCreateCoupon = ({
 	isOpen,
 	onClose,
@@ -17,6 +17,7 @@ const PopupCreateCoupon = ({
 	required = true,
 	createError,
 }) => {
+	const { t } = useTranslations();
 	const [formData, setFormData] = useState({
 		category_id: "",
 		name: "",
@@ -60,10 +61,10 @@ const PopupCreateCoupon = ({
 		);
 
 		if (!required && !hasChanges) {
-			toast.error("Please make at least one change to update the coupon.");
+			toast.error(t(["UserInfoOptions", "contentErr1"]));
 			return;
 		} else if (required && !formData.logo) {
-			toast.error("Please upload an image for the coupon.");
+			toast.error(t(["UserInfoOptions", "contentErr2"]));
 			return;
 		}
 		console.log(formData);

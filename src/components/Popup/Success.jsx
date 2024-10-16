@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { usingRedemptionById } from "../../api/redemptions";
 import LoadingSpinner from "../Utils/LoadingSpinner";
 import { FaCheck } from "react-icons/fa";
+import { useTranslations } from "@/store/languages";
 
 const PopupSuccess = ({ redeem }) => {
+	const { t } = useTranslations();
 	const { isPending, data } = useQuery({
 		queryKey: ["redemptions", "using", redeem.redemption_id],
 		queryFn: () => usingRedemptionById(redeem.redemption_id),
@@ -24,19 +26,22 @@ const PopupSuccess = ({ redeem }) => {
 					</div>
 				</div>
 				<h2 className="text-3xl font-semibold mb-4 text-center">
-					Redeem Successfully
+					{t(["success", "content"])}
 				</h2>
 				<div className="mt-6">
 					<h3 className="text-lg font-semibold text-center">{data.title}</h3>
 					<div className="mt-2">
 						<p>
-							<span className="font-semibold">Category:</span> {data.category}
+							<span className="font-semibold">{t(["success", "span"])}</span>{" "}
+							{data.category}
 						</p>
 						<p>
-							<span className="font-semibold">Shop:</span> {data.shop}
+							<span className="font-semibold">{t(["success", "span1"])}</span>{" "}
+							{data.shop}
 						</p>
 						<p>
-							<span className="font-semibold">Redeem Code:</span> {data.code}
+							<span className="font-semibold">{t(["success", "span2"])}</span>{" "}
+							{data.code}
 						</p>
 					</div>
 				</div>

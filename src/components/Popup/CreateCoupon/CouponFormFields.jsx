@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import { useTranslations } from "@/store/languages";
 
 const CouponFormInput = ({
 	formData,
@@ -31,6 +32,7 @@ const CouponFormFields = ({
 	categories,
 	required,
 }) => {
+	const { t } = useTranslations();
 	const [keyword, setKeyword] = useState("");
 
 	const addKeyword = () => {
@@ -48,7 +50,7 @@ const CouponFormFields = ({
 
 	const handleKeyDown = (e) => {
 		if (e.key === "Enter") {
-			e.preventDefault(); // Prevent form submission
+			e.preventDefault();
 			addKeyword();
 		}
 	};
@@ -87,7 +89,7 @@ const CouponFormFields = ({
 			{/* Category Select */}
 			<div className="sm:col-span-2 md:col-span-1">
 				<label className="block text-sm font-medium text-gray-700">
-					Category
+					{t(["CouponFormFields", "category"])}
 				</label>
 				<select
 					name="category_id"
@@ -96,7 +98,7 @@ const CouponFormFields = ({
 					className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
 					required={required}
 				>
-					<option value="">Select a category</option>
+					<option value="">{t(["CouponFormFields", "select"])}</option>
 					{categories.map((category) => (
 						<option key={category.id} value={category.id}>
 							{category.name}
@@ -108,7 +110,7 @@ const CouponFormFields = ({
 			{/* Incrementing Number Input */}
 			<div className="sm:col-span-2 md:col-span-1">
 				<label className="block text-sm font-medium text-gray-700">
-					Max Usage
+					{t(["CouponFormFields", "usage"])}
 				</label>
 				<div className="mt-1 flex rounded-md shadow-sm">
 					<button
@@ -171,7 +173,7 @@ const CouponFormFields = ({
 			{/* Keywords Input */}
 			<div className="sm:col-span-2">
 				<label className="block text-sm font-medium text-gray-700">
-					Keywords
+					{t(["CouponFormFields", "keyword"])}
 				</label>
 				<div className="flex items-center mt-1">
 					<input
@@ -180,14 +182,14 @@ const CouponFormFields = ({
 						onChange={(e) => setKeyword(e.target.value)}
 						onKeyDown={handleKeyDown}
 						className="flex-grow border border-gray-300 rounded-l-md shadow-sm p-2"
-						placeholder="Enter a keyword and press Enter or Add"
+						placeholder={t(["CouponFormFields", "enterKeyword"])}
 					/>
 					<button
 						type="button"
 						onClick={addKeyword}
 						className="bg-blue-500 text-white px-4 py-2 rounded-r-md"
 					>
-						Add
+						{t(["CouponFormFields", "addBtn"])}
 					</button>
 				</div>
 				<div className="mt-2 flex flex-wrap gap-2">

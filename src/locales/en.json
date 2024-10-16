@@ -149,5 +149,48 @@
 		"coupon": "Coupons",
 		"management": "Management",
 		"setting": "Setting"
+	},
+	"UserInfoOptions":{
+		"content":"User Information Required"
+	},
+	"indexPopup":{
+		"contentErr1":"Please make at least one change to update the coupon.",
+		"contentErr2":"Please upload an image for the coupon"
+	},
+	"CouponFormFields":{
+		"category":"Category",
+		"select":"Select a category",
+		"usage":"Max Usage",
+		"keyword":"Keywords",
+		"enterKeyword":"Enter a keyword and press Enter or Add",
+		"addBtn":"Add"
+	},
+	"fail":{
+		"onlyShop":"Only shop able to apply coupon",
+		"alreadyRedeemed":"The code has already been redeemed",
+		"expired":"The code has expired",
+		"notStarted":"The coupon is not available until",
+		"notStarted2":"The coupon is not yet available",
+		"location":"This coupon is not available at this location",
+		"location2":"An error occurred while redeeming the coupon",
+		"failed":"Redemption Failed"
+	},
+	"InstructionPopUp":{
+		"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at nulla vitae urna faucibus auctor.",
+		"welcome":"Welcome!",
+		"showOneTime":"Don't show this again",
+		"understood":"I understood"
+	},
+	"success":{
+		"content":"Redeem Successfully",
+		"span":"Category:",
+		"span1":"Shop:",
+		"span2":"Redeem Code:"
+	},
+	"thankYou":{
+		"content":"Thank You for Adding your Product to CuponZ",
+		"content2":"You will not see your product right away after uploading.",
+		"content3":"Thank you for being patient while waiting for our admin to approve your product.",
+		"showOneTime":"Do not show this again"
 	}
 }
