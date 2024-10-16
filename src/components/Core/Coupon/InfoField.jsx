@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CouponRequirementType, CountryListWithCode } from "../../../constants";
 import { useMutation } from "@tanstack/react-query";
 import { redeemCoupon } from "../../../api/redemptions";
@@ -20,8 +20,18 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 		email: false,
 		phone: false,
 	});
+	const [isEmailDisabled, setIsEmailDisabled] = useState(false);
 
 	const user = useUserStore((state) => state.user);
+
+	useEffect(() => {
+		if (
+			coupon.requirement_type === CouponRequirementType.EmailAndPhone &&
+			!user?.phone_number
+		) {
+			setIsEmailDisabled(true);
+		}
+	}, [coupon.requirement_type, user?.phone_number]);
 
 	const infoMutation = useMutation({
 		mutationKey: ["login"],
@@ -152,17 +162,26 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 				</h2>
 				<form onSubmit={handleSubmit}>
 					{showEmailField && (
-						<input
-							type="email"
-							name="email"
-							className={`w-full p-2 border ${
-								errors.email ? "border-red-500" : "border-gray-300"
-							} rounded mb-4`}
-							placeholder="Email"
-							value={formData.email}
-							onChange={handleChange}
-							required={isEmailRequired}
-						/>
+						<div className="mb-4">
+							<input
+								type="email"
+								name="email"
+								className={`w-full p-2 border ${
+									errors.email ? "border-red-500" : "border-gray-300"
+								} rounded ${isEmailDisabled ? "bg-gray-100" : ""}`}
+								placeholder="Email"
+								value={formData.email}
+								onChange={handleChange}
+								required={isEmailRequired}
+								disabled={isEmailDisabled}
+							/>
+							{isEmailDisabled && (
+								<p className="text-sm text-gray-500 mt-1">
+									Email input is disabled as both email and phone are required,
+									and you haven't provided a phone number.
+								</p>
+							)}
+						</div>
 					)}
 					{showPhoneField && (
 						<>

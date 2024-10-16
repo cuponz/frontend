@@ -52,7 +52,7 @@ const ChangePhoneModal = ({
 
 		const formattedPhoneNumber = Validators.formatPhoneNumber(
 			newPhoneNumber,
-			selectedRegion
+			selectedRegion,
 		);
 		console.log("Submitting new phone number:", formattedPhoneNumber);
 		onSubmit(formattedPhoneNumber);

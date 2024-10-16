@@ -1,20 +1,20 @@
 import { useState } from "react";
 
-import { useUserStore } from "../../../store/user";
-import LoadingSpinner from "../../Utils/LoadingSpinner";
+import { useUserStore } from "@/store/user";
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
 import UserCoupon from "./UserCoupon";
-import UserSetting from "../../Setting";
-import { CouponCatalogueType, ProfileTab, UserType } from "../../../constants";
+import { CouponCatalogueType, ProfileTab, UserType } from "@/constants";
 
 import ShopCouponTable from "./Shop/ShopCouponTable";
-import ShopOwnerSetting from "../../Setting";
-import { useTranslations } from "../../../store/languages";
+import ManagerCouponTable from "./Manager/MangagerCouponTable";
+import Setting from "@/components/Setting";
+import { useTranslations } from "@/store/languages";
 
 const UserContent = ({ activeTab }) => {
 	switch (activeTab) {
 		case ProfileTab.Settings:
-			return <UserSetting />;
+			return <Setting />;
 		default:
 			return null;
 	}
@@ -24,10 +24,23 @@ const ShopContent = ({ activeTab }) => {
 	switch (activeTab) {
 		case ProfileTab.Coupons:
 			return <UserCoupon type={CouponCatalogueType.ShopManage} />;
-		case ProfileTab.Management:
+		case ProfileTab.CouponManagement:
 			return <ShopCouponTable />;
 		case ProfileTab.Settings:
-			return <ShopOwnerSetting />;
+			return <Setting />;
+		default:
+			return null;
+	}
+};
+
+const ManagerContent = ({ activeTab }) => {
+	switch (activeTab) {
+		case ProfileTab.CouponManagement:
+			return <ManagerCouponTable />;
+		case ProfileTab.UserManagement:
+			return <ManagerCouponTable />;
+		case ProfileTab.Settings:
+			return <Setting />;
 		default:
 			return null;
 	}
@@ -36,7 +49,6 @@ const ShopContent = ({ activeTab }) => {
 const UserProfileMiniNav = () => {
 	const { t } = useTranslations();
 	const user = useUserStore((state) => state.user);
-	const [activeTab, setActiveTab] = useState(ProfileTab["Coupons"]);
 
 	if (!user) {
 		return <LoadingSpinner />;
@@ -46,15 +58,27 @@ const UserProfileMiniNav = () => {
 		user.type === UserType["Shop"]
 			? [
 					{ id: ProfileTab.Coupons, label: t(["miniNav", "coupon"]) },
-					{ id: ProfileTab.Management, label: t(["miniNav", "management"]) },
+					{
+						id: ProfileTab.CouponManagement,
+						label: t(["miniNav", "couponManagement"]),
+					},
 					{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
-			  ]
+				]
 			: user.type === UserType.User
-			? [{ id: ProfileTab.Settings, label: t(["miniNav", "coupon"]) }]
-			: [
-					{ id: ProfileTab.Management, label: t(["miniNav", "management"]) },
-					{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
-			  ];
+				? [{ id: ProfileTab.Settings, label: t(["miniNav", "coupon"]) }]
+				: [
+						{
+							id: ProfileTab.CouponManagement,
+							label: t(["miniNav", "couponManagement"]),
+						},
+						{
+							id: ProfileTab.UserManagement,
+							label: t(["miniNav", "userManagement"]),
+						},
+						{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
+					];
+
+	const [activeTab, setActiveTab] = useState(tabs[0].id);
 
 	return (
 		<div className="container mx-auto">
@@ -77,12 +101,12 @@ const UserProfileMiniNav = () => {
 				))}
 			</div>
 			<div className="mt-4">
-				{user.type === UserType["Shop"] ? (
+				{user.type === UserType.Shop ? (
 					<ShopContent activeTab={activeTab} />
-				) : user.type === UserType["User"] ? (
+				) : user.type === UserType.User ? (
 					<UserContent activeTab={activeTab} />
 				) : (
-					<></>
+					<ManagerContent activeTab={activeTab} />
 				)}
 			</div>
 		</div>

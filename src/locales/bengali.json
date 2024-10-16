@@ -147,7 +147,8 @@
   },
   "miniNav": {
     "coupon": "কুপন",
-    "management": "পরিচালনা",
+    "couponManagement": "কুপন ব্যবস্থাপনা",
+		"userManagement": "ব্যবহারকারী ব্যবস্থাপনা",
     "setting": "সেটিং"
   },
   "UserInfoOptions": {

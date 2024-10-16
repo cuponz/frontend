@@ -147,7 +147,8 @@
   },
   "miniNav": {
     "coupon": "Cupones",
-    "management": "Gestión",
+    "couponManagement": "Gestión de usuarios",
+		"userManagement": "Gestión de cupones",
     "setting": "Configuración"
   },
   "UserInfoOptions": {

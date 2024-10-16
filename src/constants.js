@@ -15,9 +15,10 @@ const UserType = Object.freeze({
 
 const ProfileTab = Object.freeze({
 	Coupons: 0,
-	Management: 1,
+	CouponManagement: 1,
 	Settings: 2,
 	Details: 3,
+	UserManagement: 4,
 });
 
 const CouponCatalogueType = Object.freeze({
@@ -41,8 +42,8 @@ const CouponRequirementType = Object.freeze({
 
 const CouponState = Object.freeze({
 	Pending: 0,
-	Pause: 1,
-	Active: 2,
+	Approved: 1,
+	Rejected: 2,
 });
 
 const CouponCardModalType = Object.freeze({
@@ -65,7 +66,7 @@ const CountryListWithCode = Object.freeze(
 			code: countryCode,
 			callingCode: callingCode ? `+${callingCode}` : "",
 		};
-	})
+	}),
 );
 
 const Validators = Object.freeze({

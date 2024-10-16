@@ -11,7 +11,6 @@ import { CouponState } from "@/constants";
 const useShopCouponTableMutations = (
 	setIsCreateCouponOpen,
 	setIsShowThankYou,
-	refetch,
 ) => {
 	const QUERY_KEY = ["get", "coupons", "shop"];
 	const queryClient = useQueryClient();
@@ -19,9 +18,7 @@ const useShopCouponTableMutations = (
 	const createMutation = useMutation({
 		mutationFn: creatingCoupon,
 		onSuccess: () => {
-			setIsCreateCouponOpen(false);
-			setIsShowThankYou(true);
-		refetch();
+			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
 		},
 		onError: () => {
 			console.log(error);
@@ -32,7 +29,7 @@ const useShopCouponTableMutations = (
 		mutationFn: editCoupon,
 		onSuccess: () => {
 			toast.success("Coupon edited successfully");
-		refetch();
+			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to update coupon");
@@ -42,10 +39,9 @@ const useShopCouponTableMutations = (
 	const pauseMutation = useMutation({
 		mutationFn: pauseCoupon,
 		onSuccess: (data) => {
-			const message =
-				data.state === CouponState.Pause
-					? "Coupon paused successfully"
-					: "Coupon activated successfully";
+			const message = data.active
+				? "Coupon activated successfully"
+				: "Coupon paused successfully";
 			toast.success(message);
 			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
 		},

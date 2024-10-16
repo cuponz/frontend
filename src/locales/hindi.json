@@ -147,7 +147,8 @@
   },
   "miniNav": {
     "coupon": "कूपन",
-    "management": "प्रबंधन",
+    "couponManagement": "कूपन प्रबंधन",
+		"userManagement": "प्रयोक्ता प्रबंधन",
     "setting": "सेटिंग"
   },
   "UserInfoOptions": {

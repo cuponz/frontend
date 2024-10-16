@@ -6,19 +6,19 @@ import PopupThankYou from "@/components/Popup/ThankYou";
 import { getCouponsByShopIdFromShop } from "@/api/coupon";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
-import { CouponState } from "@/constants";
 
 import Button from "@/components/Utils/Button";
 import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
 
 import useShopCouponTableMutations from "./useShopCouponTableMutations";
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
 const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
 	const categories = useMemo(
-		() => categoryObjects.map((category) => category.name),
-		[categoryObjects]
+		() => (categoryObjects || []).map((category) => category.name),
+		[categoryObjects],
 	);
 
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
@@ -43,7 +43,6 @@ const ShopCouponTable = () => {
 		isLoading,
 		error,
 		data: coupons = [],
-		refetch,
 	} = useQuery({
 		queryKey: ["get", "coupons", "shop"],
 		queryFn: getCouponsByShopIdFromShop,
@@ -51,7 +50,7 @@ const ShopCouponTable = () => {
 	});
 
 	const [createMutation, editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou, refetch);
+		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou);
 
 	const handleSubmitCreateCoupon = (couponData) => {
 		const formData = new FormData();
@@ -92,10 +91,7 @@ const ShopCouponTable = () => {
 	};
 
 	const handleStateToggle = (couponId, currentState) => {
-		const newState =
-			currentState === CouponState.Active
-				? CouponState.Pause
-				: CouponState.Active;
+		const newState = !currentState;
 
 		updateLoadingState(couponId, "isPausing", true);
 
@@ -103,7 +99,7 @@ const ShopCouponTable = () => {
 			{ couponId, state: newState },
 			{
 				onSettled: () => updateLoadingState(couponId, "isPausing", false),
-			}
+			},
 		);
 	};
 
@@ -170,7 +166,6 @@ const ShopCouponTable = () => {
 					handleStateToggle,
 					handleDelete,
 					mutationLoadingStates,
-					updateLoadingState
 				)}
 				data={coupons}
 				filename="shop_coupons.csv"

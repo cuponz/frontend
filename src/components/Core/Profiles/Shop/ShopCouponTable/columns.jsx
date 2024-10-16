@@ -1,17 +1,20 @@
+import { Fragment } from "react";
 import { format } from "date-fns";
 import Button from "@/components/Utils/Button";
 import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create this helper function
-import { CouponState } from "@/constants";
+
+import StatusBadge from "@/components/Core/Profiles/StatusBadge";
 
 const columns = (
 	handleEdit,
 	handleStateToggle,
 	handleDelete,
-	mutationLoadingStates
+	mutationLoadingStates,
 ) => [
 	{
 		header: "ID",
 		accessor: "id",
+		sortType: "number",
 	},
 	{
 		header: "Code",
@@ -41,22 +44,31 @@ const columns = (
 		cell: (value, row) => `${value}/${row.max_usage || "∞"}`,
 	},
 	{
-		header: "State",
-		accessor: "state",
-		cell: (value) => Object.keys(CouponState)[value],
+		header: "Status",
+		cell: (_, row) => (
+			<Fragment key={`${row.id}-status-badge`}>
+				<StatusBadge active={row.active} state={row.state} />
+			</Fragment>
+		),
 	},
 	{
 		header: "Actions",
 		accessor: "actions",
 		cell: (_, row) => {
-			const toggleButtonProps = getStateToggleButtonProps(row.state);
+			const toggleButtonProps = getStateToggleButtonProps(
+				row.active,
+				row.state,
+			);
 
 			const isEditing = mutationLoadingStates[row.id]?.isEditing;
 			const isPausing = mutationLoadingStates[row.id]?.isPausing;
 			const isDeleting = mutationLoadingStates[row.id]?.isDeleting;
 
 			return (
-				<div className="flex justify-center space-x-2">
+				<div
+					key={`${row.id}-btn-actions`}
+					className="flex justify-center space-x-2"
+				>
 					<Button
 						onClick={() => handleEdit(row.id)}
 						colour="yellow-500"
@@ -66,10 +78,11 @@ const columns = (
 						Edit
 					</Button>
 					<Button
-						onClick={() => handleStateToggle(row.id, row.state)}
+						onClick={() => handleStateToggle(row.id, row.active)}
 						colour={toggleButtonProps.colour}
 						disabled={toggleButtonProps.disabled || isPausing}
 						isLoading={isPausing}
+						className="w-16"
 					>
 						{toggleButtonProps.text}
 					</Button>

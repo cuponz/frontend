@@ -11,7 +11,7 @@ import { useCategoryStore } from "@/store/categories";
 import { getCategories } from "@/api/category";
 import { getGroups } from "@/api/group";
 
-import { useQueries } from "@tanstack/react-query";
+import { useQueries, useSuspenseQueries } from "@tanstack/react-query";
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import { UserType } from "@/constants";
 import { useTranslations } from "@/store/languages";
@@ -46,7 +46,7 @@ const Navbar = () => {
 	const {
 		isPending,
 		data: [fetchedCategories, groups],
-	} = useQueries({
+	} = useSuspenseQueries({
 		queries: [
 			{
 				queryKey: ["categories"],
@@ -130,7 +130,7 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						)
+						),
 					)}
 				</ul>
 
@@ -150,7 +150,7 @@ const Navbar = () => {
 					</button>
 
 					{/* Shopping Cart Icon */}
-					{(!user || user.type === UserType.User) && (
+					{(!user || user?.type === UserType.User) && (
 						<Link to="/cart">
 							<ShoppingCartIcon />
 						</Link>
@@ -218,7 +218,7 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						)
+						),
 					)}
 				</ul>
 			)}

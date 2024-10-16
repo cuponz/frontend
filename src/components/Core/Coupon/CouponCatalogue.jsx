@@ -96,7 +96,7 @@ const CouponCatalogue = ({ type }) => {
 			searchParams,
 			setStartDate,
 			setEndDate,
-			setSelectedCategories
+			setSelectedCategories,
 		);
 	}, [searchParams]);
 
@@ -111,7 +111,7 @@ const CouponCatalogue = ({ type }) => {
 
 	const handleSearchChange = useCallback(
 		(e) => setSearchTerm(e.target.value),
-		[]
+		[],
 	);
 
 	const toggleFilterBoard = () => {

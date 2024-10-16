@@ -10,7 +10,7 @@ const useNavbarState = () => {
 	});
 
 	const [isCategoriesOpen, setIsCategoriesOpen] = useIsCategoriesOpenStore(
-		(state) => [state.isCategoriesOpen, state.setIsCategoriesOpen]
+		(state) => [state.isCategoriesOpen, state.setIsCategoriesOpen],
 	);
 
 	const toggleMenuState = (key) =>

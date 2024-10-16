@@ -147,7 +147,8 @@
   },
   "miniNav": {
     "coupon": "کوپنز",
-    "management": "انتظامیہ",
+    "couponManagement": "کوپن مینجمنٹ",
+		"userManagement": "صارف کا انتظام",
     "setting": "سیٹنگ"
   },
   "UserInfoOptions": {

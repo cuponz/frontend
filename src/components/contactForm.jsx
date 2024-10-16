@@ -111,7 +111,7 @@ const ContactForm = () => {
 				<h2 className="text-lg font-semibold mb-4">
 					{t(["contactUs", "form", "selection", "title"])}
 				</h2>
-				<div className="form-group radio-group flex flex-col md:flex-row justify-between items-center mb-6">
+				<div className="form-group radio-group flex flex-col md:flex-row justify-between items-start mb-6">
 					<div className="mb-4 md:mb-0">
 						<input
 							type="radio"

@@ -22,7 +22,7 @@ const CouponBoard = ({
 				keys: ["title", "desc", "keywords", "shop_name"],
 				threshold: 0.3,
 			}),
-		[coupons]
+		[coupons],
 	);
 
 	const filteredCoupons = useMemo(() => {

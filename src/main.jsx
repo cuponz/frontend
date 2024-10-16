@@ -8,7 +8,8 @@ import routes from "./routes";
 const router = createBrowserRouter(routes);
 const queryClient = new QueryClient();
 
-hydrateRoot(document.getElementById("root")).render(
+hydrateRoot(
+	document.getElementById("root"),
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<RouterProvider router={router} />

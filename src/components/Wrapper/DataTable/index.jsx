@@ -1,10 +1,6 @@
 import { useState, useMemo, useCallback, Fragment } from "react";
 import Pagination from "@/components/Utils/Pagination";
-import {
-	dataTableCompareValues,
-	downloadCSV,
-	filterMatchCheck,
-} from "./utils";
+import { dataTableCompareValues, downloadCSV, filterMatchCheck } from "./utils";
 
 import Button from "@/components/Utils/Button";
 

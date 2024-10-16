@@ -7,7 +7,7 @@ const localesDir = path.join(__dirname, "../src/locales");
 // Output file for supported languages
 const outputFile = path.join(
 	__dirname,
-	"../src/generated/supportedLanguages.js"
+	"../src/generated/supportedLanguages.js",
 );
 
 // Function to generate the supported languages file
@@ -26,7 +26,7 @@ const generateSupportedLanguages = () => {
 export const supportedLanguages = ${JSON.stringify(
 			supportedLanguages,
 			null,
-			2
+			2,
 		)};
 `;
 
