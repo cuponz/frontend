@@ -38,7 +38,7 @@ const ReCaptchaV3 = ({ onVerify }) => {
 		window.executeReCaptcha = executeReCaptcha;
 	}, [onVerify]);
 
-	return null; // This component doesn't render anything visible
+	return null;
 };
 
 export default ReCaptchaV3;
