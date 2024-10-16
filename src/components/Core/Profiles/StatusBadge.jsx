@@ -23,7 +23,7 @@ const StatusBadge = React.memo(({ active, state }) => {
 
 	return (
 		<span
-			className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${style}`}
+			className={`px-2 py-1 w-16 inline-flex justify-center text-xs leading-5 font-semibold rounded-full ${style}`}
 		>
 			{text}
 		</span>

@@ -82,6 +82,7 @@ const columns = (
 						colour={toggleButtonProps.colour}
 						disabled={toggleButtonProps.disabled || isPausing}
 						isLoading={isPausing}
+						className="w-16"
 					>
 						{toggleButtonProps.text}
 					</Button>

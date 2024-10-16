@@ -62,6 +62,7 @@ const columns = (handleToogleApproval, handleDelete, mutationLoadingStates) => [
 						colour={toggleButtonProps.colour}
 						disabled={isApproving}
 						isLoading={isApproving}
+						className="w-24"
 					>
 						{toggleButtonProps.text}
 					</Button>
