@@ -43,7 +43,7 @@ const SearchBarNav = () => {
 		setTimeout(() => {
 			const results = couponData
 				.filter((coupon) =>
-					coupon.shopName.toLowerCase().includes(value.toLowerCase())
+					coupon.shopName.toLowerCase().includes(value.toLowerCase()),
 				)
 				.reduce((unique, coupon) => {
 					if (!unique.some((item) => item.shopName === coupon.shopName)) {

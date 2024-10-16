@@ -1,0 +1,13 @@
+pnpm run test-report || true
+
+git add TEST_REPORT.md
+
+if git diff --cached --quiet TEST_REPORT.md; then
+	echo "No changes to TEST_REPORT.md"
+else
+	echo "TEST_REPORT.md has been updated and staged"
+fi
+
+npx lint-staged
+
+pnpm run test

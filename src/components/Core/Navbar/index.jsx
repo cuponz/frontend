@@ -117,7 +117,7 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						)
+						),
 					)}
 				</ul>
 
@@ -158,10 +158,7 @@ const Navbar = () => {
 						/>
 					) : (
 						<Link to="/login">
-							<Button
-								onClick={handleLoginLogout}
-								colour="yellow-500"
-							>
+							<Button onClick={handleLoginLogout} colour="yellow-500">
 								{t(["navigation", "userActions", "login"])}
 							</Button>
 						</Link>
@@ -207,7 +204,7 @@ const Navbar = () => {
 							>
 								{route.name}
 							</li>
-						)
+						),
 					)}
 				</ul>
 			)}

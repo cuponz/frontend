@@ -14,7 +14,7 @@ const Setting = () => {
 
 	useEffect(() => {
 		const gadgetHubUser = shopOwnerData.find(
-			(user) => user.user_name === "GadgetHub"
+			(user) => user.user_name === "GadgetHub",
 		);
 		setUserData(gadgetHubUser);
 	}, []);

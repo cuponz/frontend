@@ -17,7 +17,7 @@ const ManagerCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
 	const categories = useMemo(
 		() => (categoryObjects || []).map((category) => category.name),
-		[categoryObjects]
+		[categoryObjects],
 	);
 
 	const {
@@ -30,7 +30,8 @@ const ManagerCouponTable = () => {
 		retry: false,
 	});
 
-	const [toggleApprovalMutation, deleteMutation] = useManagerCouponTableMutations();
+	const [toggleApprovalMutation, deleteMutation] =
+		useManagerCouponTableMutations();
 
 	// Action handlers
 	const handleToggleApproval = (couponId, currentState) => {
@@ -45,7 +46,7 @@ const ManagerCouponTable = () => {
 			{ couponId, state: newState },
 			{
 				onSettled: () => updateLoadingState(couponId, "isApproving", false),
-			}
+			},
 		);
 	};
 

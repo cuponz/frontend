@@ -1,154 +1,154 @@
 {
-  "navigation": {
-    "home": "Inicio",
-    "coupons": "Cupones",
-    "categories": "Categorías",
-    "aboutUs": "Sobre Nosotros",
-    "contactUs": "Contáctenos",
-    "searchBar": "Buscar",
-    "userActions": {
-      "yourProfile": "Tu Perfil",
-      "cart": "Carrito",
-      "settings": "Configuración",
-      "logout": "Cerrar Sesión",
-      "login": "Iniciar Sesión"
-    }
-  },
-  "footer": {
-    "home": "Inicio",
-    "hotdeals": "Ofertas Calientes",
-    "coupons": "Cupones",
-    "aboutUs": "Sobre Nosotros",
-    "contactUs": "Contáctenos",
-    "copyright": "© 2024 G71. Todos los derechos reservados."
-  },
-  "aboutUsPage": {
-    "header": "¿Qué Es CuponZ Y Cuán Válido Es?",
-    "description": "CuponZ es una plataforma líder para encontrar y compartir cupones de descuento en una amplia gama de productos y servicios. Nuestra misión es ayudar a los consumidores a ahorrar dinero mientras apoyamos a las empresas a llegar a nuevos clientes.",
-    "searchCoupons": "Buscar Cupones",
-    "contactUs": "Contáctenos",
-    "imageAlt": "Sobre CuponZ",
-    "company": {
-      "title": "Nuestra Empresa",
-      "content": "CuponZ fue fundada con la visión de revolucionar la forma en que las personas ahorran dinero en sus compras. Hemos crecido de una pequeña startup a un nombre de confianza en la industria de cupones, siempre poniendo a nuestros usuarios primero."
-    },
-    "products": {
-      "title": "Nuestros Productos",
-      "content": "Ofrecemos una amplia gama de cupones digitales y códigos promocionales para varias categorías, incluyendo electrónica, moda, comida, viajes y más. Nuestra plataforma está diseñada para ser fácil de usar y accesible en todos los dispositivos."
-    },
-    "team": {
-      "title": "Conoce a Nuestro Equipo",
-      "content": "Nuestro equipo está compuesto por individuos apasionados de diversos orígenes. Creemos en fomentar un ambiente colaborativo donde la creatividad y la innovación prosperan. Juntos, trabajamos para ofrecer un valor excepcional a nuestros clientes."
-    },
-    "sectionNames": {
-      "company": "Empresa",
-      "products": "Productos",
-      "team": "Nuestro Equipo"
-    }
-  },
-  "contactUs": {
-    "contactInfo": "Información de Contacto",
-    "quote": "¡Di algo para iniciar un chat en vivo!",
-    "address": "132 Dartmouth Street Boston, Massachusetts 02156 Estados Unidos",
-    "form": {
-      "fname": "Nombre",
-      "lname": "Apellido",
-      "email": "Correo Electrónico",
-      "phoneNumber": "Número de Teléfono",
-      "selection": {
-        "title": "Seleccionar Asunto",
-        "generalInquiry": "Consulta General",
-        "technicalSupport": "Soporte Técnico",
-        "billing": "Facturación",
-        "message": "Escribe tu mensaje ..."
-      }
-    },
-    "button": "Enviar Mensaje"
-  },
-  "filter": {
-    "display": "Filtros",
-    "categories": "Categorías",
-    "startDate": "Fecha de Inicio",
-    "endDate": "Fecha de Fin",
-    "apply": "Aplicar",
-    "reset": "Restablecer"
-  },
-  "login": {
-    "form": {
-      "title": "Iniciar Sesión",
-      "email": "Correo Electrónico",
-      "password": "Contraseña",
-      "button": "Iniciar Sesión",
-      "registerQuote": "¿No tienes una cuenta?",
-      "registerLink": "Registrarse"
-    },
-    "title": "CuponZ",
-    "quote": "¡Genera Cupones en todas partes!"
-  },
-  "register": {
-    "form": {
-      "title": "Crear Cuenta",
-      "fname": "Nombre",
-      "lname": "Apellido",
-      "email": "Correo Electrónico",
-      "phoneNumber": "Número de Teléfono (opcional)",
-      "miniNote": "Opcional: Ingresa un número de teléfono válido para tu región seleccionada o déjalo en blanco",
-      "password": "Contraseña",
-      "reconfirmPassword": "Vuelve a Ingresar la Contraseña",
-      "select": {
-        "title": "Selecciona el Tipo de Usuario",
-        "manager": "Gerente",
-        "shop": "Tienda",
-        "user": "Usuario"
-      },
-      "button": "Crear Cuenta",
-      "registerQuote": "¿Ya tienes una cuenta?",
-      "registerLink": "Iniciar Sesión"
-    },
-    "title": "CuponZ",
-    "quote": "¡Genera Cupones en todas partes!"
-  },
-  "userSetting": {
-    "username": "Nombre de Usuario",
-    "password": "Contraseña",
-    "email": "Correo Electrónico",
-    "phoneNumber": "Número de Teléfono",
-    "changeBtn": "Cambiar",
-    "addBtn": "Agregar"
-  },
-  "changePasswordModal": {
-    "title": "Cambiar Contraseña",
-    "oldPassword": "Contraseña Anterior",
-    "newPassword": "Nueva Contraseña",
-    "confirmNewPass": "Confirmar Nueva Contraseña",
-    "showPass": "Mostrar Contraseña",
-    "changePassBtn": "Cambiar Contraseña"
-  },
-  "changeEmailModal": {
-    "title": "Cambiar Correo Electrónico",
-    "newEmail": "Nuevo Correo Electrónico",
-    "verify": "Verificar",
-    "verifying": "Verificando...",
-    "verified": "Verificado",
-    "changeEmailBtn": "Cambiar Correo Electrónico",
-    "successnoti": "¡Correo electrónico verificado con éxito!",
-    "OTP": {
-      "title": "Verificar Correo Electrónico",
-      "quote": "Por favor, ingresa el OTP enviado a",
-      "cancelBtn": "Cancelar"
-    }
-  },
-  "changePhoneModal": {
-    "title": "Cambiar Número de Teléfono",
-    "region": "Región",
-    "newNumber": "Nuevo Número de Teléfono",
-    "confirmNumber": "Confirmar Nuevo Número de Teléfono",
-    "changeNumBtn": "Cambiar Número de Teléfono"
-  },
-  "miniNav": {
-    "coupon": "Cupones",
-    "couponManagement": "Gestión de usuarios",
-    "userManagement": "Gestión de cupones",
-    "setting": "Configuración"
-  }
+	"navigation": {
+		"home": "Inicio",
+		"coupons": "Cupones",
+		"categories": "Categorías",
+		"aboutUs": "Sobre Nosotros",
+		"contactUs": "Contáctenos",
+		"searchBar": "Buscar",
+		"userActions": {
+			"yourProfile": "Tu Perfil",
+			"cart": "Carrito",
+			"settings": "Configuración",
+			"logout": "Cerrar Sesión",
+			"login": "Iniciar Sesión"
+		}
+	},
+	"footer": {
+		"home": "Inicio",
+		"hotdeals": "Ofertas Calientes",
+		"coupons": "Cupones",
+		"aboutUs": "Sobre Nosotros",
+		"contactUs": "Contáctenos",
+		"copyright": "© 2024 G71. Todos los derechos reservados."
+	},
+	"aboutUsPage": {
+		"header": "¿Qué Es CuponZ Y Cuán Válido Es?",
+		"description": "CuponZ es una plataforma líder para encontrar y compartir cupones de descuento en una amplia gama de productos y servicios. Nuestra misión es ayudar a los consumidores a ahorrar dinero mientras apoyamos a las empresas a llegar a nuevos clientes.",
+		"searchCoupons": "Buscar Cupones",
+		"contactUs": "Contáctenos",
+		"imageAlt": "Sobre CuponZ",
+		"company": {
+			"title": "Nuestra Empresa",
+			"content": "CuponZ fue fundada con la visión de revolucionar la forma en que las personas ahorran dinero en sus compras. Hemos crecido de una pequeña startup a un nombre de confianza en la industria de cupones, siempre poniendo a nuestros usuarios primero."
+		},
+		"products": {
+			"title": "Nuestros Productos",
+			"content": "Ofrecemos una amplia gama de cupones digitales y códigos promocionales para varias categorías, incluyendo electrónica, moda, comida, viajes y más. Nuestra plataforma está diseñada para ser fácil de usar y accesible en todos los dispositivos."
+		},
+		"team": {
+			"title": "Conoce a Nuestro Equipo",
+			"content": "Nuestro equipo está compuesto por individuos apasionados de diversos orígenes. Creemos en fomentar un ambiente colaborativo donde la creatividad y la innovación prosperan. Juntos, trabajamos para ofrecer un valor excepcional a nuestros clientes."
+		},
+		"sectionNames": {
+			"company": "Empresa",
+			"products": "Productos",
+			"team": "Nuestro Equipo"
+		}
+	},
+	"contactUs": {
+		"contactInfo": "Información de Contacto",
+		"quote": "¡Di algo para iniciar un chat en vivo!",
+		"address": "132 Dartmouth Street Boston, Massachusetts 02156 Estados Unidos",
+		"form": {
+			"fname": "Nombre",
+			"lname": "Apellido",
+			"email": "Correo Electrónico",
+			"phoneNumber": "Número de Teléfono",
+			"selection": {
+				"title": "Seleccionar Asunto",
+				"generalInquiry": "Consulta General",
+				"technicalSupport": "Soporte Técnico",
+				"billing": "Facturación",
+				"message": "Escribe tu mensaje ..."
+			}
+		},
+		"button": "Enviar Mensaje"
+	},
+	"filter": {
+		"display": "Filtros",
+		"categories": "Categorías",
+		"startDate": "Fecha de Inicio",
+		"endDate": "Fecha de Fin",
+		"apply": "Aplicar",
+		"reset": "Restablecer"
+	},
+	"login": {
+		"form": {
+			"title": "Iniciar Sesión",
+			"email": "Correo Electrónico",
+			"password": "Contraseña",
+			"button": "Iniciar Sesión",
+			"registerQuote": "¿No tienes una cuenta?",
+			"registerLink": "Registrarse"
+		},
+		"title": "CuponZ",
+		"quote": "¡Genera Cupones en todas partes!"
+	},
+	"register": {
+		"form": {
+			"title": "Crear Cuenta",
+			"fname": "Nombre",
+			"lname": "Apellido",
+			"email": "Correo Electrónico",
+			"phoneNumber": "Número de Teléfono (opcional)",
+			"miniNote": "Opcional: Ingresa un número de teléfono válido para tu región seleccionada o déjalo en blanco",
+			"password": "Contraseña",
+			"reconfirmPassword": "Vuelve a Ingresar la Contraseña",
+			"select": {
+				"title": "Selecciona el Tipo de Usuario",
+				"manager": "Gerente",
+				"shop": "Tienda",
+				"user": "Usuario"
+			},
+			"button": "Crear Cuenta",
+			"registerQuote": "¿Ya tienes una cuenta?",
+			"registerLink": "Iniciar Sesión"
+		},
+		"title": "CuponZ",
+		"quote": "¡Genera Cupones en todas partes!"
+	},
+	"userSetting": {
+		"username": "Nombre de Usuario",
+		"password": "Contraseña",
+		"email": "Correo Electrónico",
+		"phoneNumber": "Número de Teléfono",
+		"changeBtn": "Cambiar",
+		"addBtn": "Agregar"
+	},
+	"changePasswordModal": {
+		"title": "Cambiar Contraseña",
+		"oldPassword": "Contraseña Anterior",
+		"newPassword": "Nueva Contraseña",
+		"confirmNewPass": "Confirmar Nueva Contraseña",
+		"showPass": "Mostrar Contraseña",
+		"changePassBtn": "Cambiar Contraseña"
+	},
+	"changeEmailModal": {
+		"title": "Cambiar Correo Electrónico",
+		"newEmail": "Nuevo Correo Electrónico",
+		"verify": "Verificar",
+		"verifying": "Verificando...",
+		"verified": "Verificado",
+		"changeEmailBtn": "Cambiar Correo Electrónico",
+		"successnoti": "¡Correo electrónico verificado con éxito!",
+		"OTP": {
+			"title": "Verificar Correo Electrónico",
+			"quote": "Por favor, ingresa el OTP enviado a",
+			"cancelBtn": "Cancelar"
+		}
+	},
+	"changePhoneModal": {
+		"title": "Cambiar Número de Teléfono",
+		"region": "Región",
+		"newNumber": "Nuevo Número de Teléfono",
+		"confirmNumber": "Confirmar Nuevo Número de Teléfono",
+		"changeNumBtn": "Cambiar Número de Teléfono"
+	},
+	"miniNav": {
+		"coupon": "Cupones",
+		"couponManagement": "Gestión de usuarios",
+		"userManagement": "Gestión de cupones",
+		"setting": "Configuración"
+	}
 }

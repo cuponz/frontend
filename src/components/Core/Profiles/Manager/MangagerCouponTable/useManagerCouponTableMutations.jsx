@@ -1,8 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-	approveCoupon,
-	deleteCoupon,
-} from "@/api/coupon";
+import { approveCoupon, deleteCoupon } from "@/api/coupon";
 import { toast } from "sonner";
 import { CouponState } from "@/constants";
 
