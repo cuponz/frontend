@@ -66,6 +66,7 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 		usage_count: usageCount,
 		redeemed_count: numUsers,
 		state,
+		redemption_state: redemptionState,
 	} = coupon;
 
 	keywords = keywords.split(",");
@@ -146,7 +147,7 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 				<CouponCardActionButton
 					type={type}
 					onAction={handleAction}
-					isUsed={state === RedemptionState.Used}
+					isUsed={redemptionState === RedemptionState.Used}
 				/>
 			)}
 
