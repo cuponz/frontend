@@ -66,6 +66,7 @@ const columns = (
 						colour={toggleButtonProps.colour}
 						disabled={isApproving}
 						isLoading={isApproving}
+						className="w-24"
 					>
 						{toggleButtonProps.text}
 					</Button>

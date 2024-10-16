@@ -55,7 +55,6 @@
 		"vite-plugin-compression": "^0.5.1",
 		"vite-plugin-image-optimizer": "^1.1.8",
 		"vite-plugin-purge": "^1.0.3",
-		"vite-plugin-tailwind-purgecss": "^0.3.3",
-		"vite-plugin-webp-generator": "^0.1.0"
+		"vite-plugin-tailwind-purgecss": "^0.3.3"
 	}
 }

@@ -12,7 +12,7 @@ const getStateToggleButtonProps = (state) => {
     default:
       return {
         text: 'Reject',
-        colour: 'yellow-500',
+        colour: 'orange-500',
         disabled: false,
       };
   }
