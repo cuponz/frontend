@@ -2,15 +2,32 @@ import ReactCountryFlag from "react-country-flag";
 import { MdExpandMore } from "react-icons/md";
 import { languageFlags, languageNames } from "./menuItems.js";
 import { useTranslations } from "@/store/languages";
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, useRef, useEffect } from "react";
 
 const LanguageDropdown = ({ language, toggleMenuState, isOpen }) => {
 	const { setLanguage, supportedLanguages } = useTranslations();
+	const dropdownRef = useRef(null);
 
 	const changeLanguage = (lng) => {
 		setLanguage(lng);
 		toggleMenuState("isLanguageDropdownOpen");
 	};
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+				toggleMenuState("isLanguageDropdownOpen");
+			}
+		};
+
+		if (isOpen) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [isOpen, toggleMenuState]);
 
 	const renderFlagButton = useCallback(
 		(lang) => (
@@ -41,7 +58,7 @@ const LanguageDropdown = ({ language, toggleMenuState, isOpen }) => {
 	);
 
 	return (
-		<div className="relative">
+		<div className="relative" ref={dropdownRef}>
 			<button
 				onClick={() => toggleMenuState("isLanguageDropdownOpen")}
 				className="flex items-center space-x-1 focus:outline-none"
