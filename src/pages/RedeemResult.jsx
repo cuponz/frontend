@@ -1,5 +1,5 @@
-import PopupSuccess from "@/components/Popup/Success";
-import PopupFail from "@/components/Popup/Fail";
+import PopupSuccess from "@/components/Popup/RedeemSuccess";
+import PopupFail from "@/components/Popup/RedeemFail";
 import { useParams } from "react-router-dom";
 import { getRedemptionsById } from "../api/redemptions";
 import { useQuery } from "@tanstack/react-query";
