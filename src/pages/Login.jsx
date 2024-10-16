@@ -1,11 +1,13 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
-import { userLogin } from "../api/user";
-import TogglePassword from "../components/Utils/TogglePassword";
-import { useTranslations } from "../store/languages";
-import ReCaptchaV3 from "../components/Utils/ReCaptchaV3";
+import { userLogin } from "@/api/user";
+import TogglePassword from "@/components/Utils/TogglePassword";
+import { useTranslations } from "@/store/languages";
+import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
+
+import Button from "@/components/Utils/Button";
 
 const LoginPage = () => {
 	const [formData, setFormData] = useState({
@@ -32,14 +34,9 @@ const LoginPage = () => {
 		},
 	});
 
-	// Callback to handle reCAPTCHA token after it's verified
-	const handleReCaptchaVerify = useCallback(
-		(token) => {
-			// Once reCAPTCHA is verified, submit the login form with the token
-			loginMutation.mutate({ ...formData, recaptchaToken: token });
-		},
-		[formData, loginMutation],
-	);
+	const handleReCaptchaVerify = (token) => {
+		loginMutation.mutate({ ...formData, recaptchaToken: token });
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -82,12 +79,14 @@ const LoginPage = () => {
 								required
 							/>
 						</div>
-						<button
+						<Button
 							type="submit"
-							className="w-full bg-yellow-500 text-white font-bold p-3 rounded hover:bg-yellow-600 transition duration-200"
+							className="w-full p-3"
+							colour="yellow-500"
+							isLoading={loginMutation.isPending}
 						>
 							{t(["login", "form", "button"])}
-						</button>
+						</Button>
 					</form>
 					<div className="mt-4 text-center">
 						<p>

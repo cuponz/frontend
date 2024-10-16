@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { userRegister } from "../api/user";
 import TogglePassword from "../components/Utils/TogglePassword";
 import { useTranslations } from "../store/languages";
+import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
 
 import Button from "@/components/Utils/Button";
 
@@ -46,6 +47,23 @@ const RegisterPage = () => {
 		},
 	});
 
+	const handleReCaptchaVerify = (token) => {
+		const formattedPhone =
+			formData.phoneNumber.trim() !== ""
+				? Validators.formatPhoneNumber(formData.phoneNumber, formData.region)
+				: null;
+
+		const registerData = {
+			name: formData.firstName.trim() + " " + formData.lastName.trim(),
+			email: formData.email,
+			phoneNumber: formattedPhone,
+			password: formData.password,
+			type: parseInt(formData.userType, 10),
+		};
+
+		registerMutation.mutate({ ...registerData, recaptchaToken: token });
+	};
+
 	const validateForm = () => {
 		let formErrors = {};
 
@@ -76,24 +94,10 @@ const RegisterPage = () => {
 		return Object.keys(formErrors).length === 0;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (validateForm()) {
-			const formattedPhone =
-				formData.phoneNumber.trim() !== ""
-					? Validators.formatPhoneNumber(formData.phoneNumber, formData.region)
-					: null;
-
-			const registerData = {
-				name: formData.firstName.trim() + " " + formData.lastName.trim(),
-				email: formData.email,
-				phoneNumber: formattedPhone,
-				password: formData.password,
-				type: parseInt(formData.userType, 10),
-			};
-			registerMutation.mutate(registerData);
-			const jsonData = JSON.stringify(registerData);
-			console.log("Form submitted as JSON:", jsonData);
+			await window.executeReCaptcha("register");
 		} else {
 			toast.error("Please correct the errors in the form");
 		}
@@ -248,9 +252,8 @@ const RegisterPage = () => {
 						</div>
 						<Button
 							type="submit"
-							// className="w-full bg-yellow-500 text-white font-bold p-3 rounded hover:bg-yellow-600 "
 							colour="yellow-500"
-							className="w-full font-bold p-3"
+							className="w-full p-3"
 							isLoading={registerMutation.isPending}
 						>
 							{t(["register", "form", "button"])}
@@ -266,6 +269,7 @@ const RegisterPage = () => {
 					</div>
 				</div>
 			</div>
+			<ReCaptchaV3 onVerify={handleReCaptchaVerify} />
 		</div>
 	);
 };
