@@ -17,6 +17,7 @@ const ShopOwnerProfilePage = lazy(() => import("@/pages/ShopOwnerProfilePage"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
 const Noti = lazy(() => import("@/pages/RedeemResult"));
 const ShoppingCart = lazy(() => import("@/pages/ShoppingCart"));
+const Test = lazy(() => import("@/pages/UserActivate"));
 
 const ErrorElement = () => (
 	<div className="flex flex-col justify-center items-center h-screen">
@@ -50,6 +51,10 @@ const routes = [
 			{
 				path: "/cart",
 				element: <ShoppingCart />,
+			},
+			{
+				path: "/test",
+				element: <Test />,
 			},
 		],
 	},
