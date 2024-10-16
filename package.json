@@ -15,7 +15,7 @@
 		"build-dev:client": "vite build --ssrManifest --outDir dist/client --watch",
 		"build-dev:server": "vite build --ssr src/entry-server.jsx --outDir dist/server --watch",
 		"test": "vitest run",
-		"test-report": "vitest --reporter json --output-file TEST_REPORT.json",
+		"test-report": "vitest --run --reporter json --output-file TEST_REPORT.json",
 		"format": "prettier . --write --ignore-unknown"
 	},
 	"lint-staged": {
