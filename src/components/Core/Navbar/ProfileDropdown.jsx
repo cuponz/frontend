@@ -1,12 +1,30 @@
 import { Link } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { useTranslations } from "@/store/languages";
+import { useRef, useEffect } from "react";
 
 const ProfileDropdown = ({ toggleMenuState, handleLoginLogout, isOpen }) => {
 	const { t } = useTranslations();
+	const dropdownRef = useRef(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+				toggleMenuState("isProfileDropdownOpen");
+			}
+		};
+
+		if (isOpen) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [isOpen, toggleMenuState]);
 
 	return (
-		<div className="relative">
+		<div className="relative" ref={dropdownRef}>
 			<button
 				onClick={() => toggleMenuState("isProfileDropdownOpen")}
 				className="focus:outline-none"

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useTranslations } from "@/store/languages";
 
 const InstructionPopup = ({ onClose }) => {
+	const { t } = useTranslations();
 	const [dontShowAgain, setDontShowAgain] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -36,11 +38,10 @@ const InstructionPopup = ({ onClose }) => {
 					isVisible ? "scale-100" : "scale-95"
 				}`}
 			>
-				<h2 className="text-xl font-semibold mb-4">Welcome!</h2>
-				<p className="mb-4">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-					at nulla vitae urna faucibus auctor.
-				</p>
+				<h2 className="text-xl font-semibold mb-4">
+					{t(["InstructionPopUp", "welcome"])}
+				</h2>
+				<p className="mb-4">{t(["InstructionPopUp", "content"])}</p>
 				<div className="flex items-center justify-between">
 					<label className="flex items-center">
 						<input
@@ -49,13 +50,15 @@ const InstructionPopup = ({ onClose }) => {
 							onChange={() => setDontShowAgain(!dontShowAgain)}
 							className="mr-2"
 						/>
-						<span className="text-sm">Don&apos;t show this again</span>
+						<span className="text-sm">
+							{t(["InstructionPopUp", "showOneTime"])}
+						</span>
 					</label>
 					<button
 						onClick={handlePopupClose}
 						className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 focus:outline-none"
 					>
-						I understood
+						{t(["InstructionPopUp", "understood"])}
 					</button>
 				</div>
 			</div>

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import FilterBoard from "./FilterBoard";
-import InstructionPopup from "../../InstructionPopup";
+import InstructionPopup from "../../Popup/InstructionPopup";
 
 import { useCouponFiltersStore } from "../../../store/filters";
 import { updateFiltersFromParams } from "../../Utils/Coupons";

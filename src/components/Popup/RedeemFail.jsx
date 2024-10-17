@@ -1,22 +1,24 @@
 import { FaExclamation } from "react-icons/fa";
+import { useTranslations } from "@/store/languages";
 
 const PopupFail = ({ errorType, startDate }) => {
+	const { t } = useTranslations();
 	const getErrorMessage = () => {
 		switch (errorType) {
 			case "only-shop":
-				return "Only shop able to apply coupon";
+				return t(["Fail", "onlyShop"]);
 			case "already-redeemed":
-				return "The code has already been redeemed";
+				return t(["Fail", "alreadyRedeemed"]);
 			case "expired":
-				return "The code has expired";
+				return t(["Fail", "expired"]);
 			case "not-started":
 				return startDate
-					? `The coupon is not available until ${startDate}`
-					: "The coupon is not yet available";
+					? `${t(["Fail", "notStarted"])} ${startDate}`
+					: t(["Fail", "notStarted2"]);
 			case "location":
-				return "This coupon is not available at this location";
+				return t(["Fail", "location"]);
 			default:
-				return "An error occurred while redeeming the coupon";
+				return t(["Fail", "location2"]);
 		}
 	};
 
@@ -31,7 +33,7 @@ const PopupFail = ({ errorType, startDate }) => {
 					</div>
 				</div>
 				<h2 className="text-xl font-semibold mb-4 text-center">
-					Redemption Failed
+					{t(["Fail", "failed"])};
 				</h2>
 				<p className="text-center text-gray-700">{getErrorMessage()}</p>
 			</div>

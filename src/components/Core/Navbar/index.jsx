@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo";
 import CategoriesMenu from "./CategoriesMenu";
@@ -16,7 +16,7 @@ import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import { UserType } from "@/constants";
 import { useTranslations } from "@/store/languages";
 import useNavbarState from "./useNavbarState";
-import LanguageDropdown from "./LangugeDropdown";
+import LanguageDropdown from "./LanguageDropdown";
 import ProfileDropdown from "./ProfileDropdown";
 import { getRoutes } from "./menuItems";
 import Button from "@/components/Utils/Button";
@@ -30,6 +30,7 @@ const Navbar = () => {
 	]);
 	const categoriesButtonRef = useRef(null);
 	const categoriesButtonMobileRef = useRef(null);
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
 	const [
 		menuState,
@@ -76,6 +77,18 @@ const Navbar = () => {
 	useEffect(() => {
 		closeAllMenus();
 	}, [location]);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
 	const handleLoginLogout = () => {
 		if (user) {
@@ -199,7 +212,8 @@ const Navbar = () => {
 								key={index}
 								className="hover:underline relative cursor-pointer"
 								onClick={() => {
-									route.onClick();
+									toggleCategoriesOpen();
+									toggleMenuState("isMobileMenuOpen");
 								}}
 							>
 								{route.name}
@@ -218,6 +232,7 @@ const Navbar = () => {
 						categories={categories}
 						categoriesButtonRef={categoriesButtonRef}
 						categoriesButtonMobileRef={categoriesButtonMobileRef}
+						isMobile={isMobile}
 					/>
 				))}
 		</nav>

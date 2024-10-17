@@ -1,7 +1,7 @@
 // UserInfoOptions.js
 import React from "react";
 import { CouponRequirementType } from "@/constants";
-
+import { useTranslations } from "@/store/languages";
 const userInfoOptions = {
 	Email: "Email",
 	PhoneNumber: "Phone Number",
@@ -10,10 +10,11 @@ const userInfoOptions = {
 };
 
 const UserInfoOptions = ({ formData, handleChange }) => {
+	const { t } = useTranslations();
 	return (
 		<div className="mb-4">
 			<label className="block text-sm font-medium text-gray-700">
-				User Information Required
+				{t(["UserInfoOptions", "content"])}
 			</label>
 			<div className="mt-2 space-x-4">
 				{Object.entries(userInfoOptions).map(([key, value]) => (
