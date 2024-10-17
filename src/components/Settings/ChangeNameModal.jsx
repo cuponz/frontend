@@ -71,7 +71,7 @@ const ChangeNameModal = ({
 					</div>
 					{error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 					<Button type="submit" colour="blue-500">
-						{t(["changeNameModal", "changeNumBtn"])}
+						{t(["changeNameModal", "changeNameBtn"])}
 					</Button>
 				</form>
 			</div>

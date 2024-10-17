@@ -193,5 +193,10 @@
 		"content2":"You will not see your product right away after uploading.",
 		"content3":"Thank you for being patient while waiting for our admin to approve your product.",
 		"showOneTime":"Do not show this again"
+	},
+	"changeNameModal":{
+		"title":"Title",
+		"change": "Change Name",
+		"changeNameBtn":"Change"
 	}
 }

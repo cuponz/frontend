@@ -193,5 +193,10 @@
     "content2": "No verás tu producto de inmediato después de subirlo.",
     "content3": "Gracias por ser paciente mientras nuestro administrador aprueba tu producto.",
     "showOneTime": "No mostrar esto de nuevo"
+  },
+  "changeNameModal": {
+    "title": "Título",
+    "change": "Cambiar nombre",
+    "changeNameBtn": "Cambiar"
   }
 }
