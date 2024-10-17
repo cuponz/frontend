@@ -5,7 +5,7 @@ import { useTranslations } from "@/store/languages";
 
 import Button from "@/components/Utils/Button";
 import { useMutation } from "@tanstack/react-query";
-import { validateOtp } from "@/api/otp";
+import { validateOtp, sendOtp } from "@/api/otp";
 
 const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const { t } = useTranslations();
@@ -13,6 +13,7 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const [popup, setPopup] = useState(null);
 	const modalRef = useRef();
 	const [otpValue, setOtpValue] = useState("");
+	const [resendCooldown, setResendCooldown] = useState(60);
 
 	const validateOtpMutation = useMutation({
 		mutationFn: validateOtp,
@@ -24,6 +25,20 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 			setError("Invalid OTP. Please try again.");
 			onVerify(false);
 			setOtpValue("");
+		},
+	});
+
+	const resendOtpMutation = useMutation({
+		mutationFn: sendOtp,
+		onSuccess: () => {
+			setPopup({ message: "OTP resent successfully.", type: "success" });
+			setResendCooldown(60);
+		},
+		onError: (error) => {
+			setPopup({
+				message: "Failed to resend OTP. Please try again.",
+				type: "error",
+			});
 		},
 	});
 
@@ -47,6 +62,21 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 		};
 	}, [isOpen, onClose]);
 
+	useEffect(() => {
+		let timer;
+		if (isOpen && resendCooldown > 0) {
+			timer = setTimeout(() => setResendCooldown(resendCooldown - 1), 1000);
+		}
+		return () => clearTimeout(timer);
+	}, [resendCooldown, isOpen]);
+
+	// Reset cooldown when modal opens
+	useEffect(() => {
+		if (isOpen) {
+			setResendCooldown(60);
+		}
+	}, [isOpen]);
+
 	const handleOTPComplete = () => {
 		if (validateOtpMutation.isPending) {
 			return;
@@ -54,6 +84,14 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 
 		setError("");
 		validateOtpMutation.mutate({ email, otp: otpValue });
+	};
+
+	const handleResendOTP = () => {
+		if (resendCooldown > 0 || resendOtpMutation.isPending) {
+			return;
+		}
+
+		resendOtpMutation.mutate(email);
 	};
 
 	if (!isOpen) {
@@ -72,13 +110,13 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 				<p className="mb-2">{t(["changeEmailModal", "OTP", "quote"])}</p>
 				<p className="mb-4 font-semibold">{email}</p>
 				<OTPInput
-					length={6}
+					length={8} //change length of input
 					onComplete={handleOTPComplete}
 					value={otpValue}
 					onChange={setOtpValue}
 				/>
 				{error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-				<div className="mt-4 flex justify-between">
+				<div className="mt-4 flex justify-between items-center">
 					<Button
 						colour="blue-500"
 						className="text-sm font-medium"
@@ -87,6 +125,17 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 						isLoading={validateOtpMutation.isPending}
 					>
 						{t(["changeEmailModal", "OTP", "cancelBtn"])}
+					</Button>
+					<Button
+						colour="blue-500"
+						className="text-sm font-medium"
+						onClick={handleResendOTP}
+						disabled={resendCooldown > 0 || resendOtpMutation.isPending}
+						isLoading={resendOtpMutation.isPending}
+					>
+						{resendCooldown > 0
+							? `Resend OTP (${resendCooldown}s)`
+							: "Resend OTP"}
 					</Button>
 				</div>
 			</div>

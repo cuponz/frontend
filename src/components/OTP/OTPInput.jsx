@@ -56,7 +56,7 @@ const OTPInput = ({ length, onComplete, value, onChange }) => {
 					type="text"
 					maxLength="1"
 					value={value[index] || ""}
-					className="w-12 h-12 border-2 rounded bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-gray-300 focus:border-[#E0DFFE] focus:ring focus:ring-[#E0DFFE] focus:ring-opacity-50"
+					className="w-10 h-12 border-2 rounded bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-gray-300 focus:border-[#E0DFFE] focus:ring focus:ring-[#E0DFFE] focus:ring-opacity-50"
 					onChange={(e) => handleChange(e.target, index)}
 					onKeyDown={(e) => handleKeyDown(e, index)}
 					onFocus={(e) => e.target.select()}
