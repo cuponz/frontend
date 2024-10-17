@@ -46,7 +46,8 @@ const Navbar = () => {
 	const {
 		isPending,
 		data: [fetchedCategories, groups],
-	} = useSuspenseQueries({
+	// } = useSuspenseQueries({
+	} = useQueries({
 		queries: [
 			{
 				queryKey: ["categories"],

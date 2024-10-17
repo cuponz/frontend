@@ -6,7 +6,6 @@ import {
 	deleteCoupon,
 } from "@/api/coupon";
 import { toast } from "sonner";
-import { CouponState } from "@/constants";
 
 const useShopCouponTableMutations = (
 	setIsCreateCouponOpen,

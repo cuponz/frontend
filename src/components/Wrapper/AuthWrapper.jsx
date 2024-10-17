@@ -7,10 +7,10 @@ import { useUserStore } from "@/store/user";
 import { userAuth } from "@/api/user";
 
 const Layout = lazy(() => import("@/layout/Layout"));
-import LoadingSpinner from "@/components/Utils/LoadingSpinner"; // Ensure this path is correct
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
 const AuthWrapper = ({ isProtected }) => {
-	const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
+	const [user, setUser, deleteUserCache] = useUserStore((state) => [state.user, state.setUser, state.deleteUserCache]);
 	const navigate = useNavigate();
 
 	const { isPending, isError, isFetched, data, error } = useQuery({
@@ -22,20 +22,19 @@ const AuthWrapper = ({ isProtected }) => {
 
 	useEffect(() => {
 		if (isProtected && isFetched && !data) {
-			setUser(undefined);
+			deleteUserCache();
 			navigate("/login");
 		}
 	}, [isProtected, isFetched, data, navigate, setUser]);
 
 	useEffect(() => {
 		if (data) {
-			console.log(data.user);
 			toast.success("Logged in");
 			setUser(data.user);
 		}
 		if (isError) {
 			toast.error(error?.message || "Authentication error");
-			setUser(undefined);
+			deleteUserCache();
 			if (isProtected) {
 				navigate("/login");
 			}

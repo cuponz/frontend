@@ -29,7 +29,15 @@ export async function userRegister(registerData) {
 
 export async function searchShops(searchTerm) {
 	return apiRequest(`/api/user/shop?searchTerm=${searchTerm}`, {
-		method: "Get",
+		method: "GET",
 		errorMessage: "Search Shop Failed",
 	});
 }
+
+export async function updateUser ({ userId, userData }) {
+	return apiRequest(`/api/user/${userId}`, {
+		method: "PUT",
+		body: JSON.stringify(userData),
+		errorMessage: "Update User Failed",
+	});
+};

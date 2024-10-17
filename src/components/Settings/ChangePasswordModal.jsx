@@ -30,7 +30,7 @@ const ChangePasswordModal = ({ isOpen, onClose, onSubmit }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (newPassword === confirmPassword) {
-			onSubmit(newPassword);
+			onSubmit(oldPassword, newPassword);
 		} else {
 			alert("New passwords don't match!");
 		}

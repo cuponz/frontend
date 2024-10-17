@@ -3,7 +3,9 @@ import { userLogout } from "../api/user";
 
 export const useUserStore = create((set) => ({
 	user: null,
-	setUser: (userData) => set({ user: userData }),
+	setUser: (userData) =>
+		set((state) => ({ user: { ...state.user, ...userData } })),
+	deleteUserCache: () => set({ user: null }),
 	logout: async () => {
 		try {
 			await userLogout();

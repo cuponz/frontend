@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import OTPInput from "./OTPInput";
 import Popup from "./Popup";
-import { useTranslations } from "../../store/languages";
+import { useTranslations } from "@/store/languages";
+
+import Button from "@/components/Utils/Button";
 
 const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const { t } = useTranslations();
@@ -51,7 +53,9 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 		}, 2000);
 	};
 
-	if (!isOpen) return null;
+	if (!isOpen) {
+		return null;
+	}
 
 	return (
 		<div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
@@ -71,22 +75,16 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 					onChange={setOtpValue}
 				/>
 				{error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-				{isVerifying && (
-					<div className="mt-4 flex items-center justify-center">
-						<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-						<span className="ml-2">
-							{t(["changeEmailModal", "OTP", "verifying"])}
-						</span>
-					</div>
-				)}
 				<div className="mt-4 flex justify-between">
-					<button
-						className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-[#E0DFFE] hover:bg-[#D0CFFE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E0DFFE]"
+					<Button
+						colour="blue-500"
+						className="text-sm font-medium"
 						onClick={onClose}
 						disabled={isVerifying}
+						isLoading={isVerifying}
 					>
 						{t(["changeEmailModal", "OTP", "cancelBtn"])}
-					</button>
+					</Button>
 				</div>
 			</div>
 			{popup && (

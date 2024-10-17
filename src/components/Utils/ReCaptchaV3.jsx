@@ -29,7 +29,7 @@ const ReCaptchaV3 = ({ onVerify }) => {
 				const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
 					action,
 				});
-				onVerify(token);
+				return onVerify(token);
 			} catch (error) {
 				console.error("reCAPTCHA failed:", error);
 			}

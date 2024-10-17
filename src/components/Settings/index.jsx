@@ -2,61 +2,75 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "@/store/languages";
 
 import ChangePasswordModal from "./ChangePasswordModal";
+import ChangeNameModal from "./ChangeNameModal";
 import ChangeEmailModal from "./ChangeEmailModal";
 import ChangePhoneModal from "./ChangePhoneModal";
 
 import Button from "@/components/Utils/Button";
 import { useUserStore } from "@/store/user";
 
+import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
+
 import { updateUser } from "@/api/user";
 import { useMutation } from "@tanstack/react-query";
+
+import { toast } from "sonner";
 
 const Setting = () => {
 	const { t } = useTranslations();
 	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+	const [isNameModalOpen, setIsNameModalOpen] = useState(false);
 	const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 	const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
 
 	const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
-
-	// useEffect(() => {
-	// 	const gadgetHubUser = shopOwnerData.find(
-	// 		(user) => user.user_name === "GadgetHub",
-	// 	);
-	// 	setUserData(gadgetHubUser);
-	// }, []);
 
 	const inputClasses =
 		"w-full rounded-md sm:text-sm border-2 border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed focus:border-gray-300 focus:ring-0 px-3 py-2";
 
 	const updateMutation = useMutation({
 		mutationFn: updateUser,
-		onSuccess: () => {
+		onSuccess: (data) => {
 			toast.success("User information updated successfully.");
+			setUser(data);
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to update user.");
 		},
 	});
 
-	const handlePasswordChange = (newPassword) => {
-		// updateMutation.update({ password: newPassword })
+	const handleReCaptchaVerify = (token) => (userData) => {
+		updateMutation.mutate({
+			userId: user.id,
+			userData: { ...userData, recaptchaToken: token },
+		});
+	};
+
+	const handlePasswordChange = async (oldPassword, newPassword) => {
+		await (
+			await window.executeReCaptcha("updatePassword")
+		)({ password: newPassword, oldPassword });
 		setIsPasswordModalOpen(false);
 	};
 
-	const handleEmailChange = (newEmail) => {
-		setUser((prevData) => ({
-			...prevData,
-			email: newEmail,
-		}));
+	const handleNameChange = async (newName) => {
+		await (
+			await window.executeReCaptcha("updateUsername")
+		)({ name: newName });
+		setIsNameModalOpen(false);
+	};
+
+	const handleEmailChange = async (newEmail) => {
+		await (
+			await window.executeReCaptcha("updateEmail")
+		)({ email: newEmail });
 		setIsEmailModalOpen(false);
 	};
 
-	const handlePhoneChange = (newPhoneNumber) => {
-		setUser((prevData) => ({
-			...prevData,
-			phone_number: newPhoneNumber,
-		}));
+	const handlePhoneChange = async (newPhoneNumber) => {
+		await (
+			await window.executeReCaptcha("updatePhoneNumber")
+		)({ phone_number: newPhoneNumber });
 		setIsPhoneModalOpen(false);
 	};
 
@@ -79,7 +93,9 @@ const Setting = () => {
 							value={user.name}
 							readOnly
 						/>
-						<Button colour="blue-500">{t(["userSetting", "changeBtn"])}</Button>
+						<Button colour="blue-500" onClick={() => setIsNameModalOpen(true)}>
+							{t(["userSetting", "changeBtn"])}
+						</Button>
 					</div>
 				</div>
 
@@ -158,6 +174,12 @@ const Setting = () => {
 				</div>
 
 				{/* TODO: add in loading state for these button similar to buttons from management page  */}
+				<ChangeNameModal
+					isOpen={isNameModalOpen}
+					onClose={() => setIsNameModalOpen(false)}
+					onSubmit={handleNameChange}
+				/>
+
 				<ChangePasswordModal
 					isOpen={isPasswordModalOpen}
 					onClose={() => setIsPasswordModalOpen(false)}
@@ -178,6 +200,7 @@ const Setting = () => {
 					currentPhoneNumber={user.phone_number}
 				/>
 			</div>
+			<ReCaptchaV3 onVerify={handleReCaptchaVerify} />
 		</div>
 	);
 };

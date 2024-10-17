@@ -76,9 +76,6 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 
 		onSubmit(newEmail);
 		setPopup({ message: "Email changed successfully!", type: "success" });
-		setTimeout(() => {
-			onClose();
-		}, 2000);
 	};
 
 	if (!isOpen) return null;
@@ -117,8 +114,11 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 								className={inputClasses}
 								required
 							/>
-							<Button colour="blue-500" disabled={isVerified} 
-								onClick={handleVerify}>
+							<Button
+								colour="blue-500"
+								disabled={isVerified}
+								onClick={handleVerify}
+							>
 								{isVerified
 									? t(["changeEmailModal", "verified"])
 									: t(["changeEmailModal", "verify"])}
@@ -131,9 +131,9 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 							{t(["changeEmailModal", "successnoti"])}
 						</p>
 					)}
-							<Button colour="blue-500" disabled={!isVerified} type="submit">
+					<Button colour="blue-500" disabled={!isVerified} type="submit">
 						{t(["changeEmailModal", "changeEmailBtn"])}
-							</Button>
+					</Button>
 				</form>
 			</div>
 			{showOTPModal && (
