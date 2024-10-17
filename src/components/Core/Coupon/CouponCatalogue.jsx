@@ -30,8 +30,12 @@ const CouponCatalogueBoard = ({
 }) => {
 	const user = useUserStore((state) => state.user);
 
+	const [searchParams] = useSearchParams();
+	const id = searchParams.get("id")
+
 	let [queryKey, queryFn] = useMemo(() => {
 		let queryKey, queryFn;
+
 		switch (type) {
 			case CouponCatalogueType.All:
 				queryKey = ["get", "coupons"];
@@ -42,8 +46,8 @@ const CouponCatalogueBoard = ({
 				queryFn = getCouponsByShopIdFromShop;
 				break;
 			case CouponCatalogueType.ShopList:
-				queryKey = ["get", "coupons", "shop", user.id];
-				queryFn = () => getCouponsByShopIdFromOthers(user.id);
+				queryKey = ["get", "coupons", "shop", id];
+				queryFn = () => getCouponsByShopIdFromOthers(id);
 				break;
 			case CouponCatalogueType.User:
 				queryKey = ["get", "user", "coupons"];
@@ -52,7 +56,7 @@ const CouponCatalogueBoard = ({
 		}
 
 		return [queryKey, queryFn];
-	}, [type]);
+	}, [type, id]);
 
 	const { isPending, data } = useQuery({
 		queryKey,
@@ -66,6 +70,7 @@ const CouponCatalogueBoard = ({
 
 	return (
 		<CouponBoard
+			key={`type-id`}
 			coupons={data}
 			type={type}
 			setShowUserTable={setShowUserTable}

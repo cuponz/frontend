@@ -8,7 +8,6 @@ const CouponPage = () => {
 			<div className="min-h-screen">
 				<div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-10">
 					<Banner message="Discover the Best Deals Today!" />
-					<title>Discover Local Deals</title>
 
 					<CouponCatalogue type={CouponCatalogueType.All} />
 				</div>

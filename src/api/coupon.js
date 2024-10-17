@@ -13,7 +13,8 @@ async function getCouponsByShopIdFromShop() {
 }
 
 async function getCouponsByShopIdFromOthers(shopId) {
-	return apirequest(`/api/coupon/shop/${shopid}`, {
+	return apiRequest(`/api/coupon/shop/${shopId}`, {
+		method: "GET",
 		errormessage: "Getting coupon by shop's id failed",
 	});
 }

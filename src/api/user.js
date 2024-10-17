@@ -26,3 +26,10 @@ export async function userRegister(registerData) {
 		errorMessage: "Register failed",
 	});
 }
+
+export async function searchShops(searchTerm) {
+	return apiRequest(`/api/user/shop?searchTerm=${searchTerm}`, {
+		method: "Get",
+		errorMessage: "Search Shop Failed",
+	});
+}

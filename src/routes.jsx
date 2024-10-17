@@ -13,7 +13,7 @@ const AboutUs = lazy(() => import("@/pages/AboutUs"));
 const Login = lazy(() => import("@/pages/Login"));
 const Register = lazy(() => import("@/pages/Register"));
 const CouponPage = lazy(() => import("@/pages/CouponPage"));
-const ShopOwnerProfilePage = lazy(() => import("@/pages/ShopOwnerProfilePage"));
+const ShopOwnerProfile = lazy(() => import("@/pages/ShopOwnerProfile"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
 const Noti = lazy(() => import("@/pages/RedeemResult"));
 const ShoppingCart = lazy(() => import("@/pages/ShoppingCart"));
@@ -80,7 +80,7 @@ const routes = [
 		children: [
 			{
 				path: "/shop",
-				element: <ShopOwnerProfilePage />,
+				element: <ShopOwnerProfile />,
 			},
 			{
 				path: "/login",

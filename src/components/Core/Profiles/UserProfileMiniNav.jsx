@@ -8,13 +8,13 @@ import { CouponCatalogueType, ProfileTab, UserType } from "@/constants";
 
 import ShopCouponTable from "./Shop/ShopCouponTable";
 import ManagerCouponTable from "./Manager/MangagerCouponTable";
-import Setting from "@/components/Setting";
+import Settings from "@/components/Settings";
 import { useTranslations } from "@/store/languages";
 
 const UserContent = ({ activeTab }) => {
 	switch (activeTab) {
 		case ProfileTab.Settings:
-			return <Setting />;
+			return <Settings />;
 		default:
 			return null;
 	}
@@ -27,7 +27,7 @@ const ShopContent = ({ activeTab }) => {
 		case ProfileTab.CouponManagement:
 			return <ShopCouponTable />;
 		case ProfileTab.Settings:
-			return <Setting />;
+			return <Settings />;
 		default:
 			return null;
 	}
@@ -40,7 +40,7 @@ const ManagerContent = ({ activeTab }) => {
 		case ProfileTab.UserManagement:
 			return <ManagerCouponTable />;
 		case ProfileTab.Settings:
-			return <Setting />;
+			return <Settings />;
 		default:
 			return null;
 	}

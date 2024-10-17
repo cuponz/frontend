@@ -65,7 +65,6 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 		max_usage: maxUsage,
 		usage_count: usageCount,
 		redeemed_count: numUsers,
-		state,
 		redemption_state: redemptionState,
 	} = coupon;
 

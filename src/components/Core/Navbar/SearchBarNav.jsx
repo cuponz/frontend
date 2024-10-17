@@ -1,25 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaShop } from "react-icons/fa6";
-import couponData from "../../../data/couponData.json";
 import { useTranslations } from "@/store/languages";
 import { motion, AnimatePresence } from "framer-motion";
+
+import { useQuery } from "@tanstack/react-query";
+import { searchShops } from "@/api/user";
+import { Link } from "react-router-dom";
 
 const SearchBarNav = () => {
 	const { t } = useTranslations();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
-	const [filteredShops, setFilteredShops] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-
-	const generateRandomColor = () => {
-		const letters = "0123456789ABCDEF";
-		let color = "#";
-		for (let i = 0; i < 6; i++) {
-			color += letters[Math.floor(Math.random() * 16)];
-		}
-		return color;
-	};
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -29,32 +21,11 @@ const SearchBarNav = () => {
 		return () => clearTimeout(timer);
 	}, [searchTerm]);
 
-	useEffect(() => {
-		if (debouncedSearchTerm) {
-			searchShops(debouncedSearchTerm);
-		} else {
-			setFilteredShops([]);
-			setIsLoading(false);
-		}
-	}, [debouncedSearchTerm]);
-
-	const searchShops = useCallback((value) => {
-		setIsLoading(true);
-		setTimeout(() => {
-			const results = couponData
-				.filter((coupon) =>
-					coupon.shopName.toLowerCase().includes(value.toLowerCase()),
-				)
-				.reduce((unique, coupon) => {
-					if (!unique.some((item) => item.shopName === coupon.shopName)) {
-						unique.push({ id: coupon.id, shopName: coupon.shopName });
-					}
-					return unique;
-				}, []);
-			setFilteredShops(results);
-			setIsLoading(false);
-		}, 300);
-	}, []);
+	const { data: filteredShops = [], isLoading } = useQuery({
+		queryKey: ["shops", debouncedSearchTerm],
+		queryFn: () => searchShops(debouncedSearchTerm),
+		enabled: !!debouncedSearchTerm,
+	});
 
 	const handleSearchChange = (e) => {
 		const value = e.target.value;
@@ -94,20 +65,24 @@ const SearchBarNav = () => {
 							</div>
 						) : (
 							filteredShops.map((shop) => (
-								<motion.div
+								<Link
 									key={shop.id}
-									initial={{ opacity: 0, y: -10 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -10 }}
-									transition={{ duration: 0.2 }}
-									className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
+									to={`/shop/?id=${shop.id}&name=${shop.name}`}
 								>
-									<FaShop
-										className="h-8 w-8 rounded-full mr-3"
-										style={{ color: generateRandomColor() }}
-									/>
-									<span>{shop.shopName}</span>
-								</motion.div>
+									<motion.div
+										initial={{ opacity: 0, y: -10 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, y: -10 }}
+										transition={{ duration: 0.2 }}
+										className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
+									>
+										<FaShop
+											className="h-8 w-8 rounded-full mr-3"
+											style={{ color: "grey" }}
+										/>
+										<span>{shop.name}</span>
+									</motion.div>
+								</Link>
 							))
 						)}
 					</motion.div>

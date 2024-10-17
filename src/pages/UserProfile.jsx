@@ -1,5 +1,5 @@
-import UserInfo from "../components/Core/Profiles/UserInfo";
-import MiniNav from "../components/Core/Profiles/UserProfileMiniNav";
+import UserInfo from "@/components/Core/Profiles/UserInfo";
+import MiniNav from "@/components/Core/Profiles/UserProfileMiniNav";
 
 function UserProfile() {
 	return (
