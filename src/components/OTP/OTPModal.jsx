@@ -4,14 +4,28 @@ import Popup from "./Popup";
 import { useTranslations } from "@/store/languages";
 
 import Button from "@/components/Utils/Button";
+import { useMutation } from "@tanstack/react-query";
+import { validateOtp } from "@/api/otp";
 
 const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const { t } = useTranslations();
 	const [error, setError] = useState("");
-	const [isVerifying, setIsVerifying] = useState(false);
 	const [popup, setPopup] = useState(null);
 	const modalRef = useRef();
 	const [otpValue, setOtpValue] = useState("");
+
+	const validateOtpMutation = useMutation({
+		mutationFn: validateOtp,
+		onSuccess: () => {
+			onVerify(true);
+			onClose();
+		},
+		onError: (error) => {
+			setError("Invalid OTP. Please try again.");
+			onVerify(false);
+			setOtpValue("");
+		},
+	});
 
 	useEffect(() => {
 		const handleOutsideClick = (event) => {
@@ -33,24 +47,13 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 		};
 	}, [isOpen, onClose]);
 
-	const handleOTPComplete = (otp) => {
-		if (isVerifying) return;
+	const handleOTPComplete = () => {
+		if (validateOtpMutation.isPending) {
+			return;
+		}
 
-		setOtpValue(otp);
 		setError("");
-		setIsVerifying(true);
-
-		setTimeout(() => {
-			setIsVerifying(false);
-			if (otp === "123456") {
-				onVerify(true);
-				onClose();
-			} else {
-				setError("Invalid OTP. Please try again.");
-				onVerify(false);
-				setOtpValue("");
-			}
-		}, 2000);
+		validateOtpMutation.mutate({ email, otp: otpValue });
 	};
 
 	if (!isOpen) {
@@ -80,8 +83,8 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 						colour="blue-500"
 						className="text-sm font-medium"
 						onClick={onClose}
-						disabled={isVerifying}
-						isLoading={isVerifying}
+						disabled={validateOtpMutation.isPending}
+						isLoading={validateOtpMutation.isPending}
 					>
 						{t(["changeEmailModal", "OTP", "cancelBtn"])}
 					</Button>

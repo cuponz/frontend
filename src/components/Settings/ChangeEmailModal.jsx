@@ -4,6 +4,9 @@ import OTPModal from "../OTP/OTPModal";
 import Popup from "../OTP/Popup";
 import { useTranslations } from "../../store/languages";
 
+import { sendOtp } from "@/api/otp";
+import { useMutation } from "@tanstack/react-query";
+
 import Button from "@/components/Utils/Button";
 
 const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
@@ -14,6 +17,19 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 	const [showOTPModal, setShowOTPModal] = useState(false);
 	const [popup, setPopup] = useState(null);
 	const modalRef = useRef();
+
+	const sendOtpMutation = useMutation({
+		mutationFn: sendOtp,
+		onSuccess: () => {
+			setPopup({ message: "OTP sent successfully.", type: "success" });
+		},
+		onError: (error) => {
+			setPopup({
+				message: "Failed to send OTP. Please try again.",
+				type: "error",
+			});
+		},
+	});
 
 	useEffect(() => {
 		const handleOutsideClick = (event) => {
@@ -48,6 +64,7 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 			return;
 		}
 
+		sendOtpMutation.mutate(newEmail);
 		setShowOTPModal(true);
 	};
 
@@ -82,8 +99,6 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 
 	const inputClasses =
 		"w-full rounded-l-md sm:text-sm border-2 border-gray-300 focus:border-[#E0DFFE] focus:ring focus:ring-[#E0DFFE] focus:ring-opacity-50 px-3 py-2";
-	const verifyButtonClasses =
-		"px-4 py-2 border border-transparent text-sm font-medium rounded-r-md text-gray-700 bg-[#E0DFFE] hover:bg-[#D0CFFE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E0DFFE]";
 
 	return (
 		<div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
@@ -118,6 +133,7 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 								colour="blue-500"
 								disabled={isVerified}
 								onClick={handleVerify}
+								isLoading={sendOtpMutation.isPending}
 							>
 								{isVerified
 									? t(["changeEmailModal", "verified"])
