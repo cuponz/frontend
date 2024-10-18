@@ -39,7 +39,7 @@ const CouponCardActionButton = ({
 				onClick={onAction}
 				disabled={isUsed || isRedeemed}
 				className="w-full"
-				colour={isUsed || isRedeemed ? "gray-400" : "blue-500"}
+				colour="blue-500"
 			>
 				{text}
 			</Button>

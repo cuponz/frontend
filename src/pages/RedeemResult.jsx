@@ -37,9 +37,6 @@ function ResultNoti() {
 		error = "already-redeemed";
 	}
 
-	console.log(error);
-	console.log(data);
-
 	return (
 		<div>
 			<div className="pt-16 sm:px-6 ">
