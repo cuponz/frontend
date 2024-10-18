@@ -34,10 +34,10 @@ export async function searchShops(searchTerm) {
 	});
 }
 
-export async function updateUser ({ userId, userData }) {
+export async function updateUser({ userId, userData }) {
 	return apiRequest(`/api/user/${userId}`, {
 		method: "PUT",
 		body: JSON.stringify(userData),
 		errorMessage: "Update User Failed",
 	});
-};
+}

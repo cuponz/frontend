@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { CouponRequirementType, CountryListWithCode } from "../../../constants";
 import { useMutation } from "@tanstack/react-query";
 import { redeemCoupon } from "../../../api/redemptions";
@@ -9,6 +9,8 @@ import {
 	isValidPhoneNumber,
 } from "libphonenumber-js";
 import validator from "validator";
+
+import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
 
 const InfoField = ({ onClose, coupon, onRedeem }) => {
 	const [formData, setFormData] = useState({
@@ -21,7 +23,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 		phone: false,
 	});
 	const [isEmailDisabled, setIsEmailDisabled] = useState(false);
-  const [showInfoField, setShowInfoField] = useState(true);
+	const [showInfoField, setShowInfoField] = useState(true);
 
 	const user = useUserStore((state) => state.user);
 
@@ -39,7 +41,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 
 		// Check if user has all required information
 		const hasRequiredInfo = checkUserHasRequiredInfo();
-		if (hasRequiredInfo) {
+		if (showInfoField && hasRequiredInfo) {
 			setShowInfoField(false);
 			handleDirectSubmit();
 		}
@@ -89,7 +91,16 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 		}
 	};
 
-	const handleDirectSubmit = () => {
+	const handleReCaptchaVerify = (token) => (payload) => {
+		infoMutation.mutate({ ...payload, recaptchaToken: token });
+	};
+
+	const submitRedemption = useCallback(async (payload) => {
+		const executeReCaptcha = await window.executeReCaptcha("redeemCoupon");
+		executeReCaptcha(payload);
+	}, []);
+
+	const handleDirectSubmit = async () => {
 		const payload = {
 			coupon_id: coupon.id,
 			user_id: user?.id,
@@ -98,7 +109,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 		};
 
 		toast.info("Submitting payload directly:", payload);
-		infoMutation.mutate(payload);
+    submitRedemption(payload);
 	};
 
 	const formatPhoneNumber = (phone, region) => {
@@ -147,12 +158,16 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 		return !hasError;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!validateForm()) {
 			return;
 		}
+
+    if (!showInfoField) {
+      return;
+    }
 
 		const formattedPhone = formData.phone
 			? formatPhoneNumber(formData.phone, formData.region)
@@ -165,9 +180,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 			user_phone: formattedPhone || undefined,
 		};
 
-		console.log("Submitting payload:", payload); // For debugging
-
-		infoMutation.mutate(payload);
+    submitRedemption(payload);
 	};
 
 	const handleChange = (e) => {
@@ -182,9 +195,9 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 		onClose();
 	};
 
-  if (!showInfoField) {
-    return null;
-  }
+	if (!showInfoField) {
+		return null;
+	}
 
 	return (
 		<div
@@ -259,6 +272,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 					</div>
 				</form>
 			</div>
+			<ReCaptchaV3 onVerify={handleReCaptchaVerify} />
 		</div>
 	);
 };
