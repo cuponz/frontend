@@ -11,16 +11,16 @@ import { updateFiltersFromParams } from "../../Utils/Coupons";
 
 import { useQuery } from "@tanstack/react-query";
 import CouponBoard from "./CouponBoard";
-import { CouponCatalogueType } from "../../../constants";
+import { CouponCatalogueType } from "@/constants";
 import UserTable from "../Profiles/Shop/UserTable";
-import { useTranslations } from "../../../store/languages";
+import { useTranslations } from "@/store/languages";
 
 import {
 	getCoupons,
 	getCouponsByShopIdFromShop,
 	getCouponsByShopIdFromOthers,
-} from "../../../api/coupon";
-import { getRedemptionsByUserId } from "../../../api/redemptions";
+} from "@/api/coupon";
+import { getRedemptionsByUserId } from "@/api/redemptions";
 import { useUserStore } from "@/store/user";
 
 const CouponCatalogueBoard = ({
