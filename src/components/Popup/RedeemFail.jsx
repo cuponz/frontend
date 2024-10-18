@@ -1,7 +1,7 @@
 import { FaExclamation } from "react-icons/fa";
 import { useTranslations } from "@/store/languages";
 
-const PopupFail = ({ errorType, startDate }) => {
+const PopupRedeemFail = ({ errorType, startDate }) => {
 	const { t } = useTranslations();
 	const getErrorMessage = () => {
 		switch (errorType) {
@@ -41,4 +41,4 @@ const PopupFail = ({ errorType, startDate }) => {
 	);
 };
 
-export default PopupFail;
+export default PopupRedeemFail;

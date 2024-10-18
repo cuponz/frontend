@@ -1,5 +1,5 @@
-import PopupSuccess from "@/components/Popup/RedeemSuccess";
-import PopupFail from "@/components/Popup/RedeemFail";
+import PopupRedeemSuccess from "@/components/Popup/RedeemSuccess";
+import PopupRedeemFail from "@/components/Popup/RedeemFail";
 import { useParams } from "react-router-dom";
 import { getRedemptionsById } from "../api/redemptions";
 import { useQuery } from "@tanstack/react-query";
@@ -37,14 +37,15 @@ function ResultNoti() {
 		error = "already-redeemed";
 	}
 
+	console.log(error);
 	console.log(data);
 
 	return (
 		<div>
 			<div className="pt-16 sm:px-6 ">
 				{/* <PopupFail errorType="expired" couponId={1} /> */}
-				{error && <PopupFail errorType={error} startDate={startDate} />}
-				{!error && <PopupSuccess redeem={data} />}
+				{error && <PopupRedeemFail errorType={error} startDate={startDate} />}
+				{!error && <PopupRedeemSuccess redeem={data} />}
 			</div>
 		</div>
 	);

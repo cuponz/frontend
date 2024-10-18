@@ -4,7 +4,7 @@ import LoadingSpinner from "../Utils/LoadingSpinner";
 import { FaCheck } from "react-icons/fa";
 import { useTranslations } from "@/store/languages";
 
-const PopupSuccess = ({ redeem }) => {
+const PopupRedeemSuccess = ({ redeem }) => {
 	const { t } = useTranslations();
 	const { isPending, data } = useQuery({
 		queryKey: ["redemptions", "using", redeem.redemption_id],
@@ -50,4 +50,4 @@ const PopupSuccess = ({ redeem }) => {
 	);
 };
 
-export default PopupSuccess;
+export default PopupRedeemSuccess;

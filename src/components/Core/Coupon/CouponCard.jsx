@@ -10,6 +10,8 @@ import InfoField from "./InfoField";
 import { useUserStore } from "@/store/user";
 import { UserType } from "@/constants";
 
+import Button from "@/components/Utils/Button";
+
 const CouponCardActionButton = ({
 	type,
 	onAction,
@@ -33,17 +35,14 @@ const CouponCardActionButton = ({
 
 	return (
 		<div className="mt-auto">
-			<button
+			<Button
 				onClick={onAction}
 				disabled={isUsed || isRedeemed}
-				className={`px-4 py-2 rounded-md w-full text-white ${
-					isUsed || isRedeemed
-						? "bg-gray-400 cursor-not-allowed"
-						: "bg-[#46467A] hover:bg-green-700"
-				}`}
+				className="w-full"
+				colour={isUsed || isRedeemed ? "gray-400" : "blue-500"}
 			>
 				{text}
-			</button>
+			</Button>
 		</div>
 	);
 };
@@ -87,7 +86,7 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 				onShowStats(coupon.id);
 				break;
 			case CouponCatalogueType.User:
-				if (coupon.state !== RedemptionState.Used) {
+				if (coupon.redemption_state !== RedemptionState.Used) {
 					setModalType(CouponCardModalType.PopUp);
 				}
 				break;
