@@ -1,16 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import OTPInput from "./OTPInput";
-import Popup from "./Popup";
 import { useTranslations } from "@/store/languages";
 
 import Button from "@/components/Utils/Button";
 import { useMutation } from "@tanstack/react-query";
 import { validateOtp, sendOtp } from "@/api/otp";
+import { toast } from "sonner";
 
 const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const { t } = useTranslations();
 	const [error, setError] = useState("");
-	const [popup, setPopup] = useState(null);
 	const modalRef = useRef();
 	const [otpValue, setOtpValue] = useState("");
 	const [resendCooldown, setResendCooldown] = useState(60);
@@ -31,14 +30,11 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const resendOtpMutation = useMutation({
 		mutationFn: sendOtp,
 		onSuccess: () => {
-			setPopup({ message: "OTP resent successfully.", type: "success" });
+			toast.success("OTP resent successfully")
 			setResendCooldown(60);
 		},
 		onError: (error) => {
-			setPopup({
-				message: "Failed to resend OTP. Please try again.",
-				type: "error",
-			});
+			toast.error("Failed to send OTP. Please try again.")
 		},
 	});
 
@@ -139,13 +135,6 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 					</Button>
 				</div>
 			</div>
-			{popup && (
-				<Popup
-					message={popup.message}
-					type={popup.type}
-					onClose={() => setPopup(null)}
-				/>
-			)}
 		</div>
 	);
 };

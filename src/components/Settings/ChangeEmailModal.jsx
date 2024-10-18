@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Validators } from "../../constants";
 import OTPModal from "../OTP/OTPModal";
-import Popup from "../OTP/Popup";
 import { useTranslations } from "../../store/languages";
 import { sendOtp } from "@/api/otp";
 import { useMutation } from "@tanstack/react-query";
 import Button from "@/components/Utils/Button";
+import { toast } from "sonner";
 
 const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 	const { t } = useTranslations();
@@ -13,21 +13,17 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 	const [error, setError] = useState("");
 	const [isVerified, setIsVerified] = useState(false);
 	const [showOTPModal, setShowOTPModal] = useState(false);
-	const [popup, setPopup] = useState(null);
 	const modalRef = useRef();
 	const [verifyCooldown, setVerifyCooldown] = useState(0);
 
 	const sendOtpMutation = useMutation({
 		mutationFn: sendOtp,
 		onSuccess: () => {
-			setPopup({ message: "OTP sent successfully.", type: "success" });
+			toast.success("OTP sent successfully.");
 			setVerifyCooldown(300);
 		},
 		onError: (error) => {
-			setPopup({
-				message: "Failed to send OTP. Please try again.",
-				type: "error",
-			});
+			toast.error("Failed to send OTP. Please try again.");
 		},
 	});
 
@@ -83,7 +79,7 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 			setIsVerified(true);
 			setError("");
 			setShowOTPModal(false);
-			setPopup({ message: "Email verified successfully!", type: "success" });
+			toast.success("Email verified successfully!");
 		}
 	};
 
@@ -102,7 +98,7 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 		}
 
 		onSubmit(newEmail);
-		setPopup({ message: "Email changed successfully!", type: "success" });
+		toast.success("Email changed successfully!");
 		onClose();
 	};
 
@@ -185,13 +181,6 @@ const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 					email={newEmail}
 					onChangeEmail={handleChangeEmail}
 					initialCooldown={verifyCooldown}
-				/>
-			)}
-			{popup && (
-				<Popup
-					message={popup.message}
-					type={popup.type}
-					onClose={() => setPopup(null)}
 				/>
 			)}
 		</div>
