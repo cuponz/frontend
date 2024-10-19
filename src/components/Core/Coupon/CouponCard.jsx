@@ -18,11 +18,16 @@ const CouponCardActionButton = ({
 	isRedeemed = false,
 	isUsed = false,
 }) => {
+	const user = useUserStore((state) => state.user);
+
 	let text;
 
 	switch (type) {
 		case CouponCatalogueType.All:
 		case CouponCatalogueType.ShopList:
+			if (user && user.type !== UserType.User) {
+				return null;
+			}
 			text = isRedeemed ? "Redeemed" : "Redeem Now";
 			break;
 		case CouponCatalogueType.ShopManage:
@@ -141,13 +146,11 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 				)}
 			</div>
 
-			{(!user || user.type === UserType.User) && (
-				<CouponCardActionButton
-					type={type}
-					onAction={handleAction}
-					isUsed={redemptionState === RedemptionState.Used}
-				/>
-			)}
+			<CouponCardActionButton
+				type={type}
+				onAction={handleAction}
+				isUsed={redemptionState === RedemptionState.Used}
+			/>
 
 			{modalType === CouponCardModalType.InfoField && (
 				<InfoField

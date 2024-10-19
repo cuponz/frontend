@@ -28,8 +28,6 @@ const CouponCatalogueBoard = ({
 	setShowUserTable,
 	setSelectedCouponId,
 }) => {
-	const user = useUserStore((state) => state.user);
-
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get("id")
 
