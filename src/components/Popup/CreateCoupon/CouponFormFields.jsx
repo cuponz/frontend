@@ -18,7 +18,7 @@ const CouponFormInput = ({
 			name={name}
 			value={formData[name]}
 			onChange={handleChange}
-			className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+			className="w-full border border-gray-300 rounded-md shadow-sm p-3"
 			required={required}
 			{...props}
 		/>
