@@ -106,7 +106,7 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 				<p className="mb-2">{t(["changeEmailModal", "OTP", "quote"])}</p>
 				<p className="mb-4 font-semibold">{email}</p>
 				<OTPInput
-					length={8} //change length of input
+					length={9} //change length of input
 					onComplete={handleOTPComplete}
 					value={otpValue}
 					onChange={setOtpValue}
