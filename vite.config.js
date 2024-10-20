@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-// import { purgeCss as tailwindPurgeCss } from "vite-plugin-tailwind-purgecss";
+import { purgeCss as tailwindPurgeCss } from "vite-plugin-tailwind-purgecss";
 import compression from "vite-plugin-compression";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 // import ViteWebp from "vite-plugin-webp-generator";
@@ -11,7 +11,7 @@ export default defineConfig((configEnv) => {
 	return {
 		plugins: [
 			react(),
-			// tailwindPurgeCss(),
+			tailwindPurgeCss(),
 			// ViteWebp.default({
 			// 	extensions: ["png", "jpg"],
 			// }),
