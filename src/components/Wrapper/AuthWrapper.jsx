@@ -40,18 +40,13 @@ const AuthWrapper = ({ isProtected }) => {
 			if (error?.message) {
 				toast.error(error?.message);
 			}
+			console.log(error)
 			deleteUserCache();
 			if (isProtected) {
 				navigate("/login");
 			}
 		}
 	}, [data, error, isError, isProtected]);
-
-	useEffect(() => {
-		if (isProtected && !user) {
-			navigate("/login");
-		}
-	}, [user]);
 
 	if (isPending) {
 		return (
