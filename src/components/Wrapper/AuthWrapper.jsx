@@ -37,7 +37,9 @@ const AuthWrapper = ({ isProtected }) => {
 			setUser(data.user);
 		}
 		if (isError) {
-			toast.error(error?.message || "Authentication error");
+			if (error?.message) {
+				toast.error(error?.message);
+			}
 			deleteUserCache();
 			if (isProtected) {
 				navigate("/login");
@@ -71,7 +73,7 @@ const AuthWrapper = ({ isProtected }) => {
 				</div>
 			}
 		>
-			<Layout isProtected={isProtected} >
+			<Layout isProtected={isProtected}>
 				<Outlet />
 			</Layout>
 		</Suspense>
