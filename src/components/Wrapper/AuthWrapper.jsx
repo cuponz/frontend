@@ -10,7 +10,11 @@ const Layout = lazy(() => import("@/layout/Layout"));
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
 const AuthWrapper = ({ isProtected }) => {
-	const [user, setUser, deleteUserCache] = useUserStore((state) => [state.user, state.setUser, state.deleteUserCache]);
+	const [user, setUser, deleteUserCache] = useUserStore((state) => [
+		state.user,
+		state.setUser,
+		state.deleteUserCache,
+	]);
 	const navigate = useNavigate();
 
 	const { isPending, isError, isFetched, data, error } = useQuery({
@@ -25,7 +29,7 @@ const AuthWrapper = ({ isProtected }) => {
 			deleteUserCache();
 			navigate("/login");
 		}
-	}, [isProtected, isFetched, data, navigate, setUser]);
+	}, [isProtected, isFetched, data]);
 
 	useEffect(() => {
 		if (data) {
@@ -33,13 +37,16 @@ const AuthWrapper = ({ isProtected }) => {
 			setUser(data.user);
 		}
 		if (isError) {
-			toast.error(error?.message || "Authentication error");
+			if (error?.message) {
+				toast.error(error?.message);
+			}
+			console.log(error)
 			deleteUserCache();
 			if (isProtected) {
 				navigate("/login");
 			}
 		}
-	}, [data, error, isError, isProtected, navigate, setUser]);
+	}, [data, error, isError, isProtected]);
 
 	if (isPending) {
 		return (
@@ -61,7 +68,7 @@ const AuthWrapper = ({ isProtected }) => {
 				</div>
 			}
 		>
-			<Layout>
+			<Layout isProtected={isProtected}>
 				<Outlet />
 			</Layout>
 		</Suspense>

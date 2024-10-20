@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 
-// import PopupCreateCoupon from "@/components/PopupCreateCoupon";
 import PopupCreateCoupon from "@/components/Popup/CreateCoupon";
 import PopupThankYou from "@/components/Popup/ThankYou";
+import PopupDeleteConfirm from "@/components/Popup/DeleteConfirm";
+
 import { getCouponsByShopIdFromShop } from "@/api/coupon";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
@@ -23,7 +24,8 @@ const ShopCouponTable = () => {
 
 	const [isCreateCouponOpen, setIsCreateCouponOpen] = useState(false);
 	const [isEditCouponOpen, setIsEditCouponOpen] = useState(false);
-	const [editId, setEditId] = useState(false);
+	const [isDeleteCouponOpen, setIsDeleteCouponOpen] = useState(false);
+	const [selectedCouponId, setSelectedCouponId] = useState(false);
 	const [isShowThankYou, setIsShowThankYou] = useState(false);
 
 	const handleCloseCreateCoupon = () => {
@@ -39,6 +41,10 @@ const ShopCouponTable = () => {
 		setIsEditCouponOpen(false);
 	};
 
+	const handleCloseDeleteCoupon = () => {
+		setIsDeleteCouponOpen(false);
+	};
+
 	const {
 		isLoading,
 		error,
@@ -49,8 +55,17 @@ const ShopCouponTable = () => {
 		retry: false,
 	});
 
+	// use for delete and edit
+	const selectedCoupon = useMemo(
+		() => coupons.find((coupon) => coupon.id === selectedCouponId),
+		[selectedCouponId],
+	);
+
 	const [createMutation, editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou);
+		useShopCouponTableMutations(
+			handleCloseCreateCoupon,
+			handleCloseEditCoupon,
+		);
 
 	const handleSubmitCreateCoupon = (couponData) => {
 		const formData = new FormData();
@@ -58,8 +73,6 @@ const ShopCouponTable = () => {
 		for (const key in couponData) {
 			formData.append(key, couponData[key]);
 		}
-
-		console.log(formData);
 
 		createMutation.mutate(formData);
 	};
@@ -79,14 +92,22 @@ const ShopCouponTable = () => {
 			}
 		}
 
-		console.log(formData);
+		editMutation.mutate({ couponId: selectedCouponId, couponData: formData });
+	};
 
-		editMutation.mutate({ couponId: editId, couponData: formData });
+	const handleConfirmDeleteCoupon = () => {
+		updateLoadingState(selectedCouponId, "isDeleting", true);
+		setIsDeleteCouponOpen(false);
+		deleteMutation.mutate(selectedCouponId, {
+			onSettled: () => {
+				updateLoadingState(selectedCouponId, "isDeleting", false);
+			},
+		});
 	};
 
 	// Action handlers
 	const handleEdit = (couponId) => {
-		setEditId(couponId);
+		setSelectedCouponId(couponId);
 		setIsEditCouponOpen(true);
 	};
 
@@ -104,12 +125,8 @@ const ShopCouponTable = () => {
 	};
 
 	const handleDelete = (couponId) => {
-		if (window.confirm("Are you sure you want to delete this coupon?")) {
-			updateLoadingState(couponId, "isEditing", true);
-			deleteMutation.mutate(couponId, {
-				onSettled: () => updateLoadingState(couponId, "isEditing", false),
-			});
-		}
+		setSelectedCouponId(couponId);
+		setIsDeleteCouponOpen(true);
 	};
 
 	const [mutationLoadingStates, setMutationLoadingStates] = useState({});
@@ -187,11 +204,20 @@ const ShopCouponTable = () => {
 					isOpen={isEditCouponOpen}
 					onClose={handleCloseEditCoupon}
 					onSubmit={handleSubmitEditCoupon}
-					isCreating={createMutation.isPending}
-					createError={createMutation.error}
-					couponImage={coupons[editId].logo_url}
-					couponData={coupons[editId]}
+					isCreating={editMutation.isPending}
+					createError={editMutation.error}
+					couponData={selectedCoupon}
 					required={false}
+				/>
+			)}
+
+			{isDeleteCouponOpen && (
+				<PopupDeleteConfirm
+					isOpen={isDeleteCouponOpen}
+					onClose={handleCloseDeleteCoupon}
+					onConfirm={handleConfirmDeleteCoupon}
+					isDeleting={deleteMutation.isPending}
+					couponData={selectedCoupon}
 				/>
 			)}
 

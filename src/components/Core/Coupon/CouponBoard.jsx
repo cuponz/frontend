@@ -19,8 +19,8 @@ const CouponBoard = ({
 	const fuse = useMemo(
 		() =>
 			new Fuse(coupons, {
-				keys: ["title", "desc", "keywords", "shop_name"],
-				threshold: 0.3,
+				keys: ["title", "desc", "keywords", "shop_name", "shop"],
+				threshold: 0.4,
 			}),
 		[coupons],
 	);

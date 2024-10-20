@@ -21,15 +21,12 @@ import {
 	getCouponsByShopIdFromOthers,
 } from "@/api/coupon";
 import { getRedemptionsByUserId } from "@/api/redemptions";
-import { useUserStore } from "@/store/user";
 
 const CouponCatalogueBoard = ({
 	type,
 	setShowUserTable,
 	setSelectedCouponId,
 }) => {
-	const user = useUserStore((state) => state.user);
-
 	const [searchParams] = useSearchParams();
 	const id = searchParams.get("id");
 

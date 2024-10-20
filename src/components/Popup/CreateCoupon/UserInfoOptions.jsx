@@ -9,7 +9,8 @@ const userInfoOptions = {
 	EmailAndPhoneNumber: "Email and Phone Number",
 };
 
-const UserInfoOptions = ({ formData, handleChange }) => {
+const UserInfoOptions = ({ formData, handleChange, tier }) => {
+	console.log(tier)
 	const { t } = useTranslations();
 	return (
 		<div className="mb-4">
@@ -17,19 +18,21 @@ const UserInfoOptions = ({ formData, handleChange }) => {
 				{t(["UserInfoOptions", "content"])}
 			</label>
 			<div className="mt-2 space-x-4">
-				{Object.entries(userInfoOptions).map(([key, value]) => (
-					<label key={key} className="inline-flex items-center">
-						<input
-							type="radio"
-							name="type"
-							value={CouponRequirementType[key]}
-							checked={Number(formData.type) === CouponRequirementType[key]}
-							onChange={handleChange}
-							className="form-radio"
-						/>
-						<span className="ml-2">{value}</span>
-					</label>
-				))}
+				{Object.entries(userInfoOptions)
+					.filter(([key]) => CouponRequirementType[key] <= tier)
+					.map(([key, value]) => (
+						<label key={key} className="inline-flex items-center">
+							<input
+								type="radio"
+								name="type"
+								value={CouponRequirementType[key]}
+								checked={Number(formData.type) === CouponRequirementType[key]}
+								onChange={handleChange}
+								className="form-radio"
+							/>
+							<span className="ml-2">{value}</span>
+						</label>
+					))}
 			</div>
 		</div>
 	);

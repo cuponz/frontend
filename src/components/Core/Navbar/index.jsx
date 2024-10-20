@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo";
 import CategoriesMenu from "./CategoriesMenu";
 import ShoppingCartIcon from "./ShoppingCartIcon";
@@ -21,7 +21,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import { getRoutes } from "./menuItems";
 import Button from "@/components/Utils/Button";
 
-const Navbar = () => {
+const Navbar = ({ isProtected }) => {
 	const { t, language } = useTranslations();
 	const [user, logout] = useUserStore((state) => [state.user, state.logout]);
 	const [categories, setCategories] = useCategoryStore((state) => [
@@ -31,6 +31,8 @@ const Navbar = () => {
 	const categoriesButtonRef = useRef(null);
 	const categoriesButtonMobileRef = useRef(null);
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+	const navigate = useNavigate();
 
 	const [
 		menuState,
@@ -94,6 +96,9 @@ const Navbar = () => {
 	const handleLoginLogout = () => {
 		if (user) {
 			logout();
+			if (isProtected) {
+				navigate("/");
+			}
 		}
 		closeAllMenus();
 	};
