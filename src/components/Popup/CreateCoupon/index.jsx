@@ -9,6 +9,7 @@ import CouponFormFields from "./CouponFormFields";
 import ImageUpload from "./ImageUpload";
 import Button from "@/components/Utils/Button";
 import { useTranslations } from "@/store/languages";
+import { useUserStore } from "../../../store/user";
 
 const PopupCreateCoupon = ({
 	isOpen,
@@ -34,6 +35,8 @@ const PopupCreateCoupon = ({
 	const categories = useCategoryStore((state) => state.categories);
 	const popupRef = useRef(null);
 	const headerRef = useRef(null);
+
+	const user = useUserStore((state) => state.user);
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
@@ -120,7 +123,9 @@ const PopupCreateCoupon = ({
 					ref={headerRef}
 					className="sticky top-0 bg-gray-50 z-10 px-6 py-4 border-b border-gray-200 flex justify-between items-center"
 				>
-					<h2 className="text-2xl font-bold text-gray-800">{required ? "Create Coupon" : `Editing Coupon ${couponData?.id}`}</h2>
+					<h2 className="text-2xl font-bold text-gray-800">
+						{required ? "Create Coupon" : `Editing Coupon ${couponData?.id}`}
+					</h2>
 					<button
 						onClick={onClose}
 						className="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full p-1"
@@ -175,6 +180,7 @@ const PopupCreateCoupon = ({
 							<UserInfoOptions
 								formData={formData}
 								handleChange={handleChange}
+								tier={user.tier}
 								required={required}
 							/>
 						</div>

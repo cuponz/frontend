@@ -1,4 +1,4 @@
-import { apiRequest } from "./base";
+import { apiRequest, apiRequestAuto } from "./base";
 
 export async function userAuth() {
 	return apiRequest(`/api/user/auth`, {
@@ -29,8 +29,16 @@ export async function userRegister(registerData) {
 
 export async function searchShops(searchTerm) {
 	return apiRequest(`/api/user/shop?searchTerm=${searchTerm}`, {
-		method: "GET",
+		method: "POST",
+		body: JSON.stringify({ searchTerm }),
 		errorMessage: "Search Shop Failed",
+	});
+}
+
+export async function getAllShops() {
+	return apiRequest(`/api/user/shop`, {
+		method: "GET",
+		errorMessage: "Get Shops Failed",
 	});
 }
 
@@ -39,5 +47,12 @@ export async function updateUser({ userId, userData }) {
 		method: "PUT",
 		body: JSON.stringify(userData),
 		errorMessage: "Update User Failed",
+	});
+}
+
+export async function deleteUser(userId) {
+	return apiRequestAuto(`/api/user/${userId}`, {
+		method: "DELETE",
+		errorMessage: "Deleting User Failed",
 	});
 }

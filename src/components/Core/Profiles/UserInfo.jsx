@@ -1,7 +1,7 @@
-import { UserType } from "../../../constants";
-import { useUserStore } from "../../../store/user";
+import { UserType } from "@/constants";
+import { useUserStore } from "@/store/user";
 
-import LoadingSpinner from "../../Utils/LoadingSpinner";
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import { CiUser } from "react-icons/ci";
 
 const UserInfo = () => {
@@ -30,7 +30,7 @@ const UserInfo = () => {
 				</div>
 				<div className="ml-6">
 					<h2 className="sm:text-2xl font-medium text-gray-900 text-lg">
-						{user.name} ({Object.keys(UserType)[user.type]})
+						{user.name} ({Object.keys(UserType)[user.type]}) {user.type === UserType.Shop && ` - Tier ${user.tier}`}
 					</h2>
 					<p className="sm:text-xl text-gray-500 text-sm">{getContactInfo()}</p>
 				</div>

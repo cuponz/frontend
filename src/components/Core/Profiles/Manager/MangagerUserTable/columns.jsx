@@ -1,48 +1,50 @@
 import { Fragment } from "react";
-import { format } from "date-fns";
 import Button from "@/components/Utils/Button";
-import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create this helper function
+import getStateToggleButtonProps from "./getStateToggleButtonProps";
 
-import StatusBadge from "@/components/Core/Profiles/StatusBadge";
+import ShopBadge from "@/components/Core/Profiles/ShopBadge";
 
-const columns = (handleToogleApproval, handleDelete, mutationLoadingStates) => [
+const columns = (
+	handleToogleApproval,
+	handleDelete,
+	handleChangeTier,
+	mutationLoadingStates,
+) => [
 	{
 		header: "ID",
 		accessor: "id",
 		sortType: "number",
 	},
 	{
-		header: "Code",
-		accessor: "code",
-	},
-	{
 		header: "Name",
 		accessor: "name",
 	},
 	{
-		header: "Category",
-		accessor: "category",
+		header: "Email",
+		accessor: "email",
 	},
 	{
-		header: "Start Date",
-		accessor: "start_date",
-		cell: (value) => format(new Date(value), "dd/MM/yyyy"),
-	},
-	{
-		header: "End Date",
-		accessor: "end_date",
-		cell: (value) => format(new Date(value), "dd/MM/yyyy"),
-	},
-	{
-		header: "Usage",
-		accessor: "usage_count",
-		cell: (value, row) => `${value}/${row.max_usage || "∞"}`,
+		header: "Tier",
+		accessor: "tier",
+		cell: (_, row) => {
+			const isChangingTier = mutationLoadingStates[row.id]?.isChangingTier;
+			return (
+				<input
+					type="number"
+					min="0"
+					max="3"
+					value={row.tier || 0}
+					onChange={(e) => handleChangeTier(row.id, e.target.value)}
+					className={`w-16 p-1 border rounded ${isChangingTier ? "opacity-50" : ""}`}
+				/>
+			);
+		},
 	},
 	{
 		header: "Status",
 		cell: (_, row) => (
 			<Fragment key={`${row.id}-status-badge`}>
-				<StatusBadge active={row.active} state={row.state} />
+				<ShopBadge approved={row.approved} />
 			</Fragment>
 		),
 	},
@@ -50,9 +52,9 @@ const columns = (handleToogleApproval, handleDelete, mutationLoadingStates) => [
 		header: "Actions",
 		accessor: "actions",
 		cell: (_, row) => {
-			const toggleButtonProps = getStateToggleButtonProps(row.state);
+			const toggleButtonProps = getStateToggleButtonProps(row.approved);
 
-			const isApproving = mutationLoadingStates[row.id]?.isEditing;
+			const isApproving = mutationLoadingStates[row.id]?.isApproving;
 			const isDeleting = mutationLoadingStates[row.id]?.isDeleting;
 
 			return (
