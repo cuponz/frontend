@@ -8,9 +8,8 @@ import {
 import { toast } from "sonner";
 
 const useShopCouponTableMutations = (
-	setIsCreateCouponOpen,
-	setIsShowThankYou,
 	onCloseCreateCoupon,
+	onCloseEditCoupon,
 ) => {
 	const QUERY_KEY = ["get", "coupons", "shop"];
 	const queryClient = useQueryClient();
@@ -20,6 +19,7 @@ const useShopCouponTableMutations = (
 		onSuccess: () => {
 			toast.success("Coupon create successfully");
 			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+
 			onCloseCreateCoupon();
 		},
 		onError: () => {
@@ -33,6 +33,8 @@ const useShopCouponTableMutations = (
 		onSuccess: () => {
 			toast.success("Coupon edited successfully");
 			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+
+			onCloseEditCoupon();
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to update coupon");

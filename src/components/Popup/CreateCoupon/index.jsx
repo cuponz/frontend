@@ -51,7 +51,7 @@ const PopupCreateCoupon = ({
 			document.removeEventListener("mousedown", handleClickOutside);
 			document.body.style.overflow = "auto";
 		};
-	}, [isOpen, onClose]);
+	}, [isOpen]);
 
 	useEffect(() => {
 		const handleScroll = () => {
