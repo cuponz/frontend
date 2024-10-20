@@ -102,14 +102,7 @@ const PopupCreateCoupon = ({
 			return;
 		}
 
-		try {
-			await onSubmit(formData);
-			toast.success("Coupon created successfully!");
-			onClose(); // Auto close the form on success
-		} catch (error) {
-			console.error("Error creating coupon:", error);
-			toast.error("Failed to create coupon. Please try again.");
-		}
+		await onSubmit(formData);
 	};
 
 	if (!isOpen) {
@@ -195,7 +188,7 @@ const PopupCreateCoupon = ({
 						isLoading={isCreating}
 						onClick={handleSubmit}
 					>
-						{isCreating ? "Creating..." : "Create Coupon"}
+						{required ? "Create Coupon" : "Edit Coupon"}
 					</Button>
 				</div>
 			</div>

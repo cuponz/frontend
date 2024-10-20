@@ -10,6 +10,7 @@ import { toast } from "sonner";
 const useShopCouponTableMutations = (
 	setIsCreateCouponOpen,
 	setIsShowThankYou,
+	onCloseCreateCoupon,
 ) => {
 	const QUERY_KEY = ["get", "coupons", "shop"];
 	const queryClient = useQueryClient();
@@ -17,9 +18,12 @@ const useShopCouponTableMutations = (
 	const createMutation = useMutation({
 		mutationFn: creatingCoupon,
 		onSuccess: () => {
+			toast.success("Coupon create successfully");
 			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+			onCloseCreateCoupon();
 		},
 		onError: () => {
+			toast.error(error.message || "Failed to create coupon");
 			console.log(error);
 		},
 	});

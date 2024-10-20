@@ -50,7 +50,7 @@ const ShopCouponTable = () => {
 	});
 
 	const [createMutation, editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou);
+		useShopCouponTableMutations(setIsCreateCouponOpen, setIsShowThankYou, handleCloseCreateCoupon);
 
 	const handleSubmitCreateCoupon = (couponData) => {
 		const formData = new FormData();
@@ -187,10 +187,10 @@ const ShopCouponTable = () => {
 					isOpen={isEditCouponOpen}
 					onClose={handleCloseEditCoupon}
 					onSubmit={handleSubmitEditCoupon}
-					isCreating={createMutation.isPending}
-					createError={createMutation.error}
-					couponImage={coupons[editId].logo_url}
-					couponData={coupons[editId]}
+					isCreating={editMutation.isPending}
+					createError={editMutation.error}
+					couponImage={coupons.find((coupon) => coupon.id === editId).logo_url}
+					couponData={coupons.find((coupon) => coupon.id === editId)}
 					required={false}
 				/>
 			)}
