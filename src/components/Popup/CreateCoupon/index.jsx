@@ -16,6 +16,7 @@ const PopupCreateCoupon = ({
 	onSubmit,
 	isCreating,
 	required = true,
+	couponData = undefined,
 }) => {
 	const { t } = useTranslations();
 	const [formData, setFormData] = useState({
@@ -119,7 +120,7 @@ const PopupCreateCoupon = ({
 					ref={headerRef}
 					className="sticky top-0 bg-gray-50 z-10 px-6 py-4 border-b border-gray-200 flex justify-between items-center"
 				>
-					<h2 className="text-2xl font-bold text-gray-800">Create Coupon</h2>
+					<h2 className="text-2xl font-bold text-gray-800">{required ? "Create Coupon" : `Editing Coupon ${couponData?.id}`}</h2>
 					<button
 						onClick={onClose}
 						className="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full p-1"

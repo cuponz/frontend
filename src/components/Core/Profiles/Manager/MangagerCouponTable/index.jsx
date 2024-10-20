@@ -5,13 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
 import { CouponState } from "@/constants";
 
-import Button from "@/components/Utils/Button";
 import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
 
 import useManagerCouponTableMutations from "./useManagerCouponTableMutations";
 
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
+import PopupDeleteConfirm from "@/components/Popup/DeleteConfirm";
 
 const ManagerCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
@@ -19,6 +19,9 @@ const ManagerCouponTable = () => {
 		() => (categoryObjects || []).map((category) => category.name),
 		[categoryObjects],
 	);
+
+	const [isDeleteCouponOpen, setIsDeleteCouponOpen] = useState(false);
+	const [selectedCouponId, setSelectedCouponId] = useState(false);
 
 	const {
 		isLoading,
@@ -29,6 +32,11 @@ const ManagerCouponTable = () => {
 		queryFn: getCoupons,
 		retry: false,
 	});
+
+	const selectedCoupon = useMemo(
+		() => coupons.find((coupon) => coupon.id === selectedCouponId),
+		[selectedCouponId],
+	);
 
 	const [toggleApprovalMutation, deleteMutation] =
 		useManagerCouponTableMutations();
@@ -51,12 +59,22 @@ const ManagerCouponTable = () => {
 	};
 
 	const handleDelete = (couponId) => {
-		if (window.confirm("Are you sure you want to delete this coupon?")) {
-			updateLoadingState(couponId, "isEditing", true);
-			deleteMutation.mutate(couponId, {
-				onSettled: () => updateLoadingState(couponId, "isEditing", false),
-			});
-		}
+		setSelectedCouponId(couponId);
+		setIsDeleteCouponOpen(true);
+	};
+
+	const handleConfirmDeleteCoupon = () => {
+		updateLoadingState(selectedCouponId, "isDeleting", true);
+		setIsDeleteCouponOpen(false);
+		deleteMutation.mutate(selectedCouponId, {
+			onSettled: () => {
+				updateLoadingState(selectedCouponId, "isDeleting", false);
+			},
+		});
+	};
+
+	const handleCloseDeleteCoupon = () => {
+		setIsDeleteCouponOpen(false);
 	};
 
 	const [mutationLoadingStates, setMutationLoadingStates] = useState({});
@@ -100,13 +118,6 @@ const ManagerCouponTable = () => {
 
 	return (
 		<div className="p-4">
-			<div className="flex justify-between items-center mb-4">
-				<h1 className="text-2xl font-bold">Shop Coupons</h1>
-				<Button onClick={() => setIsCreateCouponOpen(true)} colour="yellow-500">
-					Create Coupon
-				</Button>
-			</div>
-
 			<DataTable
 				columns={columns(
 					handleToggleApproval,
@@ -117,6 +128,16 @@ const ManagerCouponTable = () => {
 				filename="manager_coupons.csv"
 				additionalFilters={additionalFilters}
 			/>
+
+			{isDeleteCouponOpen && (
+				<PopupDeleteConfirm
+					isOpen={isDeleteCouponOpen}
+					onClose={handleCloseDeleteCoupon}
+					onConfirm={handleConfirmDeleteCoupon}
+					isDeleting={deleteMutation.isPending}
+					couponData={selectedCoupon}
+				/>
+			)}
 		</div>
 	);
 };
