@@ -36,6 +36,8 @@ const ShopContent = ({ activeTab }) => {
 
 const ManagerContent = ({ activeTab }) => {
 	switch (activeTab) {
+		case ProfileTab.Coupons:
+			return <UserCoupon type={CouponCatalogueType.ManagerManage} />;
 		case ProfileTab.CouponManagement:
 			return <ManagerCouponTable />;
 		case ProfileTab.UserManagement:
@@ -68,6 +70,7 @@ const UserProfileMiniNav = () => {
 			: user.type === UserType.User
 				? [{ id: ProfileTab.Settings, label: t(["miniNav", "coupon"]) }]
 				: [
+						{ id: ProfileTab.Coupons, label: t(["miniNav", "coupon"]) },
 						{
 							id: ProfileTab.CouponManagement,
 							label: t(["miniNav", "couponManagement"]),

@@ -31,6 +31,7 @@ const CouponCardActionButton = ({
 			text = isRedeemed ? "Redeemed" : "Redeem Now";
 			break;
 		case CouponCatalogueType.ShopManage:
+		case CouponCatalogueType.ManagerManage:
 			text = "Show Details";
 			break;
 		case CouponCatalogueType.User:
@@ -88,6 +89,7 @@ const CouponCard = ({ coupon, type, onShowStats }) => {
 				setModalType(CouponCardModalType.InfoField);
 				break;
 			case CouponCatalogueType.ShopManage:
+			case CouponCatalogueType.ManagerManage:
 				onShowStats(coupon.id);
 				break;
 			case CouponCatalogueType.User:
