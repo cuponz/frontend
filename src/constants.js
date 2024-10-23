@@ -24,8 +24,9 @@ const ProfileTab = Object.freeze({
 const CouponCatalogueType = Object.freeze({
 	All: 0,
 	ShopManage: 1,
-	ShopList: 2,
-	User: 3,
+	ManagerManage: 2,
+	ShopList: 3,
+	User: 4,
 });
 
 const RedemptionState = Object.freeze({

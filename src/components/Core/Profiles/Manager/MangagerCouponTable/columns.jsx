@@ -58,7 +58,7 @@ const columns = (handleToogleApproval, handleDelete, mutationLoadingStates) => [
 			return (
 				<div className="flex justify-center space-x-2">
 					<Button
-						onClick={() => handleToogleApproval(row.id, row.approved)}
+						onClick={() => handleToogleApproval(row.id, row.state)}
 						colour={toggleButtonProps.colour}
 						disabled={isApproving}
 						isLoading={isApproving}

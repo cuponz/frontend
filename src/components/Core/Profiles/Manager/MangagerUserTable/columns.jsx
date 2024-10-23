@@ -59,6 +59,15 @@ const columns = (
 
 			return (
 				<div className="flex justify-center space-x-2">
+					{/* <Button
+						onClick={() => handleToogleApproval(row.id, row.approved)}
+						colour={toggleButtonProps.colour}
+						disabled={isApproving}
+						isLoading={isApproving}
+						className="w-24"
+					>
+						{toggleButtonProps.text} Viewing
+					</Button> */}
 					<Button
 						onClick={() => handleToogleApproval(row.id, row.approved)}
 						colour={toggleButtonProps.colour}
@@ -66,7 +75,7 @@ const columns = (
 						isLoading={isApproving}
 						className="w-24"
 					>
-						{toggleButtonProps.text}
+						{toggleButtonProps.text} Account
 					</Button>
 					<Button
 						onClick={() => handleDelete(row.id)}

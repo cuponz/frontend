@@ -42,6 +42,10 @@ const CouponCatalogueBoard = ({
 				queryKey = ["get", "coupons", "shop"];
 				queryFn = getCouponsByShopIdFromShop;
 				break;
+			case CouponCatalogueType.ManagerManage:
+				queryKey = ["get", "coupons", "manage"];
+				queryFn = getCoupons;
+				break;
 			case CouponCatalogueType.ShopList:
 				queryKey = ["get", "coupons", "shop", id];
 				queryFn = () => getCouponsByShopIdFromOthers(id);
