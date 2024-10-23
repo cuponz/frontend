@@ -40,7 +40,6 @@ const ManagerUserTable = () => {
 
 	// Action handlers
 	const handleToggleApproval = async (userId, currentState) => {
-		console.log(currentState)
 		const newState = !currentState;
 
 		updateLoadingState(userId, "isApproving", true);
