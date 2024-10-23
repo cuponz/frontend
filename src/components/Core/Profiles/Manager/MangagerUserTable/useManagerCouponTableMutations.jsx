@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUser, deleteUser } from "@/api/user";
 import { toast } from "sonner";
 
-const useManagerpUserTableMutations = (refetch) => {
+const useManagerpUserTableMutations = (updateLoadingState) => {
 	const QUERY_KEY = ["get", "all", "shops"];
 	const queryClient = useQueryClient();
 

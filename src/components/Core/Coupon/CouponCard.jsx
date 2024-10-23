@@ -31,6 +31,11 @@ const CouponCardActionButton = ({
 			text = isRedeemed ? "Redeemed" : "Redeem Now";
 			break;
 		case CouponCatalogueType.ShopManage:
+			if (!user.viewing_perm) {
+				onAction = undefined;
+				text = "";
+				break;
+			}
 		case CouponCatalogueType.ManagerManage:
 			text = "Show Details";
 			break;
@@ -40,16 +45,22 @@ const CouponCardActionButton = ({
 	}
 
 	return (
-		<div className="mt-auto">
-			<Button
-				onClick={onAction}
-				disabled={isUsed || isRedeemed}
-				className="w-full"
-				colour="blue-500"
-			>
-				{text}
-			</Button>
-		</div>
+		<>
+			{onAction ? (
+				<div className="mt-auto">
+					<Button
+						onClick={onAction}
+						disabled={isUsed || isRedeemed}
+						className="w-full"
+						colour="blue-500"
+					>
+						{text}
+					</Button>
+				</div>
+			) : (
+				<></>
+			)}
+		</>
 	);
 };
 
