@@ -178,8 +178,12 @@
 	},
 	
 	"InstructionPopUp": {
-		"content": "Here's how you can make the most of your coupons: \n1. Browse Coupons: Use the search bar or filters to find coupons that match your needs. Coupons are organised by categories, making it easier to find the right one. \n2. Redeem Coupons: Click on the 'Redeem Now' button under a coupon you'd like to use. You'll be asked to fill in your information (like your email or phone number). Once done, the coupon will appear in your Shopping Cart. \n3. Use Coupons: Go to the Shopping Cart (click the cart icon) and hit the 'Use Now' button to apply your coupon at the store. \n4. Manage Coupons: For shop owners, manage your coupons by editing, starting, or deleting them in the 'Coupon Management' section. You can also create new coupons by clicking 'Create Coupon' and filling in the form. Remember, each coupon needs admin approval before it goes live. \n5. Language Support: CuponZ supports multiple languages. Click the language icon in the navigation bar to change it.",
-		"welcome": "Welcome to CuponZ!",
+			"content": [
+				"1. Browse Coupons\n   - Use the search bar or filters to find coupons that match your needs.\n   - Coupons are organised by categories.\n",
+				"2. Redeem Coupons\n   - Click the 'Redeem Now' button under a coupon you'd like to use.\n   - You'll need to fill in your information (like your email or phone number).\n   - Once done, the coupon will appear in your Shopping Cart.\n",
+				"3. Use Coupons\n   - Go to the Shopping Cart (click the cart icon).\n   - Hit the 'Use Now' button to apply your coupon at the store."
+			],
+				"welcome": "Welcome to CuponZ!",
 		"showOneTime": "Don't show this again",
 		"understood": "I understood"
 },
