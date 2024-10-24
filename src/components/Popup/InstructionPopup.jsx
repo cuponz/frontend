@@ -41,7 +41,9 @@ const InstructionPopup = ({ onClose }) => {
 				<h2 className="text-xl font-semibold mb-4">
 					{t(["InstructionPopUp", "welcome"])}
 				</h2>
-				<p className="mb-4">{t(["InstructionPopUp", "content"])}</p>
+				<p className="mb-4 whitespace-pre-line">
+					{t(["InstructionPopUp", "content"])}
+				</p>
 				<div className="flex items-center justify-between">
 					<label className="flex items-center">
 						<input

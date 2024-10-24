@@ -177,8 +177,7 @@
     "failed": "El canje falló"
   },
   "InstructionPopUp": {
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at nulla vitae urna faucibus auctor.",
-    "welcome": "¡Bienvenido!",
+    "content": "Aquí está cómo puedes aprovechar al máximo tus cupones: \n1. Navegar Cupones: Utiliza la barra de búsqueda o los filtros para encontrar cupones que se ajusten a tus necesidades. Los cupones están organizados por categorías, lo que facilita encontrar el adecuado. \n2. Canjear Cupones: Haz clic en el botón 'Canjear Ahora' debajo del cupón que deseas usar. Se te pedirá que llenes tu información (como tu correo electrónico o número de teléfono). Una vez hecho, el cupón aparecerá en tu Carrito de Compras. \n3. Usar Cupones: Ve al Carrito de Compras (haz clic en el ícono del carrito) y presiona el botón 'Usar Ahora' para aplicar tu cupón en la tienda. \n4. Administrar Cupones: Para los dueños de tiendas, administra tus cupones editándolos, iniciándolos o eliminándolos en la sección 'Gestión de Cupones'. También puedes crear nuevos cupones haciendo clic en 'Crear Cupón' y llenando el formulario. Recuerda, cada cupón necesita aprobación del administrador antes de que esté en vivo. \n5. Soporte de Idiomas: CuponZ soporta múltiples idiomas. Haz clic en el ícono de idioma en la barra de navegación para cambiarlo."    "welcome": "¡Bienvenido!",
     "showOneTime": "No mostrar esto de nuevo",
     "understood": "Entendido"
   },

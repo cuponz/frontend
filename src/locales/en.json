@@ -176,12 +176,17 @@
 		"location2":"An error occurred while redeeming the coupon",
 		"failed":"Redemption Failed"
 	},
-	"InstructionPopUp":{
-		"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at nulla vitae urna faucibus auctor.",
-		"welcome":"Welcome!",
-		"showOneTime":"Don't show this again",
-		"understood":"I understood"
-	},
+	
+	"InstructionPopUp": {
+			"content": [
+				"1. Browse Coupons\n   - Use the search bar or filters to find coupons that match your needs.\n   - Coupons are organised by categories.\n",
+				"2. Redeem Coupons\n   - Click the 'Redeem Now' button under a coupon you'd like to use.\n   - You'll need to fill in your information (like your email or phone number).\n   - Once done, the coupon will appear in your Shopping Cart.\n",
+				"3. Use Coupons\n   - Go to the Shopping Cart (click the cart icon).\n   - Hit the 'Use Now' button to apply your coupon at the store."
+			],
+				"welcome": "Welcome to CuponZ!",
+		"showOneTime": "Don't show this again",
+		"understood": "I understood"
+},
 	"success":{
 		"content":"Redeem Successfully",
 		"span":"Category:",

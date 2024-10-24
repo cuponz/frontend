@@ -5,10 +5,10 @@ import { useSearchParams } from "react-router-dom";
 
 import FilterBoard from "./FilterBoard";
 import InstructionPopup from "../../Popup/InstructionPopup";
-
+import { CiFilter } from "react-icons/ci";
 import { useCouponFiltersStore } from "../../../store/filters";
 import { updateFiltersFromParams } from "../../Utils/Coupons";
-
+import { CiSearch } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
 import CouponBoard from "./CouponBoard";
 import { CouponCatalogueType } from "@/constants";
@@ -28,7 +28,7 @@ const CouponCatalogueBoard = ({
 	setSelectedCouponId,
 }) => {
 	const [searchParams] = useSearchParams();
-	const id = searchParams.get("id")
+	const id = searchParams.get("id");
 
 	let [queryKey, queryFn] = useMemo(() => {
 		let queryKey, queryFn;
@@ -143,16 +143,17 @@ const CouponCatalogue = ({ type }) => {
 						className="bg-yellow-500 text-gray-800 px-4 py-2 rounded-md shadow-lg hover:bg-yellow-600 focus:outline-none flex items-center"
 					>
 						{t(["filter", "display"])}
-						<i className="pl-2 fa-solid fa-caret-down"></i>
+						<CiFilter className="ml-2" />
 					</button>
 				</div>
-				<div className="ml-4">
+				<div className="ml-4 relative">
 					<input
 						type="text"
 						placeholder="Search coupons..."
 						onChange={handleSearchChange}
-						className="w-64 px-4 py-2 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
+						className="w-64 px-4 py-2 pr-10 border-2 border-yellow-600 rounded-md shadow-md focus:outline-none focus:border-blue-500"
 					/>
+					<CiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
 				</div>
 			</div>
 
