@@ -49,33 +49,50 @@ const columns = (
 		),
 	},
 	{
+		header: "Viewing Perm",
+		accessor: "viewing_perm",
+		cell: (_, row) => {
+			const toggleButtonProps = getStateToggleButtonProps(row.viewing_perm);
+
+			const isApprovingViewPerm =
+				mutationLoadingStates[row.id]?.isApproving_viewing_perm;
+
+			return (
+				<div className="flex justify-center space-x-2">
+					<Button
+						onClick={() =>
+							handleToogleApproval("viewing_perm", row.id, row.viewing_perm)
+						}
+						colour={toggleButtonProps.colour}
+						disabled={isApprovingViewPerm}
+						isLoading={isApprovingViewPerm}
+						className="w-24"
+					>
+						{toggleButtonProps.text}
+					</Button>
+				</div>
+			);
+		},
+	},
+	{
 		header: "Actions",
 		accessor: "actions",
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(row.approved);
 
-			const isApproving = mutationLoadingStates[row.id]?.isApproving;
+			const isApproving = mutationLoadingStates[row.id]?.isApproving_approved;
 			const isDeleting = mutationLoadingStates[row.id]?.isDeleting;
 
 			return (
 				<div className="flex justify-center space-x-2">
-					{/* <Button
-						onClick={() => handleToogleApproval(row.id, row.approved)}
-						colour={toggleButtonProps.colour}
-						disabled={isApproving}
-						isLoading={isApproving}
-						className="w-24"
-					>
-						{toggleButtonProps.text} Viewing
-					</Button> */}
 					<Button
-						onClick={() => handleToogleApproval(row.id, row.approved)}
+						onClick={() => handleToogleApproval("approved", row.id, row.approved)}
 						colour={toggleButtonProps.colour}
 						disabled={isApproving}
 						isLoading={isApproving}
 						className="w-24"
 					>
-						{toggleButtonProps.text} Account
+						{toggleButtonProps.text}
 					</Button>
 					<Button
 						onClick={() => handleDelete(row.id)}

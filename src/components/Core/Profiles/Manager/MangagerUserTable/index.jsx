@@ -39,15 +39,15 @@ const ManagerUserTable = () => {
 		useManagerCouponTableMutations(updateLoadingState);
 
 	// Action handlers
-	const handleToggleApproval = async (userId, currentState) => {
+	const handleToggleApproval = async (field, userId, currentState) => {
 		const newState = !currentState;
 
-		updateLoadingState(userId, "isApproving", true);
+		updateLoadingState(userId, `isApproving_${field}`, true);
 
 		const executeReCaptcha =
 			await window.executeReCaptcha("toggleApprovalShop");
 
-		executeReCaptcha(userId, { approved: newState }, "isApproving");
+		executeReCaptcha(userId, { [field]: newState }, `isApproving_${field}`);
 	};
 
 	const handleChangeTier = async (userId, tier) => {
