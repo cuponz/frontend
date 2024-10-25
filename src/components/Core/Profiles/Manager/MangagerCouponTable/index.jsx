@@ -125,6 +125,7 @@ const ManagerCouponTable = () => {
 					mutationLoadingStates,
 				)}
 				data={coupons}
+				name="Manager Coupons"
 				filename="manager_coupons.csv"
 				additionalFilters={additionalFilters}
 			/>

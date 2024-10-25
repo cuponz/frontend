@@ -1,8 +1,8 @@
-import { getRedemptionsByCouponId } from "../../../../api/redemptions";
+import { getRedemptionsByCouponId } from "@/api/redemptions";
 import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../../Utils/LoadingSpinner";
-import DataTable from "../../../Wrapper/DataTable";
-import { RedemptionState } from "../../../../constants";
+import LoadingSpinner from "@/components/Utils/LoadingSpinner";
+import DataTable from "@/components/Wrapper/DataTable";
+import { RedemptionState } from "@/constants";
 import { useMemo } from "react";
 
 const UserTable = ({ couponId, onBack }) => {
@@ -51,6 +51,7 @@ const UserTable = ({ couponId, onBack }) => {
 			<DataTable
 				columns={columns}
 				data={redemptions}
+				name={`User Ddetails of Coupon ${couponId}`}
 				filename={`redemptions_coupon_${couponId}.csv`}
 			/>
 		</div>

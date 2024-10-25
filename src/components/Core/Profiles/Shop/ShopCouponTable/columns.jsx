@@ -41,7 +41,7 @@ const columns = (
 	{
 		header: "Usage",
 		accessor: "usage_count",
-		cell: (value, row) => `${value}/${row.max_usage || "∞"}`,
+		cell: (value, row) => `${value}/${row.max_usage || "inf"}`,
 	},
 	{
 		header: "Status",

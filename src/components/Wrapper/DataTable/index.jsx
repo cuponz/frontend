@@ -12,6 +12,7 @@ const DataTable = ({
 	data,
 	itemsPerPage = 10,
 	filename = "data.csv",
+	name = "Data Table",
 	additionalFilters = [],
 }) => {
 	// Table states
@@ -143,15 +144,49 @@ const DataTable = ({
 		});
 
 		const worksheet = XLSX.utils.json_to_sheet(exportData);
+
+		const header = [name];
+		const columnCount = validColumns.length;
+		XLSX.utils.sheet_add_aoa(worksheet, [header], { origin: "A1" });
+		worksheet["!merges"] = [
+			{ s: { r: 0, c: 0 }, e: { r: 0, c: columnCount - 1 } },
+		];
+
+		worksheet["A1"].s = {
+			font: { bold: true, sz: 24 },
+			alignment: { horizontal: "center" },
+		};
+
+		// Add the table header row based on column headers
+		const headerRow = validColumns.map((col) => col.header);
+		XLSX.utils.sheet_add_aoa(worksheet, [headerRow], { origin: "A2" });
+
+		// Add data rows starting from the third row
+		XLSX.utils.sheet_add_json(worksheet, exportData, {
+			origin: "A3",
+			skipHeader: true,
+		});
+
+		// Auto-fit column widths based on content
+		const columnWidths = validColumns.map((col, index) => {
+			const maxContentWidth = Math.max(
+				...exportData.map((row) => String(row[col.accessor]).length),
+				col.header.length,
+			);
+			return { wch: Math.min(maxContentWidth + 5, 45) }; // add padding, cap width
+		});
+		worksheet["!cols"] = columnWidths;
+
 		const workbook = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
 
 		XLSX.writeFile(workbook, `${filename}.xlsx`);
-	}, [columns, filteredAndSortedData, filename]);
+	}, [columns, filteredAndSortedData, filename, name]);
 
 	const handleDownloadPDF = useCallback(() => {
 		const doc = new jsPDF();
-		doc.text("Data Table", 20, 10);
+		doc.setFont("Helvetica", "normal");
+		doc.text(name, 20, 10);
 
 		const validColumns = columns.filter((col) => col.accessor);
 		const tableColumn = validColumns.map((col) => col.header);
@@ -169,10 +204,11 @@ const DataTable = ({
 			head: [tableColumn],
 			body: tableRows,
 			startY: 20,
+			styles: { font: "Helvetica" },
 		});
 
 		doc.save(`${filename}.pdf`);
-	}, [columns, filteredAndSortedData, filename]);
+	}, [columns, filteredAndSortedData, filename, name]);
 
 	const renderCell = useCallback((item, column) => {
 		if (column.cell) {

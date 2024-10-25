@@ -185,6 +185,7 @@ const ShopCouponTable = () => {
 					mutationLoadingStates,
 				)}
 				data={coupons}
+				name="Shop Coupons"
 				filename="shop_coupons.csv"
 				additionalFilters={additionalFilters}
 			/>
