@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { CouponRequirementType, CountryListWithCode } from "../../../constants";
+import { CouponRequirementType, CountryListWithCode } from "@/constants";
 import { useMutation } from "@tanstack/react-query";
-import { redeemCoupon } from "../../../api/redemptions";
+import { redeemCoupon } from "@/api/redemptions";
 import { toast } from "sonner";
-import { useUserStore } from "../../../store/user";
+import { useUserStore } from "@/store/user";
 import {
 	parsePhoneNumberFromString,
 	isValidPhoneNumber,

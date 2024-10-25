@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
 import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
 
-import Button from "@/components/Utils/Button";
 import columns from "./columns";
 
 import useManagerCouponTableMutations from "./useManagerCouponTableMutations";
@@ -53,18 +52,28 @@ const ManagerUserTable = () => {
 	const handleChangeTier = async (userId, tier) => {
 		updateLoadingState(userId, "isChangingTier", true);
 
-		const executeReCaptcha =
-			await window.executeReCaptcha("changingShopTier");
+		const executeReCaptcha = await window.executeReCaptcha("changingShopTier");
 
 		executeReCaptcha(userId, { tier }, "isChangingTier");
 	};
 
-	const handleReCaptchaVerify = (token) => (userId, payload, loadingState) => {
+	const handleReCaptchaVerify = (token) => (userId, userData, loadingState) => {
+		const formData = new FormData();
+
+		for (const key in userData) {
+			if (typeof userData[key] === "boolean") {
+				formData.append(key, userData[key] ? 1 : 0);
+			} else {
+				formData.append(key, userData[key]);
+			}
+		}
+
+		formData.append("recaptchaToken", token);
+
 		updateShopMutation.mutate(
-			{ userId, userData: { ...payload, recaptchaToken: token } },
+			{ userId, userData: formData },
 			{
-				onSettled: () =>
-					updateLoadingState(userId, loadingState, false),
+				onSettled: () => updateLoadingState(userId, loadingState, false),
 			},
 		);
 	};
