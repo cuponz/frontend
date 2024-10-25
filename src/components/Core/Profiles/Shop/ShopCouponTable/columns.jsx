@@ -53,7 +53,6 @@ const columns = (
 	},
 	{
 		header: "Actions",
-		accessor: "actions",
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(
 				row.active,

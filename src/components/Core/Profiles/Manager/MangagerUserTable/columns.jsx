@@ -25,7 +25,6 @@ const columns = (
 	},
 	{
 		header: "Tier",
-		accessor: "tier",
 		cell: (_, row) => {
 			const isChangingTier = mutationLoadingStates[row.id]?.isChangingTier;
 			return (
@@ -41,16 +40,15 @@ const columns = (
 		},
 	},
 	{
-		header: "Status",
+		header: "Viewing Status",
 		cell: (_, row) => (
 			<Fragment key={`${row.id}-status-badge`}>
-				<ShopBadge approved={row.approved} />
+				<ShopBadge approved={row.viewing_perm} />
 			</Fragment>
 		),
 	},
 	{
 		header: "Viewing Perm",
-		accessor: "viewing_perm",
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(row.viewing_perm);
 
@@ -75,8 +73,15 @@ const columns = (
 		},
 	},
 	{
+		header: "Active Status",
+		cell: (_, row) => (
+			<Fragment key={`${row.id}-status-badge`}>
+				<ShopBadge approved={row.approved} />
+			</Fragment>
+		),
+	},
+	{
 		header: "Actions",
-		accessor: "actions",
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(row.approved);
 

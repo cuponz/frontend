@@ -3,6 +3,10 @@ import Pagination from "@/components/Utils/Pagination";
 import { dataTableCompareValues, downloadCSV, filterMatchCheck } from "./utils";
 import Button from "@/components/Utils/Button";
 
+import * as XLSX from "xlsx";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
 const DataTable = ({
 	columns,
 	data,
@@ -124,23 +128,50 @@ const DataTable = ({
 		setCurrentPage(page);
 	}, []);
 
-	const handleDownloadCSV = useCallback(() => {
+	const handleDownloadExcel = useCallback(() => {
+		const validColumns = columns.filter((col) => col.accessor);
 		const exportData = filteredAndSortedData.map((item) => {
 			const exportItem = {};
-			columns.forEach((column) => {
-				if (column.cell) {
-					exportItem[column.accessor] = column.cell(
-						item[column.accessor],
-						item,
-					);
+			validColumns.forEach((col) => {
+				if (col.cell) {
+					exportItem[col.accessor] = col.cell(item[col.accessor], item);
 				} else {
-					exportItem[column.accessor] = item[column.accessor];
+					exportItem[col.accessor] = item[col.accessor];
 				}
 			});
 			return exportItem;
 		});
 
-		downloadCSV(columns, exportData, filename);
+		const worksheet = XLSX.utils.json_to_sheet(exportData);
+		const workbook = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+
+		XLSX.writeFile(workbook, `${filename}.xlsx`);
+	}, [columns, filteredAndSortedData, filename]);
+
+	const handleDownloadPDF = useCallback(() => {
+		const doc = new jsPDF();
+		doc.text("Data Table", 20, 10);
+
+		const validColumns = columns.filter((col) => col.accessor);
+		const tableColumn = validColumns.map((col) => col.header);
+		const tableRows = filteredAndSortedData.map((item) =>
+			validColumns.map((col) => {
+				if (col.cell) {
+					return col.cell(item[col.accessor], item);
+				} else {
+					return item[col.accessor];
+				}
+			}),
+		);
+
+		doc.autoTable({
+			head: [tableColumn],
+			body: tableRows,
+			startY: 20,
+		});
+
+		doc.save(`${filename}.pdf`);
 	}, [columns, filteredAndSortedData, filename]);
 
 	const renderCell = useCallback((item, column) => {
@@ -227,11 +258,18 @@ const DataTable = ({
 								Reset Filters
 							</Button>
 							<Button
-								onClick={handleDownloadCSV}
-								colour="blue-500"
+								onClick={handleDownloadExcel}
+								colour="green-500"
 								className="px-4 py-2"
 							>
-								Download CSV
+								Download Excel
+							</Button>
+							<Button
+								onClick={handleDownloadPDF}
+								colour="red-500"
+								className="px-4 py-2"
+							>
+								Download PDF
 							</Button>
 						</div>
 

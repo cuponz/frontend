@@ -48,7 +48,6 @@ const columns = (handleToogleApproval, handleDelete, mutationLoadingStates) => [
 	},
 	{
 		header: "Actions",
-		accessor: "actions",
 		cell: (_, row) => {
 			const toggleButtonProps = getStateToggleButtonProps(row.state);
 
