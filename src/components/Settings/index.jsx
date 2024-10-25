@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations } from "@/store/languages";
 
 import ChangePasswordModal from "./ChangePasswordModal";
@@ -9,13 +9,6 @@ import ChangePhoneModal from "./ChangePhoneModal";
 import Button from "@/components/Utils/Button";
 import { useUserStore } from "@/store/user";
 
-import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
-
-import { updateUser } from "@/api/user";
-import { useMutation } from "@tanstack/react-query";
-
-import { toast } from "sonner";
-
 const Setting = () => {
 	const { t } = useTranslations();
 	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
@@ -23,28 +16,10 @@ const Setting = () => {
 	const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 	const [isPhoneModalOpen, setIsPhoneModalOpen] = useState(false);
 
-	const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
+	const user = useUserStore((state) => state.user);
 
 	const inputClasses =
 		"w-full rounded-md sm:text-sm border-2 border-gray-300 bg-gray-100 text-gray-600 cursor-not-allowed focus:border-gray-300 focus:ring-0 px-3 py-2";
-
-	const updateMutation = useMutation({
-		mutationFn: updateUser,
-		onSuccess: (data) => {
-			toast.success("User information updated successfully.");
-			setUser(data);
-		},
-		onError: (error) => {
-			toast.error(error.message || "Failed to update user.");
-		},
-	});
-
-	const handleReCaptchaVerify = (token) => (userData) => {
-		updateMutation.mutate({
-			userId: user.id,
-			userData: { ...userData, recaptchaToken: token },
-		});
-	};
 
 	const handlePasswordChange = async (oldPassword, newPassword) => {
 		await (
@@ -200,7 +175,6 @@ const Setting = () => {
 					currentPhoneNumber={user.phone_number}
 				/>
 			</div>
-			<ReCaptchaV3 onVerify={handleReCaptchaVerify} />
 		</div>
 	);
 };

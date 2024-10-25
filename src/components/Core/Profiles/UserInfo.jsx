@@ -1,13 +1,13 @@
+import { useState, useMemo } from "react";
 import { UserType } from "@/constants";
 import { useUserStore } from "@/store/user";
-import { useState } from "react";
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import { CiUser } from "react-icons/ci";
 
 const UserInfo = () => {
 	const user = useUserStore((state) => state.user);
 	const [isHovered, setIsHovered] = useState(false);
-	const isShop = user?.type === UserType["Shop"];
+	const isShop = useMemo(() => user?.type === UserType["Shop"], [user]);
 
 	const getContactInfo = () => {
 		if (user.email) {
@@ -19,17 +19,21 @@ const UserInfo = () => {
 		}
 	};
 
-	const handleAvatarClick = () => {
-		if (!isShop) return;
+	const handleAvatarClick = async () => {
+		if (!isShop) {
+			return;
+		}
 
 		const fileInput = document.createElement("input");
 		fileInput.type = "file";
 		fileInput.accept = "image/*";
-		fileInput.onchange = (e) => {
+		fileInput.onchange = async (e) => {
 			const file = e.target.files[0];
 			if (file) {
-				console.log("File selected:", file);
 				// Add your file handling logic here
+				await (
+					await window.executeReCaptcha("updateAvatar")
+				)({ avatar: file });
 			}
 		};
 		fileInput.click();
@@ -55,7 +59,17 @@ const UserInfo = () => {
 					onMouseLeave={() => isShop && setIsHovered(false)}
 					title={isShop ? "Click to change avatar" : undefined}
 				>
-					<CiUser className="w-full h-full p-2" style={{ color: "#46467A" }} />
+					{user.avatar_url ? (
+						<img
+							src={user.avatar_url}
+							className="h-full w-full rounded-full object-cover"
+						/>
+					) : (
+						<CiUser
+							className="w-full h-full p-2"
+							style={{ color: "#46467A" }}
+						/>
+					)}
 				</div>
 				<div className="ml-6">
 					<h2 className="sm:text-2xl font-medium text-gray-900 text-lg">

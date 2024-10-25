@@ -43,9 +43,10 @@ export async function getAllShops() {
 }
 
 export async function updateUser({ userId, userData }) {
-	return apiRequest(`/api/user/${userId}`, {
+	return apiRequestAuto(`/api/user/${userId}`, {
 		method: "PUT",
-		body: JSON.stringify(userData),
+		// body: JSON.stringify(userData),
+		body: userData,
 		errorMessage: "Update User Failed",
 	});
 }

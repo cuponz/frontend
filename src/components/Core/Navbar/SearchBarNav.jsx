@@ -76,10 +76,17 @@ const SearchBarNav = () => {
 										transition={{ duration: 0.2 }}
 										className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
 									>
-										<FaShop
-											className="h-8 w-8 rounded-full mr-3"
-											style={{ color: "grey" }}
-										/>
+										{shop.avatar_url ? (
+											<img
+												src={shop.avatar_url}
+												className="h-8 w-8 mr-3 rounded-full object-cover"
+											/>
+										) : (
+											<FaShop
+												className="h-8 w-8 rounded-full mr-3"
+												style={{ color: "grey" }}
+											/>
+										)}
 										<span>{shop.name}</span>
 									</motion.div>
 								</Link>
