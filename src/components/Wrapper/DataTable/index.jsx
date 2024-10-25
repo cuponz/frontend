@@ -7,6 +7,8 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
+import debounce from "@/utils";
+
 const DataTable = ({
 	columns,
 	data,
@@ -39,8 +41,10 @@ const DataTable = ({
 		{ id: 4, name: "Sports" },
 	];
 
+	const debouncedSearch = useCallback(debounce(setSearchTerm, 300), []);
+
 	const handleSearch = useCallback((e) => {
-		setSearchTerm(e.target.value);
+		debouncedSearch(e.target.value);
 		setCurrentPage(1);
 	}, []);
 
