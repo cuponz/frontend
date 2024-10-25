@@ -277,8 +277,9 @@ const DataTable = ({
 
 						{/* Right-aligned management buttons */}
 						<div className="flex gap-3">
-							{rightButtons.map((btn) => (
+							{rightButtons.map((btn, i) => (
 								<Button
+									key={`right-btn-${i}`}
 									onClick={btn.action}
 									colour={btn.colour}
 									className="px-4 py-2"
