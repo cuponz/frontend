@@ -151,57 +151,57 @@
 		"userManagement": "User Management",
 		"setting": "Setting"
 	},
-	"UserInfoOptions":{
-		"content":"User Information Required"
+	"UserInfoOptions": {
+		"content": "User Information Required"
 	},
-	"indexPopup":{
-		"contentErr1":"Please make at least one change to update the coupon.",
-		"contentErr2":"Please upload an image for the coupon"
+	"indexPopup": {
+		"contentErr1": "Please make at least one change to update the coupon.",
+		"contentErr2": "Please upload an image for the coupon"
 	},
-	"CouponFormFields":{
-		"category":"Category",
-		"select":"Select a category",
-		"usage":"Max Usage",
-		"keyword":"Keywords",
-		"enterKeyword":"Enter a keyword and press Enter or Add",
-		"addBtn":"Add"
+	"CouponFormFields": {
+		"category": "Category",
+		"select": "Select a category",
+		"usage": "Max Usage",
+		"keyword": "Keywords",
+		"enterKeyword": "Enter a keyword and press Enter or Add",
+		"addBtn": "Add"
 	},
-	"fail":{
-		"onlyShop":"Only shop able to apply coupon",
-		"alreadyRedeemed":"The code has already been redeemed",
-		"expired":"The code has expired",
-		"notStarted":"The coupon is not available until",
-		"notStarted2":"The coupon is not yet available",
-		"location":"This coupon is not available at this location",
-		"location2":"An error occurred while redeeming the coupon",
-		"failed":"Redemption Failed"
+	"fail": {
+		"onlyShop": "Only shop able to apply coupon",
+		"alreadyRedeemed": "The code has already been redeemed",
+		"expired": "The code has expired",
+		"notStarted": "The coupon is not available until",
+		"notStarted2": "The coupon is not yet available",
+		"location": "This coupon is not available at this location",
+		"location2": "An error occurred while redeeming the coupon",
+		"failed": "Redemption Failed"
 	},
-	
+
 	"InstructionPopUp": {
-			"content": [
-				"1. Browse Coupons\n   - Use the search bar or filters to find coupons that match your needs.\n   - Coupons are organised by categories.\n",
-				"2. Redeem Coupons\n   - Click the 'Redeem Now' button under a coupon you'd like to use.\n   - You'll need to fill in your information (like your email or phone number).\n   - Once done, the coupon will appear in your Shopping Cart.\n",
-				"3. Use Coupons\n   - Go to the Shopping Cart (click the cart icon).\n   - Hit the 'Use Now' button to apply your coupon at the store."
-			],
-				"welcome": "Welcome to CuponZ!",
+		"content": [
+			"1. Browse Coupons\n   - Use the search bar or filters to find coupons that match your needs.\n   - Coupons are organised by categories.\n",
+			"2. Redeem Coupons\n   - Click the 'Redeem Now' button under a coupon you'd like to use.\n   - You'll need to fill in your information (like your email or phone number).\n   - Once done, the coupon will appear in your Shopping Cart.\n",
+			"3. Use Coupons\n   - Go to the Shopping Cart (click the cart icon).\n   - Hit the 'Use Now' button to apply your coupon at the store."
+		],
+		"welcome": "Welcome to CuponZ!",
 		"showOneTime": "Don't show this again",
 		"understood": "I understood"
-},
-	"success":{
-		"content":"Redeem Successfully",
-		"span":"Category:",
-		"span1":"Shop:",
-		"span2":"Redeem Code:"
 	},
-	"thankYou":{
-		"content":"Thank You for Adding your Product to CuponZ",
-		"content2":"You will not see your product right away after uploading.",
-		"content3":"Thank you for being patient while waiting for our admin to approve your product.",
-		"showOneTime":"Do not show this again"
+	"success": {
+		"content": "Redeem Successfully",
+		"span": "Category:",
+		"span1": "Shop:",
+		"span2": "Redeem Code:"
 	},
-	"changeNameModal":{
-		"title":"Title",
+	"thankYou": {
+		"content": "Thank You for Adding your Product to CuponZ",
+		"content2": "You will not see your product right away after uploading.",
+		"content3": "Thank you for being patient while waiting for our admin to approve your product.",
+		"showOneTime": "Do not show this again"
+	},
+	"changeNameModal": {
+		"title": "Title",
 		"change": "Change Name",
-		"changeNameBtn":"Change"
+		"changeNameBtn": "Change"
 	}
 }
