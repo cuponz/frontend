@@ -51,8 +51,8 @@ const UserTable = ({ couponId, onBack }) => {
 			<DataTable
 				columns={columns}
 				data={redemptions}
-				name={`User Ddetails of Coupon ${couponId}`}
-				filename={`redemptions_coupon_${couponId}.csv`}
+				name={`User Details of Coupon ${couponId}`}
+				filename={`redemptions_coupon_${couponId}`}
 			/>
 		</div>
 	);

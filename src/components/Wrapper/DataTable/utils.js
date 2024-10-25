@@ -22,23 +22,6 @@ export const dataTableCompareValues = (a, b, type) => {
 	}
 };
 
-export const downloadCSV = (columns, data, filename) => {
-	const headers = columns.map((col) => col.header);
-	const rows = data.map((row) =>
-		columns.map((col) => `"${String(row[col.accessor]).replace(/"/g, '""')}"`),
-	);
-	const csvContent = [
-		headers.join(","),
-		...rows.map((row) => row.join(",")),
-	].join("\n");
-
-	const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-	const link = document.createElement("a");
-	link.href = URL.createObjectURL(blob);
-	link.download = filename;
-	link.click();
-};
-
 export const filterMatchCheck = (item, filters, additionalFilters) => {
 	return Object.entries(filters).every(([key, value]) => {
 		if (!value) {

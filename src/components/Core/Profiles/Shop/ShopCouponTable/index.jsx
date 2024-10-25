@@ -8,7 +8,6 @@ import { getCouponsByShopIdFromShop } from "@/api/coupon";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "@/components/Wrapper/DataTable";
 
-import Button from "@/components/Utils/Button";
 import columns from "./columns";
 import { useCategoryStore } from "@/store/categories";
 
@@ -62,10 +61,7 @@ const ShopCouponTable = () => {
 	);
 
 	const [createMutation, editMutation, pauseMutation, deleteMutation] =
-		useShopCouponTableMutations(
-			handleCloseCreateCoupon,
-			handleCloseEditCoupon,
-		);
+		useShopCouponTableMutations(handleCloseCreateCoupon, handleCloseEditCoupon);
 
 	const handleSubmitCreateCoupon = (couponData) => {
 		const formData = new FormData();
@@ -168,13 +164,18 @@ const ShopCouponTable = () => {
 		throw error;
 	}
 
+	const rightButtons = [
+		{
+			action: () => setIsCreateCouponOpen(true),
+			colour: "yellow-500",
+			content: "Create Coupon",
+		},
+	];
+
 	return (
 		<div className="p-4">
 			<div className="flex justify-between items-center mb-4">
 				<h1 className="text-2xl font-bold">Shop Coupons</h1>
-				<Button onClick={() => setIsCreateCouponOpen(true)} colour="yellow-500">
-					Create Coupon
-				</Button>
 			</div>
 
 			<DataTable
@@ -188,6 +189,7 @@ const ShopCouponTable = () => {
 				name="Shop Coupons"
 				filename="shop_coupons.csv"
 				additionalFilters={additionalFilters}
+				rightButtons={rightButtons}
 			/>
 
 			{isCreateCouponOpen && (
