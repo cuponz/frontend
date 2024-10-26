@@ -11,6 +11,8 @@ import ManagerCouponTable from "./Manager/MangagerCouponTable";
 import ManagerUserTable from "./Manager/MangagerUserTable";
 import Settings from "@/components/Settings";
 import { useTranslations } from "@/store/languages";
+import CategoryTable from "./Manager/CategoryTable";
+import GroupTable from "./Manager/GroupTable";
 
 const UserContent = ({ activeTab }) => {
 	switch (activeTab) {
@@ -44,6 +46,10 @@ const ManagerContent = ({ activeTab }) => {
 			return <ManagerUserTable />;
 		case ProfileTab.Settings:
 			return <Settings />;
+		case ProfileTab.CategoryManagement:
+			return <CategoryTable />;
+		case ProfileTab.GroupManagement:
+			return <GroupTable />;
 		default:
 			return null;
 	}
@@ -96,6 +102,16 @@ const UserProfileMiniNav = () => {
 						{
 							id: ProfileTab.UserManagement,
 							label: t(["miniNav", "userManagement"]),
+						},
+						{
+							id: ProfileTab.CategoryManagement,
+							// label: t(["miniNav", "userManagement"]),
+							label: "Category Management",
+						},
+						{
+							id: ProfileTab.GroupManagement,
+							// label: t(["miniNav", "userManagement"]),
+							label: "Group Management",
 						},
 						{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
 					];

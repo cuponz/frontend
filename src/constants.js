@@ -19,6 +19,8 @@ const ProfileTab = Object.freeze({
 	Settings: 2,
 	Details: 3,
 	UserManagement: 4,
+	GroupManagement: 5,
+	CategoryManagement: 6,
 });
 
 const CouponCatalogueType = Object.freeze({

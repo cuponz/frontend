@@ -4,6 +4,7 @@ import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import DataTable from "@/components/Wrapper/DataTable";
 import { RedemptionState } from "@/constants";
 import { useMemo } from "react";
+import Button from "@/components/Utils/Button";
 
 /**
  * UserTable component fetches and displays user redemption details for a given coupon.
@@ -51,12 +52,12 @@ const UserTable = ({ couponId, onBack }) => {
 
 	return (
 		<div className="p-4">
-			<button
-				className="px-4 py-2 mb-4 bg-yellow-500 text-white rounded-md shadow-md hover:bg-yellow-600"
+			<Button
+				colour="yellow-500"
 				onClick={onBack}
 			>
 				Back
-			</button>
+			</Button>
 			<DataTable
 				columns={columns}
 				data={redemptions}

@@ -122,7 +122,8 @@ const ManagerUserTable = () => {
 					mutationLoadingStates,
 				)}
 				data={shops}
-				filename="manager_coupons.csv"
+				name="Users Data"
+				filename="users"
 				additionalFilters={additionalFilters}
 			/>
 			<ReCaptchaV3 onVerify={handleReCaptchaVerify} />
