@@ -104,11 +104,6 @@ const UserProfileMiniNav = () => {
 							label: t(["miniNav", "userManagement"]),
 						},
 						{
-							id: ProfileTab.CategoryManagement,
-							// label: t(["miniNav", "userManagement"]),
-							label: "Category Management",
-						},
-						{
 							id: ProfileTab.GroupManagement,
 							// label: t(["miniNav", "userManagement"]),
 							label: "Group Management",

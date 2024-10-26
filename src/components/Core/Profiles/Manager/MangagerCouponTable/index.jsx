@@ -202,7 +202,7 @@ const ManagerCouponTable = () => {
 					onClose={handleCloseDeleteCoupon}
 					onConfirm={handleConfirmDeleteCoupon}
 					isDeleting={deleteMutation.isPending}
-					couponData={selectedCoupon}
+					extraMessage={`${selectedCoupon.name} (ID: ${selectedCoupon.id})`}
 				/>
 			)}
 		</div>

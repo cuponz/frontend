@@ -8,9 +8,7 @@ import Button from "@/components/Utils/Button";
  * @param {function} props.onClose - Function to call when closing the popup.
  * @param {function} props.onConfirm - Function to call when confirming the deletion.
  * @param {boolean} props.isDeleting - Indicates if the deletion process is ongoing.
- * @param {Object} props.couponData - Data of the coupon to be deleted.
- * @param {string} props.couponData.name - Name of the coupon.
- * @param {string} props.couponData.id - ID of the coupon.
+ * @param {string} props.extraMessage - Extra information of the deleting object
  * @returns {JSX.Element|null} The rendered component or null if not open.
  */
 const PopupDeleteConfirm = ({
@@ -18,7 +16,7 @@ const PopupDeleteConfirm = ({
 	onClose,
 	onConfirm,
 	isDeleting,
-	couponData,
+	extraMessage = "this",
 }) => {
 	if (!isOpen) {
 		return null;
@@ -29,8 +27,8 @@ const PopupDeleteConfirm = ({
 			<div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
 				<h2 className="text-xl font-bold mb-4">Confirm Deletion</h2>
 				<p className="mb-6">
-					Are you sure you want to delete {couponData.name} (ID: {couponData.id}
-					)?
+					Are you sure you want to delete {extraMessage}?
+					?
 				</p>
 				<div className="flex justify-end space-x-2">
 					<button
