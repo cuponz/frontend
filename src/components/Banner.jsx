@@ -5,6 +5,17 @@ import hpLogo from "@/assets/hp";
 import dellLogo from "@/assets/dell";
 import microsoftLogo from "@/assets/windows";
 
+/**
+ * Banner component displays a promotional section with a heading, brand logos, and a link to view all shops.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Banner />
+ * )
+ *
+ * @returns {JSX.Element} The rendered Banner component.
+ */
 const Banner = () => {
 	return (
 		<div className="bg-indigo-900 text-white py-8 sm:py-12 md:py-16 mt-5">

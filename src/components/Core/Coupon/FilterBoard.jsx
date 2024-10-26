@@ -4,6 +4,18 @@ import { useTranslations } from "../../../store/languages";
 import { useCategoryStore } from "../../../store/categories";
 import { useCouponFiltersStore } from "../../../store/filters";
 
+/**
+ * FilterBoard component allows users to apply filters to a list of coupons.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Function} props.closeFilterBoard - Function to close the filter board.
+ *
+ * @returns {JSX.Element} The rendered FilterBoard component.
+ *
+ * @example
+ * <FilterBoard closeFilterBoard={handleClose} />
+ */
 const FilterBoard = ({ closeFilterBoard }) => {
 	const { t } = useTranslations();
 	const [_, setSearchParams] = useSearchParams();

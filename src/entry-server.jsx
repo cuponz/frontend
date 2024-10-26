@@ -16,6 +16,17 @@ import routes from "./routes";
 import { getCategories } from "@/api/category";
 import { getGroups } from "@/api/group";
 
+/**
+ * Renders the server-side application.
+ *
+ * This function handles the server-side rendering of the application, including
+ * creating the necessary handlers, prefetching data, and generating the HTML
+ * for the initial page load.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} rep - The response object.
+ * @returns {Promise<Object>} The rendered HTML, context, and dehydrated state.
+ */
 export async function render(req, rep) {
 	const { query, dataRoutes } = createStaticHandler(routes);
 	const queryClient = new QueryClient();

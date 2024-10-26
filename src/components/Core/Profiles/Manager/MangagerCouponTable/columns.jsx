@@ -5,6 +5,20 @@ import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create t
 
 import StatusBadge from "@/components/Core/Profiles/StatusBadge";
 
+/**
+ * Generates the columns configuration for the ManagerCouponTable component.
+ *
+ * @param {Function} handleToogleApproval - Function to handle the approval toggle action.
+ * @param {Function} handleDelete - Function to handle the delete action.
+ * @param {Object} mutationLoadingStates - Object containing the loading states for mutations.
+ * @returns {Array<Object>} Array of column configuration objects.
+ *
+ * @typedef {Object} Column
+ * @property {string} header - The header text for the column.
+ * @property {string} [accessor] - The key to access the data for the column.
+ * @property {string} [sortType] - The type of sorting to be applied to the column.
+ * @property {Function} [cell] - Function to render the cell content.
+ */
 const columns = (handleToogleApproval, handleDelete, mutationLoadingStates) => [
 	{
 		header: "ID",

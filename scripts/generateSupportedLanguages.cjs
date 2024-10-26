@@ -11,6 +11,20 @@ const outputFile = path.join(
 );
 
 // Function to generate the supported languages file
+/**
+ * Generates a list of supported languages by reading JSON files from the locales directory,
+ * and writes the list to an output file.
+ *
+ * This function performs the following steps:
+ * 1. Reads all files from the locales directory.
+ * 2. Filters out non-JSON files and extracts language codes from file names.
+ * 3. Prepares the content for the output file.
+ * 4. Writes the content to the output file.
+ *
+ * If an error occurs during the process, it logs the error to the console.
+ *
+ * @throws Will throw an error if there is an issue reading the directory or writing the file.
+ */
 const generateSupportedLanguages = () => {
 	try {
 		// Read all files from the locales directory

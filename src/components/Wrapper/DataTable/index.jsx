@@ -9,6 +9,30 @@ import "jspdf-autotable";
 
 import { debounce } from "@/utils";
 
+/**
+ * DataTable component for displaying and managing tabular data with features like search, sort, filter, pagination, and export.
+ *
+ * @param {Object[]} columns - Array of column definitions for the table.
+ * @param {string} columns[].header - The header text for the column.
+ * @param {string} columns[].accessor - The key to access the column's data in the data objects.
+ * @param {Function} [columns[].cell] - Optional function to customize cell rendering.
+ * @param {string} [columns[].sortType] - Optional sort type for the column (e.g., "string", "number").
+ * @param {Object[]} data - Array of data objects to be displayed in the table.
+ * @param {number} [itemsPerPage=10] - Number of items to display per page.
+ * @param {string} [filename="data"] - Filename for the exported files.
+ * @param {string} [name="Data Table"] - Name of the table, used in export files.
+ * @param {Object[]} [additionalFilters=[]] - Array of additional filter definitions.
+ * @param {string} additionalFilters[].name - The name of the filter.
+ * @param {string} additionalFilters[].type - The type of the filter (e.g., "select", "text").
+ * @param {string} additionalFilters[].placeholder - Placeholder text for the filter input.
+ * @param {string[]} additionalFilters[].options - Array of options for select-type filters.
+ * @param {Object[]} [rightButtons=[]] - Array of button definitions to be displayed on the right side of the control panel.
+ * @param {Function} rightButtons[].action - The action to be performed when the button is clicked.
+ * @param {string} rightButtons[].colour - The color of the button.
+ * @param {string} rightButtons[].content - The content to be displayed inside the button.
+ *
+ * @returns {JSX.Element} The rendered DataTable component.
+ */
 const DataTable = ({
 	columns,
 	data,

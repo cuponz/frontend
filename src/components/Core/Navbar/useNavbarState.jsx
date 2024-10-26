@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { useIsCategoriesOpenStore } from "@/store/categories";
 
+/**
+ * Custom hook to manage the state of the Navbar component.
+ *
+ * @returns {Array} An array containing:
+ * - `menuState` {Object}: The state object for various menu elements.
+ * - `setMenuState` {Function}: Function to update the `menuState`.
+ * - `toggleMenuState` {Function}: Function to toggle a specific menu state by key.
+ * - `closeAllMenus` {Function}: Function to close all menus.
+ * - `toggleCategoriesOpen` {Function}: Function to toggle the categories open state.
+ * - `isCategoriesOpen` {boolean}: Boolean indicating if the categories are open.
+ */
 const useNavbarState = () => {
 	const [menuState, setMenuState] = useState({
 		isMobileMenuOpen: false,

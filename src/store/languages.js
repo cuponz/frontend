@@ -18,6 +18,16 @@ const getSupportedLanguages = () => {
 	return supportedLanguages;
 };
 
+/**
+ * Loads translations for the specified language.
+ * If the translations are already cached, it returns the cached translations.
+ * Otherwise, it attempts to load the translations from a JSON file.
+ * If loading fails and the language is not the default language, it falls back to the default language translations.
+ *
+ * @param {string} language - The language code for which to load translations.
+ * @returns {Promise<Object>} A promise that resolves to the translations object.
+ * @throws Will throw an error if loading the translations fails and the language is the default language.
+ */
 const loadTranslations = async (language) => {
 	if (translationCache[language]) {
 		return translationCache[language]; // Return cached translations if available

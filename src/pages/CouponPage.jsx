@@ -2,6 +2,16 @@ import CouponCatalogue from "../components/Core/Coupon/CouponCatalogue";
 import Banner from "../components/Banner";
 import { CouponCatalogueType } from "../constants";
 
+/**
+ * CouponPage component renders the main page for displaying coupons.
+ * It includes a banner with a message and a catalogue of all available coupons.
+ *
+ * @component
+ * @example
+ * return (
+ *   <CouponPage />
+ * )
+ */
 const CouponPage = () => {
 	return (
 		<>

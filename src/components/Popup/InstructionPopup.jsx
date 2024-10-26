@@ -1,6 +1,17 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "@/store/languages";
 
+/**
+ * InstructionPopup component displays a popup with instructions for the user.
+ * The popup is shown only on the first visit unless the user opts to not show it again.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Function} props.onClose - Function to call when the popup is closed.
+ *
+ * @example
+ * <InstructionPopup onClose={handleClose} />
+ */
 const InstructionPopup = ({ onClose }) => {
 	const { t } = useTranslations();
 	const [dontShowAgain, setDontShowAgain] = useState(false);

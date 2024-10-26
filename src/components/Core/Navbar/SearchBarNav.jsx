@@ -8,6 +8,41 @@ import { useQuery } from "@tanstack/react-query";
 import { searchShops } from "@/api/user";
 import { Link } from "react-router-dom";
 
+/**
+ * SearchBarNav component provides a search bar with debounced input and displays filtered shop results.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SearchBarNav />
+ * )
+ *
+ * @returns {JSX.Element} The rendered search bar component.
+ *
+ * @description
+ * This component includes:
+ * - An input field for search terms.
+ * - Debounced search functionality to limit the number of queries.
+ * - A list of filtered shops displayed as search results.
+ * - Loading spinner while fetching search results.
+ *
+ * @hook
+ * - useTranslations: Hook to get translation function.
+ * - useState: Hook to manage search term and debounced search term states.
+ * - useEffect: Hook to handle debouncing of search term.
+ * - useQuery: Hook to fetch filtered shops based on debounced search term.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.searchTerm - The current search term.
+ * @param {string} props.debouncedSearchTerm - The debounced search term.
+ * @param {Array} props.filteredShops - The list of filtered shops.
+ * @param {boolean} props.isLoading - Loading state for the search results.
+ *
+ * @function handleSearchChange
+ * @description Updates the search term state when the input value changes.
+ * @param {Object} e - The event object.
+ * @param {string} e.target.value - The new value of the input field.
+ */
 const SearchBarNav = () => {
 	const { t } = useTranslations();
 	const [searchTerm, setSearchTerm] = useState("");

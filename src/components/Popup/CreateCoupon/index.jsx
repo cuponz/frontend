@@ -11,6 +11,19 @@ import Button from "@/components/Utils/Button";
 import { useTranslations } from "@/store/languages";
 import { useUserStore } from "../../../store/user";
 
+/**
+ * PopupCreateCoupon component renders a popup form for creating or editing a coupon.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Determines if the popup is open.
+ * @param {Function} props.onClose - Function to call when the popup is closed.
+ * @param {Function} props.onSubmit - Function to call when the form is submitted.
+ * @param {boolean} props.isCreating - Indicates if the coupon is being created.
+ * @param {boolean} [props.required=true] - Indicates if the form fields are required.
+ * @param {Object} [props.couponData=undefined] - Data of the coupon being edited.
+ *
+ * @returns {JSX.Element|null} The rendered component or null if not open.
+ */
 const PopupCreateCoupon = ({
 	isOpen,
 	onClose,

@@ -11,6 +11,21 @@ import useManagerCouponTableMutations from "./useManagerCouponTableMutations";
 
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
+/**
+ * ManagerUserTable component fetches and displays a table of shops with various actions.
+ *
+ * This component uses the `useQuery` hook to fetch shop data and manages loading states
+ * for various mutations using the `useState` hook. It provides handlers for toggling
+ * approval, changing tiers, and deleting shops, with reCAPTCHA verification for actions.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return (
+ *   <ManagerUserTable />
+ * )
+ */
 const ManagerUserTable = () => {
 	const {
 		isLoading,

@@ -49,6 +49,24 @@ const ManagerContent = ({ activeTab }) => {
 	}
 };
 
+/**
+ * UserProfileMiniNav component renders a mini navigation bar for user profiles.
+ * It displays different tabs based on the user type and allows switching between them.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * // Usage example:
+ * <UserProfileMiniNav />
+ *
+ * @remarks
+ * This component uses the `useTranslations` hook for localization and the `useUserStore` hook to access the user state.
+ * It conditionally renders different sets of tabs and content based on the user's type.
+ *
+ * @function
+ * @name UserProfileMiniNav
+ */
 const UserProfileMiniNav = () => {
 	const { t } = useTranslations();
 	const user = useUserStore((state) => state.user);

@@ -70,6 +70,53 @@ const CountryListWithCode = Object.freeze(
 	}),
 );
 
+/**
+ * A collection of validation functions.
+ * @namespace Validators
+ */
+
+/**
+ * Validates if the given name has a minimum length of 2 characters.
+ * @function
+ * @memberof Validators
+ * @param {string} name - The name to validate.
+ * @returns {boolean} True if the name is valid, false otherwise.
+ */
+
+/**
+ * Validates if the given email is in a proper email format.
+ * @function
+ * @memberof Validators
+ * @param {string} email - The email to validate.
+ * @returns {boolean} True if the email is valid, false otherwise.
+ */
+
+/**
+ * Validates if the given password has a minimum length of 8 characters.
+ * @function
+ * @memberof Validators
+ * @param {string} password - The password to validate.
+ * @returns {boolean} True if the password is valid, false otherwise.
+ */
+
+/**
+ * Validates if the given phone number is valid for the specified region.
+ * If the phone number is an empty string, it is considered valid (optional field).
+ * @function
+ * @memberof Validators
+ * @param {string} phoneNumber - The phone number to validate.
+ * @param {string} region - The region code to validate the phone number against.
+ * @returns {boolean} True if the phone number is valid or empty, false otherwise.
+ */
+
+/**
+ * Formats the given phone number to E.164 format for the specified region.
+ * @function
+ * @memberof Validators
+ * @param {string} phone - The phone number to format.
+ * @param {string} region - The region code to format the phone number against.
+ * @returns {string|null} The formatted phone number in E.164 format, or null if invalid.
+ */
 const Validators = Object.freeze({
 	isValidName: (name) => validator.isLength(name, { min: 2 }),
 	isValidEmail: (email) => validator.isEmail(email),

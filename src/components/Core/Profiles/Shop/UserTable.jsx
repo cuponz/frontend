@@ -5,6 +5,15 @@ import DataTable from "@/components/Wrapper/DataTable";
 import { RedemptionState } from "@/constants";
 import { useMemo } from "react";
 
+/**
+ * UserTable component fetches and displays user redemption details for a given coupon.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.couponId - The ID of the coupon to fetch redemptions for.
+ * @param {Function} props.onBack - Callback function to handle the back button click.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const UserTable = ({ couponId, onBack }) => {
 	const { isLoading, error, data } = useQuery({
 		queryKey: ["get", "redemptions", couponId],

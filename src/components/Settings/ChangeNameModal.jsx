@@ -4,12 +4,18 @@ import { useTranslations } from "../../store/languages";
 
 import Button from "@/components/Utils/Button";
 
-const ChangeNameModal = ({
-	isOpen,
-	onClose,
-	onSubmit,
-	currentName,
-}) => {
+/**
+ * ChangeNameModal component renders a modal for changing the user's name.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Determines if the modal is open.
+ * @param {function} props.onClose - Function to call when the modal is closed.
+ * @param {function} props.onSubmit - Function to call when the form is submitted.
+ * @param {string} props.currentName - The current name of the user.
+ *
+ * @returns {JSX.Element|null} The rendered modal component or null if not open.
+ */
+const ChangeNameModal = ({ isOpen, onClose, onSubmit, currentName }) => {
 	const { t } = useTranslations();
 	const [newName, setNewName] = useState("");
 	const [error, setError] = useState("");

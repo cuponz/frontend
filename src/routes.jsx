@@ -26,6 +26,39 @@ const ErrorElement = () => (
 	</div>
 );
 
+/**
+ * Application routes configuration.
+ *
+ * This configuration defines the routes for the application, including their paths,
+ * elements to render, and error elements. The routes are organized into three main
+ * groups, each with its own set of child routes.
+ *
+ * @constant
+ * @type {Array<Object>}
+ * @property {string} path - The URL path for the route.
+ * @property {React.Element} element - The React component to render for the route.
+ * @property {React.Element} errorElement - The React component to render in case of an error.
+ * @property {Array<Object>} children - The child routes for the route.
+ *
+ * @example
+ * // Example route configuration
+ * {
+ *   path: "/",
+ *   element: <AuthWrapper />,
+ *   errorElement: <ErrorElement />,
+ *   children: [
+ *     {
+ *       path: "/",
+ *       element: <HomePage />,
+ *     },
+ *     {
+ *       path: "/aboutus",
+ *       element: <AboutUs />,
+ *     },
+ *     // More child routes...
+ *   ],
+ * }
+ */
 const routes = [
 	{
 		path: "/",

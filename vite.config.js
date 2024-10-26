@@ -6,6 +6,13 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 // import ViteWebp from "vite-plugin-webp-generator";
 
 // https://vitejs.dev/config/
+/**
+ * Vite configuration file.
+ *
+ * @param {Object} configEnv - The configuration environment object.
+ * @param {string} configEnv.mode - The current mode (e.g., "development" or "production").
+ * @returns {Object} The Vite configuration object.
+ */
 export default defineConfig((configEnv) => {
 	const isDevelopment = configEnv.mode === "development";
 	return {

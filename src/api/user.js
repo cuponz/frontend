@@ -42,6 +42,15 @@ export async function getAllShops() {
 	});
 }
 
+/**
+ * Updates the user information.
+ *
+ * @param {Object} params - The parameters for updating the user.
+ * @param {string} params.userId - The ID of the user to update.
+ * @param {Object} params.userData - The new data for the user.
+ * @returns {Promise<Object>} The response from the API.
+ * @throws Will throw an error if the update fails.
+ */
 export async function updateUser({ userId, userData }) {
 	return apiRequestAuto(`/api/user/${userId}`, {
 		method: "PUT",

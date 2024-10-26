@@ -2,6 +2,17 @@ import { useRef, useEffect, useCallback, useMemo } from "react";
 
 import { useMutation } from "@tanstack/react-query";
 
+/**
+ * OTPInput component for handling OTP (One Time Password) input fields.
+ *
+ * @param {Object} props - The properties object.
+ * @param {number} props.length - The number of OTP input fields.
+ * @param {function} props.onComplete - Callback function to be called when OTP input is complete.
+ * @param {string} props.value - The current value of the OTP input.
+ * @param {function} props.onChange - Callback function to be called when the OTP input value changes.
+ *
+ * @returns {JSX.Element} The OTPInput component.
+ */
 const OTPInput = ({ length, onComplete, value, onChange }) => {
 	const inputRefs = useRef([]);
 

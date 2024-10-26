@@ -4,6 +4,18 @@ import { languageFlags, languageNames } from "./menuItems.js";
 import { useTranslations } from "@/store/languages";
 import { useMemo, useCallback, useRef, useEffect } from "react";
 
+/**
+ * LanguageDropdown component renders a dropdown menu for selecting languages.
+ * It displays the current language with a flag and allows users to change the language.
+ *
+ * @component
+ * @param {Object} props - The component props
+ * @param {string} props.language - The currently selected language
+ * @param {function} props.toggleMenuState - Function to toggle the dropdown menu state
+ * @param {boolean} props.isOpen - Boolean indicating if the dropdown menu is open
+ *
+ * @returns {JSX.Element} The rendered LanguageDropdown component
+ */
 const LanguageDropdown = ({ language, toggleMenuState, isOpen }) => {
 	const { setLanguage, supportedLanguages } = useTranslations();
 	const dropdownRef = useRef(null);

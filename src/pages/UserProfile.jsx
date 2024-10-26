@@ -10,6 +10,21 @@ import { useMutation } from "@tanstack/react-query";
 
 import { toast } from "sonner";
 
+/**
+ * UserProfile component that displays user information and handles user updates.
+ *
+ * This component uses the `useUserStore` hook to manage user state and the `useMutation` hook
+ * to handle user update operations. It also integrates Google reCAPTCHA v3 for verifying user actions.
+ *
+ * @component
+ *
+ * @example
+ * return (
+ *   <UserProfile />
+ * )
+ *
+ * @returns {JSX.Element} The UserProfile component.
+ */
 function UserProfile() {
 	const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
 

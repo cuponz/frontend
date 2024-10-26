@@ -9,6 +9,18 @@ import ChangePhoneModal from "./ChangePhoneModal";
 import Button from "@/components/Utils/Button";
 import { useUserStore } from "@/store/user";
 
+/**
+ * The Setting component renders a user settings page where users can view and update their username, password, email, and phone number.
+ * It includes modals for changing these details and uses reCAPTCHA for verification.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Setting />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const Setting = () => {
 	const { t } = useTranslations();
 	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);

@@ -2,6 +2,25 @@ import { useEffect, useCallback } from "react";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
+/**
+ * ReCaptchaV3 component to handle Google reCAPTCHA v3 verification.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {function} props.onVerify - Callback function to handle the verification token.
+ *
+ * @example
+ * <ReCaptchaV3 onVerify={(token) => console.log(token)} />
+ *
+ * @returns {null} This component does not render any visible elements.
+ *
+ * @description
+ * This component loads the Google reCAPTCHA v3 script and provides a method to execute the reCAPTCHA
+ * and obtain a verification token. The token is passed to the provided `onVerify` callback function.
+ *
+ * The reCAPTCHA script is loaded when the component mounts and removed when the component unmounts.
+ * The `executeReCaptcha` function is attached to the `window` object to allow external execution.
+ */
 const ReCaptchaV3 = ({ onVerify }) => {
 	const loadRecaptchaScript = useCallback(() => {
 		if (
