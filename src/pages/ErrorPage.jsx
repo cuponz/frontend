@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 import Layout from "@/layout/Layout";
 
+/**
+ * ErrorPage component renders a 404 error page with a message and a link to navigate back to the home page.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ErrorPage />
+ * )
+ */
 export default function ErrorPage() {
 	return (
 		<div className="flex items-center justify-center h-screen bg-gray-100">

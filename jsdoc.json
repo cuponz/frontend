@@ -1,0 +1,26 @@
+{
+	"tags": {
+		"allowUnknownTags": true,
+		"dictionaries": ["jsdoc"]
+	},
+	"source": {
+		"include": ["."],
+		"includePattern": ".+\\.(js|jsx)(doc|x)?$",
+		"excludePattern": "(^|\\/|\\\\)_",
+		"exclude": ["node_modules", "dist"]
+	},
+	"plugins": ["plugins/markdown"],
+	"templates": {
+		"cleverLinks": false,
+		"monospaceLinks": false,
+		"default": {
+			"outputSourceFiles": true
+		}
+	},
+	"opts": {
+		"destination": "./docs",
+		"recurse": true,
+		"verbose": true,
+		"lenient": true
+	}
+}

@@ -3,6 +3,16 @@ import { CiUser } from "react-icons/ci";
 import { useTranslations } from "@/store/languages";
 import { useRef, useEffect } from "react";
 
+/**
+ * ProfileDropdown component renders a dropdown menu for user profile actions.
+ *
+ * @param {Object} props - The component props.
+ * @param {Function} props.toggleMenuState - Function to toggle the state of the menu.
+ * @param {Function} props.handleLoginLogout - Function to handle login/logout action.
+ * @param {boolean} props.isOpen - Boolean indicating if the dropdown is open.
+ *
+ * @returns {JSX.Element} The rendered ProfileDropdown component.
+ */
 const ProfileDropdown = ({ toggleMenuState, handleLoginLogout, isOpen }) => {
 	const { t } = useTranslations();
 	const dropdownRef = useRef(null);

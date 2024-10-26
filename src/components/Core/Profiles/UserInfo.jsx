@@ -4,6 +4,24 @@ import { useUserStore } from "@/store/user";
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import { CiUser } from "react-icons/ci";
 
+/**
+ * UserInfo component displays user information including avatar, name, and contact details.
+ * It allows shop users to change their avatar by clicking on it.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * // Usage example:
+ * <UserInfo />
+ *
+ * @remarks
+ * This component uses the `useUserStore` hook to access the user state and `useMemo` to determine if the user is a shop.
+ * It also handles avatar changes for shop users by creating a file input element and triggering a reCAPTCHA verification.
+ *
+ * @function
+ * @name UserInfo
+ */
 const UserInfo = () => {
 	const user = useUserStore((state) => state.user);
 	const [isHovered, setIsHovered] = useState(false);
@@ -30,7 +48,6 @@ const UserInfo = () => {
 		fileInput.onchange = async (e) => {
 			const file = e.target.files[0];
 			if (file) {
-				// Add your file handling logic here
 				await (
 					await window.executeReCaptcha("updateAvatar")
 				)({ avatar: file });

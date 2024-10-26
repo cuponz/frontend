@@ -1,3 +1,13 @@
+/**
+ * Pagination component for navigating through pages.
+ *
+ * @param {Object} props - The properties object.
+ * @param {number} props.currentPage - The current active page.
+ * @param {number} props.totalPages - The total number of pages.
+ * @param {function} props.onPageChange - Callback function to handle page change.
+ *
+ * @returns {JSX.Element} The rendered pagination component.
+ */
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 	const handlePrevious = () => {
 		if (currentPage > 1) {

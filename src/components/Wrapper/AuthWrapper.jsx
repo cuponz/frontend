@@ -9,6 +9,23 @@ import { userAuth } from "@/api/user";
 const Layout = lazy(() => import("@/layout/Layout"));
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
+/**
+ * AuthWrapper component that handles user authentication and navigation.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isProtected - Flag indicating if the route is protected.
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * <AuthWrapper isProtected={true} />
+ *
+ * @description
+ * This component uses the `useUserStore` hook to manage user state and the `useQuery` hook to fetch authentication data.
+ * It handles navigation to the login page if the user is not authenticated and the route is protected.
+ * It also displays a loading spinner while authentication is pending.
+ */
 const AuthWrapper = ({ isProtected }) => {
 	const [user, setUser, deleteUserCache] = useUserStore((state) => [
 		state.user,
@@ -40,7 +57,7 @@ const AuthWrapper = ({ isProtected }) => {
 			if (error?.message) {
 				toast.error(error?.message);
 			}
-			console.log(error)
+			console.log(error);
 			deleteUserCache();
 			if (isProtected) {
 				navigate("/login");

@@ -1,5 +1,18 @@
 import Button from "@/components/Utils/Button";
 
+/**
+ * PopupDeleteConfirm component renders a confirmation popup for deleting a coupon.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Determines if the popup is open.
+ * @param {function} props.onClose - Function to call when closing the popup.
+ * @param {function} props.onConfirm - Function to call when confirming the deletion.
+ * @param {boolean} props.isDeleting - Indicates if the deletion process is ongoing.
+ * @param {Object} props.couponData - Data of the coupon to be deleted.
+ * @param {string} props.couponData.name - Name of the coupon.
+ * @param {string} props.couponData.id - ID of the coupon.
+ * @returns {JSX.Element|null} The rendered component or null if not open.
+ */
 const PopupDeleteConfirm = ({
 	isOpen,
 	onClose,

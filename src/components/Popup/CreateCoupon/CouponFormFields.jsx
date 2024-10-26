@@ -25,6 +25,19 @@ const CouponFormInput = ({
 	</div>
 );
 
+/**
+ * CouponFormFields component renders a form for creating or editing a coupon.
+ * It includes fields for category selection, maximum usage, coupon name, code, start and end dates, and keywords.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.formData - The form data containing the coupon details.
+ * @param {Function} props.handleChange - The function to handle changes in form fields.
+ * @param {Function} props.handleKeywordsChange - The function to handle changes in the keywords array.
+ * @param {Array} props.categories - The list of available categories to select from.
+ * @param {boolean} props.required - Indicates if the form fields are required.
+ *
+ * @returns {JSX.Element} The rendered CouponFormFields component.
+ */
 const CouponFormFields = ({
 	formData,
 	handleChange,

@@ -2,6 +2,18 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logofooter.png";
 import { useTranslations } from "../../store/languages";
 
+/**
+ * Footer component renders the footer section of the application.
+ * It includes navigation links, a logo, and copyright information.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Footer />
+ * )
+ *
+ * @returns {JSX.Element} The rendered footer component.
+ */
 const Footer = () => {
 	const { t } = useTranslations();
 	const links = [

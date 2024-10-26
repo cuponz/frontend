@@ -1,6 +1,15 @@
 import { FaExclamation } from "react-icons/fa";
 import { useTranslations } from "@/store/languages";
 
+/**
+ * PopupRedeemFail component displays a popup with an error message based on the error type.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.errorType - The type of error to display.
+ * @param {string} [props.startDate] - The start date to display if the error type is "not-started".
+ * @returns {JSX.Element} The rendered component.
+ */
 const PopupRedeemFail = ({ errorType, startDate }) => {
 	const { t } = useTranslations();
 	const getErrorMessage = () => {

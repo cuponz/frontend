@@ -5,6 +5,23 @@ import { getCoupons } from "../../../api/coupon";
 import LoadingSpinner from "../../Utils/LoadingSpinner";
 import { CiTimer } from "react-icons/ci";
 
+/**
+ * HomeCouponList component fetches and displays a list of the latest coupons.
+ * It uses the `useQuery` hook to fetch coupon data from the server.
+ *
+ * @component
+ * @returns {JSX.Element} A React component that renders a list of coupons.
+ *
+ * @example
+ * return (
+ *   <HomeCouponList />
+ * )
+ *
+ * @remarks
+ * - Displays a loading spinner while fetching data.
+ * - Shows up to 3 coupons with their logo, title, and description.
+ * - Provides a link to view all coupons.
+ */
 const HomeCouponList = () => {
 	const { isPending, data: coupons = [] } = useQuery({
 		queryKey: ["get", "coupons"],

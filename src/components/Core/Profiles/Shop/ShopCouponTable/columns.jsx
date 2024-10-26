@@ -5,6 +5,19 @@ import getStateToggleButtonProps from "./getStateToggleButtonProps"; // Create t
 
 import StatusBadge from "@/components/Core/Profiles/StatusBadge";
 
+/**
+ * Generates the columns configuration for the ShopCouponTable component.
+ *
+ * @param {Function} handleEdit - Function to handle the edit action for a coupon.
+ * @param {Function} handleStateToggle - Function to handle the state toggle action for a coupon.
+ * @param {Function} handleDelete - Function to handle the delete action for a coupon.
+ * @param {Object} mutationLoadingStates - Object containing the loading states for mutations.
+ * @param {Object} mutationLoadingStates.<id> - Loading states for a specific coupon.
+ * @param {boolean} mutationLoadingStates.<id>.isEditing - Indicates if the coupon is being edited.
+ * @param {boolean} mutationLoadingStates.<id>.isPausing - Indicates if the coupon state is being toggled.
+ * @param {boolean} mutationLoadingStates.<id>.isDeleting - Indicates if the coupon is being deleted.
+ * @returns {Array<Object>} Array of column configuration objects for the table.
+ */
 const columns = (
 	handleEdit,
 	handleStateToggle,

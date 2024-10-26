@@ -3,6 +3,20 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import ActivateFail from "@/components/Popup/ActivateFail";
 import LoadingSpinner from "../components/Utils/LoadingSpinner";
 
+/**
+ * UserActivate component handles the user account activation process.
+ * It retrieves the activation token from the URL search parameters,
+ * validates the token, and navigates to the login page upon successful activation.
+ * If the token is invalid or missing, it displays an activation failure message.
+ *
+ * @component
+ * @returns {JSX.Element|null} The rendered component or null if not applicable.
+ *
+ * @example
+ * // Usage example:
+ * // Assuming the URL contains a valid activation token as a search parameter.
+ * <UserActivate />
+ */
 const UserActivate = () => {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();

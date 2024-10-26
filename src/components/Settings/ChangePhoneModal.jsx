@@ -4,6 +4,17 @@ import { useTranslations } from "../../store/languages";
 
 import Button from "@/components/Utils/Button";
 
+/**
+ * ChangePhoneModal component allows users to change their phone number.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Determines if the modal is open.
+ * @param {Function} props.onClose - Function to call when the modal is closed.
+ * @param {Function} props.onSubmit - Function to call when the form is submitted with the new phone number.
+ * @param {string} props.currentPhoneNumber - The current phone number of the user.
+ *
+ * @returns {JSX.Element|null} The rendered component or null if the modal is not open.
+ */
 const ChangePhoneModal = ({
 	isOpen,
 	onClose,

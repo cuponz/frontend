@@ -64,6 +64,29 @@ const CouponCardActionButton = ({
 	);
 };
 
+/**
+ * CouponCard component displays detailed information about a coupon and handles various actions based on the type of coupon catalogue.
+ *
+ * @component
+ * @param {Object} props - The properties object.
+ * @param {Object} props.coupon - The coupon data.
+ * @param {string} props.coupon.code - The coupon code.
+ * @param {string} props.coupon.logo_url - The URL of the coupon logo.
+ * @param {string} props.coupon.name - The name of the coupon.
+ * @param {string} props.coupon.desc - The description of the coupon.
+ * @param {string} props.coupon.keywords - The keywords associated with the coupon.
+ * @param {string} props.coupon.start_date - The start date of the coupon.
+ * @param {string} props.coupon.end_date - The end date of the coupon.
+ * @param {string} props.coupon.shop - The shop associated with the coupon.
+ * @param {string} props.coupon.category_name - The category name of the coupon.
+ * @param {number} props.coupon.max_usage - The maximum usage of the coupon.
+ * @param {number} props.coupon.usage_count - The current usage count of the coupon.
+ * @param {number} props.coupon.redeemed_count - The number of users who have redeemed the coupon.
+ * @param {string} props.coupon.redemption_state - The redemption state of the coupon.
+ * @param {string} props.type - The type of the coupon catalogue.
+ * @param {function} props.onShowStats - The function to call when showing statistics for the coupon.
+ * @returns {JSX.Element} The rendered CouponCard component.
+ */
 const CouponCard = ({ coupon, type, onShowStats }) => {
 	const [modalType, setModalType] = useState(null);
 	const user = useUserStore((state) => state.user);

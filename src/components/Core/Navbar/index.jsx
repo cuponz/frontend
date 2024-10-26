@@ -21,6 +21,19 @@ import ProfileDropdown from "./ProfileDropdown";
 import { getRoutes } from "./menuItems";
 import Button from "@/components/Utils/Button";
 
+/**
+ * Navbar component that displays the navigation bar with various menu items and user actions.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isProtected - Indicates if the current route is protected.
+ *
+ * @returns {JSX.Element} The rendered Navbar component.
+ *
+ * @example
+ * <Navbar isProtected={true} />
+ *
+ * @component
+ */
 const Navbar = ({ isProtected }) => {
 	const { t, language } = useTranslations();
 	const [user, logout] = useUserStore((state) => [state.user, state.logout]);
@@ -48,7 +61,7 @@ const Navbar = ({ isProtected }) => {
 	const {
 		isPending,
 		data: [fetchedCategories, groups],
-	// } = useSuspenseQueries({
+		// } = useSuspenseQueries({
 	} = useQueries({
 		queries: [
 			{

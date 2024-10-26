@@ -13,6 +13,47 @@ import useManagerCouponTableMutations from "./useManagerCouponTableMutations";
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import PopupDeleteConfirm from "@/components/Popup/DeleteConfirm";
 
+/**
+ * ManagerCouponTable component is responsible for displaying and managing a table of coupons.
+ * It fetches coupon data, handles approval toggling, and deletion of coupons.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * <ManagerCouponTable />
+ *
+ * @description
+ * This component uses the following hooks:
+ * - `useCategoryStore`: Fetches category data from the store.
+ * - `useMemo`: Memoizes the categories and selected coupon.
+ * - `useState`: Manages local state for delete confirmation modal and selected coupon ID.
+ * - `useQuery`: Fetches coupon data from the server.
+ * - `useManagerCouponTableMutations`: Provides mutation functions for toggling approval and deleting coupons.
+ *
+ * @function handleToggleApproval
+ * @param {string} couponId - The ID of the coupon to toggle approval.
+ * @param {string} currentState - The current state of the coupon.
+ *
+ * @function handleDelete
+ * @param {string} couponId - The ID of the coupon to delete.
+ *
+ * @function handleConfirmDeleteCoupon
+ * Confirms the deletion of the selected coupon.
+ *
+ * @function handleCloseDeleteCoupon
+ * Closes the delete confirmation modal.
+ *
+ * @function updateLoadingState
+ * @param {string} id - The ID of the coupon.
+ * @param {string} key - The key of the loading state to update.
+ * @param {boolean} value - The value of the loading state.
+ *
+ * @constant {Array} additionalFilters - Additional filters for the DataTable component.
+ *
+ * @throws Will throw an error if the query fails.
+ */
 const ManagerCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
 	const categories = useMemo(

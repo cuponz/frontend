@@ -1,5 +1,16 @@
 import { CiShoppingCart } from "react-icons/ci";
 
+/**
+ * ShoppingCartIcon component renders a shopping cart icon with a hover effect.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ShoppingCartIcon />
+ * )
+ *
+ * @returns {JSX.Element} The rendered shopping cart icon component.
+ */
 const ShoppingCartIcon = () => {
 	return (
 		<div className="group relative p-2 flex items-center justify-center">

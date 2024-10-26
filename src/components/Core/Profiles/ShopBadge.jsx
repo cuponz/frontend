@@ -1,5 +1,17 @@
 import React from "react";
 
+/**
+ * ShopBadge component displays a badge indicating the approval status.
+ *
+ * @component
+ * @example
+ * // Usage example:
+ * <ShopBadge approved={true} />
+ *
+ * @param {Object} props - Component props.
+ * @param {boolean} props.approved - Approval status to determine the badge text and style.
+ * @returns {JSX.Element} A styled badge indicating "Approved" or "Rejected".
+ */
 const ShopBadge = React.memo(({ approved }) => {
 	let text, style;
 

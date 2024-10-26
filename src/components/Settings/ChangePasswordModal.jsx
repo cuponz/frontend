@@ -3,6 +3,16 @@ import { useTranslations } from "@/store/languages";
 
 import Button from "@/components/Utils/Button";
 
+/**
+ * ChangePasswordModal component renders a modal for changing the user's password.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Determines if the modal is open.
+ * @param {Function} props.onClose - Function to call when the modal is closed.
+ * @param {Function} props.onSubmit - Function to call when the form is submitted.
+ * @returns {JSX.Element|null} The rendered modal component or null if not open.
+ */
 const ChangePasswordModal = ({ isOpen, onClose, onSubmit }) => {
 	const { t } = useTranslations();
 	const [oldPassword, setOldPassword] = useState("");

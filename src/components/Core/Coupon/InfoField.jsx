@@ -12,6 +12,18 @@ import validator from "validator";
 
 import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
 
+/**
+ * InfoField component handles the redemption of a coupon by collecting user information
+ * such as email and phone number based on the coupon's requirement type.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Function} props.onClose - Function to call when the close button is clicked.
+ * @param {Object} props.coupon - The coupon object containing details about the coupon.
+ * @param {Function} props.onRedeem - Function to call when the coupon is successfully redeemed.
+ *
+ * @returns {JSX.Element|null} The rendered component or null if the info field should not be shown.
+ */
 const InfoField = ({ onClose, coupon, onRedeem }) => {
 	const [formData, setFormData] = useState({
 		email: "",
@@ -109,7 +121,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 		};
 
 		toast.info("Submitting payload directly:", payload);
-    submitRedemption(payload);
+		submitRedemption(payload);
 	};
 
 	const formatPhoneNumber = (phone, region) => {
@@ -165,9 +177,9 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 			return;
 		}
 
-    if (!showInfoField) {
-      return;
-    }
+		if (!showInfoField) {
+			return;
+		}
 
 		const formattedPhone = formData.phone
 			? formatPhoneNumber(formData.phone, formData.region)
@@ -180,7 +192,7 @@ const InfoField = ({ onClose, coupon, onRedeem }) => {
 			user_phone: formattedPhone || undefined,
 		};
 
-    submitRedemption(payload);
+		submitRedemption(payload);
 	};
 
 	const handleChange = (e) => {

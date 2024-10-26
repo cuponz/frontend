@@ -14,6 +14,58 @@ import { useCategoryStore } from "@/store/categories";
 import useShopCouponTableMutations from "./useShopCouponTableMutations";
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 
+/**
+ * ShopCouponTable component renders a table of shop coupons with functionalities to create, edit, delete, and filter coupons.
+ * It uses various hooks and mutations to manage the state and perform actions on the coupons.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return (
+ *   <ShopCouponTable />
+ * )
+ *
+ * @typedef {Object} CouponData
+ * @property {string} id - The unique identifier of the coupon.
+ * @property {string} name - The name of the coupon.
+ * @property {string} category - The category of the coupon.
+ * @property {string} start_date - The start date of the coupon.
+ * @property {string} end_date - The end date of the coupon.
+ *
+ * @typedef {Object} MutationLoadingStates
+ * @property {boolean} isDeleting - Indicates if the coupon is being deleted.
+ * @property {boolean} isPausing - Indicates if the coupon is being paused.
+ *
+ * @typedef {Object} AdditionalFilter
+ * @property {string} name - The name of the filter.
+ * @property {string} type - The type of the filter (e.g., "select", "date").
+ * @property {string} placeholder - The placeholder text for the filter.
+ * @property {Array<string>} [options] - The options for the filter if it's a select type.
+ *
+ * @typedef {Object} RightButton
+ * @property {Function} action - The action to be performed when the button is clicked.
+ * @property {string} colour - The colour of the button.
+ * @property {string} content - The content/text of the button.
+ *
+ * @hook useCategoryStore - Custom hook to get the category store state.
+ * @hook useQuery - React Query hook to fetch coupons data.
+ * @hook useShopCouponTableMutations - Custom hook to get mutations for creating, editing, pausing, and deleting coupons.
+ * @hook useState - React hook to manage component state.
+ * @hook useMemo - React hook to memoize values.
+ *
+ * @function handleCloseCreateCoupon - Closes the create coupon popup.
+ * @function handleCloseThankYou - Closes the thank you popup.
+ * @function handleCloseEditCoupon - Closes the edit coupon popup.
+ * @function handleCloseDeleteCoupon - Closes the delete coupon popup.
+ * @function handleSubmitCreateCoupon - Submits the create coupon form data.
+ * @function handleSubmitEditCoupon - Submits the edit coupon form data.
+ * @function handleConfirmDeleteCoupon - Confirms the deletion of a coupon.
+ * @function handleEdit - Opens the edit coupon popup with the selected coupon data.
+ * @function handleStateToggle - Toggles the state of a coupon (active/inactive).
+ * @function handleDelete - Opens the delete coupon popup with the selected coupon data.
+ * @function updateLoadingState - Updates the loading state for a specific coupon and action.
+ */
 const ShopCouponTable = () => {
 	const categoryObjects = useCategoryStore((state) => state.categories);
 	const categories = useMemo(

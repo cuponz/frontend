@@ -7,6 +7,18 @@ import { useMutation } from "@tanstack/react-query";
 import Button from "@/components/Utils/Button";
 import { toast } from "sonner";
 
+/**
+ * ChangeEmailModal component allows users to change their email address.
+ * It handles email validation, OTP verification, and submission of the new email.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {boolean} props.isOpen - Determines if the modal is open
+ * @param {function} props.onClose - Function to close the modal
+ * @param {function} props.onSubmit - Function to handle the email submission
+ * @param {string} props.currentEmail - The current email address of the user
+ * @returns {JSX.Element|null} The rendered component or null if not open
+ */
 const ChangeEmailModal = ({ isOpen, onClose, onSubmit, currentEmail }) => {
 	const { t } = useTranslations();
 	const [newEmail, setNewEmail] = useState("");

@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Carousel component that displays a series of images in a sliding format.
+ * It adjusts the layout based on the screen size, combining images for mobile view.
+ *
+ * @param {Object} props - The component props.
+ * @param {string[]} props.images - Array of image URLs to display in the carousel.
+ * @param {string[]} props.rightImages - Array of image URLs to display in the right banner.
+ *
+ * @returns {JSX.Element} The rendered Carousel component.
+ */
 const Carousel = ({ images, rightImages }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [isMobile, setIsMobile] = useState(false);

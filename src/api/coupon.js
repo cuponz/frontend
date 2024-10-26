@@ -35,6 +35,15 @@ async function editCoupon({ couponId, couponData }) {
 	});
 }
 
+/**
+ * Pauses or activates a coupon by updating its active state.
+ *
+ * @param {Object} params - The parameters for the request.
+ * @param {string} params.couponId - The ID of the coupon to be updated.
+ * @param {boolean} params.state - The new active state of the coupon (true for active, false for paused).
+ * @returns {Promise<Object>} The response from the API request.
+ * @throws Will throw an error if the API request fails.
+ */
 async function pauseCoupon({ couponId, state }) {
 	return apiRequest(`/api/coupon/${couponId}/active`, {
 		method: "PUT",
