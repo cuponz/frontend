@@ -3,6 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useIsCategoriesOpenStore } from "../../../store/categories";
 import { CiCircleChevRight } from "react-icons/ci";
 
+/**
+ * CategoriesMenu component renders a menu with groups and categories.
+ * It handles the display of categories based on the selected group and
+ * manages the state for mobile view and active group.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.groups - The list of groups to display.
+ * @param {Array} props.categories - The list of categories to display.
+ * @param {Object} props.categoriesButtonRef - Ref to the categories button element.
+ * @param {Object} props.categoriesButtonMobileRef - Ref to the categories button element for mobile view.
+ *
+ * @returns {JSX.Element} The rendered CategoriesMenu component.
+ */
 const CategoriesMenu = ({
 	groups,
 	categories,

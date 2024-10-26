@@ -1,3 +1,40 @@
+/**
+ * Button component renders a customizable button with optional loading state.
+ *
+ * @param {Object} props - The properties object.
+ * @param {function} props.onClick - The function to call when the button is clicked.
+ * @param {string} [props.className] - Additional CSS classes to apply to the button.
+ * @param {string} props.colour - The color of the button.
+ * @param {boolean} [props.disabled] - Whether the button is disabled.
+ * @param {React.ReactNode} props.children - The content to display inside the button.
+ * @param {boolean} [props.isLoading] - Whether to show a loading spinner instead of the button content.
+ * @param {Object} [props.props] - Additional properties to spread onto the button element.
+ *
+ * @returns {JSX.Element} The rendered button component.
+ */
+/**
+ * A customizable button component.
+ *
+ * @param {Object} props - The properties object.
+ * @param {function} props.onClick - The function to call when the button is clicked.
+ * @param {string} [props.className] - Additional CSS classes to apply to the button.
+ * @param {string} props.colour - The background color of the button.
+ * @param {boolean} [props.disabled] - Whether the button is disabled.
+ * @param {React.ReactNode} props.children - The content to display inside the button.
+ * @param {boolean} [props.isLoading] - Whether to show a loading spinner inside the button.
+ * @param {Object} [props.rest] - Additional properties to pass to the button element.
+ *
+ * @example
+ * <Button
+ *   onClick={() => console.log('Button clicked')}
+ *   className="custom-class"
+ *   colour="blue"
+ *   disabled={false}
+ *   isLoading={false}
+ * >
+ *   Click Me
+ * </Button>
+ */
 const Button = ({
 	onClick,
 	className,

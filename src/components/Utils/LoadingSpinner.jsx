@@ -1,5 +1,14 @@
 import PropTypes from "prop-types";
 
+/**
+ * LoadingSpinner component renders a customizable loading spinner.
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} [props.size="medium"] - The size of the spinner. Can be "small", "medium", or "large".
+ * @param {string} [props.color="blue"] - The color of the spinner. Can be "blue", "green", "red", "yellow", or "purple".
+ * @param {string} [props.className=""] - Additional CSS classes to apply to the spinner container.
+ * @returns {JSX.Element} The LoadingSpinner component.
+ */
 const LoadingSpinner = ({
 	size = "medium",
 	color = "blue",

@@ -19,6 +19,13 @@ async function getRedemptionsById(redemptionId) {
 	});
 }
 
+/**
+ * Updates the state of a redemption to "Used" by its ID.
+ *
+ * @param {string} redemptionId - The ID of the redemption to update.
+ * @returns {Promise<Object>} The response from the API request.
+ * @throws Will throw an error if the API request fails.
+ */
 async function usingRedemptionById(redemptionId) {
 	return apiRequest(`/api/redemption/${redemptionId}/state`, {
 		method: "PATCH",

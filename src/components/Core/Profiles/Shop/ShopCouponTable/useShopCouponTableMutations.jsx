@@ -7,6 +7,17 @@ import {
 } from "@/api/coupon";
 import { toast } from "sonner";
 
+/**
+ * Custom hook that provides mutations for managing shop coupons.
+ *
+ * @param {Function} onCloseCreateCoupon - Callback function to be called after a coupon is successfully created.
+ * @param {Function} onCloseEditCoupon - Callback function to be called after a coupon is successfully edited.
+ * @returns {Array} An array containing the following mutations:
+ *   - createMutation: Mutation for creating a new coupon.
+ *   - editMutation: Mutation for editing an existing coupon.
+ *   - pauseMutation: Mutation for pausing or activating a coupon.
+ *   - deleteMutation: Mutation for deleting a coupon.
+ */
 const useShopCouponTableMutations = (
 	onCloseCreateCoupon,
 	onCloseEditCoupon,

@@ -4,6 +4,14 @@ import { Toaster } from "sonner";
 
 import { useTranslations } from "@/store/languages";
 
+/**
+ * Layout component that wraps the main content with a Navbar, Footer, and Toaster.
+ *
+ * @param {Object} props - The properties object.
+ * @param {boolean} props.isProtected - Indicates if the layout is for a protected route.
+ * @param {React.ReactNode} props.children - The child components to be rendered within the layout.
+ * @returns {JSX.Element} The rendered layout component.
+ */
 const Layout = ({ isProtected, children }) => {
 	const { language } = useTranslations();
 

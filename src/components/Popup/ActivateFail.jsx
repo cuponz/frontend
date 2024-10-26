@@ -1,5 +1,17 @@
 import { Link } from "react-router-dom";
 
+/**
+ * ActivateFail component displays a popup message indicating that the account activation has failed.
+ * It provides options to either sign up again or go back to the login page.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ActivateFail />
+ * )
+ *
+ * @returns {JSX.Element} A React component that renders the activation failure message and navigation options.
+ */
 const ActivateFail = () => {
 	return (
 		<div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">

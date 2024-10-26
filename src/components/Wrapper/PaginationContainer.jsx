@@ -3,6 +3,17 @@ import LoadingSpinner from "../Utils/LoadingSpinner";
 import Pagination from "../Utils/Pagination";
 import { useEffect } from "react";
 
+/**
+ * PaginationContainer component for displaying paginated items.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.items - The array of items to paginate.
+ * @param {number} [props.itemsPerPage=8] - The number of items to display per page.
+ * @param {boolean} props.isPending - Flag indicating if the data is still loading.
+ * @param {Function} props.renderItems - Function to render the items for the current page.
+ *
+ * @returns {JSX.Element} The rendered PaginationContainer component.
+ */
 const PaginationContainer = ({
 	items = [],
 	itemsPerPage = 8,

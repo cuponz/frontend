@@ -1,4 +1,3 @@
-// src/api/translations.js
 import { apiRequest, apiRequestAuto } from "./base";
 
 // Fetch all available languages
@@ -16,6 +15,16 @@ export async function getContentsByLanguage(language) {
 }
 
 // Update a translation by key and language
+/**
+ * Updates the content translation for a specific language.
+ *
+ * @param {Object} params - The parameters for the update.
+ * @param {string} params.language - The language code for the translation.
+ * @param {string} params.key - The key of the content to update.
+ * @param {string} params.value - The new value for the content.
+ * @returns {Promise<Response>} The response from the API request.
+ * @throws Will throw an error if the update fails.
+ */
 export async function updateContent({ language, key, value }) {
 	return apiRequest(`/api/contents/${language}`, {
 		method: "PUT",

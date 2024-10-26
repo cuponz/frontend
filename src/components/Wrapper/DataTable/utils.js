@@ -22,6 +22,14 @@ export const dataTableCompareValues = (a, b, type) => {
 	}
 };
 
+/**
+ * Checks if an item matches all the provided filters and additional filters.
+ *
+ * @param {Object} item - The item to be checked against the filters.
+ * @param {Object} filters - An object containing the filters to be applied.
+ * @param {Array} additionalFilters - An array of additional filter objects, each containing a `name` and `type`.
+ * @returns {boolean} - Returns true if the item matches all the filters, otherwise false.
+ */
 export const filterMatchCheck = (item, filters, additionalFilters) => {
 	return Object.entries(filters).every(([key, value]) => {
 		if (!value) {

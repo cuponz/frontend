@@ -1,6 +1,18 @@
 import { useState } from "react";
 import { useTranslations } from "../store/languages";
 
+/**
+ * ContactForm component renders a contact form with fields for first name, last name, email, phone number, subject, and message.
+ * It also includes a section with contact information and social media links.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ContactForm />
+ * )
+ *
+ * @returns {JSX.Element} The rendered contact form component.
+ */
 const ContactForm = () => {
 	const { t } = useTranslations();
 	const [formData, setFormData] = useState({
@@ -30,10 +42,10 @@ const ContactForm = () => {
 				<p className="text-sm mb-6">{t(["contactUs", "quote"])}</p>
 				<ul className="list-none p-0">
 					<li className="mb-4 flex items-center">
-						<i className="fas fa-phone-alt mr-3"></i> +012 3456 789
+						<i className="fas fa-phone-alt mr-3"></i> +61 430 770 907
 					</li>
 					<li className="mb-4 flex items-center">
-						<i className="fas fa-envelope mr-3"></i> demo@gmail.com
+						<i className="fas fa-envelope mr-3"></i> sadimdshaik@gmail.com
 					</li>
 					<li className="mb-4 flex items-center">
 						<i className="fas fa-map-marker-alt mr-3"></i>{" "}

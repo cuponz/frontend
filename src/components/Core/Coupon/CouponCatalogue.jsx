@@ -80,6 +80,15 @@ const CouponCatalogueBoard = ({
 	);
 };
 
+/**
+ * CouponCatalogue component renders a catalogue of coupons with filtering and search functionalities.
+ * It also manages the state for displaying a user table and a popup.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {string} props.type - The type of the coupon catalogue
+ * @returns {JSX.Element} The rendered CouponCatalogue component
+ */
 const CouponCatalogue = ({ type }) => {
 	const { t } = useTranslations();
 	const [isFilterBoardVisible, setIsFilterBoardVisible] = useState(false);

@@ -1,3 +1,12 @@
+/*
+ * 
+ * This CSS file is configured to use Tailwind CSS.
+ * It includes the base styles, component styles, and utility classes provided by Tailwind.
+ * 
+ * @tailwind base: Includes Tailwind's base styles, which are a set of preflight styles that help normalize the appearance of HTML elements.
+ * @tailwind components: Includes Tailwind's component classes, which are a set of pre-designed components that can be used to build the UI.
+ * @tailwind utilities: Includes Tailwind's utility classes, which are a set of low-level utility classes that can be used to style the UI.
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

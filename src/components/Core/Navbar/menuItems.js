@@ -16,6 +16,14 @@ export const languageFlags = {
 	urdu: "PK",
 };
 
+/**
+ * Generates an array of route objects for navigation.
+ *
+ * @param {Function} t - Translation function to get localized route names.
+ * @returns {Array<Object>} Array of route objects.
+ * @returns {string} [Array<Object>.path] - The path of the route.
+ * @returns {string} Array<Object>.name - The localized name of the route.
+ */
 export const getRoutes = (t) => [
 	{ path: "/", name: t(["navigation", "home"]) },
 	{ path: "/coupon", name: t(["navigation", "coupons"]) },

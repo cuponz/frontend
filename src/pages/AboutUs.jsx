@@ -5,6 +5,19 @@ import img1 from "@/assets/image2";
 import img2 from "@/assets/image5";
 import img7 from "@/assets/image7";
 
+/**
+ * AboutUs component renders the About Us page with sections for Company, Products, and Team.
+ * It includes a header, description, and buttons for navigating to the coupon search and contact us pages.
+ * The component also allows switching between different sections to display relevant content and images.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AboutUs />
+ * )
+ *
+ * @returns {JSX.Element} The rendered About Us page component.
+ */
 const AboutUs = () => {
 	const { t } = useTranslations();
 	const [activeSection, setActiveSection] = useState("Company");

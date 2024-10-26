@@ -2,6 +2,15 @@ import { useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useTranslations } from "@/store/languages";
 
+/**
+ * PopupThankYou component displays a thank you message in a popup.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Determines if the popup is open.
+ * @param {function} props.onClose - Callback function to handle closing the popup.
+ *
+ * @returns {JSX.Element|null} The rendered component or null if not open.
+ */
 const PopupThankYou = ({ isOpen, onClose }) => {
 	const { t } = useTranslations();
 	const [dontShowAgain, setDontShowAgain] = useState(false);

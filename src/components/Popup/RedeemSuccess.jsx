@@ -4,6 +4,19 @@ import LoadingSpinner from "../Utils/LoadingSpinner";
 import { FaCheck } from "react-icons/fa";
 import { useTranslations } from "@/store/languages";
 
+/**
+ * PopupRedeemSuccess component displays a success message after a redemption is successfully processed.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.redeem - The redemption object.
+ * @param {string} props.redeem.redemption_id - The ID of the redemption.
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * const redeem = { redemption_id: '12345' };
+ * return <PopupRedeemSuccess redeem={redeem} />;
+ */
 const PopupRedeemSuccess = ({ redeem }) => {
 	const { t } = useTranslations();
 	const { isPending, data } = useQuery({

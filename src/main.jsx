@@ -10,6 +10,12 @@ import {
 import routes from "./routes";
 
 const queryClient = new QueryClient();
+/**
+ * The dehydrated state of the React Query cache, which is typically used for server-side rendering (SSR).
+ * This state is rehydrated on the client side to avoid refetching data that was already fetched on the server.
+ *
+ * @type {object}
+ */
 const dehydratedState = window.__REACT_QUERY_DEHYDRATED_STATE__;
 
 const router = createBrowserRouter(routes);

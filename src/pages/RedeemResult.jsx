@@ -7,6 +7,27 @@ import LoadingSpinner from "../components/Utils/LoadingSpinner";
 import { useUserStore } from "../store/user";
 import { RedemptionState, UserType } from "../constants";
 
+/**
+ * Component to display the result notification of a redemption process.
+ * It fetches redemption data based on the redeemId from the URL parameters
+ * and displays appropriate messages based on the redemption state and user type.
+ *
+ * @component
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * // Usage example:
+ * <ResultNoti />
+ *
+ * @remarks
+ * This component uses the `useParams` hook to get the redeemId from the URL,
+ * the `useUserStore` hook to get the current user, and the `useQuery` hook
+ * to fetch redemption data.
+ *
+ * @see {@link https://reactrouter.com/web/api/Hooks/useparams} for more about `useParams`.
+ * @see {@link https://react-query.tanstack.com/reference/useQuery} for more about `useQuery`.
+ */
 function ResultNoti() {
 	const { redeemId } = useParams();
 	const user = useUserStore((state) => state.user);

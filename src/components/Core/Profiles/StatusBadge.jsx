@@ -2,6 +2,19 @@ import React from "react";
 
 import { CouponState } from "@/constants";
 
+/**
+ * A memoized functional component that displays a status badge based on the provided `active` and `state` props.
+ *
+ * @component
+ * @example
+ * // Example usage:
+ * // <StatusBadge active={true} state={CouponState.Pending} />
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.active - Indicates if the status is active.
+ * @param {string} props.state - The state of the coupon, which determines the badge text and style.
+ * @returns {JSX.Element} The rendered status badge.
+ */
 const StatusBadge = React.memo(({ active, state }) => {
 	let text, style;
 

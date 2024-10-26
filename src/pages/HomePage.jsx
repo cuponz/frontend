@@ -8,6 +8,16 @@ import image3 from "@/assets/image3";
 import image4 from "@/assets/image4";
 import image5 from "@/assets/image5";
 
+/**
+ * HomePage component renders the main content of the home page.
+ * It includes a carousel with images, a banner, and a list of home coupons.
+ *
+ * @component
+ * @example
+ * return (
+ *   <HomePage />
+ * )
+ */
 const HomePage = () => {
 	const carouselImages = [image3, image4, image5];
 	const rightImages = [image2, image1];

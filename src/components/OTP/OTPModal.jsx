@@ -7,6 +7,17 @@ import { useMutation } from "@tanstack/react-query";
 import { validateOtp, sendOtp } from "@/api/otp";
 import { toast } from "sonner";
 
+/**
+ * OTPModal component renders a modal for OTP (One-Time Password) verification.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Determines if the modal is open.
+ * @param {Function} props.onClose - Function to call when the modal is closed.
+ * @param {Function} props.onVerify - Function to call when OTP is verified.
+ * @param {string} props.email - The email address associated with the OTP.
+ *
+ * @returns {JSX.Element|null} The rendered OTPModal component or null if not open.
+ */
 const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const { t } = useTranslations();
 	const [error, setError] = useState("");
@@ -30,11 +41,11 @@ const OTPModal = ({ isOpen, onClose, onVerify, email }) => {
 	const resendOtpMutation = useMutation({
 		mutationFn: sendOtp,
 		onSuccess: () => {
-			toast.success("OTP resent successfully")
+			toast.success("OTP resent successfully");
 			setResendCooldown(60);
 		},
 		onError: (error) => {
-			toast.error("Failed to send OTP. Please try again.")
+			toast.error("Failed to send OTP. Please try again.");
 		},
 	});
 

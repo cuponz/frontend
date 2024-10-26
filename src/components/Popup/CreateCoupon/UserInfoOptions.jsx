@@ -1,4 +1,3 @@
-// UserInfoOptions.js
 import React from "react";
 import { CouponRequirementType } from "@/constants";
 import { useTranslations } from "@/store/languages";
@@ -9,8 +8,18 @@ const userInfoOptions = {
 	EmailAndPhoneNumber: "Email and Phone Number",
 };
 
+/**
+ * UserInfoOptions component renders a set of radio buttons based on user information options.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.formData - The form data containing the selected type.
+ * @param {Function} props.handleChange - The function to handle changes in the radio button selection.
+ * @param {number} props.tier - The tier level to filter the user information options.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const UserInfoOptions = ({ formData, handleChange, tier }) => {
-	console.log(tier)
+	console.log(tier);
 	const { t } = useTranslations();
 	return (
 		<div className="mb-4">

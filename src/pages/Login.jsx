@@ -9,6 +9,40 @@ import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
 
 import Button from "@/components/Utils/Button";
 
+/**
+ * LoginPage component renders the login page with a form for user authentication.
+ * It includes email and password fields, and integrates Google reCAPTCHA v3 for bot protection.
+ *
+ * @component
+ * @example
+ * return (
+ *   <LoginPage />
+ * )
+ *
+ * @returns {JSX.Element} The rendered login page component.
+ *
+ * @function
+ * @name LoginPage
+ *
+ * @description
+ * - Uses `useState` to manage form data.
+ * - Uses `useTranslations` for internationalization.
+ * - Uses `useNavigate` for navigation after successful login.
+ * - Uses `useMutation` from React Query for handling login API call.
+ * - Integrates Google reCAPTCHA v3 for bot protection.
+ * - Displays success or error messages using `toast`.
+ *
+ * @requires useState
+ * @requires useTranslations
+ * @requires useNavigate
+ * @requires useMutation
+ * @requires toast
+ * @requires userLogin
+ * @requires ReCaptchaV3
+ * @requires TogglePassword
+ * @requires Button
+ * @requires Link
+ */
 const LoginPage = () => {
 	const [formData, setFormData] = useState({
 		email: "",

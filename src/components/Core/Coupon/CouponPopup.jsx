@@ -4,6 +4,34 @@ import { Link } from "react-router-dom";
 import { IoIosClose } from "react-icons/io";
 import { FiCopy } from "react-icons/fi";
 
+/**
+ * CouponPopup component displays a popup with coupon details, including a QR code and a copyable coupon code.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.coupon - The coupon object containing details to display.
+ * @param {string} props.coupon.redemption_id - The unique ID for coupon redemption.
+ * @param {string} props.coupon.code - The coupon code.
+ * @param {string} props.coupon.end_date - The expiration date of the coupon.
+ * @param {string} props.coupon.logo_url - The URL of the coupon logo image.
+ * @param {string} props.coupon.title - The title of the coupon.
+ * @param {string} props.coupon.desc - The description of the coupon.
+ * @param {string} [props.coupon.url] - The optional URL for the coupon.
+ * @param {Function} props.onClose - The function to call when the popup is closed.
+ *
+ * @example
+ * const coupon = {
+ *   redemption_id: "12345",
+ *   code: "SAVE20",
+ *   end_date: "2023-12-31",
+ *   logo_url: "https://example.com/logo.png",
+ *   title: "20% Off",
+ *   desc: "Get 20% off your next purchase.",
+ *   url: "https://example.com/shop"
+ * };
+ *
+ * <CouponPopup coupon={coupon} onClose={() => console.log('Popup closed')} />
+ */
 const CouponPopup = ({ coupon, onClose }) => {
 	const redemptionLink = `${window.location.origin}/redeem/${coupon.redemption_id}`;
 	const [copied, setCopied] = useState(false);

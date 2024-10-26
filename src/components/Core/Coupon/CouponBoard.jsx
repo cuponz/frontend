@@ -7,6 +7,18 @@ import CouponCard from "./CouponCard";
 import { useCouponFiltersStore } from "../../../store/filters";
 import PaginationContainer from "../../Wrapper/PaginationContainer";
 
+/**
+ * CouponBoard component displays a list of coupons with applied filters and pagination.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isPending - Indicates if the data is still loading.
+ * @param {Array} [props.coupons=[]] - The list of coupons to display.
+ * @param {string} props.type - The type of coupon catalogue to display.
+ * @param {Function} props.setShowUserTable - Function to show the user table.
+ * @param {Function} props.setSelectedCouponId - Function to set the selected coupon ID.
+ *
+ * @returns {JSX.Element} The rendered CouponBoard component.
+ */
 const CouponBoard = ({
 	isPending,
 	coupons = [],

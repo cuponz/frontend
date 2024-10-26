@@ -1,5 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 
+/**
+ * ImageUpload component allows users to upload and preview an image for a coupon.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Object} props.formData - The form data containing the image file.
+ * @param {Function} props.handleImageUpload - The function to handle image upload.
+ * @returns {JSX.Element} The rendered ImageUpload component.
+ */
 const ImageUpload = ({ formData, handleImageUpload }) => {
 	const fileInputRef = useRef(null);
 	const [preview, setPreview] = useState(null);

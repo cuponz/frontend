@@ -4,6 +4,15 @@ import getStateToggleButtonProps from "./getStateToggleButtonProps";
 
 import ShopBadge from "@/components/Core/Profiles/ShopBadge";
 
+/**
+ * Generates the columns configuration for the Manager User Table.
+ *
+ * @param {Function} handleToogleApproval - Function to handle toggling approval status.
+ * @param {Function} handleDelete - Function to handle deleting a user.
+ * @param {Function} handleChangeTier - Function to handle changing the user's tier.
+ * @param {Object} mutationLoadingStates - Object containing loading states for various mutations.
+ * @returns {Array<Object>} Array of column configuration objects.
+ */
 const columns = (
 	handleToogleApproval,
 	handleDelete,
@@ -91,7 +100,9 @@ const columns = (
 			return (
 				<div className="flex justify-center space-x-2">
 					<Button
-						onClick={() => handleToogleApproval("approved", row.id, row.approved)}
+						onClick={() =>
+							handleToogleApproval("approved", row.id, row.approved)
+						}
 						colour={toggleButtonProps.colour}
 						disabled={isApproving}
 						isLoading={isApproving}

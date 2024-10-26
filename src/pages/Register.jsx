@@ -12,6 +12,52 @@ import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
 
 import Button from "@/components/Utils/Button";
 
+/**
+ * RegisterPage component renders a registration form for new users.
+ * It includes form validation, reCAPTCHA verification, and handles user registration.
+ *
+ * @component
+ * @example
+ * return (
+ *   <RegisterPage />
+ * )
+ *
+ * @returns {JSX.Element} The rendered registration page component.
+ *
+ * @function
+ * @name RegisterPage
+ *
+ * @description
+ * The RegisterPage component manages the state of the registration form, including form data and errors.
+ * It validates the form inputs, handles changes to the form fields, and submits the form data to the server.
+ * On successful registration, it navigates the user to the login page.
+ *
+ * @property {Object} formData - The state object containing form data.
+ * @property {string} formData.firstName - The user's first name.
+ * @property {string} formData.lastName - The user's last name.
+ * @property {string} formData.email - The user's email address.
+ * @property {string} formData.phoneNumber - The user's phone number.
+ * @property {string} formData.region - The user's region code.
+ * @property {string} formData.password - The user's password.
+ * @property {string} formData.confirmPassword - The user's password confirmation.
+ * @property {string} formData.userType - The type of user (e.g., customer, admin).
+ *
+ * @property {Object} errors - The state object containing form validation errors.
+ *
+ * @property {function} handleChange - Handles changes to form input fields.
+ * @param {Object} e - The event object.
+ * @param {string} e.target.name - The name of the form field.
+ * @param {string} e.target.value - The value of the form field.
+ *
+ * @property {function} handleReCaptchaVerify - Handles reCAPTCHA verification.
+ * @param {string} token - The reCAPTCHA token.
+ *
+ * @property {function} validateForm - Validates the form inputs.
+ * @returns {boolean} - Returns true if the form is valid, otherwise false.
+ *
+ * @property {function} handleSubmit - Handles form submission.
+ * @param {Object} e - The event object.
+ */
 const RegisterPage = () => {
 	const { t } = useTranslations();
 	const [formData, setFormData] = useState({
