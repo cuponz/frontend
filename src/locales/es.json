@@ -149,13 +149,14 @@
 		"coupon": "Cupones",
 		"couponManagement": "Gestión de usuarios",
 		"userManagement": "Gestión de cupones",
+		"groupManagement": "Gestión de grupos",
 		"setting": "Configuración"
 	},
 	"UserInfoOptions": {
 		"content": "Se requiere información del usuario"
 	},
-	"indexPopup": {
-		"contentErr1": "Por favor, realiza al menos un cambio para actualizar el cupón.",
+	"PopupErrors": {
+		"contentErr1": "Por favor haga al menos un cambio.",
 		"contentErr2": "Por favor, sube una imagen para el cupón"
 	},
 	"CouponFormFields": {

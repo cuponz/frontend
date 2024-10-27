@@ -19,7 +19,7 @@ const PopupCreateGroup = ({
 	onClose,
 	onSubmit,
 	isCreating,
-	required,
+	required = true,
 }) => {
 	const [formData, setFormData] = useState({
 		name: "",

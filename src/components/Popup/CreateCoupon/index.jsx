@@ -112,10 +112,10 @@ const PopupCreateCoupon = ({
 		);
 
 		if (!required && !hasChanges) {
-			toast.error(t(["UserInfoOptions", "contentErr1"]));
+			toast.error(t(["PopupErrors", "contentErr1"]));
 			return;
 		} else if (required && !formData.logo) {
-			toast.error(t(["UserInfoOptions", "contentErr2"]));
+			toast.error(t(["PopupErrors", "contentErr2"]));
 			return;
 		}
 

@@ -149,14 +149,15 @@
 		"coupon": "कूपन",
 		"couponManagement": "कूपन प्रबंधन",
 		"userManagement": "प्रयोक्ता प्रबंधन",
+		"groupManagement": "समूह प्रबंधन",
 		"setting": "सेटिंग"
 	},
 	"UserInfoOptions": {
 		"content": "उपयोगकर्ता जानकारी आवश्यक है"
 	},
-	"indexPopup": {
-		"contentErr1": "कूपन को अपडेट करने के लिए कम से कम एक बदलाव करें।",
-		"contentErr2": "कृपया कूपन के लिए एक छवि अपलोड करें"
+	"PopupErrors": {
+		"contentErr1": "कृपया कम से कम एक बदलाव करें.",
+		"contentErr2": "कृपया कूपन के लिए एक छवि अपलोड करें."
 	},
 	"CouponFormFields": {
 		"category": "श्रेणी",

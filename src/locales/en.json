@@ -149,14 +149,15 @@
 		"coupon": "Coupons",
 		"couponManagement": "Coupon Management",
 		"userManagement": "User Management",
+		"groupManagement": "Group Management",
 		"setting": "Setting"
 	},
 	"UserInfoOptions": {
 		"content": "User Information Required"
 	},
-	"indexPopup": {
-		"contentErr1": "Please make at least one change to update the coupon.",
-		"contentErr2": "Please upload an image for the coupon"
+	"PopupErrors": {
+		"contentErr1": "Please make at least one change.",
+		"contentErr2": "Please upload an image for the coupon."
 	},
 	"CouponFormFields": {
 		"category": "Category",

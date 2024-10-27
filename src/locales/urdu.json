@@ -149,13 +149,14 @@
 		"coupon": "کوپنز",
 		"couponManagement": "کوپن مینجمنٹ",
 		"userManagement": "صارف کا انتظام",
+		"groupManagement": "گروپ مینجمنٹ",
 		"setting": "سیٹنگ"
 	},
 	"UserInfoOptions": {
 		"content": "صارف کی معلومات درکار ہے"
 	},
-	"indexPopup": {
-		"contentErr1": "براہ کرم کوپن کو اپ ڈیٹ کرنے کے لیے کم از کم ایک تبدیلی کریں۔",
+	"PopupErrors": {
+		"contentErr1": "براہ کرم کم از کم ایک تبدیلی کریں۔",
 		"contentErr2": "براہ کرم کوپن کے لیے ایک تصویر اپ لوڈ کریں"
 	},
 	"CouponFormFields": {

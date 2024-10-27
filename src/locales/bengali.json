@@ -149,14 +149,15 @@
 		"coupon": "কুপন",
 		"couponManagement": "কুপন ব্যবস্থাপনা",
 		"userManagement": "ব্যবহারকারী ব্যবস্থাপনা",
+		"groupManagement": "গ্রুপ ম্যানেজমেন্ট",
 		"setting": "সেটিং"
 	},
 	"UserInfoOptions": {
 		"content": "ব্যবহারকারীর তথ্য প্রয়োজন"
 	},
-	"indexPopup": {
-		"contentErr1": "কুপন আপডেট করতে অন্তত একটি পরিবর্তন করুন।",
-		"contentErr2": "কুপনের জন্য একটি ছবি আপলোড করুন"
+	"PopupErrors": {
+		"contentErr1": "অন্তত একটি পরিবর্তন করুন.",
+		"contentErr2": "কুপনের জন্য একটি ছবি আপলোড করুন."
 	},
 	"CouponFormFields": {
 		"category": "শ্রেণীবিভাগ",

@@ -105,8 +105,7 @@ const UserProfileMiniNav = () => {
 						},
 						{
 							id: ProfileTab.GroupManagement,
-							// label: t(["miniNav", "userManagement"]),
-							label: "Group Management",
+							label: t(["miniNav", "groupManagement"]),
 						},
 						{ id: ProfileTab.Settings, label: t(["miniNav", "setting"]) },
 					];
