@@ -7,6 +7,7 @@ import {
 	createGroup,
 } from "@/api/group";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useGroupStore } from "@/store/groups";
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import DataTable from "@/components/Wrapper/DataTable";
 
@@ -26,6 +27,8 @@ const GroupTable = () => {
 	const [mutationLoadingStates, setMutationLoadingStates] = useState({});
 	const [showCateogryTable, setShowCategoryTable] = useState(false);
 
+	const setGroups = useGroupStore((state) => state.setGroups);
+
 	const updateLoadingState = (id, key, value) => {
 		setMutationLoadingStates((prevState) => ({
 			...prevState,
@@ -38,6 +41,12 @@ const GroupTable = () => {
 
 	const QUERY_KEY = ["groups", "manager"];
 	const queryClient = useQueryClient();
+
+	const refetchGroupsAndUpdateStore = async () => {
+		const updatedGroups = await queryClient.fetchQuery({ queryKey: ["groups"] });
+		console.log(updatedGroups);
+		setGroups(updatedGroups);
+	};
 
 	const {
 		isLoading,
@@ -80,6 +89,7 @@ const GroupTable = () => {
 			toast.success("Create group successfully.");
 			setIsCreateGroupOpen(false);
 			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+			refetchGroupsAndUpdateStore();
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to update group");
@@ -92,6 +102,7 @@ const GroupTable = () => {
 			toast.success("Update group successfully.");
 			setIsEditGroupOpen(false);
 			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+			refetchGroupsAndUpdateStore();
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to update group");
@@ -103,6 +114,7 @@ const GroupTable = () => {
 		onSuccess: () => {
 			toast.success("Group deleted successfully");
 			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+			refetchGroupsAndUpdateStore();
 		},
 		onError: (error) => {
 			toast.error(error.message || "Failed to delete group");
@@ -114,7 +126,7 @@ const GroupTable = () => {
 	}
 
 	const columns = [
-		{ header: "Id", accessor: "id", sortType: "number" },
+		{ header: "ID", accessor: "id", sortType: "number" },
 		{ header: "Name", accessor: "group_name" },
 		{ header: "Coupon Count", accessor: "coupon_count" },
 		{
@@ -197,7 +209,7 @@ const GroupTable = () => {
 	const rightButtons = [
 		{
 			action: () => setIsCreateGroupOpen(true),
-			colour: "yellow-500",
+			colour: "blue-500",
 			content: "Create Group",
 		},
 	];

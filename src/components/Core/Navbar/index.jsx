@@ -8,6 +8,7 @@ import { CiMenuFries, CiSearch } from "react-icons/ci";
 
 import { useUserStore } from "@/store/user";
 import { useCategoryStore } from "@/store/categories";
+import { useGroupStore } from "@/store/groups";
 import { getCategories } from "@/api/category";
 import { getGroups } from "@/api/group";
 
@@ -41,6 +42,10 @@ const Navbar = ({ isProtected }) => {
 		state.categories,
 		state.setCategories,
 	]);
+	const [groups, setGroups] = useGroupStore((state) => [
+		state.groups,
+		state.setGroups,
+	]);
 	const categoriesButtonRef = useRef(null);
 	const categoriesButtonMobileRef = useRef(null);
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -60,20 +65,21 @@ const Navbar = ({ isProtected }) => {
 
 	const {
 		isPending,
-		data: [fetchedCategories, groups],
+		data: [fetchedCategories, fetchedGroups],
 		// } = useSuspenseQueries({
 	} = useQueries({
 		queries: [
 			{
 				queryKey: ["categories"],
 				queryFn: getCategories,
-				retry: false,
 				enabled: !categories,
+				staleTime: 60000,
 			},
 			{
 				queryKey: ["groups"],
 				queryFn: getGroups,
-				retry: false,
+				enabled: !groups,
+				staleTime: 60000,
 			},
 		],
 		combine: (results) => {
@@ -87,6 +93,9 @@ const Navbar = ({ isProtected }) => {
 	useEffect(() => {
 		if (fetchedCategories) {
 			setCategories(fetchedCategories);
+		}
+		if (fetchedGroups) {
+			setGroups(fetchedGroups);
 		}
 	}, [isPending]);
 
