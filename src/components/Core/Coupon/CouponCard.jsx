@@ -31,11 +31,6 @@ const CouponCardActionButton = ({
 			text = isRedeemed ? "Redeemed" : "Redeem Now";
 			break;
 		case CouponCatalogueType.ShopManage:
-			if (!user.viewing_perm) {
-				onAction = undefined;
-				text = "";
-				break;
-			}
 		case CouponCatalogueType.ManagerManage:
 			text = "Show Details";
 			break;

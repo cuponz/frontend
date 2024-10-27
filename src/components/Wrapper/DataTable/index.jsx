@@ -30,6 +30,7 @@ import { debounce } from "@/utils";
  * @param {Function} rightButtons[].action - The action to be performed when the button is clicked.
  * @param {string} rightButtons[].colour - The color of the button.
  * @param {string} rightButtons[].content - The content to be displayed inside the button.
+ * @param {Error} error - error when getting data for data table
  *
  * @returns {JSX.Element} The rendered DataTable component.
  */
@@ -41,6 +42,7 @@ const DataTable = ({
 	name = "Data Table",
 	additionalFilters = [],
 	rightButtons = [],
+	error,
 }) => {
 	// Table states
 	const [currentPage, setCurrentPage] = useState(1);
@@ -317,7 +319,11 @@ const DataTable = ({
 			</div>
 
 			{/* Table Section with updated styling */}
-			{filteredAndSortedData.length === 0 ? (
+			{error ? (
+				<div className="bg-white rounded-lg shadow p-8 text-center text-gray-500">
+					{error.message}
+				</div>
+			) : filteredAndSortedData.length === 0 ? (
 				<div className="bg-white rounded-lg shadow p-8 text-center text-gray-500">
 					No records found
 				</div>

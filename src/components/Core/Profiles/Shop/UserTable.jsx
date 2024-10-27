@@ -45,10 +45,6 @@ const UserTable = ({ couponId, onBack }) => {
 		return <LoadingSpinner />;
 	}
 
-	if (error) {
-		throw error;
-	}
-
 	const rightButtons = [
 		{
 			action: onBack,
@@ -65,6 +61,7 @@ const UserTable = ({ couponId, onBack }) => {
 				name={`User Details of Coupon ${couponId}`}
 				filename={`redemptions_coupon_${couponId}`}
 				rightButtons={rightButtons}
+				error={error}
 			/>
 		</div>
 	);
