@@ -1,0 +1,104 @@
+[
+	{
+		"coupon_id": 2,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 8,
+		"startDate": "2023-08-10",
+		"endDate": "2024-08-10",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 21,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 22,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 23,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 24,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 25,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 26,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 27,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 28,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 29,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 299,
+		"startDate": "2023-02-01",
+		"endDate": "2024-02-01",
+		"status": "Approve"
+	},
+	{
+		"coupon_id": 30,
+		"startDate": "2023-03-01",
+		"endDate": "2024-03-01",
+		"status": "Pending"
+	},
+	{
+		"coupon_id": 31,
+		"startDate": "2023-04-15",
+		"endDate": "2024-04-15",
+		"status": "Pending"
+	},
+	{
+		"coupon_id": 32,
+		"startDate": "2023-05-10",
+		"endDate": "2024-05-10",
+		"status": "Rejected"
+	},
+	{
+		"coupon_id": 33,
+		"startDate": "2023-06-20",
+		"endDate": "2024-06-20",
+		"status": "Rejected"
+	},
+	{
+		"coupon_id": 34,
+		"startDate": "2023-07-05",
+		"endDate": "2024-07-05",
+		"status": "Pending"
+	}
+]
