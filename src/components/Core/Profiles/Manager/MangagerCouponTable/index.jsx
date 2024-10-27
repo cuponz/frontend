@@ -130,31 +130,6 @@ const ManagerCouponTable = () => {
 		}));
 	};
 
-	const QUERY_KEY = ["get", "groups", "manager"];
-	const queryClient = useQueryClient();
-
-	const updateGroupMutation = useMutation({
-		mutationFn: updateGroup,
-		onSuccess: (data) => {
-			toast.success("Update shop successfully.");
-			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-		},
-		onError: (error) => {
-			toast.error(error.message || "Failed to update shop");
-		},
-	});
-
-	const deleteGroupMutation = useMutation({
-		mutationFn: deleteGroup,
-		onSuccess: () => {
-			toast.success("Shop deleted successfully");
-			queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-		},
-		onError: (error) => {
-			toast.error(error.message || "Failed to delete coupon");
-		},
-	});
-
 	const additionalFilters = [
 		{
 			name: "category",
