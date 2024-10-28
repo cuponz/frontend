@@ -24,7 +24,7 @@
 		"updated": 0,
 		"didUpdate": false
 	},
-	"startTime": 1729952978760,
+	"startTime": 1730078889393,
 	"success": true,
 	"testResults": [
 		{
@@ -34,7 +34,7 @@
 					"fullName": "ReCaptchaV3 loads the reCAPTCHA script if not present",
 					"status": "passed",
 					"title": "loads the reCAPTCHA script if not present",
-					"duration": 44.147199999999884,
+					"duration": 57.12519999999995,
 					"failureMessages": [],
 					"meta": {}
 				},
@@ -43,7 +43,7 @@
 					"fullName": "ReCaptchaV3 calls the grecaptcha execute function and verifies the token",
 					"status": "passed",
 					"title": "calls the grecaptcha execute function and verifies the token",
-					"duration": 8.449100000000271,
+					"duration": 9.86830000000009,
 					"failureMessages": [],
 					"meta": {}
 				},
@@ -52,7 +52,7 @@
 					"fullName": "ReCaptchaV3 handles grecaptcha failure gracefully",
 					"status": "passed",
 					"title": "handles grecaptcha failure gracefully",
-					"duration": 16.40269999999964,
+					"duration": 21.659299999999803,
 					"failureMessages": [],
 					"meta": {}
 				},
@@ -61,13 +61,13 @@
 					"fullName": "ReCaptchaV3 does not load the reCAPTCHA script if already present",
 					"status": "passed",
 					"title": "does not load the reCAPTCHA script if already present",
-					"duration": 4.567099999999755,
+					"duration": 6.121000000000095,
 					"failureMessages": [],
 					"meta": {}
 				}
 			],
-			"startTime": 1729952982853,
-			"endTime": 1729952982927.5671,
+			"startTime": 1730078894775,
+			"endTime": 1730078894870.121,
 			"status": "passed",
 			"message": "",
 			"name": "C:/Users/OneGa/git/CuponZ/frontend/test/components/captcha.test.jsx"

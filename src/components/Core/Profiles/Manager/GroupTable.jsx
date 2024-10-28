@@ -43,7 +43,9 @@ const GroupTable = () => {
 	const queryClient = useQueryClient();
 
 	const refetchGroupsAndUpdateStore = async () => {
-		const updatedGroups = await queryClient.fetchQuery({ queryKey: ["groups"] });
+		const updatedGroups = await queryClient.fetchQuery({
+			queryKey: ["groups"],
+		});
 		console.log(updatedGroups);
 		setGroups(updatedGroups);
 	};
