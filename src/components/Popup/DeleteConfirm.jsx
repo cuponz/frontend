@@ -26,10 +26,7 @@ const PopupDeleteConfirm = ({
 		<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
 			<div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
 				<h2 className="text-xl font-bold mb-4">Confirm Deletion</h2>
-				<p className="mb-6">
-					Are you sure you want to delete {extraMessage}?
-					?
-				</p>
+				<p className="mb-6">Are you sure you want to delete {extraMessage}?</p>
 				<div className="flex justify-end space-x-2">
 					<button
 						className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"

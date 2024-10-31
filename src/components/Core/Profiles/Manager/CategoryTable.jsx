@@ -2,7 +2,12 @@ import { useState, useMemo } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { useCategoryStore } from "@/store/categories";
 
-import { getCategoriesByGroupIdByManager, createCategory, editCategory, deleteCategory } from "@/api/category";
+import {
+	getCategoriesByGroupIdByManager,
+	createCategory,
+	editCategory,
+	deleteCategory,
+} from "@/api/category";
 
 import LoadingSpinner from "@/components/Utils/LoadingSpinner";
 import DataTable from "@/components/Wrapper/DataTable";
@@ -36,7 +41,9 @@ const CategoryTable = ({ groupId, onBack }) => {
 	const queryClient = useQueryClient();
 
 	const refetchCategoriesAndUpdateStore = async () => {
-		const updatedCategories = await queryClient.fetchQuery({ queryKey: ["categories"] });
+		const updatedCategories = await queryClient.fetchQuery({
+			queryKey: ["categories"],
+		});
 		setCategories(updatedCategories);
 	};
 

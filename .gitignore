@@ -24,8 +24,6 @@ dist-ssr
 *.sw?
 *.env
 
-# We are using pnpm
-package-lock.json
 
 #Docs will be in Deploy Repo
 docs/*

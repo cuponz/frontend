@@ -70,18 +70,18 @@ const PopupCreateCategory = ({
 				),
 		);
 
-		console.log(hasChanges)
+		console.log(hasChanges);
 
 		if (!required && !hasChanges) {
 			toast.error(t(["PopupErrors", "contentErr1"]));
 			return;
-		} 
+		}
 
 		if (!formData.name.trim()) {
 			delete formData.name;
 		}
 
-		onSubmit(formData)
+		onSubmit(formData);
 	};
 
 	return (
