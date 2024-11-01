@@ -6,11 +6,19 @@ import LoadingSpinner from "../../Utils/LoadingSpinner";
 import { CiTimer } from "react-icons/ci";
 
 /**
+ * @typedef {Object} Coupon
+ * @property {string} logo_url - URL of the coupon's logo image
+ * @property {string} title - Title/name of the coupon
+ * @property {string} desc - Description of the coupon offer
+ */
+
+/**
  * HomeCouponList component fetches and displays a list of the latest coupons.
  * It uses the `useQuery` hook to fetch coupon data from the server.
  *
  * @component
- * @returns {JSX.Element} A React component that renders a list of coupons.
+ * @returns {JSX.Element} A React component that renders a list of coupons
+ * @throws {Error} When coupon data fetching fails
  *
  * @example
  * return (
@@ -18,9 +26,11 @@ import { CiTimer } from "react-icons/ci";
  * )
  *
  * @remarks
- * - Displays a loading spinner while fetching data.
- * - Shows up to 3 coupons with their logo, title, and description.
- * - Provides a link to view all coupons.
+ * - Displays a loading spinner while fetching data
+ * - Shows up to 3 coupons with their logo, title, and description
+ * - Provides a link to view all coupons
+ * - Uses React Query for data fetching and caching
+ * - Implements retry: false to avoid multiple failed fetch attempts
  */
 const HomeCouponList = () => {
 	const { isPending, data: coupons = [] } = useQuery({

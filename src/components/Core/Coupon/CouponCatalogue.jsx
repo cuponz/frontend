@@ -22,6 +22,20 @@ import {
 } from "@/api/coupon";
 import { getRedemptionsByUserId } from "@/api/redemptions";
 
+/**
+ * @typedef {Object} CouponCatalogueBoardProps
+ * @property {('all'|'shoplist'|'shopmanage'|'managermanage'|'user')} type - Type of coupon catalogue view
+ * @property {Function} setShowUserTable - Callback to toggle user table visibility
+ * @property {Function} setSelectedCouponId - Callback to set selected coupon ID
+ */
+
+/**
+ * Renders the main coupon board with data fetching logic based on catalogue type
+ *
+ * @component
+ * @param {CouponCatalogueBoardProps} props - Component props
+ * @returns {JSX.Element} Rendered coupon board or loading spinner
+ */
 const CouponCatalogueBoard = ({
 	type,
 	setShowUserTable,
@@ -124,16 +138,32 @@ const CouponCatalogue = ({ type }) => {
 		setShowPopup(false);
 	};
 
+	/**
+	 * Handles search input changes
+	 *
+	 * @param {React.ChangeEvent<HTMLInputElement>} e - Change event
+	 * @returns {void}
+	 */
 	const handleSearchChange = useCallback(
 		(e) => setSearchTerm(e.target.value),
 		[],
 	);
 
+	/**
+	 * Toggles filter board visibility and body scroll
+	 *
+	 * @returns {void}
+	 */
 	const toggleFilterBoard = () => {
 		setIsFilterBoardVisible(!isFilterBoardVisible);
 		document.body.style.overflow = isFilterBoardVisible ? "auto" : "hidden";
 	};
 
+	/**
+	 * Handles navigation back from user table view
+	 *
+	 * @returns {void}
+	 */
 	const handleBack = () => {
 		setShowUserTable(false);
 		setSelectedCouponId(null);

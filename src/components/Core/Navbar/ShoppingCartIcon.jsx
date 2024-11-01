@@ -2,6 +2,8 @@ import { CiShoppingCart } from "react-icons/ci";
 
 /**
  * ShoppingCartIcon component renders a shopping cart icon with a hover effect.
+ * Uses the CiShoppingCart icon from react-icons and implements a circular
+ * hover animation effect.
  *
  * @component
  * @example
@@ -9,7 +11,15 @@ import { CiShoppingCart } from "react-icons/ci";
  *   <ShoppingCartIcon />
  * )
  *
- * @returns {JSX.Element} The rendered shopping cart icon component.
+ * @returns {JSX.Element} The rendered shopping cart icon component
+ *
+ * @remarks
+ * Features:
+ * - Circular border animation on hover
+ * - Responsive sizing (text-3xl)
+ * - Centered alignment
+ * - Group hover state management
+ * - Smooth transitions (300ms duration)
  */
 const ShoppingCartIcon = () => {
 	return (

@@ -4,17 +4,69 @@ import { useIsCategoriesOpenStore } from "../../../store/categories";
 import { CiCircleChevRight } from "react-icons/ci";
 
 /**
+ * @typedef {Object} Group
+ * @property {string|number} id - Unique identifier for the group
+ * @property {string} name - Display name of the group
+ */
+
+/**
+ * @typedef {Object} Category
+ * @property {string|number} id - Unique identifier for the category
+ * @property {string} name - Display name of the category
+ * @property {string|number} group_id - ID of the parent group
+ */
+
+/**
+ * @typedef {Object} CategoriesMenuProps
+ * @property {Group[]} groups - Array of category groups
+ * @property {Category[]} categories - Array of categories
+ * @property {React.RefObject} categoriesButtonRef - Reference to desktop categories button
+ * @property {React.RefObject} categoriesButtonMobileRef - Reference to mobile categories button
+ */
+
+/**
+ * Handles window resize events and updates mobile view state
+ *
+ * @returns {void}
+ */
+
+/**
+ * Handles clicks outside the menu to close it
+ *
+ * @param {MouseEvent} event - Click event
+ * @returns {void}
+ */
+
+/**
+ * Navigates to filtered coupon list when category is selected
+ *
+ * @param {string} category - Selected category name
+ * @returns {Function} Click handler function
+ */
+
+/**
+ * Updates active group state based on click and device type
+ *
+ * @param {string|number} groupId - ID of clicked group
+ * @returns {void}
+ */
+
+/**
  * CategoriesMenu component renders a menu with groups and categories.
  * It handles the display of categories based on the selected group and
  * manages the state for mobile view and active group.
  *
- * @param {Object} props - The component props.
- * @param {Array} props.groups - The list of groups to display.
- * @param {Array} props.categories - The list of categories to display.
- * @param {Object} props.categoriesButtonRef - Ref to the categories button element.
- * @param {Object} props.categoriesButtonMobileRef - Ref to the categories button element for mobile view.
+ * @component
+ * @param {CategoriesMenuProps} props - Component props
+ * @returns {JSX.Element} Rendered menu component
  *
- * @returns {JSX.Element} The rendered CategoriesMenu component.
+ * @example
+ * <CategoriesMenu
+ *   groups={groupsData}
+ *   categories={categoriesData}
+ *   categoriesButtonRef={buttonRef}
+ *   categoriesButtonMobileRef={mobileButtonRef}
+ * />
  */
 const CategoriesMenu = ({
 	groups,

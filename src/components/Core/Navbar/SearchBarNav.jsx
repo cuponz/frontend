@@ -9,6 +9,26 @@ import { searchShops } from "@/api/user";
 import { Link } from "react-router-dom";
 
 /**
+ * @typedef {Object} Shop
+ * @property {string} id - Unique identifier for the shop
+ * @property {string} name - Shop name
+ * @property {string} [avatar_url] - Optional URL for shop avatar image
+ */
+
+/**
+ * @typedef {Object} SearchBarNavState
+ * @property {string} searchTerm - Current search input value
+ * @property {string} debouncedSearchTerm - Debounced search term for API calls
+ */
+
+/**
+ * Handles changes to the search input field
+ *
+ * @param {React.ChangeEvent<HTMLInputElement>} e - Change event
+ * @returns {void}
+ */
+
+/**
  * SearchBarNav component provides a search bar with debounced input and displays filtered shop results.
  *
  * @component
@@ -17,31 +37,22 @@ import { Link } from "react-router-dom";
  *   <SearchBarNav />
  * )
  *
- * @returns {JSX.Element} The rendered search bar component.
+ * @returns {JSX.Element} The rendered search bar component
  *
  * @description
- * This component includes:
- * - An input field for search terms.
- * - Debounced search functionality to limit the number of queries.
- * - A list of filtered shops displayed as search results.
- * - Loading spinner while fetching search results.
+ * Features:
+ * - Debounced search input (500ms)
+ * - Animated dropdown results
+ * - Shop avatar display
+ * - Loading indicator
+ * - Keyboard navigation support
+ * - Responsive design
  *
- * @hook
- * - useTranslations: Hook to get translation function.
- * - useState: Hook to manage search term and debounced search term states.
- * - useEffect: Hook to handle debouncing of search term.
- * - useQuery: Hook to fetch filtered shops based on debounced search term.
- *
- * @param {Object} props - The component props.
- * @param {string} props.searchTerm - The current search term.
- * @param {string} props.debouncedSearchTerm - The debounced search term.
- * @param {Array} props.filteredShops - The list of filtered shops.
- * @param {boolean} props.isLoading - Loading state for the search results.
- *
- * @function handleSearchChange
- * @description Updates the search term state when the input value changes.
- * @param {Object} e - The event object.
- * @param {string} e.target.value - The new value of the input field.
+ * @hooks
+ * - useTranslations: Internationalization
+ * - useState: Search term management
+ * - useEffect: Debounce implementation
+ * - useQuery: API integration
  */
 const SearchBarNav = () => {
 	const { t } = useTranslations();

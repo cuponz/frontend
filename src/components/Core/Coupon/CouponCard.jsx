@@ -12,6 +12,22 @@ import { UserType } from "@/constants";
 
 import Button from "@/components/Utils/Button";
 
+/**
+ * @typedef {Object} CouponCardActionButtonProps
+ * @property {('all'|'shoplist'|'shopmanage'|'managermanage'|'user')} type - Type of coupon catalogue view
+ * @property {Function} [onAction] - Callback function when button is clicked
+ * @property {boolean} [isRedeemed=false] - Whether the coupon is redeemed
+ * @property {boolean} [isUsed=false] - Whether the coupon is used
+ */
+
+/**
+ * Renders an action button for the coupon card with different states based on the catalogue type
+ * and user type.
+ *
+ * @component
+ * @param {CouponCardActionButtonProps} props - Component props
+ * @returns {JSX.Element|null} Action button element or null if not applicable
+ */
 const CouponCardActionButton = ({
 	type,
 	onAction,
@@ -60,27 +76,74 @@ const CouponCardActionButton = ({
 };
 
 /**
- * CouponCard component displays detailed information about a coupon and handles various actions based on the type of coupon catalogue.
+ * @typedef {Object} CouponData
+ * @property {string} id - Unique identifier for the coupon
+ * @property {string} code - The coupon code
+ * @property {string} logo_url - URL of the coupon logo
+ * @property {string} name - Name/title of the coupon
+ * @property {string} desc - Description of the coupon
+ * @property {string} keywords - Comma-separated keywords
+ * @property {string} start_date - Start date in ISO format
+ * @property {string} end_date - End date in ISO format
+ * @property {string} shop - Shop identifier
+ * @property {string} category_name - Category name
+ * @property {number} max_usage - Maximum number of times coupon can be used
+ * @property {number} usage_count - Current number of times coupon has been used
+ * @property {number} redeemed_count - Number of users who redeemed the coupon
+ * @property {string} redemption_state - Current redemption state
+ */
+
+/**
+ * @typedef {Object} CouponModalState
+ * @property {string|null} modalType - Current modal type being displayed
+ */
+
+/**
+ * Handles closing of any open modal
+ *
+ * @returns {void}
+ */
+
+/**
+ * Handles primary action button click based on catalogue type
+ * Shows appropriate modal or triggers stats callback
+ *
+ * @returns {void}
+ */
+
+/**
+ * Format date string to locale date format
+ *
+ * @param {string} dateString - ISO date string
+ * @returns {string} Formatted date string
+ */
+
+/**
+ * Parse keywords string into array
+ *
+ * @param {string} keywordString - Comma separated keywords
+ * @returns {string[]} Array of keyword strings
+ */
+
+/**
+ * @typedef {Object} CouponCardUIConfig
+ * @property {boolean} showRemainingCount - Whether to show remaining coupon count
+ * @property {boolean} showUserCount - Whether to show number of users who redeemed
+ * @property {Object} imageConfig - Image display configuration
+ * @property {string} imageConfig.size - Image size classes
+ * @property {string} imageConfig.objectFit - Image object-fit style
+ */
+
+/**
+ * CouponCard component displays detailed information about a coupon and handles
+ * various actions based on the type of coupon catalogue.
  *
  * @component
- * @param {Object} props - The properties object.
- * @param {Object} props.coupon - The coupon data.
- * @param {string} props.coupon.code - The coupon code.
- * @param {string} props.coupon.logo_url - The URL of the coupon logo.
- * @param {string} props.coupon.name - The name of the coupon.
- * @param {string} props.coupon.desc - The description of the coupon.
- * @param {string} props.coupon.keywords - The keywords associated with the coupon.
- * @param {string} props.coupon.start_date - The start date of the coupon.
- * @param {string} props.coupon.end_date - The end date of the coupon.
- * @param {string} props.coupon.shop - The shop associated with the coupon.
- * @param {string} props.coupon.category_name - The category name of the coupon.
- * @param {number} props.coupon.max_usage - The maximum usage of the coupon.
- * @param {number} props.coupon.usage_count - The current usage count of the coupon.
- * @param {number} props.coupon.redeemed_count - The number of users who have redeemed the coupon.
- * @param {string} props.coupon.redemption_state - The redemption state of the coupon.
- * @param {string} props.type - The type of the coupon catalogue.
- * @param {function} props.onShowStats - The function to call when showing statistics for the coupon.
- * @returns {JSX.Element} The rendered CouponCard component.
+ * @param {Object} props - Component props
+ * @param {CouponData} props.coupon - The coupon data object
+ * @param {('all'|'shoplist'|'shopmanage'|'managermanage'|'user')} props.type - Type of coupon catalogue view
+ * @param {Function} props.onShowStats - Callback to display coupon statistics
+ * @returns {JSX.Element} Rendered coupon card
  */
 const CouponCard = ({ coupon, type, onShowStats }) => {
 	const [modalType, setModalType] = useState(null);

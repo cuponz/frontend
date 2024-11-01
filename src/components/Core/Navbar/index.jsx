@@ -23,17 +23,50 @@ import { getRoutes } from "./menuItems";
 import Button from "@/components/Utils/Button";
 
 /**
+ * @typedef {Object} NavbarState
+ * @property {boolean} isSearchOpen - Controls search bar visibility on mobile
+ * @property {boolean} isMobileMenuOpen - Controls mobile menu visibility
+ * @property {boolean} isLanguageDropdownOpen - Controls language dropdown visibility
+ * @property {boolean} isProfileDropdownOpen - Controls profile dropdown visibility
+ * @property {boolean} isCategoriesOpen - Controls categories menu visibility
+ */
+
+/**
+ * @typedef {Object} Route
+ * @property {string} [path] - URL path for the route
+ * @property {string} name - Display name for the route
+ */
+
+/**
+ * Handles user login/logout and navigation
+ *
+ * @returns {void}
+ */
+
+/**
+ * Updates mobile view state on window resize
+ *
+ * @returns {void}
+ */
+
+/**
  * Navbar component that displays the navigation bar with various menu items and user actions.
+ * Handles responsive design, user authentication, navigation, and multiple dropdown menus.
  *
- * @param {Object} props - The component props.
- * @param {boolean} props.isProtected - Indicates if the current route is protected.
- *
- * @returns {JSX.Element} The rendered Navbar component.
+ * @component
+ * @param {Object} props - Component props
+ * @param {boolean} props.isProtected - Indicates if the current route requires authentication
+ * @returns {JSX.Element} Rendered navbar component
  *
  * @example
  * <Navbar isProtected={true} />
  *
- * @component
+ * @remarks
+ * - Uses React Query for data fetching
+ * - Implements responsive design for mobile/desktop
+ * - Manages multiple dropdown states
+ * - Handles user authentication state
+ * - Supports internationalization
  */
 const Navbar = ({ isProtected }) => {
 	const { t, language } = useTranslations();

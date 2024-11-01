@@ -5,16 +5,47 @@ import { useTranslations } from "@/store/languages";
 import { useMemo, useCallback, useRef, useEffect } from "react";
 
 /**
+ * @typedef {Object} LanguageDropdownProps
+ * @property {string} language - Currently selected language code
+ * @property {Function} toggleMenuState - Function to toggle dropdown visibility
+ * @property {boolean} isOpen - Whether the dropdown is currently open
+ */
+
+/**
+ * Changes the application language and closes the dropdown
+ *
+ * @param {string} lng - Language code to switch to
+ * @returns {void}
+ */
+
+/**
+ * Handles clicks outside the dropdown to close it
+ *
+ * @param {MouseEvent} event - Click event object
+ * @returns {void}
+ */
+
+/**
+ * Renders a language selection button with flag and name
+ *
+ * @param {string} lang - Language code to render button for
+ * @returns {JSX.Element} Rendered button component
+ */
+
+/**
  * LanguageDropdown component renders a dropdown menu for selecting languages.
  * It displays the current language with a flag and allows users to change the language.
  *
  * @component
- * @param {Object} props - The component props
- * @param {string} props.language - The currently selected language
- * @param {function} props.toggleMenuState - Function to toggle the dropdown menu state
- * @param {boolean} props.isOpen - Boolean indicating if the dropdown menu is open
+ * @param {LanguageDropdownProps} props - Component props
+ * @returns {JSX.Element} Rendered dropdown component
  *
- * @returns {JSX.Element} The rendered LanguageDropdown component
+ * @example
+ * <LanguageDropdown
+ *   language="en"
+ *   toggleMenuState={toggleFn}
+ *   isOpen={true}
+ * />
  */
 const LanguageDropdown = ({ language, toggleMenuState, isOpen }) => {
 	const { setLanguage, supportedLanguages } = useTranslations();
