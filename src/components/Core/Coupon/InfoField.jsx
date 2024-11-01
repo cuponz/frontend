@@ -13,6 +13,66 @@ import validator from "validator";
 import ReCaptchaV3 from "@/components/Utils/ReCaptchaV3";
 
 /**
+ * @typedef {Object} FormData
+ * @property {string} email - User's email address
+ * @property {string} phone - User's phone number
+ * @property {string} region - Selected country code for phone number
+ */
+
+/**
+ * @typedef {Object} FormErrors
+ * @property {boolean} email - Whether email has validation error
+ * @property {boolean} phone - Whether phone has validation error
+ */
+
+/**
+ * Formats phone number to E.164 standard
+ *
+ * @param {string} phone - Phone number to format
+ * @param {string} region - Country code for phone number
+ * @returns {string|null} Formatted phone number or null if invalid
+ */
+
+/**
+ * Validates form data based on coupon requirements
+ *
+ * @returns {boolean} Whether form data is valid
+ */
+
+/**
+ * Handles reCAPTCHA verification callback
+ *
+ * @param {string} token - reCAPTCHA verification token
+ * @returns {Function} Callback function that submits redemption with token
+ */
+
+/**
+ * Submits redemption request with reCAPTCHA verification
+ *
+ * @param {Object} payload - Redemption request payload
+ * @returns {Promise<void>}
+ */
+
+/**
+ * Checks if user has required information based on coupon type
+ *
+ * @returns {boolean} Whether user has all required information
+ */
+
+/**
+ * Handles form field changes and clears errors
+ *
+ * @param {React.ChangeEvent<HTMLInputElement|HTMLSelectElement>} e - Change event
+ * @returns {void}
+ */
+
+/**
+ * Resets form state and closes modal
+ *
+ * @returns {void}
+ */
+
+/**
  * InfoField component handles the redemption of a coupon by collecting user information
  * such as email and phone number based on the coupon's requirement type.
  *

@@ -4,14 +4,39 @@ import { useTranslations } from "@/store/languages";
 import { useRef, useEffect } from "react";
 
 /**
+ * @typedef {Object} ProfileDropdownProps
+ * @property {Function} toggleMenuState - Function to toggle the dropdown visibility state
+ * @property {Function} handleLoginLogout - Function to handle user login/logout actions
+ * @property {boolean} isOpen - Whether the dropdown menu is currently open
+ */
+
+/**
+ * Handles clicks outside the dropdown to close it
+ *
+ * @param {MouseEvent} event - Click event object
+ * @returns {void}
+ */
+
+/**
  * ProfileDropdown component renders a dropdown menu for user profile actions.
+ * Provides navigation links to profile, cart and logout functionality.
  *
- * @param {Object} props - The component props.
- * @param {Function} props.toggleMenuState - Function to toggle the state of the menu.
- * @param {Function} props.handleLoginLogout - Function to handle login/logout action.
- * @param {boolean} props.isOpen - Boolean indicating if the dropdown is open.
+ * @component
+ * @param {ProfileDropdownProps} props - Component props
+ * @returns {JSX.Element} Rendered dropdown component
  *
- * @returns {JSX.Element} The rendered ProfileDropdown component.
+ * @example
+ * <ProfileDropdown
+ *   toggleMenuState={(state) => setMenuState(state)}
+ *   handleLoginLogout={() => logout()}
+ *   isOpen={isDropdownOpen}
+ * />
+ *
+ * @remarks
+ * - Uses click outside detection to auto-close
+ * - Integrates with translation system
+ * - Supports responsive design
+ * - Implements hover animations
  */
 const ProfileDropdown = ({ toggleMenuState, handleLoginLogout, isOpen }) => {
 	const { t } = useTranslations();

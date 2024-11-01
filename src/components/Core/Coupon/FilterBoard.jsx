@@ -16,6 +16,47 @@ import { useCouponFiltersStore } from "../../../store/filters";
  * @example
  * <FilterBoard closeFilterBoard={handleClose} />
  */
+
+/**
+ * @typedef {Object} FilterBoardProps
+ * @property {Function} closeFilterBoard - Function to close the filter board overlay
+ */
+
+/**
+ * Updates selected categories in both URL parameters and store
+ *
+ * @param {string[]} categories - Array of selected category names
+ * @returns {void}
+ */
+
+/**
+ * Resets all filters to their default empty state
+ *
+ * @returns {void}
+ */
+
+/**
+ * Calculates total number of currently applied filters
+ *
+ * @param {Object} appliedFilters - Current filter state
+ * @param {string[]} appliedFilters.selectedCategories - Selected category filters
+ * @param {string} appliedFilters.startDate - Start date filter
+ * @param {string} appliedFilters.endDate - End date filter
+ * @returns {number} Total count of applied filters
+ */
+
+/**
+ * @typedef {Object} FilterState
+ * @property {string[]} selectedCategories - Array of selected category names
+ * @property {string} startDate - Selected start date
+ * @property {string} endDate - Selected end date
+ */
+
+/**
+ * @typedef {Object} CategoryData
+ * @property {string} name - Category name
+ */
+
 const FilterBoard = ({ closeFilterBoard }) => {
 	const { t } = useTranslations();
 	const [_, setSearchParams] = useSearchParams();

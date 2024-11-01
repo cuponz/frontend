@@ -5,6 +5,46 @@ import { IoIosClose } from "react-icons/io";
 import { FiCopy } from "react-icons/fi";
 
 /**
+ * Copies coupon code to clipboard and shows temporary confirmation
+ *
+ * @returns {Promise<void>} Promise that resolves when copy is complete
+ * @throws {Error} If clipboard access fails
+ */
+
+/**
+ * Formats date string into localized format
+ *
+ * @param {string} dateString - ISO date string to format
+ * @returns {string} Formatted date string in "DD MMM YYYY" format
+ */
+
+/**
+ * Generates redemption link for coupon
+ *
+ * @param {string} redemptionId - Unique redemption identifier
+ * @returns {string} Full URL for coupon redemption
+ */
+
+/**
+ * @typedef {Object} CopiedState
+ * @property {boolean} copied - Whether code was just copied
+ * @property {Function} setCopied - State setter for copied flag
+ */
+
+/**
+ * @typedef {Object} CouponPopupProps
+ * @property {Object} coupon - Coupon details
+ * @property {string} coupon.redemption_id - Unique redemption ID
+ * @property {string} coupon.code - Coupon code
+ * @property {string} coupon.end_date - Expiration date
+ * @property {string} coupon.logo_url - Logo image URL
+ * @property {string} coupon.title - Coupon title
+ * @property {string} coupon.desc - Coupon description
+ * @property {string} [coupon.url] - Optional shop URL
+ * @property {Function} onClose - Close handler function
+ */
+
+/**
  * CouponPopup component displays a popup with coupon details, including a QR code and a copyable coupon code.
  *
  * @component
